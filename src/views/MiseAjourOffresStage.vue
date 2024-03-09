@@ -12,7 +12,7 @@
 
         <div class="groupe-tache">
             <h1>Description de la tâche</h1>
-            <input type="text" id="description-tache">
+            <textarea id="description-tache"></textarea>
         </div>
 
         <div class="groupe-programme">
@@ -22,7 +22,7 @@
 
         <div class="groupe-exigence">
             <h3>Exigences</h3>
-            <input type="text" id="exigences">
+            <textarea id="exigences"></textarea>
         </div>
 
         <div class="groupe-info-stage">
@@ -62,7 +62,7 @@
 
         <section class="info-sup">
             <h3>Informations suplémentaires</h3>
-            <input type="text" id="info-sup-form">
+            <textarea id="info-sup-form"></textarea>
         </section>
 
     </form>

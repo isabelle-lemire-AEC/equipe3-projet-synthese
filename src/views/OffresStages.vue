@@ -1,4 +1,5 @@
 <template>
+    
     <h1>Offres de stage</h1>
 
     <button>Ajouter une offre de stage</button>
@@ -7,17 +8,17 @@
         <thead>
             <tr>
                 <th scope="col">Poste</th>
-                <hr>
+                
                 <th scope="col">Secteur d'activité</th>
-                <hr>
+                
                 <th scope="col">Région</th>
-                <hr>
+                
                 <th scope="col">Date de publication</th>
-                <hr>
+                
                 <th scope="col"></th>
             </tr>
         </thead>
-
+   
         <tbody>
             <th>
                 <!--icone-->
@@ -30,10 +31,16 @@
             <td>2023-03-03</td>
             <td><!--icone--></td>
         </tbody>
+        
     </table>
+    <hr>
 </template>
 
 <script setup>
+
+
+
+
 
 </script>
 
