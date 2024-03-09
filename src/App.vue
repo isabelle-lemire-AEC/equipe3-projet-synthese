@@ -15,8 +15,6 @@ import OffresStages from './views/OffresStages.vue';
 import DetailOffresStages from './views/DetailOffresStages.vue';
 import MiseAjourOffresStage from './views/MiseAjourOffresStage.vue';
 
-
-
 export default {
   components: {
     Accueil,
