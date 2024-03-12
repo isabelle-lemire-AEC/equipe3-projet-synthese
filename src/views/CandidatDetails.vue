@@ -3,7 +3,7 @@
   <div class="candidat">
     <h3>Candidat</h3>
    
-<CandidatCardDetails></CandidatCardDetails>
+  <CandidatCardDetails></CandidatCardDetails>
   </div>
 </template>
 
