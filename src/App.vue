@@ -11,6 +11,10 @@
   
   <!-- 
   <Accueil></Accueil>
+  <div>
+    <RouterView />
+  </div>
+
   <OffresStages></OffresStages>
   <DetailOffresStages></DetailOffresStages>
   <MiseAjourOffresStage></MiseAjourOffresStage>
@@ -26,7 +30,7 @@ import Candidats from './views/Candidats.vue';
 import CandidatDetails from './views/CandidatDetails.vue';
 import CandidatAjout from './views/CandidatAjout.vue';
 import CandidatMiseAjour from './views/CandidatMiseAjour.vue';
-
+import { RouterView } from 'vue-router';
 
 export default {
   components: {
