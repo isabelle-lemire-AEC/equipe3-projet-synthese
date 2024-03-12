@@ -1,19 +1,10 @@
 <!-- App.vue -->
 <template>
   <div>
-    <Accueil></Accueil>
+    <RouterView />
   </div>
 </template>
 
 <script>
-import Accueil from './views/Accueil.vue';
-
-
-
-export default {
-  components: {
-    Accueil
-
-  }
-}
+import { RouterView } from 'vue-router';
 </script>
