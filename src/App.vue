@@ -1,5 +1,6 @@
 <!-- App.vue -->
 <template>
+  <RouterView />
   <CandidatMiseAjour></CandidatMiseAjour>
   <hr>
   <CandidatAjout></CandidatAjout>
@@ -12,7 +13,6 @@
   <!-- 
   <Accueil></Accueil>
   <div>
-    <RouterView />
   </div>
 
   <OffresStages></OffresStages>
