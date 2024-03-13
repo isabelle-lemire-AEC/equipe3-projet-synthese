@@ -1,5 +1,20 @@
 <!-- App.vue -->
 <template>
+  <OffresStages></OffresStages>
+  <hr>
+  <DetailOffresStages></DetailOffresStages>
+  <hr>
+  <MiseAjourOffresStage></MiseAjourOffresStage>
+  <hr>
+  <AjoutOffresStages></AjoutOffresStages>
+  <hr>
+  <Sidebar></Sidebar>
+  <Candidats></Candidats>
+  <CandidatDetails></CandidatDetails>
+  <CandidatMiseAjour></CandidatMiseAjour>
+  <CandidatAjout></CandidatAjout>
+
+
   <div>
     <RouterView />
   </div>
@@ -7,15 +22,9 @@
   <!-- 
   <Accueil></Accueil>
   
-  <OffresStages></OffresStages>
-  <DetailOffresStages></DetailOffresStages>
-  <MiseAjourOffresStage></MiseAjourOffresStage>
-  <AjoutOffresStages></AjoutOffresStages>
 
-  <Candidats></Candidats>
-  <CandidatDetails></CandidatDetails>
-  <CandidatMiseAjour></CandidatMiseAjour>
-  <CandidatAjout></CandidatAjout>
+
+
   -->
 </template>
 
@@ -32,6 +41,7 @@ import Candidats from './views/Candidats.vue';
 import CandidatDetails from './views/CandidatDetails.vue';
 import CandidatAjout from './views/CandidatAjout.vue';
 import CandidatMiseAjour from './views/CandidatMiseAjour.vue';
+import Sidebar from './components/Sidebar.vue';
 
 export default {
   components: {
@@ -43,7 +53,8 @@ export default {
     Candidats,
     CandidatDetails,
     CandidatAjout,
-    CandidatMiseAjour
+    CandidatMiseAjour,
+    Sidebar
   }
 }
 </script>
