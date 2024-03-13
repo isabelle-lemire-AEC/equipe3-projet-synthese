@@ -10,33 +10,52 @@
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Poste</th>
+                        <th scope="col">Poste
+                            <hr>
+                        </th>
                         
-                        <th scope="col">Secteur d'activité</th>
+                        <th scope="col">Secteur d'activité
+                            <hr>
+                        </th>
                         
-                        <th scope="col">Région</th>
+                        <th scope="col">Région
+                            <hr>
+                        </th>
                         
-                        <th scope="col">Date de publication</th>
+                        <th scope="col">Date de publication
+                            <hr>
+                        </th>
                         
                         <th scope="col"></th>
                     </tr>
+                    
                 </thead>
-        
+                </table>
+                
+                <table>
                 <tbody>
-                    <th>
-                        <!--icone-->
-                        <h4>Intégrateur Web</h4>
-                        <p>Acolyte communication</p>
+                    
+                    <tr>
+                        <th scope="row">
+                            <div class="poste">
+                                <div class="vl"></div>
+                            <!--icone-->
+                            <div class="poste-detail">
+                                <h4>Intégrateur Web</h4>
+                                <p>Acolyte communication</p>
+                            </div>
+                            </div>
 
-                    </th>
-                    <td>Communication</td>
-                    <td>Mauricie</td>
-                    <td>2023-03-03</td>
-                    <td><!--icone--></td>
+                        </th>
+                        <td>Communication</td>
+                        <td>Mauricie</td>
+                        <td>2023-03-03</td>
+                        <td><!--icone--></td>
+                    </tr>
                 </tbody>
                 
             </table>
-            <hr>
+            <hr class="separation">
         </div>
     </div>
 </template>
@@ -52,8 +71,53 @@
 <style scoped>
 h1{
     color: #707070;
-    padding: 60px;
+    padding: 40px;
 }
+
+button{
+    margin: 0 0 40px 40px;
+    padding: 10px;
+    border-radius: 10px;
+    color: rgb(249, 246, 247);
+    background-color: #bb2026;
+}
+table{
+    width: 100%;
+    table-layout: fixed;
+    margin-left: 40px;
+}
+tbody td {
+  text-align: left;
+}
+tbody th{
+    text-align: left;
+}
+thead th{
+    text-align: left;
+    color: #707070;
+   
+}
+hr.separation{
+    margin: 0 40px;
+}
+.vl{
+    border-left: 6px solid #bb2026;
+    height: 60px;
+    display: inline;
+}
+.poste{
+    display: flex;
+    align-items: center;
+  
+}
+.poste-detail{
+    margin-left: 10px;
+}
+
+
+
+
+
 
 
 
