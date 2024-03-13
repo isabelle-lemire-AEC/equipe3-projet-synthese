@@ -30,23 +30,23 @@
                     </tr>
                     
                 </thead>
-                </table>
+            </table>
                 
-                <table>
-                <tbody>
-                    
+            <table>
+
+                <tbody>   
                     <tr>
                         <th scope="row">
                             <div class="poste">
                                 <div class="vl"></div>
-                            <!--icone-->
-                            <div class="poste-detail">
-                                <h4>Intégrateur Web</h4>
-                                <p>Acolyte communication</p>
+                                <!--icone-->
+                                <div class="poste-detail">
+                                    <h4>Intégrateur Web</h4>
+                                    <p>Acolyte communication</p>
+                                </div>
                             </div>
-                            </div>
-
                         </th>
+                        
                         <td>Communication</td>
                         <td>Mauricie</td>
                         <td>2023-03-03</td>

@@ -5,24 +5,25 @@
   </div>
 
   <OffresStages></OffresStages>
-  <DetailOffresStages></DetailOffresStages>
-  <MiseAjourOffresStage></MiseAjourOffresStage>
+  <OffresStagesDetail></OffresStagesDetail>
+  <OffresStageMiseAjour></OffresStageMiseAjour>
 </template>
 
 <script>
 import Accueil from './views/Accueil.vue';
 import OffresStages from './views/OffresStages.vue';
-import DetailOffresStages from './views/DetailOffresStages.vue';
-import MiseAjourOffresStage from './views/MiseAjourOffresStage.vue';
+import OffresStagesDetail from './views/OffresStagesDetail.vue';
+import OffresStageMiseAjour from './views/OffresStageMiseAjour.vue';
 
 export default {
   components: {
     Accueil,
     OffresStages,
-    DetailOffresStages,
-    MiseAjourOffresStage,
+    OffresStagesDetail,
+    OffresStageMiseAjour,
 
 
   }
 }
 </script>
+./views/OffresStagesDetail.vue./views/OffresStageMiseAjour.vue
