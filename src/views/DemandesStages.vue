@@ -48,7 +48,7 @@ const stagiere3 = {
 }
 </script>
 
-<style>
+<style scoped>
 
 html, body {
     background-color: rgb(222, 222, 222);
@@ -99,7 +99,7 @@ h1 {
     border-bottom: 0.1rem solid rgb(193, 193, 193);
 }
 
-.barVertical {
+.barreVerticale {
     width: 0.3rem;
     background-color: orange;
 }
