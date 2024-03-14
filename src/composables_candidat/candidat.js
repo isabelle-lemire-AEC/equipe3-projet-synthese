@@ -42,7 +42,7 @@ const editCandidat = async (id, candidatData) => {
     loading.value = true;
     try {
       response.value = await axios.patch('https://api-3.fly.dev/candidates/${id}', candidatData);
-      console.log("Success: Candidate edited");
+      console.log("ca marche Candidate edited");
     } catch (error) {
       error.value = error;
       console.log("Error: Failed to edit candidate");
@@ -54,7 +54,7 @@ const editCandidat = async (id, candidatData) => {
   const deleteCandidat = async (id) => {
     loading.value = true;
     try {
-      response.value = await axios.delete(`https://api-3.fly.dev/candidates/${id}`);
+      response.value = await axios.delete('https://api-3.fly.dev/candidates/${id}');
       console.log("Success: Candidate deleted");
     } catch (error) {
       error.value = error;

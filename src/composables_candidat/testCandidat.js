@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-               //Attention ce nest pas le meme nom que la vrai function Raph*
+  //Attention ce nest pas le meme nom que la vrai function Raph*
 async function testAddCandidat() {
   try {
     const response = await axios.post('https://api-3.fly.dev/candidates', {
