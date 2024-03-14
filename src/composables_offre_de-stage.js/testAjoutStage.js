@@ -1,39 +1,40 @@
 
 import axios from 'axios';
 import { ref } from 'vue';
+// REMPLIR ENTREPRIZE AVEC LES VALEUR DUNE ENTREPRISE CRÉÉ AU PRÉALABLE RAPH ATTENTION***
 
 const offerData = {
   title: "developeur debutent",
   description: "Recherche un développeur debutent.",
   enterprise: {
-    _id: "65ecc6e68ba959c0b0e17864",
-    image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
-    name: "Petite arraignées",
-    address: "1800 RUE DES sapins",
-    postalCode: "H7L 0B2",
-    city: "VILLE ST-GEORGE",
+    _id: "65f27c246b6b31ec79d74019",
+    image: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8HwQACgAB/1TD9R8AAAAASUVORK5CYII=",
+    name: "Les réseaux du nord",
+    address: "6767 des Colibries",
+    postalCode: "J5T 0B4",
+    city: "St-bruno",
     province: {
-      _id: "65e4dff388da6547197b121b",
-      value: "QUEBEC"
+      _id: "65e4dff388da6547197b1225",
+      value: "PRINCE EDWARD ISLAND"
     },
-    phone: "514-966-6782",
-    email: "SPIDE@VLOUD.CA",
-    description: "CIE EOUVRENT DANS LA TOILE",
+    phone: "514-555-1234",
+    email: "truite_ping@hotmail.ca",
+    description: "Groupe de reseautage",
     activitySector: {
-      _id: "65ecc4cde6bb4d85fbad0437",
-      value: "WEB"
+      _id: "65f27444cbefd230d7c90949",
+      value: "securite pour entreprise"
     },
-    website: "www.techinnovate.ca"
+    website: "reseau_nord@gmail.com"
   },
-  startDate: "2024-04-01T09:00:00.000Z",
-  endDate: "2024-10-31T17:00:00.000Z",
-  weeklyWorkHours: 40,
-  salary: 50000,
+  "startDate": "2024-03-14T16:48:11.067Z",
+  "endDate": "2024-03-14T16:48:11.067Z",
+  weeklyWorkHours: 30,
+  salary: 200,
   province: {
-    _id: "65e4dff388da6547197b1229",
-    value: "NUNAVUT"
+    _id: "65e4dff388da6547197b1225",
+    value: "PRINCE EDWARD ISLAND"
   },
-  requiredSkills: ["React", "Vue.js", "CSS"],
+  requiredSkills: ["Python"],
   internshipType: {
     _id: "65e4dffb88da6547197b1233",
     value: "PARTIAL"
@@ -51,7 +52,8 @@ export function ajouterUnOffre() {
   const ajouterUnOffre = async (offerData) => {
     loading.value = true;
     try {
-      response.value = await axios.post('https://api-3.fly.dev/api#/default/InternshipOffers', offerData);
+      response.value = await axios.post('https://api-3.fly.dev/InternshipOffers', offerData);
+      // ``
       console.log("Offre joutée");
     } catch (err) {
       error.value = err;
@@ -66,3 +68,4 @@ export function ajouterUnOffre() {
 }
 ajouterUnOffre(offerData);
 
+console.log(offerData);

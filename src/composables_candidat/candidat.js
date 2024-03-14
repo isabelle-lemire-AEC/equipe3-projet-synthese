@@ -1,6 +1,8 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
+//ATTENTION IL SE PEUT QUE L'OFFRE NE PUISSE RECEVROIR QU'UNE SEUL ENTREPRISE UNE ENTREPRISE UN OFFRE POUR PLUSIEURS CANDIDATS
+
 export function useCandidat() {
  const response = ref(null);
  const error = ref(null);
