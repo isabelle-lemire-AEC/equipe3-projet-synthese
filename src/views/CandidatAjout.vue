@@ -1,3 +1,4 @@
+<!-- CandidatAjout.vue - Isa  -->
 <template>
     <div class="container">
         <h1>Ajouter un candidat</h1>
