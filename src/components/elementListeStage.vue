@@ -1,10 +1,13 @@
 <template>
     <div class="elementStage">
-        <div class="barVertical"></div>
-        <div class="iconTemp"></div>
-        <div class="poste">
-            <span>{{ props.stage.poste }}</span>
-            <span>{{ props.stage.nom }}</span>
+        <div>
+            <div class="poste">
+            <div class="iconTemp"></div>
+            <div class="posteEtNom">
+                <span>{{ props.stage.poste }}</span>
+                <span>{{ props.stage.nom }}</span>
+            </div>
+            </div>
         </div>
         <div class="secteurActivite">
             <span>{{ props.stage.secteurActivite }}</span>
@@ -30,6 +33,24 @@
 
 </script>
 
-<style>
+<style scoped>
 
+    .poste {
+        border-left: 0.3rem solid orange;
+        padding-left: 0.6rem;
+        display: flex;
+        gap: 1rem;
+    }
+
+    .posteEtNom {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .iconTemp {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.3rem;
+        background-color: orange;
+    }
 </style>
