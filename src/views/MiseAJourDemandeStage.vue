@@ -1,49 +1,38 @@
 <template>
 	<section>
-		<h1>Ajouter une demande</h1>
+		<p>Demande de stage</p>
+		<h1>Titre API</h1>
 
 		<div>
 			<!-- COMPONENT?? Classe pour flex les boutons -->
 			<button>Annuler</button>
-			<button type="submit">Sauvegarder</button>
+			<button type="submit">Mettre à jour</button>
 		</div>
 
-		<form id="ajout-demande-stage" @submit.prevent="validate">
-			<div>
-				<!-- Classe pour regrouper le input et le label side by side -->
-				<label for="ajout-demande-titre">Titre</label>
-				<input
-					type="text"
-					id="ajout-demande-titre"
-					name="ajout-demande-titre"
-					v-model.trim="demande.title" />
-				<p v-if="errors.title" class="error-message">
-					Veuillez fournir le titre du stage.
-				</p>
-			</div>
+		<form id="edit-demande-stage" @submit.prevent="validate">
 
 			<div>
 				<!-- Classe pour encadré blanc -->
 
 				<div>
 					<!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-					<label for="ajout-demande-nom-prenom">Nom et prénom</label>
+					<label for="edit-demande-candidat">Candidat</label>
 					<input
 						type="text"
-						id="ajout-demande-nom-prenom"
-						name="ajout-demande-nom-prenom"
+						id="edit-demande-candidat"
+						name="edit-demande-candidat"
 						v-model.trim="demande.fullName" />
 					<p v-if="errors.fullName" class="error-message">
-						Veuillez fournir votre nom complet.
+						Veuillez fournir le nom du candidat.
 					</p>
 				</div>
 
 				<div
 					><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-					<label for="ajout-demande-presentation">Présentation</label>
+					<label for="edit-demande-presentation">Présentation</label>
 					<textarea
-						id="ajout-demande-presentation"
-						name="ajout-demande-presentation"
+						id="edit-demande-presentation"
+						name="edit-demande-presentation"
 						v-model="demande.description"></textarea>
 					<p v-if="errors.description" class="error-message">
 						Veuillez fournir une présentation.
@@ -56,11 +45,11 @@
 						><!-- Classe pour regrouper DEUX INPUTS UN EN DESSOUS DE L'AUTRES-->
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-programme">Programme de formation</label>
+							<label for="edit-demande-programme">Programme de formation</label>
 							<input
 								type="text"
-								id="ajout-demande-programme"
-								name="ajout-demande-programme"
+								id="edit-demande-programme"
+								name="edit-demande-programme"
 								v-model="demande.activitySector" />
 							<p v-if="errors.activitySector" class="error-message">
 								Veuillez fournir un programme de formation.
@@ -69,8 +58,8 @@
 
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-secteur">Secteur d'activité</label>
-							<select id="ajout-demande-secteur" name="ajout-demande-secteur">
+							<label for="edit-demande-secteur">Secteur d'activité</label>
+							<select id="edit-demande-secteur" name="edit-demande-secteur">
 								<option value="">Veuillez effectuer un choix</option>
 								<!-- Autres options de l'API -->
 							</select>
@@ -84,11 +73,11 @@
 						><!-- Classe pour regrouper deux inputs side by side-->
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-etablissement">Établissement scolaire</label>
+							<label for="edit-demande-etablissement">Établissement scolaire</label>
 							<input
 								type="text"
-								id="ajout-demande-etablissement"
-								name="ajout-demande-etablissement" />
+								id="edit-demande-etablissement"
+								name="edit-demande-etablissement" />
 							<p v-if="errors.activitySector" class="error-message">
 								Veuillez fournir un programme de formation.
 							</p>
@@ -96,11 +85,11 @@
 
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-ville">Ville</label>
+							<label for="edit-demande-ville">Ville</label>
 							<input
 								type="text"
-								id="ajout-demande-ville"
-								name="ajout-demande-ville"
+								id="edit-demande-ville"
+								name="edit-demande-ville"
 								v-model="demande.city" />
 							<p v-if="errors.city" class="error-message">
 								Veuillez fournir une ville.
@@ -113,8 +102,8 @@
 					><!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 100 % de l'espace-->
 					<div
 						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-						<label for="ajout-demande-region">Région</label>
-						<select id="ajout-demande-region" name="ajout-demande-region">
+						<label for="edit-demande-region">Région</label>
+						<select id="edit-demande-region" name="demande-region">
 							<option value="">Veuillez effectuer un choix</option>
 							<!-- Autres options de l'API -->
 						</select>
@@ -122,10 +111,10 @@
 
 					<div
 						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-						<label for="ajout-demande-competences">Compétences</label>
+						<label for="edit-demande-competences">Compétences</label>
 						<textarea
-							id="ajout-demande-competences"
-							name="ajout-demande-competences"
+							id="edit-demande-competences"
+							name="edit-demande-competences"
 							v-model="demande.skills"></textarea>
 						<p v-if="errors.skills" class="error-message">
 							Veuillez fournir des compétences.
@@ -141,8 +130,8 @@
 
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-type">Type de stage</label>
-							<select id="ajout-demande-type" name="ajout-demande-type">
+							<label for="edit-demande-type">Type de stage</label>
+							<select id="edit-demande-type" name="edit-demande-type">
 								<option value="">Veuillez effectuer un choix</option>
 								<!-- Autres options de l'API -->
 							</select>
@@ -150,8 +139,8 @@
 
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-heures">Nombre d'heures par semaine</label>
-							<select id="ajout-demande-heures" name="ajout-demande-heures">
+							<label for="edit-demande-heures">Nombre d'heures par semaine</label>
+							<select id="edit-demande-heures" name="edit-demande-heures">
 								<option value="">Veuillez effectuer un choix</option>
 								<!-- Autres options de l'API -->
 							</select>
@@ -162,34 +151,34 @@
 						<!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 50 % de l'espace-->
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-date-debut">Date de début</label>
+							<label for="edit-demande-date-debut">Date de début</label>
 							<input
 								type="date"
-								id="ajout-demande-date-debut"
-								name="ajout-demande-date-debut" />
+								id="edit-demande-date-debut"
+								name="edit-demande-date-debut" />
 						</div>
 
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-date-fin">Date de fin</label>
+							<label for="edit-demande-date-fin">Date de fin</label>
 							<input
 								type="date"
-								id="ajout-demande-date-fin"
-								name="ajout-demande-date-fin" />
+								id="edit-demande-date-fin"
+								name="edit-demande-date-fin" />
 						</div>
 					</div>
 
 					<div
 						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-						<label for="ajout-demande-remuneration">Rémunération</label> <!-- Remplacer par legend? Faire une recherche. -->
+						<label for="edit-demande-remuneration">Rémunération</label>
 						<div>
 							<input
 								type="checkbox"
-								id="ajout-demande-discretion"
-								name="ajout-demande-remuneration"
+								id="edit-demande-discretion"
+								name="edit-demande-remuneration"
 								value="discretion"
 								v-model="remunerationType" />
-							<label for="ajout-demande-discretion"
+							<label for="edit-demande-discretion"
 								>À la discrétion de l'entreprise</label
 							>
 						</div>
@@ -197,21 +186,21 @@
 						<div>
 							<input
 								type="checkbox"
-								id="ajout-demande-remunere"
-								name="ajout-demande-remuneration"
+								id="edit-demande-remunere"
+								name="edit-demande-remuneration"
 								value="remunere"
 								v-model="remunerationType" />
-							<label for="ajout-demande-remunere">Rémunéré</label>
+							<label for="edit-demande-remunere">Rémunéré</label>
 						</div>
 						<!-- Wrapper case checkbox + label -->
 						<div>
 							<input
 								type="checkbox"
-								id="ajout-demande-non-renumere"
-								name="ajout-demande-remuneration"
+								id="edit-demande-non-renumere"
+								name="edit-demande-remuneration"
 								value="non-remunere"
 								v-model="remunerationType" />
-							<label for="ajout-demande-non-renumere">Non-rémunéré</label>
+							<label for="edit-demande-non-renumere">Non-rémunéré</label>
 						</div>
 						<!-- Wrapper case checkbox + label -->
 					</div>
@@ -221,11 +210,11 @@
 					<legend>Informations supplémentaires</legend>
 					<div
 						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-						<label for="ajout-demande-infos-supp">Présentation</label>
+						<label for="edit-demande-infos-supp">Présentation</label>
 						<!-- Classe pour cacher le label -->
 						<textarea
-							id="ajout-demande-infos-supp"
-							name="ajout-demande-infos-supp"
+							id="edit-demande-infos-supp"
+							name="edit-demande-infos-supp"
 							v-model="demande.additionalInformation">
 						</textarea>
 						<p v-if="errors.additionalInformation" class="error-message">
@@ -238,7 +227,7 @@
 			<div>
 				<!-- COMPONENT?? Classe pour flex les boutons -->
 				<button>Annuler</button>
-				<button type="submit">Sauvegarder</button>
+				<button type="submit">Mettre à jour</button>
 			</div>
 		</form>
 	</section>
@@ -249,10 +238,9 @@
 <script setup>
 	import {reactive, ref} from "vue";
 
-	const remunerationType = ref([]);
+	/* const remunerationType = ref([]); */
 
 	const demande = reactive({
-		title: "",
 		fullName: "",
 		description: "",
 		activitySector: "",
@@ -268,12 +256,9 @@
 	});
 
 	const errors = reactive({
-		title: false,
-
 		fullName: false,
 		description: false,
 		activitySector: false,
-
 		city: false,
 		province: false,
 		skills: false,
@@ -289,12 +274,6 @@
 
 	const validate = (e) => {
 		e.preventDefault();
-
-		if (demande.title === "") {
-			errors.title = true;
-		} else {
-			errors.title = false;
-		}
 
 		if (demande.fullName === "") {
 			errors.fullName = true;
@@ -369,7 +348,6 @@
 		}
 
 		if (
-			errors.title === false &&
 			errors.fullName === false &&
 			errors.description === false &&
 			errors.activitySector === false &&
