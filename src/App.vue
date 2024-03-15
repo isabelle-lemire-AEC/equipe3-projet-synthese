@@ -1,15 +1,14 @@
 <!-- App.vue -->
 <template>
-  <div>
-    <Accueil></Accueil>
-  </div>
-
   <OffresStages></OffresStages>
   <OffresStagesDetail></OffresStagesDetail>
   <OffresStageMiseAjour></OffresStageMiseAjour>
 </template>
 
 <script>
+
+import { RouterView } from 'vue-router';
+
 import Accueil from './views/Accueil.vue';
 import OffresStages from './views/OffresStages.vue';
 import OffresStagesDetail from './views/OffresStagesDetail.vue';
