@@ -80,6 +80,7 @@ button{
     border-radius: 10px;
     color: rgb(249, 246, 247);
     background-color: #bb2026;
+    
 }
 table{
     width: 100%;

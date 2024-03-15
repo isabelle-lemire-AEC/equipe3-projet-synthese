@@ -1,15 +1,19 @@
 <template>
     <section class="entete">
-        <h3>Offre de stage</h3>
-        <h1>Intégrateur Web junior api titre</h1>
-        <h2>api entreprise.name</h2>
+        <div class="vl"></div>
+
+        <div class="entete-titre">
+            <h3>Offre de stage</h3>
+            <h1>Intégrateur Web junior api titre</h1>
+            <h2>api entreprise.name</h2>
+        </div>
     </section>
 
     <form>
 
         <button>Annuler</button>
         <button>Mettre à jour</button>
-
+        <div class="page">
         <div class="groupe-tache">
             <h1>Description de la tâche</h1>
             <textarea id="description-tache"></textarea>
@@ -64,7 +68,7 @@
             <h3>Informations suplémentaires</h3>
             <textarea id="info-sup-form"></textarea>
         </section>
-
+    </div>
     </form>
 
 
