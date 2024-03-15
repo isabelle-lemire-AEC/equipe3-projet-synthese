@@ -2,7 +2,7 @@
 <template>
   <div class="app-container">
     <div class="logo-container">
-    <img src="../assets/logo.png" alt="Logo" class="logo">
+    <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
     </div>
     <div class="content-container">
       <img src="../assets/accueil.png" alt="Image" class="half-page-image"> 

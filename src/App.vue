@@ -1,60 +1,32 @@
 <!-- App.vue -->
 <template>
-  <OffresStages></OffresStages>
-  <hr>
-  <DetailOffresStages></DetailOffresStages>
-  <hr>
-  <MiseAjourOffresStage></MiseAjourOffresStage>
-  <hr>
-  <AjoutOffresStages></AjoutOffresStages>
-  <hr>
-  <Sidebar></Sidebar>
-  <Candidats></Candidats>
-  <CandidatDetails></CandidatDetails>
-  <CandidatMiseAjour></CandidatMiseAjour>
-  <CandidatAjout></CandidatAjout>
 
-
-  <div>
-    <RouterView />
+  <div class="container">
+    <NavBar></NavBar>
+    <div class="main flex">
+      <Sidebar></Sidebar>
+      <div class="content">
+        <router-view />
+      </div>
+    </div>
+    <Footer></Footer>
   </div>
   
-  <!-- 
-  <Accueil></Accueil>
-  
-
-
-
-  -->
 </template>
 
 <script>
 
 import { RouterView } from 'vue-router';
 
-import Accueil from './views/Accueil.vue';
-import OffresStages from './views/OffresStages.vue';
-import DetailOffresStages from './views/DetailOffresStages.vue';
-import MiseAjourOffresStage from './views/MiseAjourOffresStage.vue';
-import AjoutOffresStages from './views/AjoutOffresStages.vue';
-import Candidats from './views/Candidats.vue';
-import CandidatDetails from './views/CandidatDetails.vue';
-import CandidatAjout from './views/CandidatAjout.vue';
-import CandidatMiseAjour from './views/CandidatMiseAjour.vue';
+import NavBar from './components/NavBar.vue';
 import Sidebar from './components/Sidebar.vue';
+import Footer from './components/Footer.vue';
 
 export default {
   components: {
-    Accueil,
-    OffresStages,
-    DetailOffresStages,
-    MiseAjourOffresStage,
-    AjoutOffresStages,
-    Candidats,
-    CandidatDetails,
-    CandidatAjout,
-    CandidatMiseAjour,
-    Sidebar
+    NavBar,
+    Sidebar,
+    Footer
   }
 }
 </script>
