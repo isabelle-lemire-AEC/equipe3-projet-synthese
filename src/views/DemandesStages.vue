@@ -109,6 +109,5 @@ h1 {
     flex-direction: column;
 }
 
-.groupeBtns {
-}
+
 </style>
