@@ -40,9 +40,11 @@
                             <div class="poste">
                                 <div class="vl"></div>
                                 <!--icone-->
-                                <div class="poste-detail">
-                                    <h4>Intégrateur Web</h4>
-                                    <p>Acolyte communication</p>
+                                <div class="poste-detail" @click="pageOffreStageDetail(offreStageDetail.id)" >
+                                    <RouterLink :to=" {name: 'offre-de-stage-details', params: {id:offreStageDetail.id}}">
+                                        <h4>Intégrateur Web</h4>
+                                        <p>Acolyte communication</p>
+                                    </RouterLink>
                                 </div>
                             </div>
                         </th>
@@ -61,10 +63,12 @@
 </template>
 
 <script setup>
+import router from '../router/index'
 
 
-
-
+const pageOffreStageDetail = (id) =>{
+        router.push({name: 'offre-de-stage-details', params:{id}})
+    }
 
 </script>
 

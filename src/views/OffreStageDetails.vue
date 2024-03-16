@@ -47,7 +47,7 @@
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe, nulla totam nemo, ea asperiores eveniet minus magni ex hic architecto dolores, commodi repudiandae animi inventore quam molestiae quisquam possimus sunt.</p>
         </section>
     </div>
-
+    <RouterView></RouterView>
 </template>
 
 <script setup>
