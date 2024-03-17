@@ -25,26 +25,28 @@
       </div>
   
       <div class="user">
+        user
         <!-- Contenu à ajouter plus tard -->
       </div>
     </nav>
   </template>
   
   <script>
+
   export default {
     name: 'NavBar',
     methods: {
       ajouterOffre() {
-        // Action à effectuer lors du clic sur "Ajouter une offre"
+        this.$router.push({ name: 'OffreStageAjout' });
       },
       ajouterDemande() {
-        // Action à effectuer lors du clic sur "Ajouter une demande de stage"
+        this.$router.push({ name: 'DemandeStageAjout' });
       },
       ajouterEntreprise() {
-        // Action à effectuer lors du clic sur "Ajouter une entreprise"
+        this.$router.push({ name: 'EntrepriseAjout' });
       },
       ajouterCandidat() {
-        // Action à effectuer lors du clic sur "Ajouter un candidat"
+        this.$router.push({ name: 'CandidatAjout' });
       }
     }
   }

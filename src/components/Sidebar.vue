@@ -3,28 +3,33 @@
   <nav class="navbar">
     <ul>
       <li class="link tableau-de-bord">
-        <router-link to="/tableau-de-bord"
-          ><i class="fa-solid fa-gauge"></i><span>Tableau de bord</span>
+        <router-link to="/tableau-de-bord">
+          <i class="fa-solid fa-gauge"></i>
+          <span>Tableau de bord</span>
         </router-link>
       </li>
       <li class="link demandes-stage">
-        <router-link to="/demandes-de-stages"
-          ><i class="fa-solid fa-file-lines"></i><span>Demandes de stage</span>
+        <router-link to="/demandes-de-stages">
+          <i class="fa-solid fa-file-lines"></i>
+          <span>Demandes de stage</span>
         </router-link>
       </li>
       <li class="link offres-stage">
         <router-link to="/offres-de-stages">
-          <i class="fa-solid fa-paper-plane"></i><span>Offres de stage</span>
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Offres de stage</span>
         </router-link>
       </li>
       <li class="link candidats">
         <router-link to="/candidats">
-          <i class="fa-solid fa-user"></i><span>Candidats</span>
+          <i class="fa-solid fa-user"></i>
+          <span>Candidats</span>
         </router-link>
       </li>
       <li class="link entreprises">
         <router-link to="/entreprises">
-          <i class="fa-solid fa-computer-mouse"></i><span>Entreprises</span>
+          <i class="fa-solid fa-computer-mouse"></i>
+          <span>Entreprises</span>
         </router-link>
       </li>
     </ul>

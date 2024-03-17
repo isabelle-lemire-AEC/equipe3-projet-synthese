@@ -2,9 +2,17 @@
 <template>
     <div class="candidatsList">
       <h1>Candidats</h1>
-      <button class="post-candidat">Ajouter un candidat</button>
+      <!-- <button class="post-candidat">Ajouter un candidat</button> -->
+      <router-link class="post-candidat" :to="{ path: '/candidat-ajout', name: 'CandidatAjout' }">Ajouter un candidat</router-link>
+      <!-- 
+            <div class="grid">
+              <CandidatCard v-for="n in 12" :key="n"></CandidatCard>
+            </div>  
+       -->
       <div class="grid">
-        <CandidatCard v-for="n in 12" :key="n"></CandidatCard>
+        <router-link v-for="n in 12" :key="n" :to="{ path: '/candidat-details', name: 'CandidatDetails' }">
+          <CandidatCard></CandidatCard>
+        </router-link>
       </div>
     </div>
   </template>
