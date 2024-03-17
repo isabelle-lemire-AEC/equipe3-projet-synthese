@@ -3,64 +3,69 @@ import axios from 'axios';
 
 //ATTENTION IL SE PEUT QUE L'OFFRE NE PUISSE RECEVROIR QU'UNE SEUL ENTREPRISE UNE ENTREPRISE UN OFFRE POUR PLUSIEURS CANDIDATS
 
-export function useCandidat() {
- const response = ref(null);
- const error = ref(null);
- const loading = ref(false);
+const API_BASE_URL = 'https://api-3.fly.dev';
 
- // ici c'est pour les post
- const addCandidat = async (candidatData) => {
+export function useCandidat() {
+  const response = ref(null);
+  const error = ref(null);
+  const loading = ref(false);
+
+  // Fonction pour l'ajout d'un candidat
+  const addCandidat = async (candidatData) => {
     loading.value = true;
     try {
-        response.value = await axios.post('https://api-3.fly.dev/candidates', candidatData);
-        console.log("Ca rock bro post work");
+        response.value = await axios.post(`${API_BASE_URL}/candidates`, candidatData);
+        console.log("candidat ajouté");
     }
     catch (err) {
         error.value = err;
-        console.log("post does not work at all brotha");
+        console.log("Le candidat n'a pas pu être ajouter", err.response.data);
     }
     finally{
         loading.value = false;
     }
- }
- //c'est pour le get by id
-const getCandidatById = async (id) => {
-loading.value = true;
-try{
-    response.value = await axios.get('https://api-3.fly.dev/api#/default/Candidates/${id}');
-    console.log("test get id");
-}
-catch (err) {
-    error.value = err;
-    console.log("get id does not work at all brotha");
-}
+  }
 
-finally{
-    loading.value = false;
-}
-}
-//ici C'est pour edit
-const editCandidat = async (id, candidatData) => {
+  // Fonction pour chercher un candidat par ID
+  const getCandidatById = async (id) => {
+    loading.value = true;
+    try{
+        response.value = await axios.get(`${API_BASE_URL}/api#/default/Candidates/${id}`);
+        console.log("test get id");
+    }
+    catch (err) {
+        error.value = err;
+        console.log("get id does not work at all brotha");
+    }
+
+    finally{
+        loading.value = false;
+    }
+  }
+
+  // Fonction pour l'édition d'un candidat
+  const editCandidat = async (id, candidatData) => {
     loading.value = true;
     try {
-      response.value = await axios.patch('https://api-3.fly.dev/candidates/${id}', candidatData);
-      console.log("ca marche Candidate edited");
+      response.value = await axios.patch(`${API_BASE_URL}/candidates/${id}`, candidatData);
+      console.log("Le candidat a été modifier");
     } catch (error) {
       error.value = error;
-      console.log("Error: Failed to edit candidate");
+      console.log("Erreur : Le candidat n'a pu être modifié");
     } finally {
       loading.value = false;
     }
   };
 
+  // Fonction pour supprimer un candidat
   const deleteCandidat = async (id) => {
     loading.value = true;
     try {
-      response.value = await axios.delete('https://api-3.fly.dev/candidates/${id}');
-      console.log("Success: Candidate deleted");
+      response.value = await axios.delete(`${API_BASE_URL}/candidates/${id}`);
+      console.log("Le candidat a été supprimer avec succès");
     } catch (error) {
       error.value = error;
-      console.log("Error: Failed to delete candidate");
+      console.log("Erreur : Le candidat n'a pu être supprimé");
     } finally {
       loading.value = false;
     }

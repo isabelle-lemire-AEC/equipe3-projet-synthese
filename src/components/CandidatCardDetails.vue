@@ -6,7 +6,10 @@
 
     <div class="button-group">
       <button class="btn approve"> <img src="../assets/icons8-tick-box-48.png" alt="Icon"></button>
-      <button class="btn edit"> <img src="../assets/icons8-write-24.png" alt="Icon"></button>
+      <!-- <button class="btn edit"> <img src="../assets/icons8-write-24.png" alt="Icon"></button> -->
+      <router-link to="/candidat-mise-a-jour" class="btn edit">
+        <img src="../assets/icons8-write-24.png" alt="Icon">
+      </router-link>
       <button class="btn delete"> <img src="../assets/icons8-delete-24.png" alt="Icon"></button>
     </div>
 

@@ -10,7 +10,7 @@
         <form action="">
 
             <button class="annuler">Annuler</button>
-            <button class="mettre-a-jour">Sauvegarder</button>
+            <button class="mettre-a-jour"><i class="fas fa-save"></i>Sauvegarder</button>
 
             
             <div class="section">
@@ -56,7 +56,7 @@
 
             <div>
                 <button class="annuler">Annuler</button>
-                <button class="mettre-a-jour">Sauvegarder</button>
+                <button class="mettre-a-jour"><i class="fas fa-save"></i>Sauvegarder</button>
             </div>
         </form>
     </div>
@@ -127,6 +127,7 @@
         padding: 10px 20px;
         margin-bottom: 50px;
         border:none;
+        cursor: pointer;
     }
 
     .mettre-a-jour:hover{
