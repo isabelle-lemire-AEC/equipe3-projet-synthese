@@ -4,18 +4,20 @@
         <h1>Ajouter un candidat</h1>
 
         <form @submit.prevent="soumettreFormulaire">
-
-            <button class="annuler">Annuler</button>
-            <button class="mettre-a-jour"><i class="fas fa-save"></i>Sauvegarder</button>
+            
+            <div>
+                <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
+                <button class="mettre-a-jour" type="submit" @click="sauvegarderClick = true"><i class="fas fa-save"></i>Sauvegarder</button>
+            </div>
 
             <div class="flex">
                 <div class="flex">
-                    <label for="prenom">Prénom :</label>
-                    <input type="text" id="prenom" v-model="prenom">
+                    <label for="firstName">Prénom :</label>
+                    <input type="text" id="firstName" v-model="firstName">
                 </div>
                 <div class="flex">
-                    <label for="nom">Nom :</label>
-                    <input type="text" id="nom" v-model="nom">
+                    <label for="lastName">Nom :</label>
+                    <input type="text" id="lastName" v-model="lastName">
                 </div>
             </div>
             <div class="flex">
@@ -26,31 +28,30 @@
             <div class="section">
                 <div>
                     <h2>Courte présentation</h2>
-                    <label for="presentation"></label>
-                    <textarea name="presentation" id="presentation" cols="30" rows="10" v-model="presentation"></textarea>
+                    <label for="description"></label>
+                    <textarea name="description" id="description" cols="30" rows="10" v-model="description"></textarea>
                 </div>
-
                 
                 <div>
                     <h3>Inormations personnelles</h3>
                     <div class="flex">
                         <div class="col-gauche padding-right-15 border-left">
-                            <label for="adresse">Adresse</label>
-                            <input type="text" id="adresse" v-model="adresse">
+                            <label for="address">Adresse</label>
+                            <input type="text" id="address" v-model="address">
                         </div>
                         <div class="col-droite border-left">
-                            <label for="telephone">Téléphone</label>
-                            <input type="text" id="telephone" v-model="telephone">
+                            <label for="phone">Téléphone</label>
+                            <input type="text" id="phone" v-model="phone">
                         </div>
                     </div>
                     <div class="flex">
                         <div class="col-gauche padding-right-15 border-left">
-                            <label for="ville">Ville</label>
-                            <input type="text" id="ville" v-model="ville">
+                            <label for="city">Ville</label>
+                            <input type="text" id="city" v-model="city">
                         </div>
                         <div class="col-droite border-left">
-                            <label for="courriel">Courriel</label>
-                            <input type="email" id="courriel" v-model="courriel">
+                            <label for="email">Courriel</label>
+                            <input type="email" id="email" v-model="email">
                         </div>
                     </div>
                     <div class="border-left">
@@ -61,86 +62,98 @@
                                 :key="province._id" 
                                 :value="province.value">{{ province.value }}</option>
                         </select>
-
                     </div>
                     <div class="border-left">
-                        <label for="codePostal">Code postal</label>
-                        <input type="text" id="codePostal" v-model="codePostal">
+                        <label for="postalCode">Code postal</label>
+                        <input type="text" id="postalCode" v-model="postalCode">
                     </div>
                 </div>
             </div>
 
             <div>
-                <button class="annuler">Annuler</button>
-                <button type="submit" class="mettre-a-jour"><i class="fas fa-save"></i>Sauvegarder</button>
+                <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
+                <button class="mettre-a-jour" type="submit" @click="sauvegarderClick = true"><i class="fas fa-save"></i>Sauvegarder</button>
             </div>
         </form>
     </div>
 </template>
 
 <script setup>
-    import { ref, onMounted } from 'vue';
-    
+    import { ref } from 'vue';
+    import { useRouter } from 'vue-router';
+
     import { useCandidat } from '@/composables/candidats/candidat';
     import { fetchProvinces } from '@/composables/api';
 
-    // données du formulaire
+    const router = useRouter();
+
+    const firstName = ref('');
+    const lastName = ref('');
+    const poste = ref('');
+    const description = ref('');
+    const address = ref('');
+    const phone = ref('');
+    const city = ref('');
+    const email = ref('');
     const selectedProvince = ref('');
+    const postalCode = ref('');
+    
+    const sauvegarderClick = ref(false);
+
+    const { addCandidat } = useCandidat();
     const provinces = ref([]);
 
-    onMounted(async () => {
+    const initProvinces = async () => {
         try {
             provinces.value = await fetchProvinces();
-            console.log('Provinces récupérées :', provinces.value); // Ajoutez cette ligne
         } catch (error) {
-            console.error('Erreur lors de la récupération des provinces :', error);
+            console.error("Erreur lors de la récupération des provinces :", error);
         }
-    });
+    }
 
-    // données du formulaire
-    const nom = ref('');
-    const prenom = ref('');
-    const poste = ref('');
-    const presentation = ref('');
-    const adresse = ref('');
-    const telephone = ref('');
-    const ville = ref('');
-    const courriel = ref('');
-    const province = ref('');
-    const codePostal = ref('');
+    initProvinces();
 
-    const { addCandidat, response, error, loading } = useCandidat();
-    
     const soumettreFormulaire = async () => {
-        const candidatData = {
-            nom: nom.value,
-            prenom: prenom.value,
-            presentation: presentation.value,
-            adresse: adresse.value,
-            telephone: telephone.value,
-            ville: ville.value,
-            courriel: courriel.value,
-            province: province.value,
-            codePostal: codePostal.value
-        };
+        // Valider le formulaire uniquement lorsque le bouton "Sauvegarder" est cliqué
+        if (sauvegarderClick.value && validerFormulaire()) {
+            const candidatData = {
+                firstName: firstName.value,
+                lastName: lastName.value,
+                description: description.value,
+                email: email.value,
+                address: address.value,
+                phone: phone.value,
+                city: city.value,
+                province: { value: selectedProvince.value },
+                postalCode: postalCode.value
+            };
 
-        await addCandidat(candidatData);
-
-        // Réinitialisation des champs du formulaire après l'ajout du candidat
-        if (!error.value) {
-            nom.value = '';
-            prenom.value = '';
-            poste.value = '';
-            presentation.value = '';
-            adresse.value = '';
-            telephone.value = '';
-            ville.value = '';
-            courriel.value = '';
-            province.value = '';
-            codePostal.value = '';
+            try {
+                await addCandidat(candidatData);
+                console.log("Nouveau candidat ajouté");
+                router.push({ name: 'Candidats' });
+            } catch (error) {
+                console.error("Erreur lors de l'ajout du candidat :", error);
+            }
         }
-    };
+    }
+
+    // ceci fonctionne OK
+    const annulerAjout = () => {
+        console.log("Annuler l'ajout du candidat");
+        router.push({ name: 'Candidats' });
+    }
+
+    const validerFormulaire = () => {
+        if (!firstName.value || !lastName.value || !email.value || !address.value || !phone.value || !city.value || !selectedProvince.value || !postalCode.value) {
+            console.log("Veuillez remplir tous les champs du formulaire.");
+            return false;
+        }
+        return true;
+    }
+
 </script>
+
 
 
 <style scoped>
@@ -174,10 +187,6 @@
         border-left: 10px solid gray;
         padding-left: 10px;
         margin-bottom: 25px;
-    }
-
-    .label-flex {
-        
     }
 
     .col-gauche {
