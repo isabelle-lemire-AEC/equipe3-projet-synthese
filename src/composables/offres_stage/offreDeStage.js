@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
-export function useInternshipOffers() {
+export default function useInternshipOffers() {
   const response = ref(null);
   const error = ref(null);
   const loading = ref(false);
@@ -27,7 +27,7 @@ export function useInternshipOffers() {
   const getAllOffers = async () => {
     loading.value = true;
     try {
-      response.value = await axios.get('https://api-3.fly.dev/internshipOffers');
+      response.value = await axios.get('https://api-3.fly.dev/api#/default/InternshipOffersController_findAll');
       console.log("get offer ca marche", response.value.data);
     } catch (err) {
       error.value = err;

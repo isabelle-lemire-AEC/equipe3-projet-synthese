@@ -3,7 +3,7 @@
         <h3>Offre de stage</h3>
     </section>
 
-    <form>
+    <form @submit.prevent="ajouterStage">
 
         <button>Annuler</button>
         <button>Sauvegarder</button>
@@ -80,6 +80,62 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import useInternshipOffers from '../composables/offres_stage/offreDeStage';
+
+// Initialisation des variables pour les données du formulaire
+const titre = ref('');
+const entreprise = ref('');
+const descriptionTache = ref('');
+const programmeFormation = ref('');
+const exigences = ref('');
+const typeStage = ref('');
+const heuresSemaine = ref('');
+const remuneration = ref('');
+const dateDebut = ref('');
+const dateFin = ref('');
+const infoSupplementaires = ref('');
+
+// Import du composable
+const { ajouterOffre } = useInternshipOffers();
+
+// Fonction pour ajouter un stage
+const ajouterStage = async () => {
+  const offerData = {
+    titre: titre.value,
+    entreprise: entreprise.value,
+    descriptionTache: descriptionTache.value,
+    programmeFormation: programmeFormation.value,
+    exigences: exigences.value,
+    typeStage: typeStage.value,
+    heuresSemaine: heuresSemaine.value,
+    remuneration: remuneration.value,
+    dateDebut: dateDebut.value,
+    dateFin: dateFin.value,
+    infoSupplementaires: infoSupplementaires.value,
+  };
+
+  // Appel de la fonction ajouterOffre du composable avec les données du formulaire
+  await ajouterOffre(offerData);
+
+  // Réinitialisation des champs du formulaire après l'ajout
+  resetFormData();
+};
+
+// Fonction pour réinitialiser les données du formulaire
+const resetFormData = () => {
+  titre.value = '';
+  entreprise.value = '';
+  descriptionTache.value = '';
+  programmeFormation.value = '';
+  exigences.value = '';
+  typeStage.value = '';
+  heuresSemaine.value = '';
+  remuneration.value = '';
+  dateDebut.value = '';
+  dateFin.value = '';
+  infoSupplementaires.value = '';
+};
 
 </script>
 
