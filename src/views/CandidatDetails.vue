@@ -7,9 +7,15 @@
     <p class="candidat-role">UX Designer</p>
     </div>
     <div class="button-group">
-      <button class="btn approve"> <img src="../assets/icons8-tick-box-48.png" alt="Icon"></button>
-      <button class="btn edit"> <img src="../assets/icons8-write-24.png" alt="Icon"></button>
-      <button class="btn delete"> <img src="../assets/icons8-delete-24.png" alt="Icon"></button>
+      <button class="btn approve"> 
+        <img src="../assets/icons8-tick-box-48.png" alt="Icon">
+      </button>
+      <button class="btn edit" @click="redirigerVersMiseAJour(candidat._id)">
+        <img src="../assets/icons8-write-24.png" alt="Icon">
+      </button>      
+      <button class="btn delete"> 
+        <img src="../assets/icons8-delete-24.png" alt="Icon">
+      </button>
     </div>
 
     <div class="description">
@@ -61,97 +67,102 @@
 </template>
 
 <script>
-import axios from 'axios';
+  import axios from 'axios';
 
-export default {
-data() {
-  return {
-    candidat: null
-  };
-},
-async created() {
-  const candidatId = this.$route.params.id;
-  try {
-    const response = await axios.get(`https://api-3.fly.dev/candidates/${candidatId}`);
-    this.candidat = response.data;
-  } catch (error) {
-    console.error("Error:", error.response ? error.response.data : error.message);
+  export default {
+    data() {
+      return {
+        candidat: null
+      };
+    },
+    async created() {
+      const candidatId = this.$route.params.id;
+      try {
+        const response = await axios.get(`https://api-3.fly.dev/candidates/${candidatId}`);
+        this.candidat = response.data;
+      } catch (error) {
+        console.error("Error:", error.response ? error.response.data : error.message);
+      }
+    },
+    methods: {
+        redirigerVersMiseAJour(id) {
+            this.$router.push({ name: 'CandidatMiseAjour', params: { id } });
+        }
+    }
   }
-}
-}
 </script>
 
 
 <style scoped>
-.candidat {
-background-color: #ececee;
-padding: 80px 200px 80px 200px;
-}
+  .candidat {
+    background-color: #ececee;
+    padding: 80px 200px 80px 200px;
+  }
 
-.candidat-card-details {
-width: 900px;
-margin: 0 auto;
-font-family: Arial, sans-serif;
-color: #333;
-}
+  .candidat-card-details {
+    width: 900px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
 
-.candidat-name {
-font-size: 24px;
-font-weight: bold;
-margin: 0;
-}
+  .candidat-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
 
-.candidat-role {
-font-size: 20px;
-color: #666;
-margin-bottom: 0;
-background-color: #fff;
-padding: 5px;
-display: inline-block;
-}
+  .candidat-role {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 0;
+    background-color: #fff;
+    padding: 5px;
+    display: inline-block;
+  }
 
-.presentation h2 {
-font-size: 24px;
-font-weight: bold;
-margin-bottom: 30px;
-}
+  .presentation h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
 
-.info-row {
-display: flex;
-justify-content: space-between;
-}
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.info-column {
-width: 45%;
-}
+  .info-column {
+    width: 45%;
+  }
 
-.button-group {
-display: flex;
-justify-content: flex-end;
-margin-bottom: 20px;
-}
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
 
-.btn {
-cursor: pointer;
-border: none;
-}
+  .btn {
+    cursor: pointer;
+    border: none;
+  }
 
-.description {
-background-color: #fff;
-padding: 30px 50px 40px 60px;
-}
+  .description {
+    background-color: #fff;
+    padding: 30px 50px 40px 60px;
+  }
 
-.personal-info {
-padding-top: 20px;
-}
+  .personal-info {
+    padding-top: 20px;
+  }
 
-h2,
-h3 {
-color: purple;
-}
+  h2,
+  h3 {
+    color: purple;
+  }
 
-.border{
-border-left: 5px solid purple;
-padding-left: 1em;
-}
+  .border{
+    border-left: 5px solid purple;
+    padding-left: 1em;
+  }
 </style>

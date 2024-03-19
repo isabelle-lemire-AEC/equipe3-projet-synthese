@@ -26,22 +26,34 @@ export function useCandidat() {
     }
   }
 
-  // Fonction pour chercher un candidat par ID
+  // Fonction pour chercher un candidat par ID - ISA
   const getCandidatById = async (id) => {
-    loading.value = true;
-    try{
-        response.value = await axios.get(`${API_BASE_URL}/api#/default/Candidates/${id}`);
-        console.log("test get id");
+    try {
+        const response = await axios.get(`${API_BASE_URL}/Candidates/${id}`);
+        console.log("Appel réussi pour récupérer le candidat par ID");
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération du candidat par ID :", error);
+        throw new Error("Erreur lors de la récupération du candidat par ID");
     }
-    catch (err) {
-        error.value = err;
-        console.log("get id does not work at all brotha");
-    }
+  };
 
-    finally{
-        loading.value = false;
-    }
-  }
+  // Fonction pour chercher un candidat par ID - RAPH
+  //const getCandidatById = async (id) => {
+    //loading.value = true;
+    //try{
+        //response.value = await axios.get(`${API_BASE_URL}/api#/default/Candidates/${id}`);
+        //console.log("test get id");
+        //return response.data;
+    //}
+    //catch (err) {
+        //error.value = err;
+        //console.log("get id does not work at all brotha");
+    //}
+    //finally{
+        //loading.value = false;
+    //}
+  //};
 
   // Fonction pour l'édition d'un candidat
   const editCandidat = async (id, candidatData) => {

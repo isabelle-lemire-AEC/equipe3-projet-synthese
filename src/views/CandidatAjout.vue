@@ -7,29 +7,29 @@
             
             <div>
                 <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
-                <button class="mettre-a-jour" type="submit" @click="sauvegarderClick = true"><i class="fas fa-save"></i>Sauvegarder</button>
+                <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Sauvegarder</button>
             </div>
 
             <div class="flex">
                 <div class="flex">
                     <label for="firstName">Prénom :</label>
-                    <input type="text" id="firstName" v-model="firstName">
+                    <input type="text" id="firstName" v-model="candidat.firstName">
                 </div>
                 <div class="flex">
                     <label for="lastName">Nom :</label>
-                    <input type="text" id="lastName" v-model="lastName">
+                    <input type="text" id="lastName" v-model="candidat.lastName">
                 </div>
             </div>
             <div class="flex">
                 <label for="poste">Poste :</label>
-                <input type="text" id="poste" v-model="poste">
+                <input type="text" id="poste">
             </div>
 
             <div class="section">
                 <div>
                     <h2>Courte présentation</h2>
                     <label for="description"></label>
-                    <textarea name="description" id="description" cols="30" rows="10" v-model="description"></textarea>
+                    <textarea name="description" id="description" cols="30" rows="10" v-model="candidat.description"></textarea>
                 </div>
                 
                 <div>
@@ -37,42 +37,43 @@
                     <div class="flex">
                         <div class="col-gauche padding-right-15 border-left">
                             <label for="address">Adresse</label>
-                            <input type="text" id="address" v-model="address">
+                            <input type="text" id="address" v-model="candidat.address">
                         </div>
                         <div class="col-droite border-left">
                             <label for="phone">Téléphone</label>
-                            <input type="text" id="phone" v-model="phone">
+                            <input type="text" id="phone" v-model="candidat.phone">
                         </div>
                     </div>
                     <div class="flex">
                         <div class="col-gauche padding-right-15 border-left">
                             <label for="city">Ville</label>
-                            <input type="text" id="city" v-model="city">
+                            <input type="text" id="city" v-model="candidat.city">
                         </div>
                         <div class="col-droite border-left">
                             <label for="email">Courriel</label>
-                            <input type="email" id="email" v-model="email">
+                            <input type="email" id="email" v-model="candidat.email">
                         </div>
                     </div>
                     <div class="border-left">
                         <label for="province"></label>
-                        <select id="province" v-model="selectedProvince">
+                        <select id="province" v-model="candidat.province">
                             <option value="">Province</option>
                             <option v-for="province in provinces" 
                                 :key="province._id" 
-                                :value="province.value">{{ province.value }}</option>
+                                :value="province">{{ province.value }}
+                            </option>
+
                         </select>
                     </div>
                     <div class="border-left">
                         <label for="postalCode">Code postal</label>
-                        <input type="text" id="postalCode" v-model="postalCode">
+                        <input type="text" id="postalCode" v-model="candidat.postalCode">
                     </div>
                 </div>
             </div>
 
             <div>
-                <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
-                <button class="mettre-a-jour" type="submit" @click="sauvegarderClick = true"><i class="fas fa-save"></i>Sauvegarder</button>
+                btn à mettre quand prog ok
             </div>
         </form>
     </div>
@@ -86,22 +87,22 @@
     import { fetchProvinces } from '@/composables/api';
 
     const router = useRouter();
-
-    const firstName = ref('');
-    const lastName = ref('');
-    const poste = ref('');
-    const description = ref('');
-    const address = ref('');
-    const phone = ref('');
-    const city = ref('');
-    const email = ref('');
-    const selectedProvince = ref('');
-    const postalCode = ref('');
-    
-    const sauvegarderClick = ref(false);
-
     const { addCandidat } = useCandidat();
     const provinces = ref([]);
+
+    const candidat = ref({
+        firstName: '',
+        lastName: '',
+        poste: '',
+        description: '',
+        skills: "test",
+        address: '',
+        phone: '',
+        city: '',
+        email: '',
+        province: { _id: '', value: '' },
+        postalCode: ''
+    });
 
     const initProvinces = async () => {
         try {
@@ -111,48 +112,51 @@
         }
     }
 
-    initProvinces();
-
-    const soumettreFormulaire = async () => {
-        // Valider le formulaire uniquement lorsque le bouton "Sauvegarder" est cliqué
-        if (sauvegarderClick.value && validerFormulaire()) {
-            const candidatData = {
-                firstName: firstName.value,
-                lastName: lastName.value,
-                description: description.value,
-                email: email.value,
-                address: address.value,
-                phone: phone.value,
-                city: city.value,
-                province: { value: selectedProvince.value },
-                postalCode: postalCode.value
-            };
-
-            try {
-                await addCandidat(candidatData);
-                console.log("Nouveau candidat ajouté");
-                router.push({ name: 'Candidats' });
-            } catch (error) {
-                console.error("Erreur lors de l'ajout du candidat :", error);
-            }
-        }
-    }
-
-    // ceci fonctionne OK
     const annulerAjout = () => {
         console.log("Annuler l'ajout du candidat");
         router.push({ name: 'Candidats' });
     }
 
+    initProvinces();
+
+    const soumettreFormulaire = async () => {
+        try {
+            await ajouterCandidat();
+        } catch (error) {
+            console.error("Erreur lors de la soumission du formulaire :", error);
+        }
+    }
+
+    const ajouterCandidat = async () => {
+        try {
+            if (!validerFormulaire()) {
+                throw new Error("Veuillez remplir tous les champs obligatoires.");
+            }
+            console.log("Tentative d'ajout du candidat :", candidat.value);
+            await addCandidat(candidat.value);
+            console.log("Nouveau candidat ajouté");
+            router.push({ name: 'Candidats' });
+        } catch (error) {
+            console.error("Erreur lors de l'ajout du candidat :", error);
+        }
+    }
+
     const validerFormulaire = () => {
-        if (!firstName.value || !lastName.value || !email.value || !address.value || !phone.value || !city.value || !selectedProvince.value || !postalCode.value) {
-            console.log("Veuillez remplir tous les champs du formulaire.");
+        if (!candidat.value.firstName ||
+            !candidat.value.lastName ||
+            !candidat.value.email ||
+            !candidat.value.address ||
+            !candidat.value.phone ||
+            !candidat.value.city ||
+            !candidat.value.province ||
+            !candidat.value.postalCode) {
             return false;
         }
         return true;
     }
 
 </script>
+
 
 
 

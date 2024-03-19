@@ -1,23 +1,23 @@
 <!-- CandidatMiseAjour.vue - Isa  -->
 <template>
     <div class="container">
-        <div class="border-left-titre">
+        <div class="border-left-titre" v-if="candidat">
             <h3>Candidat</h3>
-            <h1>Plume Latraverse</h1>
+            <h1>{{ candidat.firstName }} {{ candidat.lastName }}</h1>
             <h2>UX Designer</h2>
         </div>
 
-        <form action="">
+        <form @submit.prevent="soumettreFormulaire">
 
-            <button class="annuler">Annuler</button>
-            <button class="mettre-a-jour"><i class="fas fa-save"></i>Sauvegarder</button>
+            <button class="annuler" type="submit" @click="annulerModif">Annuler</button>
+            <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Sauvegarder</button>
 
             
             <div class="section">
                 <div>
                     <h2>Courte présentation</h2>
-                    <label for="presentation"></label>
-                    <textarea name="presentation" id="presentation" cols="30" rows="10"></textarea>
+                    <label for="description"></label>
+                    <textarea name="description" id="description" cols="30" rows="10" v-model="candidat.description"></textarea>
                 </div>
 
                 
@@ -25,45 +25,136 @@
                     <h3>Inormations personnelles</h3>
                     <div class="flex">
                         <div class="col-gauche padding-right-15 border-left">
-                            <label for="adresse">Adresse</label>
-                            <input type="text" id="adresse">
+                            <label for="address">Adresse</label>
+                            <input type="text" id="address" v-model="candidat.address">
                         </div>
                         <div class="col-droite border-left">
-                            <label for="telephone">Téléphone</label>
-                            <input type="text" id="telephone">
+                            <label for="phone">Téléphone</label>
+                            <input type="text" id="phone" v-model="candidat.phone">
                         </div>
                     </div>
                     <div class="flex">
                         <div class="col-gauche padding-right-15 border-left">
-                            <label for="ville">Ville</label>
-                            <input type="text" id="ville">
+                            <label for="city">Ville</label>
+                            <input type="text" id="city" v-model="candidat.city">
                         </div>
                         <div class="col-droite border-left">
-                            <label for="courriel">Courriel</label>
-                            <input type="email" id="courriel">
+                            <label for="email">Courriel</label>
+                            <input type="email" id="email" v-model="candidat.email">
                         </div>
                     </div>
                     <div class="border-left">
-                        <label for="province">Province</label>
-                        <input type="text" id="province">
+                        <label for="province"></label>
+                        <select id="province" v-model="candidat.province">
+                            <option value="">Province</option>
+                            <option v-for="province in provinces" 
+                                :key="province._id" 
+                                :value="province">{{ province.value }}
+                            </option>
+
+                        </select>
                     </div>
                     <div class="border-left">
-                        <label for="codePostal">Code postal</label>
-                        <input type="text" id="codePostal">
+                        <label for="postalCode">Code postal</label>
+                        <input type="text" id="postalCode" v-model="candidat.postalCode">
                     </div>
                 </div>
             </div>
 
             <div>
-                <button class="annuler">Annuler</button>
-                <button class="mettre-a-jour"><i class="fas fa-save"></i>Sauvegarder</button>
+                bouton à mettre ici quand prog ok
             </div>
         </form>
     </div>
 </template>
 
 <script setup>
+    import { useCandidat } from '@/composables/candidats/candidat';
+    import { fetchProvinces } from '@/composables/api';
+    
+    const { getCandidatById, editCandidat } = useCandidat();
+    
+    import { ref, onMounted } from 'vue';
+    import { useRoute } from 'vue-router';
 
+    const route = useRoute();
+
+    const provinces = ref([]);
+    
+    const candidat = ref({
+        firstName: '',
+        lastName: '',
+        poste: '',
+        description: '',
+        skills: "test",
+        address: '',
+        phone: '',
+        city: '',
+        email: '',
+        province: { _id: '', value: '' },
+        postalCode: ''
+    });
+
+    const initProvinces = async () => {
+        try {
+            provinces.value = await fetchProvinces();
+        } catch (error) {
+            console.error("Erreur lors de la récupération des provinces :", error);
+        }
+    }
+
+    const modifCandidat = async () => {
+        try {
+            if (!validerFormulaire()) {
+                throw new Error("Veuillez remplir tous les champs obligatoires.");
+            }
+            console.log("Tentative de modification du candidat :", candidat.value);
+            console.log("URL de la requête PATCH :", `https://api-3.fly.dev/candidates/${candidat.value._id}`);
+            await editCandidat(candidat.value);
+            console.log("Candidat modifié");
+            route.push({ name: 'Candidats' });
+        } catch (error) {
+            console.error("Erreur lors de la modification du candidat :", error);
+        }
+    }
+
+    const annulerModif = () => {
+        console.log("Annuler la modification du candidat");
+        route.push({ name: 'Candidats' });
+    }
+
+    const soumettreFormulaire = async () => {
+        try {
+            await modifCandidat();
+        } catch (error) {
+            console.error("Erreur lors de la soumission du formulaire :", error);
+        }
+    }
+
+    initProvinces();
+
+    const validerFormulaire = () => {
+        if (!candidat.value.firstName ||
+            !candidat.value.lastName ||
+            !candidat.value.email ||
+            !candidat.value.address ||
+            !candidat.value.phone ||
+            !candidat.value.city ||
+            !candidat.value.province ||
+            !candidat.value.postalCode) {
+            return false;
+        }
+        return true;
+    }
+
+    onMounted(async () => {
+        try {
+            const candidatId = route.params.id;
+            candidat.value = await getCandidatById(candidatId);
+        } catch (error) {
+            console.error("Erreur lors de la récupération du candidat par ID :", error);
+        }
+    });
 </script>
 
 <style scoped>
