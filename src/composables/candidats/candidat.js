@@ -29,12 +29,24 @@ export function useCandidat() {
   // Fonction pour chercher un candidat par ID - ISA
   const getCandidatById = async (id) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/Candidates/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/candidates/${id}`);
         console.log("Appel réussi pour récupérer le candidat par ID");
         return response.data;
     } catch (error) {
         console.error("Erreur lors de la récupération du candidat par ID :", error);
         throw new Error("Erreur lors de la récupération du candidat par ID");
+    }
+  };
+
+  // Fonction pour chercher tous les candidats - JO
+  const getAllCandidats = async () => {
+    try {
+        response.value = await axios.get(`${API_BASE_URL}/candidates`);
+        // console.log("Appel réussi pour récupérer tous les candidats", response.value.data);
+        return response.value;
+    } catch (error) {
+        console.error("Erreur lors de la récupération de tous les candidats :", error);
+        throw new Error("Erreur lors de la récupération de tous les candidats");
     }
   };
 
@@ -83,5 +95,5 @@ export function useCandidat() {
     }
   };
 
-  return { addCandidat, getCandidatById, editCandidat, deleteCandidat, response, error, loading };
+  return { addCandidat, getCandidatById, getAllCandidats, editCandidat, deleteCandidat, response, error, loading };
 }

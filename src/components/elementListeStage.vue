@@ -19,7 +19,7 @@
             <span>{{ props.stage.dateInscription }}</span>
         </div>
         <div class="groupeBtns">
-            <RouterLink to="/ConsulterDemandeStage">Oeil</RouterLink>
+            <RouterLink to="/demande-de-stage-details">Oeil</RouterLink>
             <button>Edit</button>
             <button>Trash</button>
         </div>
@@ -27,9 +27,13 @@
 </template>
 
 <script setup>
+    // import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js'
+
+    // const { getAllRequests, response, error, loading } = useInternshipRequests();
+    // await getAllRequests();
 
     const props = defineProps(['stage'])
-    console.log(props.stage)
+    // console.log(props.stage)
 
 </script>
 
