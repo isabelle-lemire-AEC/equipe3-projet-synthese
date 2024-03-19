@@ -16,17 +16,23 @@
 
 <script>
 
-import { RouterView } from 'vue-router';
+  import { RouterView } from 'vue-router';
 
-import NavBar from './components/NavBar.vue';
-import Sidebar from './components/Sidebar.vue';
-import Footer from './components/Footer.vue';
+  import NavBar from './components/NavBar.vue';
+  import Sidebar from './components/Sidebar.vue';
+  import Footer from './components/Footer.vue';
 
-export default {
-  components: {
-    NavBar,
-    Sidebar,
-    Footer
+  export default {
+    components: {
+      NavBar,
+      Sidebar,
+      Footer
+    }
   }
-}
 </script>
+
+<style>
+  .main {
+    margin-bottom: 200px;
+  }
+</style>
