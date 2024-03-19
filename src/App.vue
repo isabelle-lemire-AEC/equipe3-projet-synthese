@@ -17,7 +17,7 @@
 
 <script>
 
-import { RouterView } from 'vue-router';
+  import { RouterView } from 'vue-router';
 
 import NavBar from './components/NavBar.vue';
 import Sidebar from './components/Sidebar.vue';
@@ -31,5 +31,10 @@ export default {
     OffresStages,
     Footer
   }
-}
 </script>
+
+<style>
+  .main {
+    margin-bottom: 200px;
+  }
+</style>
