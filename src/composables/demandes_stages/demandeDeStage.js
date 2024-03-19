@@ -1,3 +1,78 @@
+import { ref } from 'vue';
+import axios from 'axios';
+
+const API_BASE_URL = 'https://api-3.fly.dev';
+
+export function useInternshipRequests() {
+  const response = ref(null);
+  const error = ref(null);
+  const loading = ref(false);
+
+  // Ajouter une demande de stage
+  const addRequest = async (requestData) => {
+    loading.value = true;
+    try {
+      response.value = await axios.post(`${API_BASE_URL}/internship-requests`, requestData);
+      // console.log("POST Demande de stage - OK", response.value.data);
+    } catch (err) {
+      error.value = err;
+      console.log("POST Demande de stage - ERREUR", err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  // Obtenir toutes les demandes de stage
+  const getAllRequests = async () => {
+    loading.value = true;
+    try {
+      response.value = await axios.get(`${API_BASE_URL}/internship-requests`);
+      console.log("GET all Demandes de stage - OK", response.value.data);
+      return response.value;
+    } catch (err) {
+      error.value = err;
+      console.log("GET all Demandes de stage - ERREUR", err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  // Mettre à jour une demande de stage
+  const editRequest = async (id, requestData) => {
+    loading.value = true;
+    try {
+      response.value = await axios.patch(`${API_BASE_URL}/internship-requests/${id}`, requestData);
+      console.log(`PATCH Demande de stage avec le id ${id} OK`, response.value.data);
+      return response.value;
+    } catch (err) {
+      error.value = err;
+      console.log(`PATCH Demande de stage avec le id ${id} ERREUR`, err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return {addRequest, getAllRequests, editRequest, response, error, loading };
+}
+
+
+// Ex d'importation les amis   IMPORT
+// A reverifier***
+
+// import { useInternshipOffers } from './useInternshipOffers';
+
+// const { ajouterOffre } = useInternshipOffers();
+
+// const offerData = {
+//   // les données icitee
+// };
+
+// addInternshipOffer(offerData).then(() => {
+//   console.log('CA MARCHE !');
+// }).catch((error) => {
+//   console.error('CA MARCHE PAS:', error);
+// });
+
 // Objet calide fournie par l'enseignant 
 
 // {
