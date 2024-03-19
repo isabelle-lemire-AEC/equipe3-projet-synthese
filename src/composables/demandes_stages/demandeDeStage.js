@@ -13,7 +13,7 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.post(`${API_BASE_URL}/internship-requests`, requestData);
-      // console.log("POST Demande de stage - OK", response.value.data);
+      console.log("POST Demande de stage - OK", response.value.data);
     } catch (err) {
       error.value = err;
       console.log("POST Demande de stage - ERREUR", err);
