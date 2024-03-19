@@ -44,8 +44,8 @@ const router = createRouter({
     { path: '/demande-de-stage-ajout', name: 'DemandeStageAjout', component: DemandeStageAjout },
 
     { path: '/candidats', name: 'Candidats', component: Candidats },
-    { path: '/candidat/:id', name: 'CandidatDetails', component: CandidatDetails, props: true, },
-    { path: '/candidat-mise-a-jour', name: 'CandidatMiseAjour', component: CandidatMiseAjour },
+    { path: '/candidat/:id', name: 'CandidatDetails', component: CandidatDetails, props: true },
+    { path: '/candidat-mise-a-jour/:id', name: 'CandidatMiseAjour', component: CandidatMiseAjour, props: true },
     { path: '/candidat-ajout', name: 'CandidatAjout', component: CandidatAjout },
 
     { path: '/entreprises', name: 'Entreprises', component: Entreprises },
