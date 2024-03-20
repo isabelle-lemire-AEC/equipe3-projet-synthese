@@ -14,9 +14,15 @@
 
             <h3>Entreprise:</h3>
             <label for="type">Veuillez effectuer un choix</label>
+           
             <select name="entreprise" id="entreprise" v-model="offre.enterprise.name">
-                <option value="" ></option>
+                <option value="" disabled selected>Choisir une entreprise</option>
+                <option v-for="enterprise in enterprises" :key="enterprise._id" :value="enterprise.name">
+                {{ enterprise.name }}
+                </option>
             </select>
+
+
         </div>
 
         <div class="groupe-tache">
@@ -39,9 +45,12 @@
 
             <div class="groupe-gauche">
                 <h3>Type de stage</h3>
-                <label for="ajout-type">Veuillez effectuer un choix</label>
+                
                 <select name="ajout-type" id="ajout-type" v-model="offre.internshipType">
-                    <option value=""></option>
+                    <option value="" disabled selected>Veuillez effectuer un choix</option>
+                    <option v-for="typeStage in offre" :key="typeStage._id" :value="typeStage">
+                        {{ typeStage }}
+                    </option>
                 </select>
 
                 <h3>Nombre d'heures par semaine</h3>
@@ -80,12 +89,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref ,  } from 'vue';
 import { useRouter } from 'vue-router';
 import useInternshipOffers from '../composables/offres_stage/offreDeStage';
 
+
 const router = useRouter();
 const { ajouterOffre } = useInternshipOffers();
+const enterprises = ref([]); // Référence pour stocker les entreprises
+
+
 
 // Initialisation des variables pour les données du formulaire
 const offre = ref({

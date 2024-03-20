@@ -5,6 +5,7 @@ export default function useInternshipOffers() {
   const response = ref(null);
   const error = ref(null);
   const loading = ref(false);
+  
 
   // Ajouter une offre de stage
   const ajouterOffre = async (offerData) => {
@@ -51,7 +52,10 @@ export default function useInternshipOffers() {
     }
   };
 
-  return {ajouterOffre, getAllOffers, edditerOffre, response, error, loading };
+
+
+
+  return {ajouterOffre, getAllOffers, edditerOffre,  response, error, loading };
 }
 
 
