@@ -1,7 +1,7 @@
 <template>
     <div class="pageContainer">
         <h1>Demandes de stage</h1>
-        <button class="ajouterDemande">Ajouter une demande</button>
+        <RouterLink to="/demande-de-stage-ajout">Ajouter une demande</RouterLink>
         <div class="listeStages">
             <div class="listeStagesHeader">
                 <span>Poste</span>
@@ -12,14 +12,105 @@
             <ElementListeStage :stage="stagiere1"></ElementListeStage>
             <ElementListeStage :stage="stagiere2"></ElementListeStage>
             <ElementListeStage :stage="stagiere3"></ElementListeStage>
+            <p></p>
         </div>
     </div>
 </template>
 
 <script setup>
 import ElementListeStage from '../components/elementListeStage.vue'
+import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js'
+import { useCandidat } from '../composables/candidats/candidat.js'
+import { useProvinces } from '../composables/provinces/provinces.js'
+import { useInternshipTypes } from '@/composables/types_stage/types_stage.js'
 
-// Les stagières ont été créé à des fins de tests
+// Code brouillon, je vais faire le ménage plus tard.
+
+const { addRequest, getAllRequests, editRequest } = useInternshipRequests();
+const { getAllCandidats } = useCandidat();
+const { getAllProvinces } = useProvinces();
+const { getAllInternshipTypes } = useInternshipTypes();
+
+const demandeDeStageAAjouter = {
+  title: "Designer web",
+  description: "Bonjour je suis un desinger web à la recherche de travail!",
+  candidate: {
+    _id: "",
+    description: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    phone: "",
+    city: "",
+    skills: [
+      ""
+    ],
+    province: {
+      _id: "",
+      value: ""
+    },
+    postalCode: ""
+  },
+  startDate: "2024-03-19T17:36:02.007Z",
+  endDate: "2024-03-19T17:36:02.007Z",
+  weeklyWorkHours: 40,
+  province: {
+    _id: "",
+    value: ""
+  },
+  skills: [
+    "Front-end",
+    "Design"
+  ],
+  internshipType: {
+    _id: "",
+    value: ""
+  },
+  additionalInformation: "J'aime le Ping-Pong",
+  isActive: true
+}
+
+const testAPI = async () => {
+
+    // Ici je vais chercher des objets dans la BD afin de construire
+    // mon objet demandeDeStageAAjouter, je vais chercher toutes les objets
+    // et je prend le premier simplement dans le but de faire des tests et de
+    // valider si le call à l'API fonctionne.
+
+    // je vais chercher le premier candidat et je l'assigne dans le 
+    // candidat de ma demandeDeStageAAjouter
+    const candidats = await getAllCandidats();
+    demandeDeStageAAjouter.candidate = candidats.data[0];
+    
+    // je vais chercher la première province et je l'assigne dans la 
+    // province de ma demandeDeStageAAjouter
+    const provinces = await getAllProvinces();
+    demandeDeStageAAjouter.province = provinces.data[0];
+    
+    // je vais chercher le premier type de stage et je l'assigne dans le 
+    // type de stage de ma demandeDeStageAAjouter
+    const internshipTypes = await getAllInternshipTypes();
+    demandeDeStageAAjouter.internshipType = internshipTypes.data[0];
+    
+    // console.log("demandeDeStageAAjouter: ", demandeDeStageAAjouter);
+
+    // *** IMPORTANT *** enlever les commentaires de la ligne ci-dessous pour ajouter une demande de stage
+    // await addRequest(demandeDeStageAAjouter);
+
+    // afin d'afficher dans la console toutes les demandes de stage, incluant celle que l'on vient
+    // d'ajouter dans la ligne précédante
+    const allRequests = await getAllRequests();
+
+    // await editRequest(allRequests.data[1]._id, demandeDeStageAAjouter)
+    await getAllRequests();
+
+}
+
+// exécuter la fonction de test des calls API
+testAPI();
+
+// Les stagières ont été créé à des fins de tests pour les componants ElementListeStage
 const stagiere1 = {
     actif: "1",
     poste: "Programmeur",
