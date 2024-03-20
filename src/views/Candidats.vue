@@ -11,35 +11,35 @@
   </div>
 </template>
 
-<script>
-  import axios from 'axios';
+<script setup>
   import CandidatCard from '@/components/CandidatCard.vue';
+  import { useCandidat } from '@/composables/candidats/candidat';
+  import { ref, onMounted } from 'vue';
+  import { useRouter } from 'vue-router';
 
-  export default {
-    components: {
-      CandidatCard,
-    },
-    data() {
-      return {
-        candidates: [],
-      };
-    },
-    methods: {
-      goToCandidatAjout() {
-        this.$router.push({ name: 'CandidatAjout' });
-      },
-    },
-    async created() {
-      try {
-        const response = await axios.get('https://api-3.fly.dev/candidates');
-        this.candidates = response.data; 
-      } catch (error) {
-        console.error("Error:", error.response ? error.response.data : error.message);
-      }
-    },
+
+  const candidates = ref([]);
+  
+  // Importation de la fonction getAllCandidats depuis le fichier candidat.js
+  const { getAllCandidats } = useCandidat();
+  
+  const router = useRouter();
+
+  // Fonction pour naviguer vers la page d'ajout de candidat
+  const goToCandidatAjout = () => {
+    router.push({ name: 'CandidatAjout' });
   };
-</script>
 
+  // Fonction pour récupérer tous les candidats
+  onMounted(async () => {
+    try {
+      const response = await getAllCandidats();
+      candidates.value = response.data; 
+    } catch (error) {
+      console.error("Error:", error.response ? error.response.data : error.message);
+    }
+  });
+</script>
 
 <style scoped>
   .container {

@@ -12,7 +12,7 @@ export default function useInternshipOffers() {
     loading.value = true;
     try {
       // Assurez-vous que l'URL est correcte ici, sans le fragment de Swagger "#/default/InternshipOffers"
-      response.value = await axios.post('https://api-3.fly.dev/internshipOffers', offerData);
+      response.value = await axios.post('https://api-3.fly.dev/internship-offers', offerData);
       console.log("post offer marche pas", response.value.data);
     } catch (err) {
       error.value = err;
@@ -42,7 +42,7 @@ export default function useInternshipOffers() {
   const edditerOffre = async (id, offerData) => {
     loading.value = true;
     try {
-      response.value = await axios.patch(`https://api-3.fly.dev/internshipOffers/${id}`, offerData);
+      response.value = await axios.patch(`https://api-3.fly.dev/internship-offers/${id}`, offerData);
       console.log("Edition work", response.value.data);
     } catch (err) {
       error.value = err;

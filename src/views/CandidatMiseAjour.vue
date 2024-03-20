@@ -1,4 +1,5 @@
 <!-- CandidatMiseAjour.vue - Isa  -->
+
 <template>
     <div class="container">
         <div class="border-left-titre" v-if="candidat">
@@ -8,18 +9,19 @@
         </div>
 
         <form @submit.prevent="soumettreFormulaire">
-
-            <button class="annuler" type="submit" @click="annulerModif">Annuler</button>
-            <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Sauvegarder</button>
-
             
+            <div>
+                <button class="annuler" type="submit" @click="annulerModif">Annuler</button>
+                <!-- <button class="annuler" type="submit" @click="annulerModif">Annuler</button> ceci ne fonctionne pas -->
+                <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Mettre à jour</button> <!-- ceci ne fonctionne pas -->
+            </div>
+
             <div class="section">
                 <div>
                     <h2>Courte présentation</h2>
                     <label for="description"></label>
                     <textarea name="description" id="description" cols="30" rows="10" v-model="candidat.description"></textarea>
                 </div>
-
                 
                 <div>
                     <h3>Inormations personnelles</h3>
@@ -62,11 +64,12 @@
             </div>
 
             <div>
-                bouton à mettre ici quand prog ok
+                btn à mettre quand prog ok
             </div>
         </form>
     </div>
 </template>
+
 
 <script setup>
     import { useCandidat } from '@/composables/candidats/candidat';
@@ -76,8 +79,10 @@
     
     import { ref, onMounted } from 'vue';
     import { useRoute } from 'vue-router';
+    import { useRouter } from 'vue-router';
 
     const route = useRoute();
+    const router = useRouter();
 
     const provinces = ref([]);
     
@@ -110,9 +115,9 @@
             }
             console.log("Tentative de modification du candidat :", candidat.value);
             console.log("URL de la requête PATCH :", `https://api-3.fly.dev/candidates/${candidat.value._id}`);
-            await editCandidat(candidat.value);
+            await editCandidat(candidat.value._id, candidat.value); // Passez candidat.value._id en premier argument
             console.log("Candidat modifié");
-            route.push({ name: 'Candidats' });
+            router.push({ name: 'Candidats' });
         } catch (error) {
             console.error("Erreur lors de la modification du candidat :", error);
         }

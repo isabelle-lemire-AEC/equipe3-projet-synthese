@@ -96,12 +96,15 @@ const testAPI = async () => {
     // console.log("demandeDeStageAAjouter: ", demandeDeStageAAjouter);
 
     // *** IMPORTANT *** enlever les commentaires de la ligne ci-dessous pour ajouter une demande de stage
+    // vous pouvez modifier les données de l'objet demandeDeStageAAjouter afin de tester et différencier
+    // les différents objets
     // await addRequest(demandeDeStageAAjouter);
 
     // afin d'afficher dans la console toutes les demandes de stage, incluant celle que l'on vient
     // d'ajouter dans la ligne précédante
     const allRequests = await getAllRequests();
 
+    // *** IMPORTANT *** enlever les commentaires afin de tester l'édition d'une demande de stage
     // await editRequest(allRequests.data[1]._id, demandeDeStageAAjouter)
     await getAllRequests();
 
