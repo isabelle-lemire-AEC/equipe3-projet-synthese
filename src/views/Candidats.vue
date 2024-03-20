@@ -17,14 +17,20 @@
   import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
 
+
   const candidates = ref([]);
+  
+  // Importation de la fonction getAllCandidats depuis le fichier candidat.js
   const { getAllCandidats } = useCandidat();
+  
   const router = useRouter();
 
+  // Fonction pour naviguer vers la page d'ajout de candidat
   const goToCandidatAjout = () => {
     router.push({ name: 'CandidatAjout' });
   };
 
+  // Fonction pour récupérer tous les candidats
   onMounted(async () => {
     try {
       const response = await getAllCandidats();
@@ -34,8 +40,6 @@
     }
   });
 </script>
-
-
 
 <style scoped>
   .container {

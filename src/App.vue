@@ -6,7 +6,6 @@
     <div class="main flex">
       <Sidebar></Sidebar>
       <div class="content">
-        <OffresStages></OffresStages>
         <router-view />
       </div>
     </div>
