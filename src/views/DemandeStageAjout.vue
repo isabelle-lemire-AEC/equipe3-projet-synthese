@@ -4,7 +4,7 @@
 
 		<div>
 			<!-- COMPONENT?? Classe pour flex les boutons -->
-			<button>Annuler</button>
+			<RouterLink to="/demandes-de-stages">Annuler</RouterLink>
 			<button type="submit">Sauvegarder</button>
 		</div>
 
@@ -237,7 +237,7 @@
 
 			<div>
 				<!-- COMPONENT?? Classe pour flex les boutons -->
-				<button>Annuler</button>
+				<RouterLink to="/demandes-de-stages">Annuler</RouterLink>
 				<button type="submit">Sauvegarder</button>
 			</div>
 		</form>

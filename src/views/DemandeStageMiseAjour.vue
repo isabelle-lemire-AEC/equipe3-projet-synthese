@@ -10,7 +10,6 @@
 		</div>
 
 		<form id="edit-demande-stage" @submit.prevent="validate">
-
 			<div>
 				<!-- Classe pour encadré blanc -->
 
@@ -73,7 +72,9 @@
 						><!-- Classe pour regrouper deux inputs side by side-->
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="edit-demande-etablissement">Établissement scolaire</label>
+							<label for="edit-demande-etablissement"
+								>Établissement scolaire</label
+							>
 							<input
 								type="text"
 								id="edit-demande-etablissement"
@@ -139,7 +140,9 @@
 
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="edit-demande-heures">Nombre d'heures par semaine</label>
+							<label for="edit-demande-heures"
+								>Nombre d'heures par semaine</label
+							>
 							<select id="edit-demande-heures" name="edit-demande-heures">
 								<option value="">Veuillez effectuer un choix</option>
 								<!-- Autres options de l'API -->
@@ -177,7 +180,7 @@
 								id="edit-demande-discretion"
 								name="edit-demande-remuneration"
 								value="discretion"
-								v-model="remunerationType" />
+								v-model="demande.paid" />
 							<label for="edit-demande-discretion"
 								>À la discrétion de l'entreprise</label
 							>
@@ -189,7 +192,7 @@
 								id="edit-demande-remunere"
 								name="edit-demande-remuneration"
 								value="remunere"
-								v-model="remunerationType" />
+								v-model="demande.paid" />
 							<label for="edit-demande-remunere">Rémunéré</label>
 						</div>
 						<!-- Wrapper case checkbox + label -->
@@ -199,7 +202,7 @@
 								id="edit-demande-non-renumere"
 								name="edit-demande-remuneration"
 								value="non-remunere"
-								v-model="remunerationType" />
+								v-model="demande.paid" />
 							<label for="edit-demande-non-renumere">Non-rémunéré</label>
 						</div>
 						<!-- Wrapper case checkbox + label -->
@@ -236,9 +239,15 @@
 <!-- Il va rester à ajouter la validation pour les champs firstName et lastName (currently: fullName), Établissement scolaire, les champs select, checkbox et date.  -->
 
 <script setup>
-	import {reactive, ref} from "vue";
+	import {reactive, ref, onMounted} from "vue";
+	import {useDemande} from "../composables/demandes_stages/demandeDeStage";
+	import {fetchProvinces} from "../composables/api";
 
-	/* const remunerationType = ref([]); */
+	const {editDemandeStage, response, error, loading} = useDemande();
+
+	// données du formulaire
+	/* const selectedProvince = ref(""); */
+	/* const provinces = ref([]); */
 
 	const demande = reactive({
 		fullName: "",
@@ -251,9 +260,56 @@
 		weeklyWorkHours: "",
 		startDate: "",
 		endDate: "",
-		paid: "",
+		paid: "DISCRETIONARY",
 		additionalInformation: "",
 	});
+
+	onMounted(async () => {
+		try {
+			province.value = await fetchProvinces();
+			console.log("Provinces récupérées :", province.value); // Ajoutez cette ligne
+		} catch (error) {
+			console.error("Erreur lors de la récupération des provinces :", error);
+		}
+	});
+
+	/* const soumettreFormulaire = async () => {
+		const demandeData = {
+			fullName: demande.fullName,
+			description: demande.description,
+			activitySector: demande.activitySector,
+			city: demande.city,
+			province: demande.province,
+			skills: demande.skills,
+			internshipType: demande.internshipType,
+			weeklyWorkHours: demande.weeklyWorkHours,
+			startDate: demande.startDate,
+			endDate: demande.endDate,
+			paid: demande.paid,
+			additionalInformation: demande.additionalInformation,
+		};
+
+		await editDemandeStage(candidatData);
+
+
+	}; */
+
+	/* const remunerationType = ref([]); */
+
+	/* const demande = reactive({
+		fullName: "",
+		description: "",
+		activitySector: "",
+		city: "",
+		province: "",
+		skills: "",
+		internshipType: "",
+		weeklyWorkHours: "",
+		startDate: "",
+		endDate: "",
+		paid: "",
+		additionalInformation: "",
+	}); */
 
 	const errors = reactive({
 		fullName: false,
@@ -367,6 +423,25 @@
 		}
 
 		console.log("Form submitted successfully!");
+
+		if (validForm.value) {
+			const editedData = {
+				fullName: demande.fullName,
+				description: demande.description,
+				activitySector: demande.activitySector,
+				city: demande.city,
+				province: demande.province,
+				skills: demande.skills,
+				internshipType: demande.internshipType,
+				weeklyWorkHours: demande.weeklyWorkHours,
+				startDate: demande.startDate,
+				endDate: demande.endDate,
+				paid: demande.paid,
+				additionalInformation: demande.additionalInformation,
+			};
+		}
+		
+		editDemandeStage(id, editedData);
 	};
 </script>
 
