@@ -77,59 +77,63 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
 
-export default {
-  data() {
-    return {
-      candidat: null,
-      showConfirmationModal: false // Ajout d'une propriété pour contrôler l'affichage du modal
-    };
-  },
-  async created() {
-    const candidatId = this.$route.params.id;
-    try {
-      const response = await axios.get(`https://api-3.fly.dev/candidates/${candidatId}`);
-      this.candidat = response.data;
-    } catch (error) {
-      console.error("Error:", error.response ? error.response.data : error.message);
-    }
-  },
-  methods: {
-    redirigerVersMiseAJour(id) {
-      this.$router.push({ name: 'CandidatMiseAjour', params: { id } });
-    },
-    async supprimerCandidat(id) {
-      try {
-        await axios.delete(`https://api-3.fly.dev/candidates/${id}`);
-        console.log("Candidat supprimé avec succès");
-        this.$router.go(); 
-      } catch (error) {
-        console.error("Erreur lors de la suppression du candidat :", error);
-      }
-    },
-    afficherConfirmationModal() {
-      this.showConfirmationModal = true;
-    },
-    annulerSuppression() {
-      this.showConfirmationModal = false;
-    },
-    async confirmerSuppression() {
-      const candidatId = this.candidat._id;
-      try {
-        await axios.delete(`https://api-3.fly.dev/candidates/${candidatId}`);
-        console.log("Candidat supprimé avec succès");
-        this.$router.go();
-      } catch (error) {
-        console.error("Erreur lors de la suppression du candidat :", error);
-      } finally {
-        this.showConfirmationModal = false; // Cache le modal après la suppression
-      }
-    }
+const candidat = ref(null);
+const showConfirmationModal = ref(false);
+const router = useRouter();
+const route = useRoute();
+
+const redirigerVersMiseAJour = (id) => {
+  router.push({ name: 'CandidatMiseAjour', params: { id } });
+};
+
+const supprimerCandidat = async (id) => {
+  try {
+    await axios.delete(`https://api-3.fly.dev/candidates/${id}`);
+    console.log("Candidat supprimé avec succès");
+    router.go(); 
+  } catch (error) {
+    console.error("Erreur lors de la suppression du candidat :", error);
   }
 };
+
+const afficherConfirmationModal = () => {
+  showConfirmationModal.value = true;
+};
+
+const annulerSuppression = () => {
+  showConfirmationModal.value = false;
+};
+
+const confirmerSuppression = async () => {
+  const candidatId = candidat.value._id;
+  try {
+    await axios.delete(`https://api-3.fly.dev/candidates/${candidatId}`);
+    console.log("Candidat supprimé avec succès");
+    router.push({ name: 'Candidats' }); 
+  } catch (error) {
+    console.error("Erreur lors de la suppression du candidat :", error);
+  } finally {
+    showConfirmationModal.value = false; 
+  }
+};
+
+
+onMounted(async () => {
+  const candidatId = route.params.id;
+  try {
+    const response = await axios.get(`https://api-3.fly.dev/candidates/${candidatId}`);
+    candidat.value = response.data;
+  } catch (error) {
+    console.error("Error:", error.response ? error.response.data : error.message);
+  }
+});
 </script>
+
 
 
 <style scoped>
@@ -206,31 +210,55 @@ export default {
   }
 
     /* Styles pour le modal */
-    .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  .modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
 
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-  }
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
 
-  .modal-buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-  }
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 
-  .modal-buttons .btn {
-    margin-left: 10px;
-  }
+.btn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn.confirm {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn.cancel {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
 </style>
