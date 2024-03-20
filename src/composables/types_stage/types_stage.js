@@ -13,7 +13,7 @@ export function useInternshipTypes() {
     loading.value = true;
     try {
       response.value = await axios.get(`${API_BASE_URL}/internship-types`);
-    //   console.log("GET all internship types - OK", response.value.data);
+      console.log("GET all internship types - OK", response.value.data);
       return response.value;
     } catch (err) {
       error.value = err;
