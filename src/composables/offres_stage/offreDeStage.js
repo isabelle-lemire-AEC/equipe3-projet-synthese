@@ -28,7 +28,7 @@ export default function useInternshipOffers() {
   const getAllOffers = async () => {
     loading.value = true;
     try {
-      response.value = await axios.get(`https://api-3.fly.dev/InternshipOffers`);
+      response.value = await axios.get('https://api-3.fly.dev/internship-offers');
       console.log("get offer ca marche", response.value.data);
     } catch (err) {
       error.value = err;

@@ -45,12 +45,9 @@
 
             <div class="groupe-gauche">
                 <h3>Type de stage</h3>
-                <!-- test -->
+                <label for="ajout-type">Veuillez effectuer un choix</label>
                 <select name="ajout-type" id="ajout-type" v-model="offre.internshipType">
-                    <option value="" disabled selected>Veuillez effectuer un choix</option>
-                    <option v-for="typeStage in offre" :key="typeStage._id" :value="typeStage">
-                        {{ typeStage }}
-                    </option>
+                    <option value=""></option>
                 </select>
 
                 <h3>Nombre d'heures par semaine</h3>
@@ -89,7 +86,7 @@
 </template>
 
 <script setup>
-import { ref ,  } from 'vue';
+import { ref   } from 'vue';
 import { useRouter } from 'vue-router';
 import useInternshipOffers from '../composables/offres_stage/offreDeStage';
 
