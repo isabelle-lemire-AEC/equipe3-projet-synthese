@@ -3,35 +3,41 @@
         <h3>Offre de stage</h3>
     </section>
 
-    <form>
+    <form @submit.prevent="soumettreFormulaire">
 
-        <button>Annuler</button>
-        <button>Sauvegarder</button>
+        <button type="submit" @click="annulerAjout">Annuler</button>
+        <button type="submit">Sauvegarder</button>
 
         <div class="groupe-titre-entreprise">
             <h3>Titre:</h3>
-            <input type="text" id="titre">
+            <input type="text" id="titre" v-model="offre.title">
 
             <h3>Entreprise:</h3>
             <label for="type">Veuillez effectuer un choix</label>
-            <select name="entreprise" id="entreprise">
-                <option value=""></option>
+           
+            <select name="entreprise" id="entreprise" v-model="offre.enterprise.name">
+                <option value="" disabled selected>Choisir une entreprise</option>
+                <option v-for="enterprise in enterprises" :key="enterprise._id" :value="enterprise.name">
+                {{ enterprise.name }}
+                </option>
             </select>
+
+
         </div>
 
         <div class="groupe-tache">
             <h1>Description de la tâche</h1>
-            <textarea id="ajout-description-tache"></textarea>
+            <textarea id="ajout-description-tache" v-model="offre.description"></textarea>
         </div>
 
         <div class="groupe-programme">
             <h3>Programme de formation</h3>
-            <input type="text" id="ajout-programme">
+            <input type="text" id="ajout-programme" v-model="offre.enterprise.activitySector">
         </div>
 
         <div class="groupe-exigence">
             <h3>Exigences</h3>
-            <textarea id="ajout-exigences"></textarea>
+            <textarea id="ajout-exigences" v-model="offre.requiredSkills"></textarea>
         </div>
 
         <div class="groupe-info-stage">
@@ -39,14 +45,17 @@
 
             <div class="groupe-gauche">
                 <h3>Type de stage</h3>
-                <label for="ajout-type">Veuillez effectuer un choix</label>
-                <select name="ajout-type" id="ajout-type">
-                    <option value=""></option>
+                <!-- test -->
+                <select name="ajout-type" id="ajout-type" v-model="offre.internshipType">
+                    <option value="" disabled selected>Veuillez effectuer un choix</option>
+                    <option v-for="typeStage in offre" :key="typeStage._id" :value="typeStage">
+                        {{ typeStage }}
+                    </option>
                 </select>
 
                 <h3>Nombre d'heures par semaine</h3>
                 <label for="ajout-heure">Veuillez effectuer un choix</label>
-                <select name="ajout-heure" id="ajout-heure">
+                <select name="ajout-heure" id="ajout-heure" v-model="offre.weeklyWorkHours">
                     <option value=""></option>
                 </select>
 
@@ -80,6 +89,105 @@
 </template>
 
 <script setup>
+import { ref ,  } from 'vue';
+import { useRouter } from 'vue-router';
+import useInternshipOffers from '../composables/offres_stage/offreDeStage';
+
+
+const router = useRouter();
+const { ajouterOffre } = useInternshipOffers();
+const enterprises = ref([]); // Référence pour stocker les entreprises
+
+
+
+// Initialisation des variables pour les données du formulaire
+const offre = ref({
+    title: '',
+    description: '',
+    enterprise: {
+    _id: 'test',
+    image: 'test',
+    name: '',
+    address: 'test',
+    postalCode: 'test',
+    city: 'test',
+    province: {
+      _id: 'test',
+      value: 'test '
+    },
+    phone: 'test',
+    email: 'test',
+    description: 'test',
+    activitySector: {
+      _id: '',
+      value: ''
+    },
+    website: 'test'
+  },
+  startDate: '2024-03-19T22:14:11.398Z',
+  endDate: '2024-03-19T22:14:11.398Z',
+  weeklyWorkHours: 0,
+  salary: 0,
+  province: {
+    _id: 'test',
+    value: 'test'
+  },
+  requiredSkills: [
+    ''
+  ],
+  internshipType: {
+    _id: '',
+    value: ''
+  },
+  paid: 'DISCRETIONARY',
+  isActive: true
+
+});
+
+
+
+
+// Fonction pour ajouter un stage
+const ajouterStage = async () => {
+    try {
+            if (!validerFormulaire()) {
+                throw new Error("Veuillez remplir tous les champs obligatoires.");
+            }
+            console.log("Tentative d'ajout de l'offre :", offre.value);
+            await ajouterOffre(offre.value);
+            console.log("Nouvelle offre ajoutée");
+            router.push({ name: 'OffresStages' });
+        } catch (error) {
+            console.error("Erreur lors de l'ajout de l'offre de stage :", error);
+        }
+
+ 
+};
+
+const annulerAjout = () => {
+        console.log("Annuler l'ajout de l'offre");
+        router.push({ name: 'OffresStages' });
+}
+
+const soumettreFormulaire = async () => {
+        try {
+            await ajouterStage();
+        } catch (error) {
+            console.error("Erreur lors de la soumission du formulaire :", error);
+        }
+}
+
+const validerFormulaire = () => {
+        if (!offre.value.title ||
+            !offre.value.enterprise.name ||
+            !offre.value.internshipType ||
+            !offre.value.weeklyWorkHours ) {
+            return false;
+        }
+        return true;
+    }
+
+
 
 </script>
 

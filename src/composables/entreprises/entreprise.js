@@ -6,6 +6,8 @@ export function useEntreprise() {
     const error = ref(null);
     const loading = ref(false);
 
+    
+
     const addEntreprise = async (entrepriseData) => {
         loading.value = true;
         try {
