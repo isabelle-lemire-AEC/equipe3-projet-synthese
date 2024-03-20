@@ -31,6 +31,7 @@ export default {
     OffresStages,
     Footer
   }
+}
 </script>
 
 <style>

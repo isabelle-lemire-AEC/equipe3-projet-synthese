@@ -3,35 +3,35 @@
         <h3>Offre de stage</h3>
     </section>
 
-    <form @submit.prevent="ajouterStage">
+    <form @submit.prevent="soumettreFormulaire">
 
-        <button>Annuler</button>
-        <button>Sauvegarder</button>
+        <button type="submit" @click="annulerAjout">Annuler</button>
+        <button type="submit">Sauvegarder</button>
 
         <div class="groupe-titre-entreprise">
             <h3>Titre:</h3>
-            <input type="text" id="titre">
+            <input type="text" id="titre" v-model="offre.title">
 
             <h3>Entreprise:</h3>
             <label for="type">Veuillez effectuer un choix</label>
-            <select name="entreprise" id="entreprise">
-                <option value=""></option>
+            <select name="entreprise" id="entreprise" v-model="offre.enterprise.name">
+                <option value="" ></option>
             </select>
         </div>
 
         <div class="groupe-tache">
             <h1>Description de la tâche</h1>
-            <textarea id="ajout-description-tache"></textarea>
+            <textarea id="ajout-description-tache" v-model="offre.description"></textarea>
         </div>
 
         <div class="groupe-programme">
             <h3>Programme de formation</h3>
-            <input type="text" id="ajout-programme">
+            <input type="text" id="ajout-programme" v-model="offre.enterprise.activitySector">
         </div>
 
         <div class="groupe-exigence">
             <h3>Exigences</h3>
-            <textarea id="ajout-exigences"></textarea>
+            <textarea id="ajout-exigences" v-model="offre.requiredSkills"></textarea>
         </div>
 
         <div class="groupe-info-stage">
@@ -40,13 +40,13 @@
             <div class="groupe-gauche">
                 <h3>Type de stage</h3>
                 <label for="ajout-type">Veuillez effectuer un choix</label>
-                <select name="ajout-type" id="ajout-type">
+                <select name="ajout-type" id="ajout-type" v-model="offre.internshipType">
                     <option value=""></option>
                 </select>
 
                 <h3>Nombre d'heures par semaine</h3>
                 <label for="ajout-heure">Veuillez effectuer un choix</label>
-                <select name="ajout-heure" id="ajout-heure">
+                <select name="ajout-heure" id="ajout-heure" v-model="offre.weeklyWorkHours">
                     <option value=""></option>
                 </select>
 
@@ -81,61 +81,100 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import useInternshipOffers from '../composables/offres_stage/offreDeStage';
 
-// Initialisation des variables pour les données du formulaire
-const titre = ref('');
-const entreprise = ref('');
-const descriptionTache = ref('');
-const programmeFormation = ref('');
-const exigences = ref('');
-const typeStage = ref('');
-const heuresSemaine = ref('');
-const remuneration = ref('');
-const dateDebut = ref('');
-const dateFin = ref('');
-const infoSupplementaires = ref('');
-
-// Import du composable
+const router = useRouter();
 const { ajouterOffre } = useInternshipOffers();
+
+// Initialisation des variables pour les données du formulaire
+const offre = ref({
+    title: '',
+    description: '',
+    enterprise: {
+    _id: 'test',
+    image: 'test',
+    name: '',
+    address: 'test',
+    postalCode: 'test',
+    city: 'test',
+    province: {
+      _id: 'test',
+      value: 'test '
+    },
+    phone: 'test',
+    email: 'test',
+    description: 'test',
+    activitySector: {
+      _id: '',
+      value: ''
+    },
+    website: 'test'
+  },
+  startDate: '2024-03-19T22:14:11.398Z',
+  endDate: '2024-03-19T22:14:11.398Z',
+  weeklyWorkHours: 0,
+  salary: 0,
+  province: {
+    _id: 'test',
+    value: 'test'
+  },
+  requiredSkills: [
+    ''
+  ],
+  internshipType: {
+    _id: '',
+    value: ''
+  },
+  paid: 'DISCRETIONARY',
+  isActive: true
+
+});
+
+
+
 
 // Fonction pour ajouter un stage
 const ajouterStage = async () => {
-  const offerData = {
-    titre: titre.value,
-    entreprise: entreprise.value,
-    descriptionTache: descriptionTache.value,
-    programmeFormation: programmeFormation.value,
-    exigences: exigences.value,
-    typeStage: typeStage.value,
-    heuresSemaine: heuresSemaine.value,
-    remuneration: remuneration.value,
-    dateDebut: dateDebut.value,
-    dateFin: dateFin.value,
-    infoSupplementaires: infoSupplementaires.value,
-  };
+    try {
+            if (!validerFormulaire()) {
+                throw new Error("Veuillez remplir tous les champs obligatoires.");
+            }
+            console.log("Tentative d'ajout de l'offre :", offre.value);
+            await ajouterOffre(offre.value);
+            console.log("Nouvelle offre ajoutée");
+            router.push({ name: 'OffresStages' });
+        } catch (error) {
+            console.error("Erreur lors de l'ajout de l'offre de stage :", error);
+        }
 
-  // Appel de la fonction ajouterOffre du composable avec les données du formulaire
-  await ajouterOffre(offerData);
-
-  // Réinitialisation des champs du formulaire après l'ajout
-  resetFormData();
+ 
 };
 
-// Fonction pour réinitialiser les données du formulaire
-const resetFormData = () => {
-  titre.value = '';
-  entreprise.value = '';
-  descriptionTache.value = '';
-  programmeFormation.value = '';
-  exigences.value = '';
-  typeStage.value = '';
-  heuresSemaine.value = '';
-  remuneration.value = '';
-  dateDebut.value = '';
-  dateFin.value = '';
-  infoSupplementaires.value = '';
-};
+const annulerAjout = () => {
+        console.log("Annuler l'ajout de l'offre");
+        router.push({ name: 'OffresStages' });
+}
+
+const soumettreFormulaire = async () => {
+        try {
+            await ajouterStage();
+        } catch (error) {
+            console.error("Erreur lors de la soumission du formulaire :", error);
+        }
+}
+
+const validerFormulaire = () => {
+        if (!offre.value.title ||
+            !offre.value.enterprise.name ||
+            !offre.value.internshipType ||
+            !offre.value.weeklyWorkHours ) {
+            return false;
+        }
+        return true;
+    }
+
+
 
 </script>
 
