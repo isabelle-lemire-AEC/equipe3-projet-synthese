@@ -1,10 +1,11 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
-export function useInternshipOffers() {
+export default function useInternshipOffers() {
   const response = ref(null);
   const error = ref(null);
   const loading = ref(false);
+  
 
   // Ajouter une offre de stage
   const ajouterOffre = async (offerData) => {
@@ -27,7 +28,7 @@ export function useInternshipOffers() {
   const getAllOffers = async () => {
     loading.value = true;
     try {
-      response.value = await axios.get('https://api-3.fly.dev/internshipOffers');
+      response.value = await axios.get(`https://api-3.fly.dev/InternshipOffers`);
       console.log("get offer ca marche", response.value.data);
     } catch (err) {
       error.value = err;
@@ -51,7 +52,10 @@ export function useInternshipOffers() {
     }
   };
 
-  return {ajouterOffre, getAllOffers, edditerOffre, response, error, loading };
+
+
+
+  return {ajouterOffre, getAllOffers, edditerOffre,  response, error, loading };
 }
 
 
