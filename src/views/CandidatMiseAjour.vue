@@ -11,6 +11,7 @@
         <form @submit.prevent="soumettreFormulaire">
             
             <div>
+                <button class="annuler" type="submit" @click="annulerModif">Annuler</button>
                 <!-- <button class="annuler" type="submit" @click="annulerModif">Annuler</button> ceci ne fonctionne pas -->
                 <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Mettre à jour</button> <!-- ceci ne fonctionne pas -->
             </div>
@@ -114,7 +115,7 @@
             }
             console.log("Tentative de modification du candidat :", candidat.value);
             console.log("URL de la requête PATCH :", `https://api-3.fly.dev/candidates/${candidat.value._id}`);
-            await editCandidat(candidat.value);
+            await editCandidat(candidat.value._id, candidat.value); // Passez candidat.value._id en premier argument
             console.log("Candidat modifié");
             router.push({ name: 'Candidats' });
         } catch (error) {

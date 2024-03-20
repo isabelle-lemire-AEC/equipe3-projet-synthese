@@ -80,6 +80,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { useCandidat } from '@/composables/candidats/candidat';
 import axios from 'axios';
 
 const candidat = ref(null);
@@ -87,13 +88,18 @@ const showConfirmationModal = ref(false);
 const router = useRouter();
 const route = useRoute();
 
+// Importation de la fonction deleteCandidat depuis le fichier candidat.js
+const { deleteCandidat } = useCandidat();
+
+// Fonction pour rediriger vers la page de mise à jour du candidat
 const redirigerVersMiseAJour = (id) => {
   router.push({ name: 'CandidatMiseAjour', params: { id } });
 };
 
+// Fonction pour supprimer un candidat
 const supprimerCandidat = async (id) => {
   try {
-    await axios.delete(`https://api-3.fly.dev/candidates/${id}`);
+    await deleteCandidat(id);
     console.log("Candidat supprimé avec succès");
     router.go(); 
   } catch (error) {
@@ -101,18 +107,21 @@ const supprimerCandidat = async (id) => {
   }
 };
 
+// Fonction pour afficher la modal de confirmation
 const afficherConfirmationModal = () => {
   showConfirmationModal.value = true;
 };
 
+// Fonction pour annuler la suppression
 const annulerSuppression = () => {
   showConfirmationModal.value = false;
 };
 
+// Fonction pour confirmer la suppression
 const confirmerSuppression = async () => {
   const candidatId = candidat.value._id;
   try {
-    await axios.delete(`https://api-3.fly.dev/candidates/${candidatId}`);
+    await deleteCandidat(candidatId);
     console.log("Candidat supprimé avec succès");
     router.push({ name: 'Candidats' }); 
   } catch (error) {
@@ -122,7 +131,7 @@ const confirmerSuppression = async () => {
   }
 };
 
-
+// Fonction exécutée au montage du composant pour récupérer les détails du candidat
 onMounted(async () => {
   const candidatId = route.params.id;
   try {
@@ -133,7 +142,6 @@ onMounted(async () => {
   }
 });
 </script>
-
 
 
 <style scoped>
