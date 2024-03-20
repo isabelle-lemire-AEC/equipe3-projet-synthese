@@ -13,61 +13,60 @@
             <div class="flex">
                 <div class="flex">
                     <label for="firstName">Prénom :</label>
-                    <input type="text" id="firstName" v-model="candidat.firstName">
+                    <input type="text" id="firstName" v-model="candidat.firstName" required>
                 </div>
                 <div class="flex">
                     <label for="lastName">Nom :</label>
-                    <input type="text" id="lastName" v-model="candidat.lastName">
+                    <input type="text" id="lastName" v-model="candidat.lastName" required>
                 </div>
             </div>
             <div class="flex">
                 <label for="poste">Poste :</label>
-                <input type="text" id="poste">
+                <input type="text" id="poste" v-model="candidat.poste" required>
             </div>
 
             <div class="section">
                 <div>
                     <h2>Courte présentation</h2>
                     <label for="description"></label>
-                    <textarea name="description" id="description" cols="30" rows="10" v-model="candidat.description"></textarea>
+                    <textarea name="description" id="description" cols="30" rows="10" v-model="candidat.description" required></textarea>
                 </div>
                 
                 <div>
-                    <h3>Inormations personnelles</h3>
+                    <h3>Informations personnelles</h3>
                     <div class="flex">
                         <div class="col-gauche padding-right-15 border-left">
                             <label for="address">Adresse</label>
-                            <input type="text" id="address" v-model="candidat.address">
+                            <input type="text" id="address" v-model="candidat.address" required>
                         </div>
                         <div class="col-droite border-left">
                             <label for="phone">Téléphone</label>
-                            <input type="text" id="phone" v-model="candidat.phone">
+                            <input type="text" id="phone" v-model="candidat.phone" required>
                         </div>
                     </div>
                     <div class="flex">
                         <div class="col-gauche padding-right-15 border-left">
                             <label for="city">Ville</label>
-                            <input type="text" id="city" v-model="candidat.city">
+                            <input type="text" id="city" v-model="candidat.city" required>
                         </div>
                         <div class="col-droite border-left">
                             <label for="email">Courriel</label>
-                            <input type="email" id="email" v-model="candidat.email">
+                            <input type="email" id="email" v-model="candidat.email" required>
                         </div>
                     </div>
                     <div class="border-left">
-                        <label for="province"></label>
-                        <select id="province" v-model="candidat.province">
+                        <label for="province">Province</label>
+                        <select id="province" v-model="candidat.province" required>
                             <option value="">Province</option>
                             <option v-for="province in provinces" 
                                 :key="province._id" 
                                 :value="province">{{ province.value }}
                             </option>
-
                         </select>
                     </div>
                     <div class="border-left">
                         <label for="postalCode">Code postal</label>
-                        <input type="text" id="postalCode" v-model="candidat.postalCode">
+                        <input type="text" id="postalCode" v-model="candidat.postalCode" required>
                     </div>
                 </div>
             </div>
@@ -78,6 +77,7 @@
         </form>
     </div>
 </template>
+
 
 <script setup>
     import { ref } from 'vue';
