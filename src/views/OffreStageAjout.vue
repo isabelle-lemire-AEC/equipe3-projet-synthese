@@ -45,7 +45,7 @@
 
             <div class="groupe-gauche">
                 <h3>Type de stage</h3>
-                
+                <!-- test -->
                 <select name="ajout-type" id="ajout-type" v-model="offre.internshipType">
                     <option value="" disabled selected>Veuillez effectuer un choix</option>
                     <option v-for="typeStage in offre" :key="typeStage._id" :value="typeStage">
