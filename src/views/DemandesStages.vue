@@ -1,7 +1,9 @@
 <template>
     <div class="pageContainer">
         <h1>Demandes de stage</h1>
-        <RouterLink to="/demande-de-stage-ajout">Ajouter une demande</RouterLink>
+        <RouterLink to="/demande-de-stage-ajout">
+            <button>Ajouter une demande</button>
+        </RouterLink>
         <div class="listeStages">
             <div class="listeStagesHeader">
                 <span>Poste</span>
@@ -22,14 +24,10 @@ import { useProvinces } from '../composables/provinces/provinces.js'
 import { useInternshipTypes } from '@/composables/types_stage/types_stage.js'
 import { ref, onMounted } from 'vue';
 
-// Code brouillon, je vais faire le ménage plus tard.
-
-const { addRequest, getAllRequests, editRequest } = useInternshipRequests();
+const { getAllRequests, editRequest } = useInternshipRequests();
 const { getAllCandidats } = useCandidat();
 const { getAllProvinces } = useProvinces();
 const { getAllInternshipTypes } = useInternshipTypes();
-
-const abc = "def";
 
 const toutesDemandes = ref([]);
 
