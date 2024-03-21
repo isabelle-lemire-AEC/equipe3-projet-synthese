@@ -1,9 +1,9 @@
 <template>
-    <div class="pageContainer">
+    <div class="pageContainer" v-if="demande">
         <div>
             <div class="bordureGauche">
                 <h2>Demande de stage</h2>
-                <h1>Développeur Front-End</h1>
+                <h1>{{ demande.title }}</h1>
             </div>
         </div>
         <div class="btnsContainer">
@@ -13,9 +13,8 @@
         </div>
         <div class="infoContainer">
             <div>
-                <h3>Kevin Labonté</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi amet culpa maiores necessitatibus voluptas reiciendis aliquid fugiat tenetur praesentium blanditiis ratione atque assumenda, quod cumque veritatis quos autem deleniti reprehenderit?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi amet culpa maiores necessitatibus voluptas reiciendis aliquid fugiat tenetur praesentium blanditiis ratione atque assumenda, quod cumque veritatis quos autem deleniti reprehenderit?</p>
+                <h3></h3>
+                <p>{{ demande.candidate.description }}</p>
             </div>
             <div class="grilleStage">
                 <div class="grilleStageCellule bordureGauche">
@@ -35,8 +34,8 @@
                         <span>Info Cellule</span>
                 </div>
                 <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
+                        <span>Compétences</span>
+                        <!-- <span v-for="skill in demande.candidate.skills" :key>Info Cellule</span> -->
                 </div>
                 <div class="grilleStageCellule bordureGauche">
                         <span>Titre Cellule</span>
@@ -73,14 +72,36 @@
             </div>
 
             <h4>Informations suplémentaires</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At saepe earum, possimus, a doloremque voluptatum neque voluptates quaerat asperiores, porro repudiandae fuga. Quia consequuntur voluptates natus blanditiis quis! Eos, nam.</p>
+            <p>{{ demande.additionalInformation }}</p>
             <button class="btnTelechargerCV">Télécharger le C.V.</button>
 
         </div>
     </div>
 </template>
 
-<script>
+<script setup>
+    import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js'
+    import { ref, reactive, onMounted } from 'vue';
+    import { useRoute, useRouter } from 'vue-router'
+
+    const { getRequestById } = useInternshipRequests();
+
+    const route = useRoute();
+    const demande = ref(null);
+
+    onMounted(async () => {
+        try {
+            const response = await getRequestById(route.params.id);
+            demande.value = response.data;
+            // console.log("response: ", response);
+            // console.log("response.data: ", demande.value);
+            // console.log("demande: ", demande);
+            console.log("demande.value: ", demande.value);
+            // console.log("demande.value.data.candidate.firstName: ", demande.value.data.candidate.firstName);
+        } catch (error) {
+            console.error("Error:", error.response ? error.response.data : error.message);
+        }
+    });
 
 </script>
 

@@ -4,22 +4,26 @@
             <div class="poste">
             <div class="iconTemp"></div>
             <div class="posteEtNom">
-                <span>{{ props.stage.poste }}</span>
-                <span>{{ props.stage.nom }}</span>
+                <span>{{ props.stage.title }}</span>
+                <span>{{ props.stage.candidate.firstName }} {{ props.stage.candidate.lastName }}</span>
             </div>
             </div>
         </div>
         <div class="secteurActivite">
-            <span>{{ props.stage.secteurActivite }}</span>
+            <span>Où est cette info?</span>
         </div>
         <div class="region">
-            <span>{{ props.stage.region }}</span>
+            <span>{{ props.stage.province.value }}</span>
         </div>
         <div class="dateInscription">
-            <span>{{ props.stage.dateInscription }}</span>
+            <span>{{ props.stage.startDate }}</span>
         </div>
         <div class="groupeBtns">
-            <RouterLink to="/demande-de-stage-details">Oeil</RouterLink>
+            <!-- <RouterLink to="/demande-de-stage-details">Oeil</RouterLink> -->
+            <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.stage._id}}">
+                <span>Oeil</span>
+            </RouterLink>
+
             <button>Edit</button>
             <button>Trash</button>
         </div>
@@ -27,13 +31,12 @@
 </template>
 
 <script setup>
-    // import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js'
-
-    // const { getAllRequests, response, error, loading } = useInternshipRequests();
     // await getAllRequests();
 
     const props = defineProps(['stage'])
-    // console.log(props.stage)
+    // console.log("props.stage: ", props.stage)
+    
+
 
 </script>
 

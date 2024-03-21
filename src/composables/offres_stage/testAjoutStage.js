@@ -52,7 +52,7 @@ export function ajouterUnOffre() {
   const ajouterUnOffre = async (offerData) => {
     loading.value = true;
     try {
-      response.value = await axios.post('https://api-3.fly.dev/InternshipOffers', offerData);
+      response.value = await axios.post('https://api-3.fly.dev/internship-offers', offerData);
       // ``
       console.log("Offre joutée");
     } catch (err) {
