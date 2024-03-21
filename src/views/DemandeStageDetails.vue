@@ -8,7 +8,7 @@
         </div>
         <div class="btnsContainer">
             <button>Activer</button>
-            <button>Modifier</button>
+            <button @click="redirigerVersMiseAJour(demande._id)">Modifier</button>
             <button>Fermer</button>
         </div>
         <div class="infoContainer">
@@ -87,7 +87,12 @@
     const { getRequestById } = useInternshipRequests();
 
     const route = useRoute();
+    const router = useRouter();
     const demande = ref(null);
+
+    const redirigerVersMiseAJour = (id) => {
+        router.push({ name: 'DemandeStageMiseAjour', params: { id } });
+    };
 
     onMounted(async () => {
         try {
