@@ -3,7 +3,9 @@
     <h1>Offres de stage</h1>
 
     <button>Ajouter une offre de stage</button>
-
+    <div v-if="loading">Chargement...</div>
+    <div v-if="error">Erreur lors du chargement des offres</div>
+    <div v-else>
     <table>
         <thead>
             <tr>
@@ -20,20 +22,21 @@
         </thead>
    
         <tbody>
-            <tr>
-                <div v-for="offre in offreStage.value">
+            <tr  v-for="offer in offers"  :key="offer">
+                
+                <div >
                     <th scope="row">
                         <div class="poste">
-                            <div class="vl"></div>
+                            
                             <!--icone-->
-                            <h4>{{ offre.title }}</h4>
-                            <p>{{ offre.entreprise}}</p>
+                            <h4>{{ offer.title }}</h4>
+                            <p>{{ offer.enterprise.name}}</p>
                         </div>
                         
                     </th>
                             
-                    <td>{{ offre.activitySector }}</td>
-                    <td>{{ offre.entreprise.city }}</td>
+                    <td>{{ offer.enterprise.activitySector }}</td>
+                    <td>{{ offer.enterprise.city }}</td>
                     <td>2023-03-03</td>
                     <td><!--icone--></td>
                 </div>
@@ -41,15 +44,21 @@
         </tbody>
         
     </table>
+    </div>
     <hr>
 </template>
 
 <script setup>
-import useInternshipOffers from '../composables/offres_stage/offreDeStage';
-/*import { router } from 'vue-router'*/
+import { ref, onMounted } from 'vue';
+import  useInternshipOffers  from '../composables/offres_stage/offreDeStage'; 
 
-const offreStage = useInternshipOffers();
-offreStage.getAllOffers();
+const { getAllOffers, response, error, loading } = useInternshipOffers();
+const offers = ref([]);
+
+onMounted(async () => {
+  await getAllOffers();
+  offers.value = response.value; 
+});
 /*const pageOffreStageDetail = () =>{
         router.push({name: 'offre-de-stage-details'})
     }*/
