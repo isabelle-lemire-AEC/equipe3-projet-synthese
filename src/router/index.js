@@ -41,6 +41,7 @@ const router = createRouter({
     { path: '/demandes-de-stages', name: 'DemandesStages', component: DemandesStages },
     { path: '/demande-de-stage-details/:id', name: 'DemandeStageDetails', component: DemandeStageDetails, props: true },
     { path: '/demande-de-stage-mise-a-jour', name: 'DemandeStageMiseAjour', component: DemandeStageMiseAjour },
+    { path: '/demande-de-stage-mise-a-jour/:id', name: 'DemandeStageMiseAjour', component: DemandeStageMiseAjour, props: true },
     { path: '/demande-de-stage-ajout', name: 'DemandeStageAjout', component: DemandeStageAjout },
 
     { path: '/candidats', name: 'Candidats', component: Candidats },
@@ -49,8 +50,8 @@ const router = createRouter({
     { path: '/candidat-ajout', name: 'CandidatAjout', component: CandidatAjout },
 
     { path: '/entreprises', name: 'Entreprises', component: Entreprises },
-    { path: '/entreprise-details', name: 'EntrepriseDetails', component: EntrepriseDetails },
-    { path: '/entreprise-mise-a-jour', name: 'EntrepriseMiseAjour', component: EntrepriseMiseAjour },
+    { path: '/entreprise-details/:id', name: 'EntrepriseDetails', component: EntrepriseDetails, props: true },
+    { path: '/entreprise-mise-a-jour/:id', name: 'EntrepriseMiseAjour', component: EntrepriseMiseAjour, props: true },
     { path: '/entreprise-ajout', name: 'EntrepriseAjout', component: EntrepriseAjout },
 
     { path: '/:pathMatch(.*)*', name: 'erreur', component: Erreur }
