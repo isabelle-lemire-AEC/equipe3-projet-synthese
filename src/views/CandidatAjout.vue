@@ -6,7 +6,7 @@
         <form @submit.prevent="soumettreFormulaire">
             
             <div>
-                <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
+                <!-- <button class="annuler" type="submit" @click="annulerAjout">Annuler</button> -->
                 <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Sauvegarder</button>
             </div>
 
@@ -14,15 +14,18 @@
                 <div class="flex">
                     <label for="firstName">Prénom :</label>
                     <input type="text" id="firstName" v-model="candidat.firstName" required>
+                    <p class="message-erreur" v-if="submitted && !candidat.firstName">Veuillez saisir un prénom.</p>
                 </div>
                 <div class="flex">
                     <label for="lastName">Nom :</label>
                     <input type="text" id="lastName" v-model="candidat.lastName" required>
+                    <p class="message-erreur" v-if="submitted && !candidat.lastName">Veuillez saisir un nom.</p>
                 </div>
             </div>
             <div class="flex">
                 <label for="poste">Poste :</label>
                 <input type="text" id="poste" v-model="candidat.poste" required>
+                <p class="message-erreur" v-if="submitted && !candidat.poste">Veuillez saisir un poste.</p>
             </div>
 
             <div class="section">
@@ -30,6 +33,7 @@
                     <h2>Courte présentation</h2>
                     <label for="description"></label>
                     <textarea name="description" id="description" cols="30" rows="10" v-model="candidat.description" required></textarea>
+                    <p class="message-erreur" v-if="submitted && !candidat.description">Veuillez saisir une description.</p>
                 </div>
                 
                 <div>
@@ -38,35 +42,40 @@
                         <div class="col-gauche padding-right-15 border-left">
                             <label for="address">Adresse</label>
                             <input type="text" id="address" v-model="candidat.address" required>
+                            <p class="message-erreur" v-if="submitted && !candidat.address">Veuillez saisir une adresse.</p>
                         </div>
                         <div class="col-droite border-left">
                             <label for="phone">Téléphone</label>
                             <input type="text" id="phone" v-model="candidat.phone" required>
+                            <p class="message-erreur" v-if="submitted && !candidat.phone">Veuillez saisir un numéro de téléphone valide.</p>
                         </div>
                     </div>
                     <div class="flex">
                         <div class="col-gauche padding-right-15 border-left">
                             <label for="city">Ville</label>
                             <input type="text" id="city" v-model="candidat.city" required>
+                            <p class="message-erreur" v-if="submitted && !candidat.city">Veuillez saisir une ville.</p>
                         </div>
                         <div class="col-droite border-left">
                             <label for="email">Courriel</label>
                             <input type="email" id="email" v-model="candidat.email" required>
+                            <p class="message-erreur" v-if="submitted && !candidat.email">Veuillez saisir une courriel.</p>
                         </div>
                     </div>
                     <div class="border-left">
                         <label for="province">Province</label>
                         <select id="province" v-model="candidat.province" required>
-                            <option value="">Province</option>
                             <option v-for="province in provinces" 
                                 :key="province._id" 
                                 :value="province">{{ province.value }}
                             </option>
                         </select>
+                        <p class="message-erreur" v-if="submitted && !candidat.province">Veuillez sélectionner une province.</p>
                     </div>
                     <div class="border-left">
                         <label for="postalCode">Code postal</label>
                         <input type="text" id="postalCode" v-model="candidat.postalCode" required>
+                        <p class="message-erreur" v-if="submitted && !candidat.postalCode">Veuillez saisir un code postal.</p>
                     </div>
                 </div>
             </div>
@@ -89,6 +98,8 @@
     const router = useRouter();
     const { addCandidat } = useCandidat();
     const provinces = ref([]);
+
+    const submitted = ref(false);
 
     const candidat = ref({
         firstName: '',
@@ -120,7 +131,9 @@
     initProvinces();
 
     const soumettreFormulaire = async () => {
+        console.log("Formulaire soumis");
         try {
+            submitted.value = true;
             await ajouterCandidat();
         } catch (error) {
             console.error("Erreur lors de la soumission du formulaire :", error);
@@ -142,16 +155,42 @@
     }
 
     const validerFormulaire = () => {
-        if (!candidat.value.firstName ||
-            !candidat.value.lastName ||
-            !candidat.value.email ||
-            !candidat.value.address ||
-            !candidat.value.phone ||
-            !candidat.value.city ||
-            !candidat.value.province ||
-            !candidat.value.postalCode) {
-            return false;
+        if (submitted.value) { // Vérifie si le formulaire a été soumis
+            console.log("Validation du formulaire en cours...");
+            if (!candidat.value.firstName) {
+                console.log("Prénom manquant.");
+                return false;
+            }
+            if (!candidat.value.lastName) {
+                console.log("Nom manquant.");
+                return false;
+            }
+            if (!candidat.value.email) {
+                console.log("Email manquant.");
+                return false;
+            }
+            if (!candidat.value.address) {
+                console.log("Adresse manquante.");
+                return false;
+            }
+            if (!candidat.value.phone) {
+                console.log("Téléphone manquant.");
+                return false;
+            }
+            if (!candidat.value.city) {
+                console.log("Ville manquante.");
+                return false;
+            }
+            if (!candidat.value.province) {
+                console.log("Province manquante.");
+                return false;
+            }
+            if (!candidat.value.postalCode) {
+                console.log("Code postal manquant.");
+                return false;
+            }
         }
+        console.log("Validation terminée, formulaire valide.");
         return true;
     }
 
@@ -226,6 +265,10 @@
 
     button {
         margin-right: 15px;
+    }
+
+    .message-erreur {
+        color: red;
     }
 
 </style>

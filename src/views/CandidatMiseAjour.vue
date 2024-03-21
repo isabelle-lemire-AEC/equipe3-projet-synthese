@@ -12,8 +12,7 @@
             
             <div>
                 <button class="annuler" type="submit" @click="annulerModif">Annuler</button>
-                <!-- <button class="annuler" type="submit" @click="annulerModif">Annuler</button> ceci ne fonctionne pas -->
-                <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Mettre à jour</button> <!-- ceci ne fonctionne pas -->
+                <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Mettre à jour</button>
             </div>
 
             <div class="section">
@@ -21,6 +20,7 @@
                     <h2>Courte présentation</h2>
                     <label for="description"></label>
                     <textarea name="description" id="description" cols="30" rows="10" v-model="candidat.description"></textarea>
+                    <span class="message" v-if="!candidat.description">Veuillez saisir une description.</span>
                 </div>
                 
                 <div>
@@ -125,7 +125,7 @@
 
     const annulerModif = () => {
         console.log("Annuler la modification du candidat");
-        route.push({ name: 'Candidats' });
+        router.push({ name: 'Candidats' });
     }
 
     const soumettreFormulaire = async () => {
