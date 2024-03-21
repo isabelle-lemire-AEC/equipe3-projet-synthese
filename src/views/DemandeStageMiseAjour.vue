@@ -9,8 +9,7 @@
 			<button type="submit">Mettre à jour</button>
 		</div>
 
-		<form id="edit-demande-stage" @submit.prevent="validate">
-
+		<form id="edit-demande-stage" @submit.prevent="soumettreFormulaire">
 			<div>
 				<!-- Classe pour encadré blanc -->
 
@@ -21,10 +20,10 @@
 						type="text"
 						id="edit-demande-candidat"
 						name="edit-demande-candidat"
-						v-model.trim="demande.fullName" />
-					<p v-if="errors.fullName" class="error-message">
+						v-model.trim="demande.candidate.firstName" />
+					<!-- <p v-if="errors.fullName" class="error-message">
 						Veuillez fournir le nom du candidat.
-					</p>
+					</p> -->
 				</div>
 
 				<div
@@ -33,10 +32,10 @@
 					<textarea
 						id="edit-demande-presentation"
 						name="edit-demande-presentation"
-						v-model="demande.description"></textarea>
-					<p v-if="errors.description" class="error-message">
+						v-model="demande.candidate.description"></textarea>
+					<!-- <p v-if="errors.description" class="error-message">
 						Veuillez fournir une présentation.
-					</p>
+					</p> -->
 				</div>
 
 				<div>
@@ -51,9 +50,9 @@
 								id="edit-demande-programme"
 								name="edit-demande-programme"
 								v-model="demande.activitySector" />
-							<p v-if="errors.activitySector" class="error-message">
+							<!-- <p v-if="errors.activitySector" class="error-message">
 								Veuillez fournir un programme de formation.
-							</p>
+							</p> -->
 						</div>
 
 						<div
@@ -73,14 +72,16 @@
 						><!-- Classe pour regrouper deux inputs side by side-->
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="edit-demande-etablissement">Établissement scolaire</label>
+							<label for="edit-demande-etablissement"
+								>Établissement scolaire</label
+							>
 							<input
 								type="text"
 								id="edit-demande-etablissement"
 								name="edit-demande-etablissement" />
-							<p v-if="errors.activitySector" class="error-message">
+							<!-- <p v-if="errors.activitySector" class="error-message">
 								Veuillez fournir un programme de formation.
-							</p>
+							</p> -->
 						</div>
 
 						<div
@@ -90,10 +91,10 @@
 								type="text"
 								id="edit-demande-ville"
 								name="edit-demande-ville"
-								v-model="demande.city" />
-							<p v-if="errors.city" class="error-message">
+								v-model="demande.candidate.city" />
+							<!-- <p v-if="errors.city" class="error-message">
 								Veuillez fournir une ville.
-							</p>
+							</p> -->
 						</div>
 					</div>
 				</div>
@@ -116,9 +117,9 @@
 							id="edit-demande-competences"
 							name="edit-demande-competences"
 							v-model="demande.skills"></textarea>
-						<p v-if="errors.skills" class="error-message">
+						<!-- <p v-if="errors.skills" class="error-message">
 							Veuillez fournir des compétences.
-						</p>
+						</p> -->
 					</div>
 				</div>
 
@@ -139,7 +140,9 @@
 
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="edit-demande-heures">Nombre d'heures par semaine</label>
+							<label for="edit-demande-heures"
+								>Nombre d'heures par semaine</label
+							>
 							<select id="edit-demande-heures" name="edit-demande-heures">
 								<option value="">Veuillez effectuer un choix</option>
 								<!-- Autres options de l'API -->
@@ -155,7 +158,8 @@
 							<input
 								type="date"
 								id="edit-demande-date-debut"
-								name="edit-demande-date-debut" />
+								name="edit-demande-date-debut"
+								v-model="demande.startDate" />
 						</div>
 
 						<div
@@ -164,7 +168,8 @@
 							<input
 								type="date"
 								id="edit-demande-date-fin"
-								name="edit-demande-date-fin" />
+								name="edit-demande-date-fin"
+								v-model="demande.endDate" />
 						</div>
 					</div>
 
@@ -217,9 +222,9 @@
 							name="edit-demande-infos-supp"
 							v-model="demande.additionalInformation">
 						</textarea>
-						<p v-if="errors.additionalInformation" class="error-message">
+						<!-- <p v-if="errors.additionalInformation" class="error-message">
 							Veuillez fournir des informations supplémentaires.
-						</p>
+						</p> -->
 					</div>
 				</fieldset>
 			</div>
@@ -236,11 +241,22 @@
 <!-- Il va rester à ajouter la validation pour les champs firstName et lastName (currently: fullName), Établissement scolaire, les champs select, checkbox et date.  -->
 
 <script setup>
-	import {reactive, ref} from "vue";
+	import {reactive, ref, onMounted} from "vue";
+	import {useCandidat} from "../composables/candidats/candidat";
+	import {useProvinces} from "../composables/provinces/provinces";
+	import {useInternshipRequests} from "../composables/demandes_stages/demandeDeStage";
+	import {useInternshipTypes} from "../composables/types_stage/types_stage";
+	const {getCandidatById} = useCandidat();
+	const {getAllProvinces} = useProvinces();
+	const {editRequest} = useInternshipRequests();
+	const {getAllInternshipTypes} = useInternshipTypes();
+
+	import {useRoute} from "vue-router";
+	const route = useRoute();
 
 	/* const remunerationType = ref([]); */
 
-	const demande = reactive({
+	/* const demande = reactive({
 		fullName: "",
 		description: "",
 		activitySector: "",
@@ -253,9 +269,71 @@
 		endDate: "",
 		paid: "",
 		additionalInformation: "",
+	}); */
+	const provinces = ref([]);
+
+	const demande = reactive({
+		title: "Designer web",
+		description: "Bonjour je suis un desinger web à la recherche de travail!",
+		candidate: {
+			_id: "",
+			description: "",
+			email: "",
+			firstName: "",
+			lastName: "",
+			address: "",
+			phone: "",
+			city: "",
+			skills: [""],
+			province: {
+				_id: "",
+				value: "",
+			},
+			postalCode: "",
+		},
+		startDate: "2024-03-19T17:36:02.007Z",
+		endDate: "2024-03-19T17:36:02.007Z",
+		weeklyWorkHours: 40,
+		province: {
+			_id: "",
+			value: "",
+		},
+		skills: ["Front-end", "Design"],
+		internshipType: {
+			_id: "",
+			value: "",
+		},
+		additionalInformation: "J'aime le Ping-Pong",
+		isActive: true,
 	});
 
-	const errors = reactive({
+	const modifDemande = async () => {
+		const id = route.params.id;
+		try {
+			/* if (!validerFormulaire()) {
+				throw new Error("Veuillez remplir tous les champs obligatoires.");
+			} */
+			/* console.log("Tentative de modification du candidat :", demande.value);
+			console.log(
+				"URL de la requête PATCH :",
+				`https://api-3.fly.dev/internship-requests/${demande.value._id}`
+			); */
+			await editRequest(id, demande);
+			console.log("Request edited successfully");
+		} catch (error) {
+			console.error("Erreur lors de la modification de la demande :", error);
+		}
+	};
+
+	onMounted(async () => {
+		await Promise.all([
+			getAllProvinces(),
+			getCandidatById(),
+			getAllInternshipTypes(),
+		]);
+	});
+
+	/* 	const errors = reactive({
 		fullName: false,
 		description: false,
 		activitySector: false,
@@ -268,14 +346,50 @@
 		endDate: false,
 		paid: false,
 		additionalInformation: false,
-	});
+	}); */
 
-	const validForm = ref(false);
+	/* 	const errors = reactive({
+		title: false,
+		description: false,
+		candidate: {
+			_id: false,
+			description: false,
+			email: false,
+			firstName: false,
+			lastName: false,
+			address: false,
+			phone: false,
+			city: false,
+			skills: false,
+			province: {
+				_id: false,
+				value: false,
+			},
+			postalCode: false,
+		},
+		startDate: false,
+		endDate: false,
+		weeklyWorkHours: false,
+		province: {
+			_id: false,
+			value: false,
+		},
+		skills: false,
+		internshipType: {
+			_id: false,
+			value: false,
+		},
+		additionalInformation: false,
+		isActive: false,
+	}); */
 
-	const validate = (e) => {
+	/* const validForm = ref(false); */
+
+	const soumettreFormulaire = (e) => {
 		e.preventDefault();
+		modifDemande();
 
-		if (demande.fullName === "") {
+		/* if (demande.fullName === "") {
 			errors.fullName = true;
 		} else {
 			errors.fullName = false;
@@ -364,7 +478,7 @@
 			validForm.value = true;
 		} else {
 			validForm.value = false;
-		}
+		} */
 
 		console.log("Form submitted successfully!");
 	};
