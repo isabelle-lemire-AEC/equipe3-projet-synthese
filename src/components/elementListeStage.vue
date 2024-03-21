@@ -19,12 +19,14 @@
             <span>{{ props.stage.startDate }}</span>
         </div>
         <div class="groupeBtns">
-            <!-- <RouterLink to="/demande-de-stage-details">Oeil</RouterLink> -->
             <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.stage._id}}">
-                <span>Oeil</span>
+                <button>Oeil</button>
             </RouterLink>
 
-            <button>Edit</button>
+            <RouterLink :to="{name: 'DemandeStageMiseAjour', params: {id: props.stage._id}}">
+                <button>Edit</button>
+            </RouterLink>
+
             <button>Trash</button>
         </div>
     </div>
