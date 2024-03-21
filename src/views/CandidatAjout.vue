@@ -70,6 +70,7 @@
                     </div>
                 </div>
             </div>
+            <p>{{ provinces[0].value }}abc</p>
 
             <div>
                 btn à mettre quand prog ok
