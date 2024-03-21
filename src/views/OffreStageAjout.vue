@@ -89,11 +89,13 @@
 import { ref   } from 'vue';
 import { useRouter } from 'vue-router';
 import useInternshipOffers from '../composables/offres_stage/offreDeStage';
+import { fetchProvinces } from '@/composables/api';
 
 
 const router = useRouter();
 const { ajouterOffre } = useInternshipOffers();
 const enterprises = ref([]); // Référence pour stocker les entreprises
+
 
 
 
@@ -141,7 +143,15 @@ const offre = ref({
 
 });
 
+const initProvinces = async () => {
+        try {
+            provinces.value = await fetchProvinces();
+        } catch (error) {
+            console.error("Erreur lors de la récupération des provinces :", error);
+        }
+}
 
+initProvinces();
 
 
 // Fonction pour ajouter un stage

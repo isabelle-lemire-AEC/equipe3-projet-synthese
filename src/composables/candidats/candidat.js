@@ -6,7 +6,7 @@ import axios from 'axios';
 const API_BASE_URL = 'https://api-3.fly.dev';
 
 export function useCandidat() {
-  const response = ref(null);
+  const response = ref(null); 
   const error = ref(null);
   const loading = ref(false);
 
