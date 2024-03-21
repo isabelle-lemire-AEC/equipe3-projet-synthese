@@ -46,7 +46,7 @@ export function useEntreprise() {
             loading.value = false;
         }
     }
-
+    
     const getAllEntreprise = async () => {
         loading.value = true;
         try {
