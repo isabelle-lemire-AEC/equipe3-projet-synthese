@@ -2,7 +2,7 @@ import { ref } from "vue";
 import axios from "axios";
 
 export function useEntreprise() {
-    const response = ref(null);
+    const response = ref([]);
     const error = ref(null);
     const loading = ref(false);
 
@@ -47,6 +47,19 @@ export function useEntreprise() {
         }
     }
 
+    const getAllEntreprise = async () => {
+        loading.value = true;
+        try {
+            response.value = await axios.get(`https://api-3.fly.dev/enterprises`);
+            console.log("Get edition by id ca marche");
+        } catch (err) {
+            error.value = err;
+            console.log("error vous n'avez pas obetenue l'edition");
+        } finally {
+            loading.value = false;
+        }
+    }
+
     const deleteEntreprise = async (id) => {
         loading.value = true;
         try {
@@ -60,6 +73,6 @@ export function useEntreprise() {
         }
     }
 
-    return { addEntreprise, editEntreprise, getEntrepriseById, deleteEntreprise, response, error, loading };
+    return { addEntreprise, getAllEntreprise, editEntreprise, getEntrepriseById, deleteEntreprise, response, error, loading };
 }
 

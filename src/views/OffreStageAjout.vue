@@ -86,15 +86,22 @@
 </template>
 
 <script setup>
-import { ref   } from 'vue';
+import { ref, onMounted  } from 'vue';
 import { useRouter } from 'vue-router';
 import useInternshipOffers from '../composables/offres_stage/offreDeStage';
-import { fetchProvinces } from '@/composables/api';
+import {useEntreprise} from '../composables/entreprises/entreprise';
 
 
 const router = useRouter();
 const { ajouterOffre } = useInternshipOffers();
+const { getAllEntreprise, response, error, loading } = useEntreprise();
 const enterprises = ref([]); // Référence pour stocker les entreprises
+
+
+onMounted(async () => {
+    await getAllEntreprise();
+    enterprises.value = response.value;
+});
 
 
 
@@ -143,15 +150,7 @@ const offre = ref({
 
 });
 
-const initProvinces = async () => {
-        try {
-            provinces.value = await fetchProvinces();
-        } catch (error) {
-            console.error("Erreur lors de la récupération des provinces :", error);
-        }
-}
 
-initProvinces();
 
 
 // Fonction pour ajouter un stage
