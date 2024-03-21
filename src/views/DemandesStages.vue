@@ -9,10 +9,7 @@
                 <span>Région</span>
                 <span>Date d'inscription</span>
             </div>
-            <ElementListeStage :stage="stagiere1"></ElementListeStage>
-            <ElementListeStage :stage="stagiere2"></ElementListeStage>
-            <ElementListeStage :stage="stagiere3"></ElementListeStage>
-            <p></p>
+            <ElementListeStage v-for="demande in toutesDemandes" :key="demande._id" :stage="demande"></ElementListeStage>
         </div>
     </div>
 </template>
@@ -23,6 +20,7 @@ import { useInternshipRequests } from '../composables/demandes_stages/demandeDeS
 import { useCandidat } from '../composables/candidats/candidat.js'
 import { useProvinces } from '../composables/provinces/provinces.js'
 import { useInternshipTypes } from '@/composables/types_stage/types_stage.js'
+import { ref, onMounted } from 'vue';
 
 // Code brouillon, je vais faire le ménage plus tard.
 
@@ -30,6 +28,21 @@ const { addRequest, getAllRequests, editRequest } = useInternshipRequests();
 const { getAllCandidats } = useCandidat();
 const { getAllProvinces } = useProvinces();
 const { getAllInternshipTypes } = useInternshipTypes();
+
+const abc = "def";
+
+const toutesDemandes = ref([]);
+
+onMounted(async () => {
+    try {
+        const response = await getAllRequests();
+        toutesDemandes.value = response.data;
+        console.log("toutesDemandes: ", toutesDemandes);
+    } catch (error) {
+        console.error("Error:", error.response ? error.response.data : error.message);
+    }
+});
+
 
 const demandeDeStageAAjouter = {
   title: "Designer web",
@@ -105,7 +118,8 @@ const testAPI = async () => {
     const allRequests = await getAllRequests();
 
     // *** IMPORTANT *** enlever les commentaires afin de tester l'édition d'une demande de stage
-    // await editRequest(allRequests.data[1]._id, demandeDeStageAAjouter)
+    await editRequest(allRequests.data[0]._id, demandeDeStageAAjouter)
+
     await getAllRequests();
 
 }
@@ -113,33 +127,6 @@ const testAPI = async () => {
 // exécuter la fonction de test des calls API
 testAPI();
 
-// Les stagières ont été créé à des fins de tests pour les componants ElementListeStage
-const stagiere1 = {
-    actif: "1",
-    poste: "Programmeur",
-    nom: "Robert Thibeault",
-    secteurActivite: "Informatique",
-    region: "Montréal",
-    dateInscription: "2021-03-04"
-}
-
-const stagiere2 = {
-    actif: "0",
-    poste: "Designer",
-    nom: "Valérie Boisvert",
-    secteurActivite: "Design graphique",
-    region: "Montérigie",
-    dateInscription: "2017-07-02"
-}
-
-const stagiere3 = {
-    actif: "1",
-    poste: "Gestionnaire de projets",
-    nom: "Steve McQueen",
-    secteurActivite: "Évennementiel",
-    region: "Mauricie",
-    dateInscription: "2022-10-14"
-}
 </script>
 
 <style scoped>
