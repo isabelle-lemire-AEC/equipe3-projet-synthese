@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { useEntreprise } from "@/composables/Entreprise";
+import { useEntreprise } from "@/composables/entreprises/entreprise";
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 
