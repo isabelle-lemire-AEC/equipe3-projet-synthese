@@ -32,15 +32,14 @@
 						type="text"
 						id="ajout-demande-nom-prenom"
 						name="ajout-demande-nom-prenom" /> -->
-					<select id="ajout-demande-nom-prenom" name="ajout-demande-nom-prenom">
+					<select id="ajout-demande-nom-prenom" name="ajout-demande-nom-prenom" v-model.trim="demande.candidate">
 						<option value="">Veuillez effectuer un choix</option>
 						<option
 							v-for="candidate in candidates"
 							:key="candidate._id"
-							:value="candidate._id">
+							:value="candidate">
 							{{ candidate.firstName }} {{ candidate.lastName }}
-						</option></select
-					>
+						</option></select>
 
 					<!-- Autres options de l'API -->
 					<!-- <p v-if="errors.fullName" class="error-message">
@@ -48,8 +47,7 @@
                     </p> -->
 				</div>
 
-				<div
-					><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+				<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 					<label for="ajout-demande-presentation">Présentation</label>
 					<textarea
 						id="ajout-demande-presentation"
@@ -62,26 +60,24 @@
 
 				<div>
 					<!-- Classe pour groupe de deux inputs qui occupent 50% de l'espace -->
-					<div
-						><!-- Classe pour regrouper DEUX INPUTS UN EN DESSOUS DE L'AUTRES-->
+					<div><!-- Classe pour regrouper DEUX INPUTS UN EN DESSOUS DE L'AUTRES-->
 						<div
 							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-programme"
+							<!-- <label for="ajout-demande-programme"
 								>Programme de formation</label
 							>
 							<input
 								type="text"
 								id="ajout-demande-programme"
 								name="ajout-demande-programme"
-								v-model.trim="demande.program" />
+								v-model.trim="demande.program" /> -->
 							<!-- <p v-if="errors.activitySector" class="error-message">
                                 Veuillez fournir un programme de formation.
                             </p> -->
 						</div>
 
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-secteur">Secteur d'activité</label>
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+							<!-- <label for="ajout-demande-secteur">Secteur d'activité</label>
 							<select id="ajout-demande-secteur" name="ajout-demande-secteur">
 								<option value="">Veuillez effectuer un choix</option>
 								<option
@@ -90,18 +86,16 @@
 									:value="activitySector">
 									{{ activitySector }}
 								</option>
-							</select>
+							</select> -->
 						</div>
 					</div>
 				</div>
 
 				<div>
 					<!-- Classe pour groupe de deux inputs qui occupent 50% de l'espace -->
-					<div
-						><!-- Classe pour regrouper deux inputs side by side-->
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-etablissement"
+					<div><!-- Classe pour regrouper deux inputs side by side-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+							<!-- <label for="ajout-demande-etablissement"
 								>Établissement scolaire</label
 							>
 							<input
@@ -111,17 +105,15 @@
 								v-model="demande.etablissement" />
 							<p v-if="errors.etablissement" class="error-message">
 								Veuillez fournir un établissement
-							</p>
+							</p> -->
 						</div>
 
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="ajout-demande-ville">Ville</label>
 							<input
 								type="text"
 								id="ajout-demande-ville"
-								name="ajout-demande-ville"
-								v-model="demande.candidate.city" />
+								name="ajout-demande-ville"/>
 							<p v-if="errors.city" class="error-message">
 								Veuillez fournir une ville.
 							</p>
@@ -129,10 +121,8 @@
 					</div>
 				</div>
 
-				<div
-					><!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 100 % de l'espace-->
-					<div
-						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+				<div><!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 100 % de l'espace-->
+					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 						<label for="ajout-demande-region">Région</label>
 						<select
 							id="ajout-demande-region"
@@ -142,14 +132,13 @@
 							<option
 								v-for="province in provinces"
 								:key="province._id"
-								:value="province._id">
+								:value="province">
 								{{ province.value }}
 							</option>
 						</select>
 					</div>
 
-					<div
-						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 						<label for="ajout-demande-competences">Compétences</label>
 						<textarea
 							id="ajout-demande-competences"
@@ -167,25 +156,21 @@
 					<div>
 						<!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 50 % de l'espace-->
 
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="ajout-demande-type">Type de stage</label>
-							<select id="ajout-demande-type" name="ajout-demande-type">
+							<select id="ajout-demande-type" name="ajout-demande-type" v-model.trim="demande.internshipType">
 								<option value="">Veuillez effectuer un choix</option>
 								<option
 									v-for="internshipType in internshipTypes"
 									:key="internshipType._id"
-									:value="internshipType._id">
+									:value="internshipType">
 									{{ internshipType.value }}
-								</option></select
-							>
+								</option></select>
 						</div>
 
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="ajout-demande-heures"
-								>Nombre d'heures par semaine</label
-							>
+								>Nombre d'heures par semaine</label>
 
 							<input
 								type="number"
@@ -197,8 +182,7 @@
 
 					<div>
 						<!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 50 % de l'espace-->
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="ajout-demande-date-debut">Date de début</label>
 							<input
 								type="date"
@@ -210,8 +194,7 @@
 							</p>
 						</div>
 
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="ajout-demande-date-fin">Date de fin</label>
 							<input
 								type="date"
@@ -223,12 +206,11 @@
 							</p>
 						</div>
 
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-remuneration">Rémunération</label>
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+							<!-- <label for="ajout-demande-remuneration">Rémunération</label> -->
 							<!-- Remplacer par legend? Faire une recherche. -->
 
-							<div v-for="(type, index) in demande.remuneration" :key="index">
+							<!-- <div v-for="(type, index) in demande.remuneration" :key="index">
 								<input
 									type="checkbox"
 									:id="'ajout-demande-' + type"
@@ -236,21 +218,15 @@
 									:value="type"
 									v-model="remunerationType" />
 								<label :for="'ajout-demande-' + type">{{ type }}</label>
-								<!-- <p v-if="errors.remuneration" class="error-message">
-									Veuillez cocher une rémunération.
-								</p> -->
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</fieldset>
 
 				<fieldset>
 					<legend>Informations supplémentaires</legend>
-					<div
-						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-						<label for="ajout-demande-infos-supp"
-							>Informations supplémentaires</label
-						>
+					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+						<label for="ajout-demande-infos-supp">Informations supplémentaires</label>
 						<!-- Classe pour cacher le label -->
 						<textarea
 							id="ajout-demande-infos-supp"
@@ -281,7 +257,7 @@
 	import {useCandidat} from "../composables/candidats/candidat.js";
 	import {useProvinces} from "../composables/provinces/provinces.js";
 	import {useInternshipTypes} from "@/composables/types_stage/types_stage.js";
-	const {addRequest} = useInternshipRequests();
+	const {addRequest, getAllRequests} = useInternshipRequests();
 	const {getAllCandidats} = useCandidat();
 	const {getAllProvinces} = useProvinces();
 	const {getAllInternshipTypes} = useInternshipTypes();
@@ -398,6 +374,7 @@
 			console.log("Tentative d'ajout du candidat :", demande);
 			await addRequest(demande);
 			console.log("Nouvelle demande ajoutée");
+			await getAllRequests();
 			/* router.push({name: "Candidats"}); */
 		} catch (error) {
 			console.error("Erreur lors de l'ajout de la demande :", error);
@@ -546,6 +523,23 @@
 		} else {
 			errors.additionalInformation = false;
 		}
+
+
+		console.log(errors.title)
+		console.log(errors.candidate)
+		console.log(errors.description)
+		console.log(errors.program)
+		console.log(errors.activitySector)
+		console.log(errors.etablissement)
+		console.log(errors.city)
+		console.log(errors.province)
+		console.log(errors.skills)
+		console.log(errors.internshipType)
+		console.log(errors.weeklyWorkHours)
+		console.log(errors.startDate)
+		console.log(errors.endDate)
+		console.log(errors.remuneration)
+		console.log(errors.additionalInformation)
 
 		if (
 			errors.title === false &&
