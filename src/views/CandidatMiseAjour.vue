@@ -8,12 +8,11 @@
             <h2>UX Designer</h2>
         </div>
 
-        <form @submit.prevent="soumettreFormulaire">
+        <form id="edition-candidat" @submit.prevent="soumettreFormulaire">
             
             <div>
                 <button class="annuler" type="submit" @click="annulerModif">Annuler</button>
-                <!-- <button class="annuler" type="submit" @click="annulerModif">Annuler</button> ceci ne fonctionne pas -->
-                <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Mettre à jour</button> <!-- ceci ne fonctionne pas -->
+                <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Mettre à jour</button>
             </div>
 
             <div class="section">

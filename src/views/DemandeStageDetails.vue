@@ -8,66 +8,46 @@
         </div>
         <div class="btnsContainer">
             <button>Activer</button>
-            <button>Modifier</button>
+            <button @click="redirigerVersMiseAJour(demande._id)">Modifier</button>
             <button>Fermer</button>
         </div>
         <div class="infoContainer">
             <div>
-                <h3></h3>
+                <h3>{{ demande.candidate.firstName }} {{ demande.candidate.lastName }}</h3>
                 <p>{{ demande.candidate.description }}</p>
             </div>
             <div class="grilleStage">
                 <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
+                        <h4>Ville</h4>
+                        <span>{{ demande.candidate.city }}</span>
                 </div>
                 <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
+                        <h4>Compétences</h4>
+                        <span class="skills" v-for="skill in demande.candidate.skills" :key="skill">{{ skill }}</span>
                 </div>
                 <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
-                </div>
-                <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
-                </div>
-                <div class="grilleStageCellule bordureGauche">
-                        <span>Compétences</span>
-                        <!-- <span v-for="skill in demande.candidate.skills" :key>Info Cellule</span> -->
-                </div>
-                <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
+                        <h4>Région</h4>
+                        <span>{{ demande.province.value }}</span>
                 </div>            
             </div>
 
             <h4>Informations sur le stage recherché</h4>
             <div class="grilleStage">
                 <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
+                        <h4>Type de stage</h4>
+                        <span>{{ demande.internshipType.value }}</span>
                 </div>
                 <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
-                </div>
+                        <h4>Date de début</h4>
+                        <span>{{ demande.startDate }}</span>
+                </div>   
                 <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
-                </div>
+                        <h4>Nombre d'heures par semaine</h4>
+                        <span>{{ demande.weeklyWorkHours }}</span>
+                </div>   
                 <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
-                </div>
-                <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
-                </div>
-                <div class="grilleStageCellule bordureGauche">
-                        <span>Titre Cellule</span>
-                        <span>Info Cellule</span>
+                        <h4>Date de fin</h4>
+                        <span>{{ demande.endDate }}</span>
                 </div>            
             </div>
 
@@ -87,7 +67,12 @@
     const { getRequestById } = useInternshipRequests();
 
     const route = useRoute();
+    const router = useRouter();
     const demande = ref(null);
+
+    const redirigerVersMiseAJour = (id) => {
+        router.push({ name: 'DemandeStageMiseAjour', params: { id } });
+    };
 
     onMounted(async () => {
         try {
@@ -119,6 +104,7 @@
 
     h4 {
         color: rgb(34,166,172);
+        margin: 0;
     }
 
     p {
@@ -170,4 +156,7 @@
         border-radius: 0.5rem;
     }
 
+    .skills {
+        display: inline;
+    }
 </style>

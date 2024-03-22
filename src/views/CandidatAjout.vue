@@ -3,7 +3,7 @@
     <div class="container">
         <h1>Ajouter un candidat</h1>
 
-        <form @submit.prevent="soumettreFormulaire">
+        <form id="ajout-candidat" @submit.prevent="soumettreFormulaire">
             
             <div>
                 <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
