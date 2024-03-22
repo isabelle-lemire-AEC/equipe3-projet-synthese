@@ -24,9 +24,8 @@
                 <option v-for="enterprise in entreprises" :key="enterprise._id" :value="enterprise.name">
                 {{ enterprise.name }}
                 </option>
-                <p v-if="erreurs.value && erreurs.value.name">Veuillez effectuer un choix</p>
             </select>
-
+            <p v-if="erreurs.value && erreurs.value.name">Veuillez effectuer un choix</p>
 
         </div>
 
@@ -56,8 +55,8 @@
                 <label for="ajout-type">Veuillez effectuer un choix</label>
                 <select name="ajout-type" id="ajout-type" v-model="offre.internshipType">
                     <option value=""></option>
-                    <p v-if="erreurs.value && erreurs.value.internshipType">Veuillez effectuer un choix</p>
                 </select>
+                <p v-if="erreurs.value && erreurs.value.internshipType">Veuillez effectuer un choix</p>
                 
 
                 <h3>Nombre d'heures par semaine</h3>
@@ -167,7 +166,7 @@ const offre = ref({
 // Fonction pour ajouter un stage
 const ajouterStage = async () => {
     try {
-            if (!validerFormulaire()) {
+            if (validerFormulaire()) {
                 throw new Error("Veuillez remplir tous les champs obligatoires.");
             }
             console.log("Tentative d'ajout de l'offre :", offre.value);
@@ -186,10 +185,18 @@ const annulerAjout = () => {
         router.push({ name: 'OffresStages' });
 }
 
+const formulaireValide = ref(false);
+
 const soumettreFormulaire = async () => {
         try {
-            
-            await ajouterStage();
+            formulaireValide.value = validerFormulaire();
+            if (!formulaireValide.value) {
+                await ajouterStage();
+            }else {
+            throw new Error("Veuillez remplir tous les champs obligatoires.");
+        }
+            console.log("Soumettre le formulaire"); 
+           
         } catch (error) {
             console.error("Erreur lors de la soumission du formulaire :", error);
         }
@@ -208,23 +215,23 @@ const erreurs = ref({
     });
 
    
-/*const validerFormulaire = () => {
+const validerFormulaire = () => {
   
     erreurs.value.title= offre.value.title === '',
     erreurs.value.name= offre.value.enterprise.name === '',
     erreurs.value.description= offre.value.description === '',
     erreurs.value.activitySector= offre.value.enterprise.activitySector === '',
-    erreurs.value.requiredSkills= offre.value.requiredSkills === '',
+    erreurs.value.requiredSkills= offre.value.requiredSkills.length === 0,
     erreurs.value.internshipType= offre.value.internshipType === '',
     erreurs.value.weeklyWorkHours= offre.value.weeklyWorkHours === 0
   
-
+    console.log("Erreurs :", erreurs.value);
   // Vérifie s'il y a des erreurs dans le formulaire
   return Object.values(erreurs.value).some(err => err);
-};*/
+};
 
 
-const validerFormulaire = () => {
+/*const validerFormulaire = () => {
     erreurs.value = {
         title: offre.value.title === '',
         name: offre.value.enterprise.name === '',
@@ -242,7 +249,7 @@ const validerFormulaire = () => {
     console.log('hasErrors:', hasErrors);
 
     return hasErrors;
-};
+};*/
 
  //let formvalide = false
     
