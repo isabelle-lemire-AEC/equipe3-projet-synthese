@@ -13,16 +13,19 @@
             <div class="flex">
                 <div class="flex">
                     <label for="firstName">Prénom :</label>
-                    <input type="text" id="firstName" v-model="candidat.firstName" required>
+                    <input type="text" id="firstName" v-model="candidat.firstName">
+                    <p v-if="erreurs.firstName">Veuillez remplir ce champ</p>
                 </div>
                 <div class="flex">
                     <label for="lastName">Nom :</label>
                     <input type="text" id="lastName" v-model="candidat.lastName" required>
+                    <p v-if="erreurs.lastName">Veuillez remplir ce champ</p>
                 </div>
             </div>
             <div class="flex">
                 <label for="poste">Poste :</label>
                 <input type="text" id="poste" v-model="candidat.poste" required>
+                <p v-if="erreurs.poste">Veuillez remplir ce champ</p>
             </div>
 
             <div class="section">
@@ -30,6 +33,7 @@
                     <h2>Courte présentation</h2>
                     <label for="description"></label>
                     <textarea name="description" id="description" cols="30" rows="10" v-model="candidat.description" required></textarea>
+                    <p v-if="erreurs.description">Veuillez remplir ce champ</p>
                 </div>
                 
                 <div>
@@ -38,20 +42,24 @@
                         <div class="col-gauche padding-right-15 border-left">
                             <label for="address">Adresse</label>
                             <input type="text" id="address" v-model="candidat.address" required>
+                            <p v-if="erreurs.address">Veuillez remplir ce champ</p>
                         </div>
                         <div class="col-droite border-left">
                             <label for="phone">Téléphone</label>
                             <input type="text" id="phone" v-model="candidat.phone" required>
+                            <p v-if="erreurs.phone">Veuillez remplir ce champ</p>
                         </div>
                     </div>
                     <div class="flex">
                         <div class="col-gauche padding-right-15 border-left">
                             <label for="city">Ville</label>
                             <input type="text" id="city" v-model="candidat.city" required>
+                            <p v-if="erreurs.city">Veuillez remplir ce champ</p>
                         </div>
                         <div class="col-droite border-left">
                             <label for="email">Courriel</label>
                             <input type="email" id="email" v-model="candidat.email" required>
+                            <p v-if="erreurs.email">Veuillez remplir ce champ</p>
                         </div>
                     </div>
                     <div class="border-left">
@@ -63,10 +71,12 @@
                                 :value="province">{{ province.value }}
                             </option>
                         </select>
+                        <p v-if="erreurs.province">Veuillez effectuer un choix</p>
                     </div>
                     <div class="border-left">
                         <label for="postalCode">Code postal</label>
                         <input type="text" id="postalCode" v-model="candidat.postalCode" required>
+                        <p v-if="erreurs.postalCode">Veuillez remplir ce champ</p>
                     </div>
                 </div>
             </div>
@@ -142,19 +152,36 @@
         }
     }
 
+    //  validation formulaire
+
+
+    const erreurs = ref({
+        firstName: false,
+        lastName: false,
+        poste: false,
+        description: false,
+        address: false,
+        phone: false,
+        city: false,
+        email: false,
+        province: false,
+        postalCode: false
+    });
+
     const validerFormulaire = () => {
-        if (!candidat.value.firstName ||
-            !candidat.value.lastName ||
-            !candidat.value.email ||
-            !candidat.value.address ||
-            !candidat.value.phone ||
-            !candidat.value.city ||
-            !candidat.value.province ||
-            !candidat.value.postalCode) {
-            return false;
-        }
-        return true;
-    }
+       erreurs.value = {
+        firstName: candidat.value.firstName === '',
+        lastName: candidat.value.lastName === '',
+        email: candidat.value.email === '',
+        address: candidat.value.address === '',
+        phone: candidat.value.phone === '',
+        city: candidat.value.city === '',
+        province: candidat.value.province === '',
+        postalCode: candidat.value.postalCode === ''
+       
+       };
+       return Object.values(erreurs.value).some(err => err);
+    };
 
 </script>
 

@@ -6,20 +6,25 @@
     <form @submit.prevent="soumettreFormulaire">
 
         <button type="submit" @click="annulerAjout">Annuler</button>
+        
         <button type="submit">Sauvegarder</button>
+        
 
         <div class="groupe-titre-entreprise">
             <h3>Titre:</h3>
-            <input type="text" id="titre" v-model="offre.title">
-
+            
+              <input type="text" id="titre" v-model.trim="offre.title">
+              <p v-if="erreurs.title">Veuillez remplir ce champ</p>
+            
             <h3>Entreprise:</h3>
             <label for="type">Veuillez effectuer un choix</label>
            
             <select name="entreprise" id="entreprise" v-model="offre.enterprise.name">
                 <option value="" disabled selected>Choisir une entreprise</option>
-                <option v-for="enterprise in enterprises" :key="enterprise._id" :value="enterprise.name">
+                <option v-for="enterprise in entreprises" :key="enterprise._id" :value="enterprise.name">
                 {{ enterprise.name }}
                 </option>
+                <p v-if="erreurs.name">Veuillez effectuer un choix</p>
             </select>
 
 
@@ -27,17 +32,20 @@
 
         <div class="groupe-tache">
             <h1>Description de la tâche</h1>
-            <textarea id="ajout-description-tache" v-model="offre.description"></textarea>
+            <textarea id="ajout-description-tache" v-model.trim="offre.description"></textarea>
+            <p v-if="erreurs.description">Veuillez remplir ce champ</p>
         </div>
 
         <div class="groupe-programme">
             <h3>Programme de formation</h3>
-            <input type="text" id="ajout-programme" v-model="offre.enterprise.activitySector">
+            <input type="text" id="ajout-programme" v-model.trim="offre.enterprise.activitySector">
+            <p v-if="erreurs.activitySector">Veuillez remplir ce champ</p>
         </div>
 
         <div class="groupe-exigence">
             <h3>Exigences</h3>
-            <textarea id="ajout-exigences" v-model="offre.requiredSkills"></textarea>
+            <textarea id="ajout-exigences" v-model.trim="offre.requiredSkills"></textarea>
+            <p v-if="erreurs.requiredSkills">Veuillez remplir ce champ</p>
         </div>
 
         <div class="groupe-info-stage">
@@ -49,12 +57,14 @@
                 <select name="ajout-type" id="ajout-type" v-model="offre.internshipType">
                     <option value=""></option>
                 </select>
+                <p v-if="erreurs.internshipType">Veuillez effectuer un choix</p>
 
                 <h3>Nombre d'heures par semaine</h3>
                 <label for="ajout-heure">Veuillez effectuer un choix</label>
                 <select name="ajout-heure" id="ajout-heure" v-model="offre.weeklyWorkHours">
                     <option value=""></option>
                 </select>
+                <p v-if="erreurs.weeklyWorkHours">Veuillez remplir ce champ</p>
 
                 <h3>Rénumération</h3>
 
@@ -74,7 +84,7 @@
                 <input type="date" id="ajout-dateFin" name="ajout-dateFin">
             </div>
         </div>
-
+    
         <section class="info-sup">
             <h3>Informations suplémentaires</h3>
             <textarea id="ajout-info-sup-form"></textarea>
@@ -86,22 +96,22 @@
 </template>
 
 <script setup>
-import { ref, onMounted  } from 'vue';
+import { ref  } from 'vue';
 import { useRouter } from 'vue-router';
 import useInternshipOffers from '../composables/offres_stage/offreDeStage';
-import {useEntreprise} from '../composables/entreprises/entreprise';
+//import {useEntreprise} from '../composables/entreprises/entreprise';
 
 
 const router = useRouter();
 const { ajouterOffre } = useInternshipOffers();
-const { getAllEntreprise, response, error, loading } = useEntreprise();
-const enterprises = ref([]); // Référence pour stocker les entreprises
+//const { chargerEntreprises, response, error, loading } = useEntreprise();
+const entreprises = ref([]); // Référence pour stocker les entreprises
 
 
-onMounted(async () => {
-    await getAllEntreprise();
-    enterprises.value = response.value;
-});
+/*onMounted(async () => {
+    await chargerEntreprises();
+    entreprises.value = response.data;
+});*/
 
 
 
@@ -177,21 +187,142 @@ const annulerAjout = () => {
 
 const soumettreFormulaire = async () => {
         try {
+            
             await ajouterStage();
         } catch (error) {
             console.error("Erreur lors de la soumission du formulaire :", error);
         }
 }
 
+// validation formulaire
+
+const erreurs = ref({
+        title: false,
+        name: false,
+        description: false,
+        activitySector: false,
+        requiredSkills: false,
+        internshipType: false,
+        weeklyWorkHours: false
+    });
+
+   
 const validerFormulaire = () => {
-        if (!offre.value.title ||
-            !offre.value.enterprise.name ||
-            !offre.value.internshipType ||
-            !offre.value.weeklyWorkHours ) {
-            return false;
+  erreurs.value = {
+    title: offre.value.title === '',
+    name: offre.value.enterprise.name === '',
+    description: offre.value.description === '',
+    activitySector: offre.value.enterprise.activitySector === '',
+    requiredSkills: offre.value.requiredSkills === '',
+    internshipType: offre.value.internshipType === '',
+    weeklyWorkHours: offre.value.weeklyWorkHours === 0
+  };
+
+  // Vérifie s'il y a des erreurs dans le formulaire
+  return Object.values(erreurs.value).some(err => err);
+};
+ //let formvalide = false
+    
+    /*const resetErreurs = () => {
+        erreurs.value = {
+        title: false,
+        name: false,
+        description: false,
+        activitySector: false,
+        requiredSkills: false,
+        internshipType: false,
+        weeklyWorkHours: false
+            
+        };
+    };*/
+
+    //let afficherFormulaire = true;
+
+/*const validerFormulaire = () => {
+        
+        resetErreurs()
+
+        let valide = true
+
+        if(offre.value.title === "")
+        {
+            erreurs.value.title = true
+            valide = false
         }
-        return true;
-    }
+
+        if(offre.value.name === "")
+        {
+            erreurs.value.name = true
+            valide = false
+        }
+
+        if(offre.value.description === "")
+        {
+            erreurs.value.description = true
+            valide = false
+        }
+
+        if(offre.value.enterprise.activitySector === "")
+        {
+            erreurs.value.activitySector = true
+            valide = false
+        }
+
+        if(offre.value.requiredSkills === "")
+        {
+            erreurs.value.requiredSkills = true
+            valide = false
+        }
+
+        if(offre.value.internshipType === "")
+        {
+            erreurs.value.internshipType = true
+            valide = false
+        }
+
+        if(offre.value.weeklyWorkHours === 0)
+        {
+            erreurs.value.weeklyWorkHours = true
+            valide = false
+        }
+
+        if (!valide) {
+            erreurs.title,
+            erreurs.name,
+            erreurs.description,
+            erreurs.activitySector,
+            erreurs.requiredSkills,
+            erreurs.internshipType,
+            erreurs.weeklyWorkHours
+
+        } else {
+      
+            //formvalide = true;
+
+            afficherFormulaire = false;
+        
+        }
+
+        
+    }*/
+
+
+   /* const validerFormulaire = () => {
+    erreurs.value = {
+        title: offre.title === '',
+        name: offre.name === '',
+        description: offre.description=== '',
+        activitySector: offre.activitySector === '',
+        requiredSkills: offre.requiredSkills === '',
+        internshipType: offre.internshipType === '',
+        weeklyWorkHours: offre.weeklyWorkHours === 0
+    };
+
+    // Vérifie s'il y a des erreurs dans le formulaire
+    return Object.values(erreurs.value).some(err => err);
+};*/
+
+
 
 
 
