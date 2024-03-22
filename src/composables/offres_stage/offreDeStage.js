@@ -2,7 +2,7 @@ import { ref } from 'vue';
 import axios from 'axios';
 
 export function useInternshipOffers() {
-  const response = ref(null);
+  const response = ref([]);
   const error = ref(null);
   const loading = ref(false);
 
@@ -10,9 +10,9 @@ export function useInternshipOffers() {
   const ajouterOffre = async (offerData) => {
     loading.value = true;
     try {
-      // Assurez-vous que l'URL est correcte ici, sans le fragment de Swagger "#/default/InternshipOffers"
-      response.value = await axios.post('https://api-3.fly.dev/internshipOffers', offerData);
-      console.log("post offer marche pas", response.value.data);
+    
+      response.value = await axios.post('https://api-3.fly.dev/internship-offers', offerData);
+      console.log("post offer marche", response.value.data);
     } catch (err) {
       error.value = err;
       console.log("post offer marche pas", err);
@@ -21,23 +21,21 @@ export function useInternshipOffers() {
     }
   };
 
-
-  // PAS TESTÉ ICI ENCORE
-  // Obtenir toutes les offres de stage
   const getAllOffers = async () => {
     loading.value = true;
     try {
-      response.value = await axios.get('https://api-3.fly.dev/internshipOffers');
-      console.log("get offer ca marche", response.value.data);
+      const res = await axios.get('https://api-3.fly.dev/internship-offers');
+      response.value = res.data; // Mettre à jour la référence réactive avec les données récupérées
+      console.log("get offer ça marche", res.data);
     } catch (err) {
       error.value = err;
-      console.log("get offer ca marche pas", err);
+      console.log("get offer ça marche pas", err);
     } finally {
       loading.value = false;
     }
   };
-     // PAS TESTÉ ICI ENCORE
-  // Mettre à jour une offre de stage
+
+
   const edditerOffre = async (id, offerData) => {
     loading.value = true;
     try {
@@ -51,8 +49,31 @@ export function useInternshipOffers() {
     }
   };
 
-  return {ajouterOffre, getAllOffers, edditerOffre, response, error, loading };
+
+// Dans useInternshipOffers composable
+const getInternshipOfferById = async (id) => {
+  try {
+    const res = await axios.get(`https://api-3.fly.dev/internship-offers/${id}`);
+    console.log("Success: Obtained internship offer by ID", res.data);
+    // Mise à jour de la réponse au niveau supérieur
+    response.value = [res.data]; // Mettez les données dans un tableau pour rester cohérent avec votre structure actuelle
+  } catch (err) {
+    console.error("Error: Failed to obtain internship offer by ID", err);
+    error.value = err;
+  }
+};
+
+
+// Remplace "65ecd2360321b1c87f2b6325" par l'ID réel de l'offre de stage que tu souhaites récupérer
+// getInternshipOfferById("65ecd2360321b1c87f2b6325");
+
+
+  return {ajouterOffre, getAllOffers, getInternshipOfferById, edditerOffre, response, error, loading };
 }
+
+
+// getAllOffers()
+// console.log
 
 
 // Ex d'importation les amis   IMPORT
@@ -71,3 +92,5 @@ export function useInternshipOffers() {
 // }).catch((error) => {
 //   console.error('CA MARCHE PAS:', error);
 // });
+
+// getAllOffers()

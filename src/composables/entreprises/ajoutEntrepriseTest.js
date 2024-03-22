@@ -25,7 +25,7 @@ const entrepriseData = {
 
 const addEntreprise = async () => {
   try {
-    // Remplace cette URL par l'URL correcte de ton API
+
     const response = await axios.post('https://api-3.fly.dev/enterprises', entrepriseData);
     console.log("Success: Entreprise added", response.data);
   } catch (error) {

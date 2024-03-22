@@ -1,49 +1,50 @@
 <template>
-    
-    <h1>Offres de stage</h1>
-
-    <button>Ajouter une offre de stage</button>
-
-    <table>
+  <div>
+    <h3>Offres de stage disponibles</h3>
+    <div v-if="loading">Chargement...</div>
+    <div v-if="error">Erreur lors du chargement des offres</div>
+    <div v-else>
+      <table>
         <thead>
-            <tr>
-                <th scope="col">Poste</th>
-                
-                <th scope="col">Secteur d'activité</th>
-                
-                <th scope="col">Région</th>
-                
-                <th scope="col">Date de publication</th>
-                
-                <th scope="col"></th>
-            </tr>
+          <tr>
+            <th scope="col">Titre</th>
+            <th scope="col">Entreprise</th>
+      
+          </tr>
         </thead>
-   
         <tbody>
-            <th>
-                <!--icone-->
-                <h4>Intégrateur Web</h4>
-                <p>Acolyte communication</p>
+          <tr v-for="offer in offers" :key="offer._id">
+            <td>{{ offer.title }}</td>
+            <td>{{ offer.enterprise.name }}</td>
 
-            </th>
-            <td>Communication</td>
-            <td>Mauricie</td>
-            <td>2023-03-03</td>
-            <td><!--icone--></td>
+
+      
+    
+          </tr>
+          <tr v-for="offer in offers" :key="offer._id">
+    <td>
+      <router-link :to="`/offre-de-stage-details/${offer._id}`">{{ offer.title }}</router-link>
+    </td>
+    <td>{{ offer.title }}</td>
+  </tr>
         </tbody>
-        
-    </table>
-    <hr>
+      </table>
+    </div>
+  </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useInternshipOffers } from '../composables/offres_stage/offreDeStage'; 
+ import { useRouter } from 'vue-router';
 
+const { getAllOffers, response, error, loading } = useInternshipOffers();
+const offers = ref([]);
 
-
+onMounted(async () => {
+  await getAllOffers();
+  offers.value = response.value; 
+});
 
 
 </script>
-
-<style>
-
-</style>

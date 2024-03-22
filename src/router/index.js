@@ -53,7 +53,14 @@ const router = createRouter({
     { path: '/entreprise-mise-a-jour', name: 'EntrepriseMiseAjour', component: EntrepriseMiseAjour },
     { path: '/entreprise-ajout', name: 'EntrepriseAjout', component: EntrepriseAjout },
 
-    { path: '/:pathMatch(.*)*', name: 'erreur', component: Erreur }
+    { path: '/:pathMatch(.*)*', name: 'erreur', component: Erreur },
+
+    {
+      path: '/offre-de-stage-details/:id',
+      name: 'OffreStageDetails',
+      component: OffreStageDetails,
+      props: true,
+    }
   ],
 });
 

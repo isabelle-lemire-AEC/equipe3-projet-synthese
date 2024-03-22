@@ -2,9 +2,16 @@ import { ref } from "vue";
 import axios from "axios";
 
 export function useEntreprise() {
-    const response = ref(null);
+    const response = ref();
+    const responseALL = ref([]);
     const error = ref(null);
     const loading = ref(false);
+
+    //     const entreprises = ref([]);
+    // const entreprise = ref({});
+    // const error = ref(null);
+    // const loading = ref(false);
+
 
     const addEntreprise = async (entrepriseData) => {
         loading.value = true;
@@ -45,7 +52,21 @@ export function useEntreprise() {
         }
     }
 
-    const deleteEntreprise = async (id) => {
+    const getAllEntreprises = async () => {
+        loading.value = true;
+        try {
+            responseALL.value = await axios.get('https://api-3.fly.dev/enterprises');
+            console.log("Get all entreprises ça marche", responseALL.value);
+            return responseALL.value;
+        } catch (err) {
+            error.value = err;
+            console.log("Erreur en récupérant toutes les entreprises");
+        } finally {
+            loading.value = false;
+        }
+    }
+    
+const deleteEntreprise = async (id) => {
         loading.value = true;
         try {
             response.value = await axios.delete(`https://api-3.fly.dev/enterprises/${id}`);
@@ -56,8 +77,9 @@ export function useEntreprise() {
         } finally {
             loading.value = false;
         }
+        
     }
 
-    return { addEntreprise, editEntreprise, getEntrepriseById, deleteEntreprise, response, error, loading };
+    return { addEntreprise, editEntreprise, getEntrepriseById, deleteEntreprise, getAllEntreprises, response, responseALL, error, loading };
 }
 
