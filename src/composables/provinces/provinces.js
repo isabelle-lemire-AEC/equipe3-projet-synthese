@@ -13,7 +13,7 @@ export function useProvinces() {
     loading.value = true;
     try {
       response.value = await axios.get(`${API_BASE_URL}/provinces`);
-      // console.log("GET all Province - OK", response.value.data);
+      console.log("GET all Province - OK", response.value.data);
       return response.value;
     } catch (err) {
       error.value = err;

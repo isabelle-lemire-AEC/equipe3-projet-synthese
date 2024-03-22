@@ -34,13 +34,14 @@ const router = createRouter({
     { path: '/tableau-de-bord', name: 'TableauDeBord', component: TableauDeBord },
 
     { path: '/offres-de-stages', name: 'OffresStages', component: OffresStages },
-    { path: '/offre-de-stage-details', name: 'OffreStageDetails', component: OffreStageDetails },
+    { path: '/offres-de-stages/offre-de-stage-details', name: 'OffreStageDetails', component: OffreStageDetails },
     { path: '/offre-de-stage-mise-a-jour', name: 'OffreStageMiseAjour', component: OffreStageMiseAjour },
     { path: '/offre-de-stage-ajout', name: 'OffreStageAjout', component: OffreStageAjout },
 
     { path: '/demandes-de-stages', name: 'DemandesStages', component: DemandesStages },
-    { path: '/demande-de-stage-details', name: 'DemandeStageDetails', component: DemandeStageDetails },
-    { path: '/demande-de-stage-mise-a-jour', name: 'DemandeStageMiseAjour', component: DemandeStageMiseAjour },
+    { path: '/demande-de-stage-details/:id', name: 'DemandeStageDetails', component: DemandeStageDetails, props: true },
+    { path: '/demande-de-stage-mise-a-jour', name: 'DemandeStageMiseAjour', component: DemandeStageMiseAjour }, // à effacer? ça ne devrait pas exister - JO
+    { path: '/demande-de-stage-mise-a-jour/:id', name: 'DemandeStageMiseAjour', component: DemandeStageMiseAjour, props: true },
     { path: '/demande-de-stage-ajout', name: 'DemandeStageAjout', component: DemandeStageAjout },
 
     { path: '/candidats', name: 'Candidats', component: Candidats },
@@ -49,8 +50,8 @@ const router = createRouter({
     { path: '/candidat-ajout', name: 'CandidatAjout', component: CandidatAjout },
 
     { path: '/entreprises', name: 'Entreprises', component: Entreprises },
-    { path: '/entreprise-details', name: 'EntrepriseDetails', component: EntrepriseDetails },
-    { path: '/entreprise-mise-a-jour', name: 'EntrepriseMiseAjour', component: EntrepriseMiseAjour },
+    { path: '/entreprise-details/:id', name: 'EntrepriseDetails', component: EntrepriseDetails, props: true },
+    { path: '/entreprise-mise-a-jour/:id', name: 'EntrepriseMiseAjour', component: EntrepriseMiseAjour, props: true },
     { path: '/entreprise-ajout', name: 'EntrepriseAjout', component: EntrepriseAjout },
 
     { path: '/:pathMatch(.*)*', name: 'erreur', component: Erreur }

@@ -13,7 +13,8 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.post(`${API_BASE_URL}/internship-requests`, requestData);
-      // console.log("POST Demande de stage - OK", response.value.data);
+      console.log("POST Demande de stage - OK", response.value.data);
+      return response.value;
     } catch (err) {
       error.value = err;
       console.log("POST Demande de stage - ERREUR", err);
@@ -27,11 +28,26 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.get(`${API_BASE_URL}/internship-requests`);
-      console.log("GET all Demandes de stage - OK", response.value.data);
+      console.log("GET ALL Demandes de stage - OK", response.value.data);
       return response.value;
     } catch (err) {
       error.value = err;
-      console.log("GET all Demandes de stage - ERREUR", err);
+      console.log("GET ALL Demandes de stage - ERREUR", err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  // Obtenir une demande de stage avec le ID
+  const getRequestById = async (id) => {
+    loading.value = true;
+    try {
+      response.value = await axios.get(`${API_BASE_URL}/internship-requests/${id}`);
+      console.log("GET Demandes de stage BY ID - OK", response.value.data);
+      return response.value;
+    } catch (err) {
+      error.value = err;
+      console.log("GET Demandes de stage BY ID - ERREUR", err);
     } finally {
       loading.value = false;
     }
@@ -52,7 +68,7 @@ export function useInternshipRequests() {
     }
   };
 
-  return {addRequest, getAllRequests, editRequest, response, error, loading };
+  return {addRequest, getAllRequests, getRequestById, editRequest, response, error, loading };
 }
 
 

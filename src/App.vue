@@ -18,17 +18,19 @@
 
   import { RouterView } from 'vue-router';
 
-  import NavBar from './components/NavBar.vue';
-  import Sidebar from './components/Sidebar.vue';
-  import Footer from './components/Footer.vue';
+import NavBar from './components/NavBar.vue';
+import Sidebar from './components/Sidebar.vue';
 
-  export default {
-    components: {
-      NavBar,
-      Sidebar,
-      Footer
-    }
+import Footer from './components/Footer.vue';
+
+export default {
+  components: {
+    NavBar,
+    Sidebar,
+    
+    Footer
   }
+}
 </script>
 
 <style>

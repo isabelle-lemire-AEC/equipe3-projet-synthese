@@ -1,7 +1,9 @@
 <template>
     <div class="pageContainer">
         <h1>Demandes de stage</h1>
-        <RouterLink to="/demande-de-stage-ajout">Ajouter une demande</RouterLink>
+        <RouterLink to="/demande-de-stage-ajout">
+            <button>Ajouter une demande</button>
+        </RouterLink>
         <div class="listeStages">
             <div class="listeStagesHeader">
                 <span>Poste</span>
@@ -9,10 +11,7 @@
                 <span>Région</span>
                 <span>Date d'inscription</span>
             </div>
-            <ElementListeStage :stage="stagiere1"></ElementListeStage>
-            <ElementListeStage :stage="stagiere2"></ElementListeStage>
-            <ElementListeStage :stage="stagiere3"></ElementListeStage>
-            <p></p>
+            <ElementListeStage v-for="demande in toutesDemandes" :key="demande._id" :stage="demande"></ElementListeStage>
         </div>
     </div>
 </template>
@@ -23,13 +22,25 @@ import { useInternshipRequests } from '../composables/demandes_stages/demandeDeS
 import { useCandidat } from '../composables/candidats/candidat.js'
 import { useProvinces } from '../composables/provinces/provinces.js'
 import { useInternshipTypes } from '@/composables/types_stage/types_stage.js'
+import { ref, onMounted } from 'vue';
 
-// Code brouillon, je vais faire le ménage plus tard.
-
-const { addRequest, getAllRequests, editRequest } = useInternshipRequests();
+const { getAllRequests, editRequest } = useInternshipRequests();
 const { getAllCandidats } = useCandidat();
 const { getAllProvinces } = useProvinces();
 const { getAllInternshipTypes } = useInternshipTypes();
+
+const toutesDemandes = ref([]);
+
+onMounted(async () => {
+    try {
+        const response = await getAllRequests();
+        toutesDemandes.value = response.data;
+        console.log("toutesDemandes: ", toutesDemandes);
+    } catch (error) {
+        console.error("Error:", error.response ? error.response.data : error.message);
+    }
+});
+
 
 const demandeDeStageAAjouter = {
   title: "Designer web",
@@ -96,13 +107,17 @@ const testAPI = async () => {
     // console.log("demandeDeStageAAjouter: ", demandeDeStageAAjouter);
 
     // *** IMPORTANT *** enlever les commentaires de la ligne ci-dessous pour ajouter une demande de stage
+    // vous pouvez modifier les données de l'objet demandeDeStageAAjouter afin de tester et différencier
+    // les différents objets
     // await addRequest(demandeDeStageAAjouter);
 
     // afin d'afficher dans la console toutes les demandes de stage, incluant celle que l'on vient
     // d'ajouter dans la ligne précédante
     const allRequests = await getAllRequests();
 
-    // await editRequest(allRequests.data[1]._id, demandeDeStageAAjouter)
+    // *** IMPORTANT *** enlever les commentaires afin de tester l'édition d'une demande de stage
+    await editRequest(allRequests.data[0]._id, demandeDeStageAAjouter)
+
     await getAllRequests();
 
 }
@@ -110,33 +125,6 @@ const testAPI = async () => {
 // exécuter la fonction de test des calls API
 testAPI();
 
-// Les stagières ont été créé à des fins de tests pour les componants ElementListeStage
-const stagiere1 = {
-    actif: "1",
-    poste: "Programmeur",
-    nom: "Robert Thibeault",
-    secteurActivite: "Informatique",
-    region: "Montréal",
-    dateInscription: "2021-03-04"
-}
-
-const stagiere2 = {
-    actif: "0",
-    poste: "Designer",
-    nom: "Valérie Boisvert",
-    secteurActivite: "Design graphique",
-    region: "Montérigie",
-    dateInscription: "2017-07-02"
-}
-
-const stagiere3 = {
-    actif: "1",
-    poste: "Gestionnaire de projets",
-    nom: "Steve McQueen",
-    secteurActivite: "Évennementiel",
-    region: "Mauricie",
-    dateInscription: "2022-10-14"
-}
 </script>
 
 <style scoped>

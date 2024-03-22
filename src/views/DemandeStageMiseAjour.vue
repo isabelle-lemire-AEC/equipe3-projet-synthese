@@ -1,12 +1,10 @@
 <template>
 	<section>
 		<p>Demande de stage</p>
-		<h1>Titre API</h1>
+		<h1> {{ demande.title }}</h1>
 
 		<div>
-			<!-- COMPONENT?? Classe pour flex les boutons -->
-			<button>Annuler</button>
-			<button type="submit">Mettre à jour</button>
+			btn à faire à la fin
 		</div>
 
 		<form id="edit-demande-stage" @submit.prevent="soumettreFormulaire">
@@ -26,8 +24,8 @@
 					</p> -->
 				</div>
 
-				<div
-					><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+				<div>
+					<!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 					<label for="edit-demande-presentation">Présentation</label>
 					<textarea
 						id="edit-demande-presentation"
@@ -40,10 +38,8 @@
 
 				<div>
 					<!-- Classe pour groupe de deux inputs qui occupent 50% de l'espace -->
-					<div
-						><!-- Classe pour regrouper DEUX INPUTS UN EN DESSOUS DE L'AUTRES-->
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+					<div><!-- Classe pour regrouper DEUX INPUTS UN EN DESSOUS DE L'AUTRES-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="edit-demande-programme">Programme de formation</label>
 							<input
 								type="text"
@@ -55,8 +51,7 @@
 							</p> -->
 						</div>
 
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="edit-demande-secteur">Secteur d'activité</label>
 							<select id="edit-demande-secteur" name="edit-demande-secteur">
 								<option value="">Veuillez effectuer un choix</option>
@@ -68,13 +63,9 @@
 
 				<div>
 					<!-- Classe pour groupe de deux inputs qui occupent 50% de l'espace -->
-					<div
-						><!-- Classe pour regrouper deux inputs side by side-->
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="edit-demande-etablissement"
-								>Établissement scolaire</label
-							>
+					<div><!-- Classe pour regrouper deux inputs side by side-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+							<label for="edit-demande-etablissement">Établissement scolaire</label>
 							<input
 								type="text"
 								id="edit-demande-etablissement"
@@ -84,8 +75,7 @@
 							</p> -->
 						</div>
 
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="edit-demande-ville">Ville</label>
 							<input
 								type="text"
@@ -110,8 +100,7 @@
 						</select>
 					</div>
 
-					<div
-						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 						<label for="edit-demande-competences">Compétences</label>
 						<textarea
 							id="edit-demande-competences"
@@ -129,8 +118,7 @@
 					<div>
 						<!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 50 % de l'espace-->
 
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="edit-demande-type">Type de stage</label>
 							<select id="edit-demande-type" name="edit-demande-type">
 								<option value="">Veuillez effectuer un choix</option>
@@ -138,11 +126,8 @@
 							</select>
 						</div>
 
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="edit-demande-heures"
-								>Nombre d'heures par semaine</label
-							>
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+							<label for="edit-demande-heures">Nombre d'heures par semaine</label>
 							<select id="edit-demande-heures" name="edit-demande-heures">
 								<option value="">Veuillez effectuer un choix</option>
 								<!-- Autres options de l'API -->
@@ -152,8 +137,7 @@
 
 					<div>
 						<!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 50 % de l'espace-->
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="edit-demande-date-debut">Date de début</label>
 							<input
 								type="date"
@@ -162,8 +146,7 @@
 								v-model="demande.startDate" />
 						</div>
 
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="edit-demande-date-fin">Date de fin</label>
 							<input
 								type="date"
@@ -177,15 +160,11 @@
 						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 						<label for="edit-demande-remuneration">Rémunération</label>
 						<div>
-							<input
-								type="checkbox"
-								id="edit-demande-discretion"
+							<input type="checkbox" id="edit-demande-discretion"
 								name="edit-demande-remuneration"
 								value="discretion"
 								v-model="remunerationType" />
-							<label for="edit-demande-discretion"
-								>À la discrétion de l'entreprise</label
-							>
+							<label for="edit-demande-discretion">À la discrétion de l'entreprise</label>
 						</div>
 						<!-- Wrapper case checkbox + label -->
 						<div>
@@ -213,8 +192,7 @@
 
 				<fieldset>
 					<legend>Informations supplémentaires</legend>
-					<div
-						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 						<label for="edit-demande-infos-supp">Présentation</label>
 						<!-- Classe pour cacher le label -->
 						<textarea

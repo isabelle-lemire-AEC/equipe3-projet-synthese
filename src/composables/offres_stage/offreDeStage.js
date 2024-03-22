@@ -1,17 +1,19 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
-export function useInternshipOffers() {
-  const response = ref(null);
+export default function useInternshipOffers() {
+ 
   const error = ref(null);
   const loading = ref(false);
+  const response = ref([]); 
+  
 
   // Ajouter une offre de stage
   const ajouterOffre = async (offerData) => {
     loading.value = true;
     try {
       // Assurez-vous que l'URL est correcte ici, sans le fragment de Swagger "#/default/InternshipOffers"
-      response.value = await axios.post('https://api-3.fly.dev/internshipOffers', offerData);
+      response.value = await axios.post('https://api-3.fly.dev/internship-offers', offerData);
       console.log("post offer marche pas", response.value.data);
     } catch (err) {
       error.value = err;
@@ -24,14 +26,28 @@ export function useInternshipOffers() {
 
   // PAS TESTÉ ICI ENCORE
   // Obtenir toutes les offres de stage
-  const getAllOffers = async () => {
+  /*const getAllOffers = async () => {
     loading.value = true;
     try {
-      response.value = await axios.get('https://api-3.fly.dev/internshipOffers');
+      response.value = await axios.get('https://api-3.fly.dev/internship-offers');
       console.log("get offer ca marche", response.value.data);
     } catch (err) {
       error.value = err;
       console.log("get offer ca marche pas", err);
+    } finally {
+      loading.value = false;
+    }
+  };*/
+
+  const getAllOffers = async () => {
+    loading.value = true;
+    try {
+      const res = await axios.get('https://api-3.fly.dev/internship-offers');
+      response.value = res.data; // Mettre a jour icitte
+      console.log("get offer ça marche", res.data);
+    } catch (err) {
+      error.value = err;
+      console.log("get offer ça marche pas", err);
     } finally {
       loading.value = false;
     }
@@ -41,7 +57,7 @@ export function useInternshipOffers() {
   const edditerOffre = async (id, offerData) => {
     loading.value = true;
     try {
-      response.value = await axios.patch(`https://api-3.fly.dev/internshipOffers/${id}`, offerData);
+      response.value = await axios.patch(`https://api-3.fly.dev/internship-offers/${id}`, offerData);
       console.log("Edition work", response.value.data);
     } catch (err) {
       error.value = err;
@@ -51,7 +67,10 @@ export function useInternshipOffers() {
     }
   };
 
-  return {ajouterOffre, getAllOffers, edditerOffre, response, error, loading };
+
+
+
+  return {ajouterOffre, getAllOffers,  edditerOffre, response, error, loading };
 }
 
 
