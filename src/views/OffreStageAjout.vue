@@ -14,7 +14,7 @@
             <h3>Titre:</h3>
             
               <input type="text" id="titre" v-model.trim="offre.title">
-              <p v-if="erreurs.title">Veuillez remplir ce champ</p>
+              <p v-if="erreurs.value && erreurs.value.title">Veuillez remplir ce champ</p>
             
             <h3>Entreprise:</h3>
             <label for="type">Veuillez effectuer un choix</label>
@@ -24,7 +24,7 @@
                 <option v-for="enterprise in entreprises" :key="enterprise._id" :value="enterprise.name">
                 {{ enterprise.name }}
                 </option>
-                <p v-if="erreurs.name">Veuillez effectuer un choix</p>
+                <p v-if="erreurs.value && erreurs.value.name">Veuillez effectuer un choix</p>
             </select>
 
 
@@ -33,19 +33,19 @@
         <div class="groupe-tache">
             <h1>Description de la tâche</h1>
             <textarea id="ajout-description-tache" v-model.trim="offre.description"></textarea>
-            <p v-if="erreurs.description">Veuillez remplir ce champ</p>
+            <p v-if="erreurs.value && erreurs.value.description">Veuillez remplir ce champ</p>
         </div>
 
         <div class="groupe-programme">
             <h3>Programme de formation</h3>
             <input type="text" id="ajout-programme" v-model.trim="offre.enterprise.activitySector">
-            <p v-if="erreurs.activitySector">Veuillez remplir ce champ</p>
+            <p v-if="erreurs.value && erreurs.value.activitySector">Veuillez remplir ce champ</p>
         </div>
 
         <div class="groupe-exigence">
             <h3>Exigences</h3>
             <textarea id="ajout-exigences" v-model.trim="offre.requiredSkills"></textarea>
-            <p v-if="erreurs.requiredSkills">Veuillez remplir ce champ</p>
+            <p v-if="erreurs.value && erreurs.value.requiredSkills">Veuillez remplir ce champ</p>
         </div>
 
         <div class="groupe-info-stage">
@@ -56,15 +56,16 @@
                 <label for="ajout-type">Veuillez effectuer un choix</label>
                 <select name="ajout-type" id="ajout-type" v-model="offre.internshipType">
                     <option value=""></option>
+                    <p v-if="erreurs.value && erreurs.value.internshipType">Veuillez effectuer un choix</p>
                 </select>
-                <p v-if="erreurs.internshipType">Veuillez effectuer un choix</p>
+                
 
                 <h3>Nombre d'heures par semaine</h3>
                 <label for="ajout-heure">Veuillez effectuer un choix</label>
                 <select name="ajout-heure" id="ajout-heure" v-model="offre.weeklyWorkHours">
                     <option value=""></option>
                 </select>
-                <p v-if="erreurs.weeklyWorkHours">Veuillez remplir ce champ</p>
+                <p v-if="erreurs.value && erreurs.value.weeklyWorkHours">Veuillez remplir ce champ</p>
 
                 <h3>Rénumération</h3>
 
@@ -99,7 +100,7 @@
 import { ref  } from 'vue';
 import { useRouter } from 'vue-router';
 import useInternshipOffers from '../composables/offres_stage/offreDeStage';
-//import {useEntreprise} from '../composables/entreprises/entreprise';
+// import {useEntreprise} from '../composables/entreprises/entreprise';
 
 
 const router = useRouter();
@@ -207,20 +208,42 @@ const erreurs = ref({
     });
 
    
-const validerFormulaire = () => {
-  erreurs.value = {
-    title: offre.value.title === '',
-    name: offre.value.enterprise.name === '',
-    description: offre.value.description === '',
-    activitySector: offre.value.enterprise.activitySector === '',
-    requiredSkills: offre.value.requiredSkills === '',
-    internshipType: offre.value.internshipType === '',
-    weeklyWorkHours: offre.value.weeklyWorkHours === 0
-  };
+/*const validerFormulaire = () => {
+  
+    erreurs.value.title= offre.value.title === '',
+    erreurs.value.name= offre.value.enterprise.name === '',
+    erreurs.value.description= offre.value.description === '',
+    erreurs.value.activitySector= offre.value.enterprise.activitySector === '',
+    erreurs.value.requiredSkills= offre.value.requiredSkills === '',
+    erreurs.value.internshipType= offre.value.internshipType === '',
+    erreurs.value.weeklyWorkHours= offre.value.weeklyWorkHours === 0
+  
 
   // Vérifie s'il y a des erreurs dans le formulaire
   return Object.values(erreurs.value).some(err => err);
+};*/
+
+
+const validerFormulaire = () => {
+    erreurs.value = {
+        title: offre.value.title === '',
+        name: offre.value.enterprise.name === '',
+        description: offre.value.description === '',
+        activitySector: offre.value.enterprise.activitySector === '',
+        requiredSkills: offre.value.requiredSkills === '',
+        internshipType: offre.value.internshipType === '',
+        weeklyWorkHours: offre.value.weeklyWorkHours === 0
+    };
+
+    console.log('erreurs.value:', erreurs.value);
+
+    // Vérifie s'il y a des erreurs dans le formulaire
+    const hasErrors = Object.values(erreurs.value).some(err => err);
+    console.log('hasErrors:', hasErrors);
+
+    return hasErrors;
 };
+
  //let formvalide = false
     
     /*const resetErreurs = () => {
