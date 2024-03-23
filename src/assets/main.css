@@ -10,3 +10,7 @@ html, body {
 .flex {
   display: flex;
 }
+
+.validForm{
+  color: red;
+}

@@ -42,7 +42,7 @@
             <h3>Titre:</h3>
             
               <input type="text" id="titre" v-model.trim="offre.title">
-              <p v-if="erreurs.value && erreurs.value.title">Veuillez remplir ce champ</p>
+              <p class="validForm" v-if="erreurs.title">Veuillez remplir ce champ</p>
             
             <h3>Entreprise:</h3>
             <label for="type">Veuillez effectuer un choix</label>
@@ -52,9 +52,8 @@
                 <option v-for="enterprise in entreprises" :key="enterprise._id" :value="enterprise.name">
                 {{ enterprise.name }}
                 </option>
-                <p v-if="erreurs.value && erreurs.value.name">Veuillez effectuer un choix</p>
             </select>
-
+            <p class="validForm" v-if="erreurs.name">Veuillez effectuer un choix</p>
 
         </div>
 
