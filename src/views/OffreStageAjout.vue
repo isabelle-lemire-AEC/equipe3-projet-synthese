@@ -28,7 +28,9 @@
     <section class="entete">
         <h3>Ajouter une offre de stage</h3>
     </section>
-</form>
+
+    </form>
+
     <form @submit.prevent="soumettreFormulaire">
 
         <button type="submit" @click="annulerAjout">Annuler</button>
@@ -78,7 +80,6 @@
     </div>
   </template>
 
-<!-- //raph/Joe & caro  -->
 <script setup>
 
 import { ref, onMounted } from 'vue';
