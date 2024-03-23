@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-
-
-
 const getAllOffers = async () => {
   try {
     const response = await axios.get('https://api-3.fly.dev/internship-offers');

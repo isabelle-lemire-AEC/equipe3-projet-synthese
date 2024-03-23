@@ -3,27 +3,18 @@
 <template>
     <div class=" h-2/3 bg-neutral-500 felex flex-col w-96 ">
       <form class="flex flex-col" id="ajout-intern-sheep-offer" @submit.prevent="submitForm">
-        
-
-        <div class="my-4">
+                <div class="my-4">
           <!-- ton annuler nest pas définie raph -->
                 <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
                 <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Sauvegarder</button>
             </div>
-     
-
-        <input class="my-4" v-model="offerData.title" type="text" placeholder="Titre de l'offre" />
+             <input class="my-4" v-model="offerData.title" type="text" placeholder="Titre de l'offre" />
   
         <textarea v-model="offerData.description" placeholder="Description"></textarea>
-  
-       
-     
-      
-        <select class="my-4" v-model="offerData.province._id">
+          <select class="my-4" v-model="offerData.province._id">
           <option disabled value="">Sélectionnez une province</option>
           <option v-for="province in provinces" :key="province._id" :value="province._id">{{ province.value }}</option>
         </select>
-
 
         <select class="my-4" v-model="offerData.internshipType._id">
           <option disable value="">select Type temps plein ou partiel</option>
@@ -45,8 +36,6 @@
         <input v-model.number="offerData.salary" type="number" placeholder="Salaire" />
         </div>
       
-  
-     
         <input  class="my-4" v-model="offerData.requiredSkills" type="text" placeholder="Compétences requises" />
   
         <select  class="my-4" v-model="offerData.enterprise">
@@ -55,15 +44,6 @@
            {{ entreprise.name }} 
           </option>
         </select>
-
-
-
-
-
-
-
-
-  
         <button class="p-4 bg-red-400 rounded-lg mx-4" type='submit'>Ajouter offre</button>
       </form>
     </div>
@@ -72,15 +52,12 @@
 <script setup>
 
 import { ref, onMounted } from 'vue';
-
 import { useEntreprise } from '../composables/entreprises/entreprise';
 import { fetchProvinces } from '@/composables/api';
 import { fetchStageTypes } from '@/composables/api';
 
-
 // type RAPH***
 import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
-// import { useProvinces } from '../composables/types_stage/types_stage';
 
 const { ajouterOffre } = useInternshipOffers();
 const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError, loading: entrepriseLoading} = useEntreprise();
@@ -139,7 +116,7 @@ const offerData = ref({
   weeklyWorkHours: 0,
   salary: 0,
   province: { _id: "" },
-  //attention ici verifier si je peux mettrep^lus d'un string dans le tableau de skills
+  //attention ici verifier si je peux mettre plus d'un string dans le tableau de skills
   requiredSkills: [],
   internshipType: { _id: "" },
   paid: "DISCRETIONARY",
@@ -149,41 +126,9 @@ const offerData = ref({
 const submitForm = async () => {
   console.log(offerData.value)
   await ajouterOffre(offerData.value);
- 
-  console.log("Offre ajoutée avec succès");
+   console.log("Offre ajoutée avec succès");
 
 };
 </script>
 
 <style></style>
-
-
-<!-- <template>
-    <div>
-      <h1>Liste des entreprises</h1>
-      <div v-if="loading">Chargement...</div>
-      <div v-else-if="error">Erreur : {{ error.message }}</div>
-      <ul v-else>
-        <li v-for="entreprise in entreprises" :key="entreprise._id">
-          {{ entreprise.name }}
-        </li>
-      </ul>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue';
-  import { useEntreprise } from '../composables/entreprises/entreprise';
-  
-  const { getAllEntreprises, response, error, loading } = useEntreprise();
-  const entreprises = ref([]);
-  
-  onMounted(async () => {
-    await getAllEntreprises();
-    if (response.value) {
-      entreprises.value = response.value;
- 
-    }
-  });
-
-  </script> -->

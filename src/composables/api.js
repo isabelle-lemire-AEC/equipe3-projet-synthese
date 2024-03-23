@@ -22,6 +22,26 @@ export async function fetchStageTypes() {
     }
 }
 
+export async function fetchInternshipOffers() {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/internship-offers`);
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des internship-offers :", error);
+        throw error;
+    }
+}
+
+export async function getAllEntreprises() {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/enterprises`);
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des enterprises :", error);
+        throw error;
+    }
+}
+
 
 // function pour tester si fetchStageTypes marche bien 
 // async function displayStageTypes() {
