@@ -1,4 +1,53 @@
 <template>
+    <div>
+      <h3>Offres de stage disponibles</h3>
+      <div v-if="loading">Chargement...</div>
+      <div v-if="error">Erreur lors du chargement des offres</div>
+      <div v-else>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Titre</th>
+              <th scope="col">Entreprise</th>
+        
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="offer in offers" :key="offer._id">
+              <td>{{ offer.title }}</td>
+              <td>{{ offer.enterprise.name }}</td>
+  
+            </tr>
+            <tr v-for="offer in offers" :key="offer._id">
+      <td>
+        <router-link :to="`/offre-de-stage-details/${offer._id}`">{{ offer.title }}</router-link>
+      </td>
+      <td>{{ offer.title }}</td>
+    </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </template>
+  <!-- raph caro -->
+  <script setup>
+  import { ref, onMounted } from 'vue';
+  import { useInternshipOffers } from '../composables/offres_stage/offreDeStage'; 
+   import { useRouter } from 'vue-router';
+  
+  const { getAllOffers, response, error, loading } = useInternshipOffers();
+  const offers = ref([]);
+  
+  onMounted(async () => {
+    await getAllOffers();
+    offers.value = response.value; 
+  });
+  
+  
+  </script>
+  
+  
+  <!-- <template>
     
     <h1>Offres de stage</h1>
 
@@ -17,7 +66,7 @@
                 
                 <th scope="col">Date de publication</th>
                 
-                <th scope="col"></th>
+                <th scope="col">t</th>
             </tr>
         </thead>
    
@@ -28,7 +77,7 @@
                     <th scope="row">
                         <div class="poste">
                             
-                            <!--icone-->
+                            icone
                             <h4>{{ offer.title }}</h4>
                             <p>{{ offer.enterprise.name}}</p>
                         </div>
@@ -38,7 +87,7 @@
                     <td>{{ offer.enterprise.activitySector }}</td>
                     <td>{{ offer.enterprise.city }}</td>
                     <td>2023-03-03</td>
-                    <td><!--icone--></td>
+                    <td></td>
                 </div>
             </tr>
         </tbody>
@@ -116,4 +165,4 @@ hr.separation{
 }
 
 
-</style>
+</style> -->

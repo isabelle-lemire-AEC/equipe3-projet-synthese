@@ -1,20 +1,17 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
-export default function useInternshipOffers() {
- 
+export function useInternshipOffers() {
+  const response = ref([]);
   const error = ref(null);
   const loading = ref(false);
-  const response = ref([]); 
-  
 
-  // Ajouter une offre de stage
   const ajouterOffre = async (offerData) => {
     loading.value = true;
     try {
-      // Assurez-vous que l'URL est correcte ici, sans le fragment de Swagger "#/default/InternshipOffers"
+    
       response.value = await axios.post('https://api-3.fly.dev/internship-offers', offerData);
-      console.log("post offer marche pas", response.value.data);
+      console.log("post offer marche", response.value.data);
     } catch (err) {
       error.value = err;
       console.log("post offer marche pas", err);
@@ -23,27 +20,11 @@ export default function useInternshipOffers() {
     }
   };
 
-
-  // PAS TESTÉ ICI ENCORE
-  // Obtenir toutes les offres de stage
-  /*const getAllOffers = async () => {
-    loading.value = true;
-    try {
-      response.value = await axios.get('https://api-3.fly.dev/internship-offers');
-      console.log("get offer ca marche", response.value.data);
-    } catch (err) {
-      error.value = err;
-      console.log("get offer ca marche pas", err);
-    } finally {
-      loading.value = false;
-    }
-  };*/
-
   const getAllOffers = async () => {
     loading.value = true;
     try {
       const res = await axios.get('https://api-3.fly.dev/internship-offers');
-      response.value = res.data; // Mettre a jour icitte
+      response.value = res.data; 
       console.log("get offer ça marche", res.data);
     } catch (err) {
       error.value = err;
@@ -52,27 +33,34 @@ export default function useInternshipOffers() {
       loading.value = false;
     }
   };
-     // PAS TESTÉ ICI ENCORE
-  // Mettre à jour une offre de stage
+
   const edditerOffre = async (id, offerData) => {
     loading.value = true;
     try {
-      response.value = await axios.patch(`https://api-3.fly.dev/internship-offers/${id}`, offerData);
-      console.log("Edition work", response.value.data);
+        const url = `https://api-3.fly.dev/internship-offers/${id}`; 
+        response.value = await axios.patch(url, offerData);
+        console.log("Edition réussie", response.value.data);
     } catch (err) {
-      error.value = err;
-      console.log("Edition work pas!", err);
+        error.value = err;
+        console.error("Échec de l'édition", err);
     } finally {
-      loading.value = false;
+        loading.value = false;
     }
-  };
+};
+  
+const getInternshipOfferById = async (id) => {
+  try {
+    const res = await axios.get(`https://api-3.fly.dev/internship-offers/${id}`);
+    console.log("Success: Obtained internship offer by ID", res.data);
+    response.value = [res.data];
+  } catch (err) {
+    console.error("Error: Failed to obtain internship offer by ID", err);
+    error.value = err;
+  }
+};
 
-
-
-
-  return {ajouterOffre, getAllOffers,  edditerOffre, response, error, loading };
+  return {ajouterOffre, getAllOffers, getInternshipOfferById, edditerOffre, response, error, loading };
 }
-
 
 // Ex d'importation les amis   IMPORT
 // A reverifier***

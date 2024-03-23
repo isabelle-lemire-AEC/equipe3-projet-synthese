@@ -1,4 +1,38 @@
+
 <template>
+    <div v-if="loading">Chargement...</div>
+    <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>
+    <div v-else-if="offerDetails && offerDetails.title">
+      <h1>{{ offerDetails.title }}</h1>
+      <h2>Entreprise: {{ offerDetails.enterprise?.name }}</h2>
+      <p>Description: {{ offerDetails.description }}</p>
+
+    </div>
+    <div v-else>Aucune information disponible</div>
+  </template>
+  
+  <!-- //raph & caro -->
+  <script setup>
+  import { ref, onMounted } from 'vue';
+  import { useRoute } from 'vue-router';
+  import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
+  
+  const route = useRoute();
+  const { getInternshipOfferById, response, loading, error } = useInternshipOffers();
+  const offerDetails = ref({});
+  
+  onMounted(async () => {
+  await getInternshipOfferById(route.params.id);
+ 
+  if (response.value && response.value.length > 0) {
+    offerDetails.value = response.value[0]; 
+  }
+});
+  </script>
+
+
+
+<!-- <template>
     <section class="entete">
         <h3>Offre de stage</h3>
         <h1>Intégrateur Web junior api titre</h1>
@@ -56,4 +90,7 @@
 
 <style>
 
-</style>
+</style> -->
+
+  
+  
