@@ -11,4 +11,33 @@ export async function fetchProvinces() {
         throw error;
     }
 }
-
+//raph
+export async function fetchStageTypes() {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/internship-types`);
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des type de stage :", error);
+        throw error;
+    }
+}
+//raph
+export async function fetchInternshipOffers() {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/internship-offers`);
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des internship-offers :", error);
+        throw error;
+    }
+}
+//raph
+export async function getAllEntreprises() {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/enterprises`);
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des enterprises :", error);
+        throw error;
+    }
+}
