@@ -188,6 +188,6 @@ h1 {
     flex-direction: column;
 }
 
-.groupeBtns {
-}
+/*.groupeBtns {
+}*/
 </style>
