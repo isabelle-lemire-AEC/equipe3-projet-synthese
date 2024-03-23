@@ -15,8 +15,7 @@
           <tbody>
             <tr v-for="offer in offers" :key="offer._id">
               <td>{{ offer.title }}</td>
-              <td>{{ offer.enterprise.name }}</td>
-  
+    
             </tr>
             <tr v-for="offer in offers" :key="offer._id">
       <td>
