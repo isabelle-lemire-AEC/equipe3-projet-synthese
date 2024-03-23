@@ -80,6 +80,8 @@ export function useCandidat() {
     }
   };
 
+
+
     // Fonction pour chercher un candidat par ID - RAPH
   //const getCandidatById = async (id) => {
     //loading.value = true;

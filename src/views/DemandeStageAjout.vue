@@ -1,6 +1,6 @@
 <template
 	><section v-if="demande">
-		<h1>Ajouter une demande</h1>
+		<h1>Ajouter une demande de stage</h1>
 
 		<form id="ajout-demande-stage" @submit.prevent="soumettreFormulaire">
 			<div>

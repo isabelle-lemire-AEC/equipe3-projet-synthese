@@ -24,35 +24,41 @@
         </button>
       </div>
   
-      <div class="user">
-        user
-        <!-- Contenu à ajouter plus tard -->
+      <div class="utilisateur flex">
+        <div class="utilisateur-detail">
+          <p class="utilisateur-nom">Jonh Doe</p>
+          <p class="utilisateur-courriel">Courriel</p>
+        </div>
+        <div class="utilisateur-img">
+          <img src="../assets/user.png" alt="">
+        </div>
       </div>
     </nav>
   </template>
   
-  <script>
+<script setup>
+  import { useRouter } from 'vue-router';
 
-  export default {
-    name: 'NavBar',
-    methods: {
-      ajouterOffre() {
-        this.$router.push({ name: 'OffreStageAjout' });
-      },
-      ajouterDemande() {
-        this.$router.push({ name: 'DemandeStageAjout' });
-      },
-      ajouterEntreprise() {
-        this.$router.push({ name: 'EntrepriseAjout' });
-      },
-      ajouterCandidat() {
-        this.$router.push({ name: 'CandidatAjout' });
-      }
-    }
-  }
-  </script>
+  const router = useRouter();
+
+  const ajouterOffre = () => {
+    router.push({ name: 'OffreStageAjout' });
+  };
+
+  const ajouterDemande = () => {
+    router.push({ name: 'DemandeStageAjout' });
+  };
+
+  const ajouterEntreprise = () => {
+    router.push({ name: 'EntrepriseAjout' });
+  };
+
+  const ajouterCandidat = () => {
+    router.push({ name: 'CandidatAjout' });
+  };
+</script>
   
-  <style scoped>
+<style scoped>
   .navbar {
     display: grid;
     grid-template-columns: 20% 60% 20%; /* Répartition en trois colonnes */
@@ -112,6 +118,33 @@
   
   .add-button:hover {
     opacity: 0.8;
+  }
+
+  .utilisateur {
+    margin-left: 20px;
+  }
+
+  .utilisateur-detail p {
+    text-align: right;
+    margin: 0;
+    padding-right: 5px;
+  }
+
+  .utilisateur-nom {
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .utilisateur-courriel {
+    font-size: 12px;
+  }
+
+  img.utilisateur-img {
+    width: 20%;
+  }
+
+  .flex {
+    align-items: center;
   }
   </style>
   
