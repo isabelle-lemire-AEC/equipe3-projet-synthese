@@ -1,6 +1,6 @@
 <template>
     <section class="entete">
-        <h3>Offre de stage</h3>
+        <h3>Ajouter une offre de stage</h3>
     </section>
 
     <form @submit.prevent="soumettreFormulaire">
