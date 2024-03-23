@@ -28,7 +28,7 @@
     <section class="entete">
         <h3>Ajouter une offre de stage</h3>
     </section>
-
+</form>
     <form @submit.prevent="soumettreFormulaire">
 
         <button type="submit" @click="annulerAjout">Annuler</button>
