@@ -16,7 +16,7 @@
 					type="text"
 					id="ajout-demande-titre"
 					name="ajout-demande-titre"
-					v-model="demande.title" />
+					v-model.trim="demande.title" />
 				<p v-if="errors.title" class="error-message">
 					Veuillez fournir le titre du stage.
 				</p>
