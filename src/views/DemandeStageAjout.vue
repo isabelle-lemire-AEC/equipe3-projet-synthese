@@ -40,6 +40,7 @@
 							:value="candidate">
 							{{ candidate.firstName }} {{ candidate.lastName }}
 						</option></select>
+						<p v-if="erreurs.firstName" class="validForm"></p>
 
 					<!-- Autres options de l'API -->
 					<!-- <p v-if="errors.fullName" class="error-message">
