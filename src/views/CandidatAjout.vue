@@ -14,20 +14,20 @@
                 <div class="flex">
                     <label for="firstName">Prénom :</label>
                     <input type="text" id="firstName" v-model.trim="candidat.firstName">
-                    <p v-if="erreurs.firstName">Veuillez remplir ce champ</p>
+                    <p class="validForm" v-if="erreurs.firstName">Veuillez remplir ce champ</p>
                     
                 </div>
                 <div class="flex">
                     <label for="lastName">Nom :</label>
                     <input type="text" id="lastName" v-model.trim="candidat.lastName">
-                    <p v-if="erreurs.lastName">Veuillez remplir ce champ</p>
+                    <p class="validForm" v-if="erreurs.lastName">Veuillez remplir ce champ</p>
                   
                 </div>
             </div>
             <div class="flex">
                 <label for="poste">Poste :</label>
                 <input type="text" id="poste" v-model.trim="candidat.poste">
-                <p v-if="erreurs.poste">Veuillez remplir ce champ</p>
+                <p class="validForm" v-if="erreurs.poste">Veuillez remplir ce champ</p>
                 
             </div>
 
@@ -36,7 +36,7 @@
                     <h2>Courte présentation</h2>
                     <label for="description"></label>
                     <textarea name="description" id="description" cols="30" rows="10" v-model.trim="candidat.description" ></textarea>
-                    <p v-if="erreurs.description">Veuillez remplir ce champ</p>
+                    <p class="validForm" v-if="erreurs.description">Veuillez remplir ce champ</p>
                  
                 </div>
                 
@@ -46,24 +46,24 @@
                         <div class="col-gauche padding-right-15 border-left">
                             <label for="address">Adresse</label>
                             <input type="text" id="address" v-model.trim="candidat.address">
-                            <p v-if="erreurs.address">Veuillez remplir ce champ</p>
+                            <p class="validForm" v-if="erreurs.address">Veuillez remplir ce champ</p>
                         </div>
                         <div class="col-droite border-left">
                             <label for="phone">Téléphone</label>
                             <input type="text" id="phone" v-model.trim="candidat.phone">
-                            <p v-if="erreurs.phone">Veuillez remplir ce champ</p>
+                            <p class="validForm" v-if="erreurs.phone">Veuillez remplir ce champ</p>
                         </div>
                     </div>
                     <div class="flex">
                         <div class="col-gauche padding-right-15 border-left">
                             <label for="city">Ville</label>
                             <input type="text" id="city" v-model.trim="candidat.city">
-                            <p v-if="erreurs.city">Veuillez remplir ce champ</p>
+                            <p class="validForm" v-if="erreurs.city">Veuillez remplir ce champ</p>
                         </div>
                         <div class="col-droite border-left">
                             <label for="email">Courriel</label>
                             <input type="email" id="email" v-model.trim="candidat.email">
-                            <p v-if="erreurs.email">Veuillez remplir ce champ</p>
+                            <p class="validForm" v-if="erreurs.email">Veuillez remplir ce champ</p>
                         </div>
                     </div>
                     <div class="border-left">
@@ -75,12 +75,12 @@
                                 :value="province">{{ province.value }}
                             </option>
                         </select>
-                        <p v-if="erreurs.province">Veuillez effectuer un choix</p>
+                        <p class="validForm" v-if="erreurs.province">Veuillez effectuer un choix</p>
                     </div>
                     <div class="border-left">
                         <label for="postalCode">Code postal</label>
                         <input type="text" id="postalCode" v-model.trim="candidat.postalCode">
-                        <p v-if="erreurs.postalCode">Veuillez remplir ce champ</p>
+                        <p class="validForm" v-if="erreurs.postalCode">Veuillez remplir ce champ</p>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@
         erreurs.value.phone = candidat.value.phone === '';
         erreurs.value.city = candidat.value.city === '';
         erreurs.value.email = candidat.value.email === '';
-        erreurs.value.province = candidat.value.province === '';
+        erreurs.value.province = candidat.value.province.value === '';
         erreurs.value.postalCode = candidat.value.postalCode === '';
 
        // console.log('Erreurs après validation :', erreurs.value);
