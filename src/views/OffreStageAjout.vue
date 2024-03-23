@@ -25,6 +25,36 @@
         <input class="my-4" v-model="offerData.startDate" type="date" placeholder="Date de début" />
         <input v-model="offerData.endDate" type="date" placeholder="Date de fin" />
       </div>
+    <section class="entete">
+        <h3>Ajouter une offre de stage</h3>
+    </section>
+
+    <form @submit.prevent="soumettreFormulaire">
+
+        <button type="submit" @click="annulerAjout">Annuler</button>
+        
+        <button type="submit">Sauvegarder</button>
+        
+
+        <div class="groupe-titre-entreprise">
+            <h3>Titre:</h3>
+            
+              <input type="text" id="titre" v-model.trim="offre.title">
+              <p v-if="erreurs.value && erreurs.value.title">Veuillez remplir ce champ</p>
+            
+            <h3>Entreprise:</h3>
+            <label for="type">Veuillez effectuer un choix</label>
+           
+            <select name="entreprise" id="entreprise" v-model="offre.enterprise.name">
+                <option value="" disabled selected>Choisir une entreprise</option>
+                <option v-for="enterprise in entreprises" :key="enterprise._id" :value="enterprise.name">
+                {{ enterprise.name }}
+                </option>
+                <p v-if="erreurs.value && erreurs.value.name">Veuillez effectuer un choix</p>
+            </select>
+
+
+        </div>
 
       <div class="my-4 text-red-400 flex flex-col">
         <label for="weeklyWorkHours">Heures de travail par semaine :</label>
