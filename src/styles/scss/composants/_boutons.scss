@@ -1,0 +1,27 @@
+@use '../general/variables';
+@use '../general/mixins';
+
+.bouton {
+    color: variables.$white;
+    font-weight: 700;
+    @include mixins.padding(variables.$spacing-small, variables.$spacing-small);
+    @include mixins.border(0, none, 5px);
+
+    &--transparent {
+        background: transparent;
+        color: variables.$gray;
+        @include mixins.border(1px, variables.$gray, null);
+    }
+
+    &--mauve {
+        background: variables.$purple;
+    }
+}
+
+.boutons {
+    @include mixins.flex(row, center, center, variables.$spacing-small);
+}
+
+.icone-libelle {
+    @include mixins.flex(row, null, center, variables.$spacing-xsmall);
+}

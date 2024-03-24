@@ -1,15 +1,11 @@
-<!-- NavBar.vue - Nacer  -->
+<!-- NavBar.vue - Nacer / prog isa pour identification  -->
 <template>
-    <nav class="navbar">
-      <!-- Logo -->
-      <div class="logo">
-        <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
-      </div>
-  
-      <!-- Boutons d'ajout -->
-  
-      <div class="add-buttons">
-        <i class="fa-solid fa-bars"></i>
+
+  <!-- Boutons d'ajout -->
+  <div class="header-items">
+    <div class="nav-items">
+      <i class="fa-solid fa-bars"></i>
+      <div class="boutons-ajout">
         <button class="add-button add-offer" @click="ajouterOffre">
           <i class="fas fa-plus"></i> Ajouter une offre de satge
         </button>
@@ -23,67 +19,80 @@
           <i class="fas fa-plus"></i> Ajouter un candidat
         </button>
       </div>
-  
-      <div class="utilisateur flex">
-        <div class="utilisateur-detail">
-          <p class="utilisateur-nom">Jonh Doe</p>
-          <p class="utilisateur-courriel">Courriel</p>
-        </div>
-        <div class="utilisateur-img">
-          <img src="../assets/user.png" alt="">
-        </div>
+    </div>
+
+    <div class="utilisateur">
+      <div class="utilisateur__details">
+        <p class="utilisateur__nom">{{ nomPrenom }}</p>
+        <p class="utilisateu__courriel">{{ courriel }}</p>
       </div>
-    </nav>
-  </template>
-  
+      <div class="utilisateur__img">
+        <img src="../assets/user.png" alt="Utilisateur">
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup>
   import { useRouter } from 'vue-router';
+
+  // pour utilisateur
+  import { utilisateurStore } from '@/stores/utilisateur';
+  const { nomPrenom, courriel } = utilisateurStore;
+
 
   const router = useRouter();
 
   const ajouterOffre = () => {
-    router.push({ name: 'OffreStageAjout' });
+    router.push({
+      name: 'OffreStageAjout'
+    });
   };
 
   const ajouterDemande = () => {
-    router.push({ name: 'DemandeStageAjout' });
+    router.push({
+      name: 'DemandeStageAjout'
+    });
   };
 
   const ajouterEntreprise = () => {
-    router.push({ name: 'EntrepriseAjout' });
+    router.push({
+      name: 'EntrepriseAjout'
+    });
   };
 
   const ajouterCandidat = () => {
-    router.push({ name: 'CandidatAjout' });
+    router.push({
+      name: 'CandidatAjout'
+    });
   };
 </script>
-  
+
 <style scoped>
   .navbar {
     display: grid;
-    grid-template-columns: 20% 60% 20%; /* Répartition en trois colonnes */
-    align-items: center; /* Alignement vertical au centre */
+    grid-template-columns: 20% 60% 20%;
+    /* Répartition en trois colonnes */
+    align-items: center;
+    /* Alignement vertical au centre */
     /* Fond cyan */
     padding: 20px;
   }
-  
+
   .logo,
   .add-buttons,
   .user {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Centrage du contenu */
+    justify-content: space-between;
+    /* Centrage du contenu */
   }
 
-  .logo {
-    width: 150px;
-    height: auto;
-  }
-  
   .add-buttons {
-    gap: 10px; /* Espacement entre les boutons */
+    gap: 10px;
+    /* Espacement entre les boutons */
   }
-  
+
   .add-button {
     padding: 10px 20px;
     border-radius: 5px;
@@ -93,29 +102,32 @@
     align-items: center;
     background: none;
   }
-  
+
   /* Couleurs différentes pour chaque bouton */
   .add-offer {
     border: 1px solid #bc1f26;
     color: #bc1f26;
   }
+
   .add-request {
     border: 1px solid #d6a853;
     color: #d6a853;
   }
+
   .add-company {
     border: 1px solid #89a9e6;
-    color:#89a9e6 ;
+    color: #89a9e6;
   }
+
   .add-candidate {
     border: 1px solid #7e2687;
-    color:#7e2687 ; 
+    color: #7e2687;
   }
-  
+
   .add-button i {
     margin-right: 5px;
   }
-  
+
   .add-button:hover {
     opacity: 0.8;
   }
@@ -146,5 +158,4 @@
   .flex {
     align-items: center;
   }
-  </style>
-  
+</style>

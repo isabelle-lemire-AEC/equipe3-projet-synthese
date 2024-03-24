@@ -1,40 +1,49 @@
 <!-- Candidats.vue - Donaria  -->
 <template>
-  <div class="container">
-    <div class="candidatsList">
-      <h1>Candidats</h1>
-      <button class="post-candidat" @click="goToCandidatAjout">Ajouter un candidat</button>
-      <div class="grid" v-if="candidates.length">
-        <CandidatCard v-for="candidate in candidates" :key="candidate._id" :candidate="candidate"></CandidatCard>
-      </div>
+  <div class="candidats">
+    <h1>Candidats</h1>
+    <button class="bouton bouton--mauve" @click="goToCandidatAjout">Ajouter un candidat</button>
+    <div class="candidats__liste" v-if="candidates.length">
+      <CandidatCard v-for="candidate in candidates" :key="candidate._id" :candidate="candidate"></CandidatCard>
     </div>
   </div>
 </template>
 
 <script setup>
   import CandidatCard from '@/components/CandidatCard.vue';
-  import { useCandidat } from '@/composables/candidats/candidat';
-  import { ref, onMounted } from 'vue';
-  import { useRouter } from 'vue-router';
+  import {
+    useCandidat
+  } from '@/composables/candidats/candidat';
+  import {
+    ref,
+    onMounted
+  } from 'vue';
+  import {
+    useRouter
+  } from 'vue-router';
 
 
   const candidates = ref([]);
-  
+
   // Importation de la fonction getAllCandidats depuis le fichier candidat.js
-  const { getAllCandidats } = useCandidat();
-  
+  const {
+    getAllCandidats
+  } = useCandidat();
+
   const router = useRouter();
 
   // Fonction pour naviguer vers la page d'ajout de candidat
   const goToCandidatAjout = () => {
-    router.push({ name: 'CandidatAjout' });
+    router.push({
+      name: 'CandidatAjout'
+    });
   };
 
   // Fonction pour récupérer tous les candidats
   onMounted(async () => {
     try {
       const response = await getAllCandidats();
-      candidates.value = response.data; 
+      candidates.value = response.data;
     } catch (error) {
       console.error("Error:", error.response ? error.response.data : error.message);
     }
@@ -42,7 +51,7 @@
 </script>
 
 <style scoped>
-  .container {
+  /* .container {
     max-width: 100%;
     height: 900px;
     
@@ -77,5 +86,5 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
-  }
+  } */
 </style>

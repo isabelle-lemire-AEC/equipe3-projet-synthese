@@ -1,4 +1,4 @@
-
+<!-- Offre de stage AJOUT - RAPH et Caro -->
 
 <template>
     <section class="entete">
@@ -105,191 +105,158 @@
         <!--<button class="p-4 bg-red-400 rounded-lg mx-4" type='submit'>Ajouter offre</button>-->
       </form>
     </div>
-  </template>
+</template>
 
 <!-- //raph/Joe & caro  -->
 <script setup>
 
-import { ref, onMounted } from 'vue';
-import { useEntreprise } from '../composables/offres_stage/stageEntreprise';
-import { fetchProvinces } from '@/composables/api';
-import { fetchStageTypes } from '@/composables/api';
-import { useRouter } from 'vue-router';
+    import { ref, onMounted } from 'vue';
+    import { useEntreprise } from '../composables/offres_stage/stageEntreprise';
+    import { fetchProvinces } from '@/composables/api';
+    import { fetchStageTypes } from '@/composables/api';
+    import { useRouter } from 'vue-router';
 
-// type RAPH***
-import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
+    // type RAPH***
+    import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
 
-const router = useRouter();
-const { ajouterOffre } = useInternshipOffers();
-const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError, loading: entrepriseLoading} = useEntreprise();
+    const router = useRouter();
+    const { ajouterOffre } = useInternshipOffers();
+    const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError, loading: entrepriseLoading} = useEntreprise();
 
-const entreprises = ref([]);
-const provinces = ref([]);
-const internshipTypes = ref([]);
+    const entreprises = ref([]);
+    const provinces = ref([]);
+    const internshipTypes = ref([]);
 
-// type RAPH***
+    // type RAPH***
 
-onMounted(async () => {
-  ////////////////////////
-  const entreprisesData = await getAllEntreprises();
-   entreprises.value = entreprisesData.data;
-  if (entreprisesResponse.value && Array.isArray(entreprisesResponse.value)){
-    entreprises.value = entreprisesResponse.value;
-    console.log("Entreprises chargées:", entreprises.value); 
-  } else {
-    console.error("La réponse n'est pas un tableau:", entreprisesResponse.value);
-  }
+    onMounted(async () => {
+    ////////////////////////
+    const entreprisesData = await getAllEntreprises();
+    entreprises.value = entreprisesData.data;
+    if (entreprisesResponse.value && Array.isArray(entreprisesResponse.value)){
+        entreprises.value = entreprisesResponse.value;
+        console.log("Entreprises chargées:", entreprises.value); 
+    } else {
+        console.error("La réponse n'est pas un tableau:", entreprisesResponse.value);
+    }
 
-  if (entreprisesError.value) {
-    console.error("Erreur lors du chargement des entreprises:", entreprisesError.value);
-  }
-  ////////////////////////
+    if (entreprisesError.value) {
+        console.error("Erreur lors du chargement des entreprises:", entreprisesError.value);
+    }
+    ////////////////////////
 
-  ///////////////////////////
-  try {
-    const typesData = await fetchStageTypes();
-    internshipTypes.value = typesData;
-    console.log("Provinces chargées:", internshipTypes.value); 
-  } catch (error) {
-    console.error("Erreur lors du chargement des type", error);
-  }
-  /////////////////////////////
-  
-//////////////////////////////////////
-  try {
-    const provincesData = await fetchProvinces();
-    provinces.value = provincesData;
-    console.log("Provinces chargées:", provinces.value); 
-  } catch (error) {
-    console.error("Erreur lors du chargement des provinces", error);
-  }
-///////////////////////////////////////////////
-  
-});
-
-const offerData = ref({
-  title: '',
-  description: '',
-  //est ce que l'entreprise à été transformeé en id ?
-  enterprise: { _id: '' }, 
-  startDate: '',
-  endDate: '',
-  weeklyWorkHours: 0,
-  salary: 0,
-  province: {  _id: '', value: '' },
-  //attention ici verifier si je peux mettre plus d'un string dans le tableau de skills
-  requiredSkills: [],
-  internshipType: { _id: '', value: '' },
-  paid: "DISCRETIONARY",
-  isActive: true
-});
-
-// validation formulaire
-
-const erreurs = ref({
-        title: false,
-        name: false,
-        description: false,
-        activitySector: false,
-        startDate: false,
-        endDate: false,
-        requiredSkills: false,
-        internshipType: false,
-        weeklyWorkHours: false,
-        salary: false,
+    ///////////////////////////
+    try {
+        const typesData = await fetchStageTypes();
+        internshipTypes.value = typesData;
+        console.log("Provinces chargées:", internshipTypes.value); 
+    } catch (error) {
+        console.error("Erreur lors du chargement des type", error);
+    }
+    /////////////////////////////
+    
+    //////////////////////////////////////
+    try {
+        const provincesData = await fetchProvinces();
+        provinces.value = provincesData;
+        console.log("Provinces chargées:", provinces.value); 
+    } catch (error) {
+        console.error("Erreur lors du chargement des provinces", error);
+    }
+    ///////////////////////////////////////////////
+    
     });
 
-   
-/*const validerFormulaire = () => {
-  
-    erreurs.value.title= offerData.value.title === '',
-    erreurs.value.name= offerData.value.enterprise === '',
-    erreurs.value.description= offerData.value.description === '',
-    erreurs.value.activitySector= offerData.value.enterprise.activitySector.value === '',
-    erreurs.value.startDate= offerData.value.startDate === '',
-    erreurs.value.endDate= offerData.value.endDate ==='',
-    erreurs.value.requiredSkills= offerData.value.requiredSkills === '',
-    erreurs.value.internshipType= offerData.value.internshipType.value === '',
-    erreurs.value.weeklyWorkHours= offerData.value.weeklyWorkHours === 0
-    erreurs.value.salary= offerData.value.salary === 0
+    const offerData = ref({
+    title: '',
+    description: '',
+    //est ce que l'entreprise à été transformeé en id ?
+    enterprise: { _id: '' }, 
+    startDate: '',
+    endDate: '',
+    weeklyWorkHours: 0,
+    salary: 0,
+    province: {  _id: '', value: '' },
+    //attention ici verifier si je peux mettre plus d'un string dans le tableau de skills
+    requiredSkills: [],
+    internshipType: { _id: '', value: '' },
+    paid: "DISCRETIONARY",
+    isActive: true
+    });
+
+    // validation formulaire
+
+    const erreurs = ref({
+            title: false,
+            name: false,
+            description: false,
+            activitySector: false,
+            startDate: false,
+            endDate: false,
+            requiredSkills: false,
+            internshipType: false,
+            weeklyWorkHours: false,
+            salary: false,
+        });
+
+    const validerFormulaire = () => {
+        erreurs.value.title = !offerData.value.title || offerData.value.title === '';
+        erreurs.value.name = !offerData.value.enterprise || !offerData.value.enterprise._id || offerData.value.enterprise._id === '';
+        erreurs.value.description = !offerData.value.description || offerData.value.description === '';
+        erreurs.value.activitySector = !offerData.value.enterprise || !offerData.value.enterprise.activitySector || !offerData.value.enterprise.activitySector.value || offerData.value.enterprise.activitySector.value === '';
+        erreurs.value.startDate = !offerData.value.startDate || offerData.value.startDate === '';
+        erreurs.value.endDate = !offerData.value.endDate || offerData.value.endDate === '';
+        erreurs.value.requiredSkills = !offerData.value.requiredSkills || offerData.value.requiredSkills === '';
+        erreurs.value.internshipType = !offerData.value.internshipType || !offerData.value.internshipType._id || offerData.value.internshipType._id === '';
+        erreurs.value.weeklyWorkHours = !offerData.value.weeklyWorkHours || offerData.value.weeklyWorkHours === 0;
+        erreurs.value.salary = !offerData.value.salary || offerData.value.salary === 0;
+
+        console.log("Valeurs du formulaire :", offerData.value);
+        console.log("Erreurs détectées :", erreurs.value);
+
+        // Vérifie s'il y a des erreurs dans le formulaire
+        return Object.values(erreurs.value).some(err => err);
+    };
+
+    const formulaireValide = ref(false);
+
+    const submitForm = async () => {
+        try{
+            formulaireValide.value = validerFormulaire();
+            if (!formulaireValide.value) {
+                await ajouterStage();
+                //console.log(offerData.value)
+                console.log("Offre ajoutée avec succès");
+            } else {
+                throw new Error("Veuillez remplir tous les champs obligatoires."); 
+            }
+        } catch (error) {
+                console.error("Erreur lors de la soumission du formulaire :", error);
+                }
+    };
+
+
+    const ajouterStage = async () => {
+        try {
+                if (validerFormulaire()) {
+                    throw new Error("Veuillez remplir tous les champs obligatoires.");
+                }
+                console.log("Tentative d'ajout de l'offre :", offerData.value);
+                await ajouterOffre(offerData.value);
+                console.log("Nouvelle offre ajoutée");
+                router.push({ name: 'OffresStages' });
+            } catch (error) {
+                console.error("Erreur lors de l'ajout de l'offre de stage :", error);
+            }
 
     
-  
-    console.log("Erreurs :", erreurs.value);
-  // Vérifie s'il y a des erreurs dans le formulaire
-  return Object.values(erreurs.value).some(err => err);
-};*/
+    };
 
-const validerFormulaire = () => {
-    erreurs.value.title = !offerData.value.title || offerData.value.title === '';
-    erreurs.value.name = !offerData.value.enterprise || !offerData.value.enterprise._id || offerData.value.enterprise._id === '';
-    erreurs.value.description = !offerData.value.description || offerData.value.description === '';
-    erreurs.value.activitySector = !offerData.value.enterprise || !offerData.value.enterprise.activitySector || !offerData.value.enterprise.activitySector.value || offerData.value.enterprise.activitySector.value === '';
-    erreurs.value.startDate = !offerData.value.startDate || offerData.value.startDate === '';
-    erreurs.value.endDate = !offerData.value.endDate || offerData.value.endDate === '';
-    erreurs.value.requiredSkills = !offerData.value.requiredSkills || offerData.value.requiredSkills === '';
-    erreurs.value.internshipType = !offerData.value.internshipType || !offerData.value.internshipType._id || offerData.value.internshipType._id === '';
-    erreurs.value.weeklyWorkHours = !offerData.value.weeklyWorkHours || offerData.value.weeklyWorkHours === 0;
-    erreurs.value.salary = !offerData.value.salary || offerData.value.salary === 0;
-
-    console.log("Valeurs du formulaire :", offerData.value);
-    console.log("Erreurs détectées :", erreurs.value);
-
-    // Vérifie s'il y a des erreurs dans le formulaire
-    return Object.values(erreurs.value).some(err => err);
-};
-
-
-
-const formulaireValide = ref(false);
-
-const submitForm = async () => {
-    try{
-        formulaireValide.value = validerFormulaire();
-        if (!formulaireValide.value) {
-            await ajouterStage();
-            //console.log(offerData.value)
-            console.log("Offre ajoutée avec succès");
-        } else {
-            throw new Error("Veuillez remplir tous les champs obligatoires."); 
-          }
-    } catch (error) {
-            console.error("Erreur lors de la soumission du formulaire :", error);
-            }
-};
-
-
-const ajouterStage = async () => {
-    try {
-            if (validerFormulaire()) {
-                throw new Error("Veuillez remplir tous les champs obligatoires.");
-            }
-            console.log("Tentative d'ajout de l'offre :", offerData.value);
-            await ajouterOffre(offerData.value);
-            console.log("Nouvelle offre ajoutée");
+    const annulerAjout = () => {
+            console.log("Annuler l'ajout de l'offre");
             router.push({ name: 'OffresStages' });
-        } catch (error) {
-            console.error("Erreur lors de l'ajout de l'offre de stage :", error);
-        }
-
- 
-};
-
-
-
-const annulerAjout = () => {
-        console.log("Annuler l'ajout de l'offre");
-        router.push({ name: 'OffresStages' });
-}
- 
-  
-   
-
-
-
-
-
-
+    }
+    
 
 </script>
 

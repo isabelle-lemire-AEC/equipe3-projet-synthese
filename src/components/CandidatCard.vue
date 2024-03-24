@@ -1,12 +1,16 @@
 <!-- CandidatCard.vue - Donaria -->
 <template>
-  <div class="candidat-card" @click="redirectToDetails">
-    <img src="../assets/icons8-account-96.png" alt="Candidate Icon">
-    <div class="text-content">
-      <h3>{{ candidate.firstName }} {{ candidate.lastName }}</h3>
-      <p class="fonction">UX Designer</p>
-      <p>{{ candidate.email }}</p>
-      <p>{{ candidate.phone }}</p>
+  <div class="carte-candidat" @click="redirectToDetails">
+    <img class="carte-candidat__img " src="../assets/icons8-account-96.png" alt="Candidate Icon">
+    <div class="carte-candidat__texte">
+      <div>
+        <h2>{{ candidate.firstName }} {{ candidate.lastName }}</h2>
+        <p>UX Designer</p>
+      </div>
+      <div>
+        <p>{{ candidate.email }}</p>
+        <p>{{ candidate.phone }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -21,7 +25,12 @@
     },
     methods: {
       redirectToDetails() {
-        this.$router.push({ name: 'CandidatDetails', params: { id: this.candidate._id } });
+        this.$router.push({
+          name: 'CandidatDetails',
+          params: {
+            id: this.candidate._id
+          }
+        });
       }
     }
   }
@@ -30,7 +39,7 @@
 
 
 <style scoped>
-  .candidat-card {
+  /* .candidat-card {
   display: flex;
   background-color: #fff;
   padding: 10px; 
@@ -61,5 +70,5 @@
 
   .fonction{
     padding-bottom: 15px; 
-  }
+  } */
 </style>
