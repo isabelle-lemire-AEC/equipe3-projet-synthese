@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-//import Accueil from '../views/Accueil.vue';
+import Accueil from '../views/Accueil.vue';
 import TableauDeBord from '../views/TableauDeBord.vue';
 
 import OffresStages from '../views/OffresStages.vue';
@@ -29,8 +29,8 @@ import Erreur from '../views/Erreur.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    //{ path: '/', name: 'accueil', component: Accueil },
-    { path: '/', name: 'TableauDeBord', component: TableauDeBord },
+    { path: '/', name: 'accueil', component: Accueil },
+    //{ path: '/', name: 'TableauDeBord', component: TableauDeBord },
     { path: '/tableau-de-bord', name: 'TableauDeBord', component: TableauDeBord },
 
     { path: '/offres-de-stages', name: 'OffresStages', component: OffresStages },
