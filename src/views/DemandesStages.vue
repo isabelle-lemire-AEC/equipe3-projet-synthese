@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import ElementListeStage from '../components/elementListeStage.vue'
+import ElementListeStage from '../components/ElementListeStage.vue'
 import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js'
 import { useCandidat } from '../composables/candidats/candidat.js'
 import { useProvinces } from '../composables/provinces/provinces.js'
@@ -79,7 +79,17 @@ const demandeDeStageAAjouter = {
     value: ""
   },
   additionalInformation: "J'aime le Ping-Pong",
-  isActive: true
+  isActive: true,
+
+
+    program: "Design graphique",
+    activitySector: "Nouvelles technologies",
+    etablissement: "Collège de Maisonneuve",
+    remuneration: [
+    "Rémunéré",
+    "Non-rémunéré",
+    "À la discrétion de l'entreprise",
+    ]
 }
 
 const testAPI = async () => {
