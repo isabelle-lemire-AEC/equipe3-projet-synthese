@@ -1,0 +1,198 @@
+/* https://utopia.fyi/clamp/calculator?a=320,1920,20%E2%80%94120|30%E2%80%9480*/
+.bouton {
+  color: #FFFFFF;
+  font-weight: 700;
+  padding-block: 1rem;
+  padding-inline: 1rem;
+  border-width: 0;
+  border-style: solid;
+  border-color: none;
+  border-radius: 5px;
+}
+.bouton--transparent {
+  background: transparent;
+  color: #707070;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #707070;
+}
+.bouton--mauve {
+  background: #7F2987;
+}
+
+.boutons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icone-libelle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.carte-candidat {
+  background-color: #FFFFFF;
+  padding-block: 2rem;
+  padding-inline: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+.carte-candidat__img {
+  background-color: #7F2987;
+  padding-block: 1rem;
+  padding-inline: 1rem;
+}
+.carte-candidat__texte {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.carte-candidat__texte h2 {
+  font-size: clamp(1.728rem, 1.683rem + 0.2251vi, 1.9531rem);
+}
+.carte-candidat__texte p {
+  color: #707070;
+  font-family: "Lato";
+}
+
+.formulaire__input-hors-encadre {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.formulaire__encadre {
+  width: 100%;
+  background-color: #FFFFFF;
+  border-width: 0;
+  border-style: solid;
+  border-radius: 10px;
+  padding-block: 3rem;
+  padding-inline: 3rem;
+}
+.formulaire__label-input-horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-items,
+.boutons-ajout {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.utilisateur {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  max-width: 150px;
+}
+
+.navbar__menu {
+  list-style: none;
+  padding-left: 0;
+}
+.navbar__menu-item a {
+  text-decoration: none;
+}
+
+.formulaire-ajout-candidat h1 {
+  color: #707070;
+  border-left: 8px solid #7F2987;
+  padding-left: 1rem;
+}
+
+#ajout-candidat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+.candidats h1 {
+  color: #707070;
+  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+}
+.candidats .bouton--mauve {
+  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+}
+.candidats__liste {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.container {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding-block: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+  padding-inline: clamp(1.25rem, 0rem + 6.25vi, 7.5rem);
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+.no-margin, p,
+label, .headings, h1, h2, h3 {
+  margin-block: 0;
+}
+
+body {
+  margin: 0;
+  background-color: #EEEEEE;
+}
+
+.headings, h1, h2, h3 {
+  font-family: "Lato";
+  font-weight: 700;
+}
+
+p,
+label {
+  font-family: "Roboto";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: clamp(2.4883rem, 2.3756rem + 0.5634vi, 3.0518rem);
+}
+
+h2 {
+  font-size: clamp(2.0736rem, 2rem + 0.3678vi, 2.4414rem);
+}
+
+h3 {
+  font-size: clamp(1.728rem, 1.683rem + 0.2251vi, 1.9531rem);
+}/*# sourceMappingURL=styles.css.map */

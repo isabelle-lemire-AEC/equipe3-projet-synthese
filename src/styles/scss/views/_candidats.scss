@@ -1,0 +1,20 @@
+@use '../general/variables';
+@use '../general/mixins';
+
+.candidats {
+    h1 {
+        color: variables.$gray;
+        margin-bottom: variables.$spacing-xlarge;
+    }
+
+    .bouton {
+        &--mauve {
+            margin-bottom: variables.$spacing-xlarge;
+        }
+    }
+
+    &__liste {
+        @include mixins.grid(3, variables.$spacing-large);
+    }
+
+}
