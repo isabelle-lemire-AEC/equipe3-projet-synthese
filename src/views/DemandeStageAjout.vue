@@ -16,8 +16,8 @@
 					type="text"
 					id="ajout-demande-titre"
 					name="ajout-demande-titre"
-					v-model="demande.title" />
-				<p v-if="errors.title" class="error-message">
+					v-model.trim="demande.title" />
+				<p v-if="erreurs.title" class="validForm">
 					Veuillez fournir le titre du stage.
 				</p>
 			</div>
@@ -40,6 +40,7 @@
 							:value="candidate">
 							{{ candidate.firstName }} {{ candidate.lastName }}
 						</option></select>
+						<p v-if="erreurs.firstName" class="validForm"></p>
 
 					<!-- Autres options de l'API -->
 					<!-- <p v-if="errors.fullName" class="error-message">
@@ -53,7 +54,7 @@
 						id="ajout-demande-presentation"
 						name="ajout-demande-presentation"
 						v-model.trim="demande.description"></textarea>
-					<p v-if="errors.description" class="error-message">
+					<p v-if="erreurs.description" class="validForm">
 						Veuillez fournir une présentation.
 					</p>
 				</div>
@@ -114,7 +115,7 @@
 								type="text"
 								id="ajout-demande-ville"
 								name="ajout-demande-ville"/>
-							<p v-if="errors.city" class="error-message">
+							<p v-if="erreurs.city" class="validForm">
 								Veuillez fournir une ville.
 							</p>
 						</div>
@@ -136,6 +137,9 @@
 								{{ province.value }}
 							</option>
 						</select>
+						<p v-if="erreurs.province" class="validForm">
+								Veuillez effectuer un choix.
+							</p>
 					</div>
 
 					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -144,7 +148,7 @@
 							id="ajout-demande-competences"
 							name="ajout-demande-competences"
 							v-model="demande.candidate.skills"></textarea>
-						<p v-if="errors.skills" class="error-message">
+						<p v-if="erreurs.skills" class="validForm">
 							Veuillez fournir des compétences.
 						</p>
 					</div>
@@ -166,6 +170,9 @@
 									:value="internshipType">
 									{{ internshipType.value }}
 								</option></select>
+								<p v-if="erreurs.internshipType" class="validForm">
+							Veuillez effectuer un choix.
+						</p>
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -177,6 +184,9 @@
 								id="ajout-demande-heures"
 								name="ajout-demande-heures"
 								v-model.trim="demande.weeklyWorkHours" />
+								<p v-if="erreurs.weeklyWorkHours" class="validForm">
+								Veuillez effectuer un choix.
+							</p>
 						</div>
 					</div>
 
@@ -189,7 +199,7 @@
 								id="ajout-demande-date-debut"
 								name="ajout-demande-date-debut"
 								v-model.trim="demande.startDate" />
-							<p v-if="errors.startDate" class="error-message">
+							<p v-if="erreurs.startDate" class="validForm">
 								Veuillez fournir une date de début.
 							</p>
 						</div>
@@ -201,7 +211,7 @@
 								id="ajout-demande-date-fin"
 								name="ajout-demande-date-fin"
 								v-model.trim="demande.endDate" />
-							<p v-if="errors.startDate" class="error-message">
+							<p v-if="erreurs.startDate" class="validForm">
 								Veuillez fournir une date de fin.
 							</p>
 						</div>
@@ -267,7 +277,7 @@
 	const internshipTypes = ref([]);
 	const remunerationType = ref([]);
 
-	const demande = reactive({
+	const demande = ref({
 		title: "",
 		description: "",
 		candidate: {
@@ -311,6 +321,97 @@
 		],
 	});
 
+	// validation formulaire
+
+	const erreurs = ref({
+        title: false,
+        firstName: false,
+		lastName: false,
+        description: false,
+        city: false,
+		province: false,
+        startDate: false,
+        endDate: false,
+        skills: false,
+        internshipType: false,
+        weeklyWorkHours: false,
+        
+    });
+
+	const validerFormulaire = () => {
+  
+		erreurs.value.title= demande.value.title === '',
+		erreurs.value.firstName= demande.value.candidate.firstName === '',
+		erreurs.value.lastName= demande.value.candidate.lastName === '',
+		erreurs.value.description= demande.value.candidate.description === '',
+		erreurs.value.city= demande.value.candidate.city === '',
+		erreurs.value.province= demande.value.candidate.province.value === '',
+		erreurs.value.startDate= demande.value.startDate === '',
+		erreurs.value.endDate= demande.value.endDate ==='',
+		erreurs.value.skills= demande.value.skills === '',
+		erreurs.value.internshipType= demande.value.internshipType.value === '',
+		erreurs.value.weeklyWorkHours= demande.value.weeklyWorkHours === 0
+		
+
+		console.log("Erreurs :", erreurs.value);
+		// Vérifie s'il y a des erreurs dans le formulaire
+		return Object.values(erreurs.value).some(err => err);
+	};
+
+const formulaireValide = ref(false);
+
+const soumettreFormulaire = async () => {
+        try {
+            formulaireValide.value = validerFormulaire();
+            if (!formulaireValide.value) {
+                await ajouterDemande();
+            }else {
+            throw new Error("Veuillez remplir tous les champs obligatoires.");
+        }
+            console.log("Soumettre le formulaire"); 
+           
+        } catch (error) {
+            console.error("Erreur lors de la soumission du formulaire :", error);
+        }
+}
+
+
+/*const soumettreFormulaire = async (e) => {
+		try {
+			// Prevent default form submission
+			e.preventDefault();
+
+			// Validate the form
+			await validate(e);
+
+			// If form is valid, proceed with adding request
+			if (validForm.value) {
+				await ajouterDemande();
+			} else {
+				console.log(
+					"Form validation failed. Please fill in all required fields."
+				);
+			}
+		} catch (error) {
+			console.error("Erreur lors de la soumission du formulaire :", error);
+		}
+	};*/
+
+	const ajouterDemande = async () => {
+		try {
+			 if (validerFormulaire()) {
+				throw new Error("Veuillez remplir tous les champs obligatoires.");
+			} 
+			console.log("Tentative d'ajout du candidat :", demande);
+			await addRequest(demande);
+			console.log("Nouvelle demande ajoutée");
+			await getAllRequests();
+			/* router.push({name: "Candidats"}); */
+		} catch (error) {
+			console.error("Erreur lors de l'ajout de la demande :", error);
+		}
+	};
+
 	const initProvinces = async () => {
 		try {
 			const provincesData = await getAllProvinces();
@@ -345,41 +446,7 @@
 	initCandidats();
 	initProvinces();
 
-	const soumettreFormulaire = async (e) => {
-		try {
-			// Prevent default form submission
-			e.preventDefault();
-
-			// Validate the form
-			await validate(e);
-
-			// If form is valid, proceed with adding request
-			if (validForm.value) {
-				await ajouterDemande();
-			} else {
-				console.log(
-					"Form validation failed. Please fill in all required fields."
-				);
-			}
-		} catch (error) {
-			console.error("Erreur lors de la soumission du formulaire :", error);
-		}
-	};
-
-	const ajouterDemande = async () => {
-		try {
-			/* if (!validerFormulaire()) {
-						throw new Error("Veuillez remplir tous les champs obligatoires.");
-					} */
-			console.log("Tentative d'ajout du candidat :", demande);
-			await addRequest(demande);
-			console.log("Nouvelle demande ajoutée");
-			await getAllRequests();
-			/* router.push({name: "Candidats"}); */
-		} catch (error) {
-			console.error("Erreur lors de l'ajout de la demande :", error);
-		}
-	};
+	
 
 	/* const validerFormulaire = () => {
 				if (
@@ -429,7 +496,7 @@
 		additionalInformation: false,
 	});
 
-	const validForm = ref(false);
+	/*const validForm = ref(false);
 
 	const validate = async (e) => {
 		e.preventDefault();
@@ -562,7 +629,7 @@
 		} else {
 			validForm.value = false;
 		}
-	};
+	};*/
 
 	/* const validate = async (e) => {
 					e.preventDefault();
