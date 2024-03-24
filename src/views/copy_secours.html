@@ -207,12 +207,12 @@ const soumettreFormulaire = async () => {
                 await ajouterStage();
             }else {
             throw new Error("Veuillez remplir tous les champs obligatoires.");
-        }
+            }
             console.log("Soumettre le formulaire"); 
            
-        } catch (error) {
+            } catch (error) {
             console.error("Erreur lors de la soumission du formulaire :", error);
-        }
+            }
 }
 
 
@@ -252,6 +252,6 @@ const annulerAjout = () => {
 
 </script>
 
-<style>
+<style lang="sass">
 
 </style>
