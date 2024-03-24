@@ -1,3 +1,4 @@
+<!-- TableauDeBord.vue / débuter par Caro -->
 <template>
     <div class="container">
         <section class="infoRapide">

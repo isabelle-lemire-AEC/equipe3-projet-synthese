@@ -2,7 +2,7 @@
 <template>
   <div class="content">
     <h1>Entreprises</h1>
-    <router-link to="/entreprises/ajouter" class="button">Ajouter une entreprise</router-link>
+    <router-link to="/entreprise-ajout" class="button">Ajouter une entreprise</router-link>
 
     <div class="grid">
       <router-link v-for="entreprise in entreprises" :key="entreprise._id"
@@ -37,6 +37,7 @@
 
       // Chargement des entreprises au montage du composant
       onMounted(chargerEntreprises)
+                console.log('Le composant est monté, chargement des entreprises...')
 
       // Rechargement des entreprises lorsque le chemin de la route change
       watch(() => route.path, chargerEntreprises, { immediate: true })

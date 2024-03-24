@@ -96,26 +96,33 @@
   // Initialisation de l'entreprise 
   const entreprise = ref({
     name: '',
-    image: logoEntreprise, // Utilisez une image comme valeur par défaut
+    image: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8HwQACgAB/1TD9R8AAAAASUVORK5CYII=',
+    contactPerson: '',
     description: '',
     address: '',
     phone: '',
     city: '',
     email: '',
     province: { _id: '', value: '' },
-    postalCode: ''
+    postalCode: '',
+    activitySector: {_id: "65f27444cbefd230d7c90949",value: "securite pour entreprise"},
+    website: 'valeur par défaut'
   });
 
   // Fonction pour initialiser les provinces en faisant une requête à l'API
   const initProvinces = async () => {
     try {
+      console.log("Initialisation des provinces...");
       provinces.value = await fetchProvinces();
+      console.log("Provinces récupérées avec succès :", provinces.value);
     } catch (error) {
       console.error("Erreur lors de la récupération des provinces :", error);
     }
   }
 
+  console.log("Début de l'initialisation du formulaire d'ajout d'entreprise...");
   initProvinces();
+  console.log("Fin de l'initialisation du formulaire d'ajout d'entreprise.");
 
   const formulaireValide = ref(false);
 
@@ -154,6 +161,7 @@
       console.log('État du formulaire avant validation :', entreprise.value);
       console.log('État des erreurs avant validation :', erreurs.value);
       formulaireValide.value = validerFormulaire();
+      console.log('Formulaire valide :', !formulaireValide.value);
       if (!formulaireValide.value) {
         await ajouterEntreprise();
       } else {
@@ -167,12 +175,35 @@
   // Fonction pour ajouter une entreprise
   const ajouterEntreprise = async () => {
     try {
-      console.log("Tentative d'ajout de l'entreprise :", entreprise.value);
-      await ajouterEntrepriseAPI(entreprise.value);
-      console.log("Nouvelle entreprise ajoutée");
-      router.push({ name: 'Entreprises' });
+      // Validation des données
+      if (validerDonnees(entreprise.value)) {
+        console.log("Tentative d'ajout de l'entreprise :", entreprise.value);
+        await ajouterEntrepriseAPI(entreprise.value);
+        console.log("Nouvelle entreprise ajoutée avec succès :", entreprise.value);
+        router.push({ name: 'Entreprises' });
+      } else {
+        // Afficher un message d'erreur à l'utilisateur
+        console.error("Erreur : Données manquantes ou incorrectes.");
+      }
     } catch (error) {
       console.error("Erreur lors de l'ajout de l'entreprise :", error);
+    }
+  };
+
+  // Fonction pour valider les données de l'entreprise
+  const validerDonnees = (entreprise) => {
+    // Vérifier si les champs obligatoires sont présents et non vides
+    if (
+      entreprise.name.trim() !== '' &&
+      entreprise.address.trim() !== '' &&
+      entreprise.phone.trim() !== '' &&
+      entreprise.email.trim() !== '' &&
+      entreprise.province._id.trim() !== '' &&
+      entreprise.postalCode.trim() !== ''
+    ) {
+      return true; // Les données sont valides
+    } else {
+      return false; // Les données sont invalides
     }
   };
 </script>
