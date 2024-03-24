@@ -1,41 +1,49 @@
 <!-- CandidatAjout.vue - Isa  -->
 <template>
-    <div class="container">
+
+    <div class="formulaire-ajout-candidat">
         <h1>Ajouter un candidat</h1>
 
         <form id="ajout-candidat" @submit.prevent="soumettreFormulaire">
-            
-            <div>
-                <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
-                <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Sauvegarder</button>
+
+            <div class="boutons">
+                <button class="bouton bouton--transparent" type="submit" @click="annulerAjout">Annuler</button>
+                <button class="bouton bouton--mauve" type="submit">
+                    <div class="icone-libelle">
+                        <i class="fas fa-save"></i>
+                        <span>Sauvegarder</span>
+                    </div>
+                </button>
             </div>
 
-            <div class="flex">
-                <div class="flex">
+            <div class="formulaire__input-hors-encadre">
+                <div class="label-input-horizontal">
                     <label for="firstName">Prénom :</label>
                     <input type="text" id="firstName" v-model="candidat.firstName">
                     <p v-if="erreurs.firstName">Veuillez remplir ce champ</p>
                 </div>
-                <div class="flex">
+                <div class="formulaire__label-input-horizontal">
                     <label for="lastName">Nom :</label>
                     <input type="text" id="lastName" v-model="candidat.lastName" required>
                     <p v-if="erreurs.lastName">Veuillez remplir ce champ</p>
                 </div>
-            </div>
-            <div class="flex">
-                <label for="poste">Poste :</label>
-                <input type="text" id="poste" v-model="candidat.poste" required>
-                <p v-if="erreurs.poste">Veuillez remplir ce champ</p>
+
+                <div class="formulaire__label-input-horizontal">
+                    <label for="poste">Poste :</label>
+                    <input type="text" id="poste" v-model="candidat.poste" required>
+                    <p v-if="erreurs.poste">Veuillez remplir ce champ</p>
+                </div>
             </div>
 
-            <div class="section">
+            <div class="formulaire__encadre">
                 <div>
                     <h2>Courte présentation</h2>
                     <label for="description"></label>
-                    <textarea name="description" id="description" cols="30" rows="10" v-model="candidat.description" required></textarea>
+                    <textarea name="description" id="description" cols="30" rows="10" v-model="candidat.description"
+                              required></textarea>
                     <p v-if="erreurs.description">Veuillez remplir ce champ</p>
                 </div>
-                
+
                 <div>
                     <h3>Informations personnelles</h3>
                     <div class="flex">
@@ -66,9 +74,9 @@
                         <label for="province">Province</label>
                         <select id="province" v-model="candidat.province" required>
                             <option value="">Province</option>
-                            <option v-for="province in provinces" 
-                                :key="province._id" 
-                                :value="province">{{ province.value }}
+                            <option v-for="province in provinces"
+                                    :key="province._id"
+                                    :value="province">{{ province.value }}
                             </option>
                         </select>
                         <p v-if="erreurs.province">Veuillez effectuer un choix</p>
@@ -82,23 +90,36 @@
             </div>
             <p>{{ provinces[0].value }}abc</p>
 
+
+
             <div>
                 btn à mettre quand prog ok
             </div>
+
         </form>
     </div>
 </template>
 
 
 <script setup>
-    import { ref } from 'vue';
-    import { useRouter } from 'vue-router';
+    import {
+        ref
+    } from 'vue';
+    import {
+        useRouter
+    } from 'vue-router';
 
-    import { useCandidat } from '@/composables/candidats/candidat';
-    import { fetchProvinces } from '@/composables/api';
+    import {
+        useCandidat
+    } from '@/composables/candidats/candidat';
+    import {
+        fetchProvinces
+    } from '@/composables/api';
 
     const router = useRouter();
-    const { addCandidat } = useCandidat();
+    const {
+        addCandidat
+    } = useCandidat();
     const provinces = ref([]);
 
     const candidat = ref({
@@ -111,7 +132,10 @@
         phone: '',
         city: '',
         email: '',
-        province: { _id: '', value: '' },
+        province: {
+            _id: '',
+            value: ''
+        },
         postalCode: ''
     });
 
@@ -125,7 +149,9 @@
 
     const annulerAjout = () => {
         console.log("Annuler l'ajout du candidat");
-        router.push({ name: 'Candidats' });
+        router.push({
+            name: 'Candidats'
+        });
     }
 
     initProvinces();
@@ -146,7 +172,9 @@
             console.log("Tentative d'ajout du candidat :", candidat.value);
             await addCandidat(candidat.value);
             console.log("Nouveau candidat ajouté");
-            router.push({ name: 'Candidats' });
+            router.push({
+                name: 'Candidats'
+            });
         } catch (error) {
             console.error("Erreur lors de l'ajout du candidat :", error);
         }
@@ -169,27 +197,26 @@
     });
 
     const validerFormulaire = () => {
-       erreurs.value = {
-        firstName: candidat.value.firstName === '',
-        lastName: candidat.value.lastName === '',
-        email: candidat.value.email === '',
-        address: candidat.value.address === '',
-        phone: candidat.value.phone === '',
-        city: candidat.value.city === '',
-        province: candidat.value.province === '',
-        postalCode: candidat.value.postalCode === ''
-       
-       };
-       return Object.values(erreurs.value).some(err => err);
-    };
+        erreurs.value = {
+            firstName: candidat.value.firstName === '',
+            lastName: candidat.value.lastName === '',
+            email: candidat.value.email === '',
+            address: candidat.value.address === '',
+            phone: candidat.value.phone === '',
+            city: candidat.value.city === '',
+            province: candidat.value.province === '',
+            postalCode: candidat.value.postalCode === ''
 
+        };
+        return Object.values(erreurs.value).some(err => err);
+    };
 </script>
 
 
 
 
-<style scoped>
-    .container {
+<style lang="scss">
+    /* .container {
         padding:80px 200px 80px 200px;
         background-color: #ececee;
     }
@@ -254,6 +281,5 @@
 
     button {
         margin-right: 15px;
-    }
-
+    } */
 </style>

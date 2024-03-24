@@ -1,0 +1,22 @@
+@use '../general/variables';
+@use '../general/mixins';
+
+.formulaire {
+
+    &__input-hors-encadre {
+        width: 100%;
+        @include mixins.flex(column, null, null, variables.$spacing-small);
+    }
+
+    &__encadre {
+        width: 100%;
+        background-color: variables.$white;
+        @include mixins.border(0, null, 10px);
+        @include mixins.padding(variables.$spacing-large, variables.$spacing-large);
+    }
+
+    &__label-input-horizontal {
+        @include mixins.flex(row, null, center, variables.$spacing-small);
+    
+    }
+}

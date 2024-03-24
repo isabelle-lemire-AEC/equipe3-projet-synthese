@@ -1,0 +1,47 @@
+@use 'general/variables';
+@use 'general/mixins';
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.no-margin {
+    margin-block: 0;
+}
+
+body {
+    margin: 0;
+    background-color: variables.$light-gray;
+}
+
+.headings {
+    font-family: variables.$font-headings;
+    font-weight: 700;
+    @extend .no-margin;
+}
+
+p,
+label {
+    @include mixins.font(variables.$font-body, 1rem, 400);
+    @extend .no-margin;
+}
+
+h1 {
+    font-size: variables.$font-style-h1;
+}
+
+h2 {
+    font-size: variables.$font-style-h2;
+}
+
+h3 {
+    font-size: variables.$font-style-h3;
+}
+
+h1, h2, h3 {
+    @extend .headings;
+}

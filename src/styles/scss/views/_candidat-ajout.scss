@@ -1,0 +1,16 @@
+@use '../general/variables';
+@use '../general/mixins';
+
+.formulaire-ajout-candidat {
+    h1 {
+        color: variables.$gray;
+        border-left: 8px solid variables.$purple;
+        padding-left: variables.$spacing-small;
+    }
+
+    
+}
+
+#ajout-candidat {
+    @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
+}

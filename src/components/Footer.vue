@@ -10,7 +10,6 @@
     background-color: #000;
     padding: 10px;
     color: white;
-    position: fixed;
     bottom: 0;
     width: 100%;
   }

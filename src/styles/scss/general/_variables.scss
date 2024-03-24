@@ -1,0 +1,38 @@
+$white: #FFFFFF;
+$black: #111111;
+$charcoal: #5E5E5E;
+$gray: #707070;
+$light-gray: #EEEEEE;
+$magenta: #D51C53;
+$gold: #CB912B;
+$dark-gold: #986D22;
+$red: #BB2026;
+$dark-red: #821519;
+$purple: #7F2987;
+$dark-purple: #4A1150;
+$blue: #86A9E6;
+$dark-blue: #5E7EB5;
+$orange: #F9A35E;
+$turquoise : #0C9DA4;
+
+
+
+$font-body: 'Roboto';
+$font-headings: 'Lato';
+
+$font-style-h1: clamp(2.4883rem, 2.3756rem + 0.5634vi, 3.0518rem);
+$font-style-h2: clamp(2.0736rem, 2rem + 0.3678vi, 2.4414rem);
+$font-style-h3: clamp(1.728rem, 1.683rem + 0.2251vi, 1.9531rem);
+$font-style-h4: clamp(1.44rem, 1.4155rem + 0.1225vi, 1.5625rem);
+
+
+
+$spacing-xsmall: 0.5rem;
+$spacing-small: 1rem;
+$spacing-medium: 2rem;
+$spacing-large: 3rem;
+$spacing-xlarge: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+
+/* https://utopia.fyi/clamp/calculator?a=320,1920,20%E2%80%94120|30%E2%80%9480*/
+$spacing-block-section: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+$spacing-inline-section: clamp(1.25rem, 0rem + 6.25vi, 7.5rem);
