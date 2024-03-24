@@ -68,7 +68,22 @@ export function useInternshipRequests() {
     }
   };
 
-  return {addRequest, getAllRequests, getRequestById, editRequest, response, error, loading };
+  // Effacer une demande de stage
+  const deleteRequest = async (id) => {
+    loading.value = true;
+    try {
+      response.value = await axios.delete(`${API_BASE_URL}/internship-requests/${id}`);
+      console.log(`DELETE Demande de stage avec le id ${id} OK`, response.value.data);
+      return response.value;
+    } catch (err) {
+      error.value = err;
+      console.log(`DELETE Demande de stage avec le id ${id} ERREUR`, err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, response, error, loading };
 }
 
 
