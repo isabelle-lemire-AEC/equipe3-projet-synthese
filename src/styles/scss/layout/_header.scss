@@ -1,0 +1,17 @@
+@use '../general/variables';
+@use '../general/mixins';
+
+
+.header-items {
+    @include mixins.flex(row, space-between, center, 1rem);
+
+}
+
+.nav-items,
+.boutons-ajout {
+    @include mixins.flex(row, flex-start, null, 1rem);
+}
+
+.utilisateur {
+    @include mixins.flex(row, flex-start, center, 1rem);
+}
