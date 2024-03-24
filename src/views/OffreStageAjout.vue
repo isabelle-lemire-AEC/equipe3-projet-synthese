@@ -200,7 +200,7 @@ const erreurs = ref({
     });
 
    
-const validerFormulaire = () => {
+/*const validerFormulaire = () => {
   
     erreurs.value.title= offerData.value.title === '',
     erreurs.value.name= offerData.value.enterprise === '',
@@ -212,11 +212,33 @@ const validerFormulaire = () => {
     erreurs.value.internshipType= offerData.value.internshipType.value === '',
     erreurs.value.weeklyWorkHours= offerData.value.weeklyWorkHours === 0
     erreurs.value.salary= offerData.value.salary === 0
+
+    
   
     console.log("Erreurs :", erreurs.value);
   // Vérifie s'il y a des erreurs dans le formulaire
   return Object.values(erreurs.value).some(err => err);
+};*/
+
+const validerFormulaire = () => {
+    erreurs.value.title = !offerData.value.title || offerData.value.title === '';
+    erreurs.value.name = !offerData.value.enterprise || !offerData.value.enterprise._id || offerData.value.enterprise._id === '';
+    erreurs.value.description = !offerData.value.description || offerData.value.description === '';
+    erreurs.value.activitySector = !offerData.value.enterprise || !offerData.value.enterprise.activitySector || !offerData.value.enterprise.activitySector.value || offerData.value.enterprise.activitySector.value === '';
+    erreurs.value.startDate = !offerData.value.startDate || offerData.value.startDate === '';
+    erreurs.value.endDate = !offerData.value.endDate || offerData.value.endDate === '';
+    erreurs.value.requiredSkills = !offerData.value.requiredSkills || offerData.value.requiredSkills === '';
+    erreurs.value.internshipType = !offerData.value.internshipType || !offerData.value.internshipType._id || offerData.value.internshipType._id === '';
+    erreurs.value.weeklyWorkHours = !offerData.value.weeklyWorkHours || offerData.value.weeklyWorkHours === 0;
+    erreurs.value.salary = !offerData.value.salary || offerData.value.salary === 0;
+
+    console.log("Valeurs du formulaire :", offerData.value);
+    console.log("Erreurs détectées :", erreurs.value);
+
+    // Vérifie s'il y a des erreurs dans le formulaire
+    return Object.values(erreurs.value).some(err => err);
 };
+
 
 
 const formulaireValide = ref(false);
@@ -242,7 +264,7 @@ const ajouterStage = async () => {
             if (validerFormulaire()) {
                 throw new Error("Veuillez remplir tous les champs obligatoires.");
             }
-            console.log("Tentative d'ajout de l'offre :", offre.value);
+            console.log("Tentative d'ajout de l'offre :", offerData.value);
             await ajouterOffre(offerData.value);
             console.log("Nouvelle offre ajoutée");
             router.push({ name: 'OffresStages' });
