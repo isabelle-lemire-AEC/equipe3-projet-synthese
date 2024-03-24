@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import ElementListeStage from '../components/ElementListeStage.vue'
+import ElementListeStage from '../components/elementListeStage.vue'
 import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js'
 import { useCandidat } from '../composables/candidats/candidat.js'
 import { useProvinces } from '../composables/provinces/provinces.js'
