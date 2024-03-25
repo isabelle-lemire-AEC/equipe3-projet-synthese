@@ -1,5 +1,7 @@
 
 <template>
+<!-- Raph ca marche mais j'ai une erreur dans la console mais ca delete pourtent  -->
+<button @click="supprimer">Supprimer l'offre</button>
     <div v-if="loading">Chargement...</div>
     <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>
     <div v-else-if="offerDetails && offerDetails.title">
@@ -14,8 +16,16 @@
   <!-- //raph & caro -->
   <script setup>
   import { ref, onMounted } from 'vue';
+  // const router = useRouter();
   import { useRoute } from 'vue-router';
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
+
+  const { supprimerOffre } = useInternshipOffers();
+
+  const supprimer = async () => {
+  await supprimerOffre(route.params.id);
+  router.push('/chemin-vers-la-liste-des-offres'); // Redirigez l'utilisateur après la suppression
+};
   
   const route = useRoute();
   const { getInternshipOfferById, response, loading, error } = useInternshipOffers();

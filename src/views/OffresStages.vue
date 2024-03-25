@@ -14,15 +14,15 @@
           </thead>
           <tbody>
             <tr v-for="offer in offers" :key="offer._id">
-              <td>{{ offer.title }}</td>
-              <td>{{ offer.enterprise.name }}</td>
+              <!-- <td>{{ offer.title }}</td> -->
+          
   
             </tr>
             <tr v-for="offer in offers" :key="offer._id">
       <td>
         <router-link :to="`/offre-de-stage-details/${offer._id}`">{{ offer.title }}</router-link>
       </td>
-      <td>{{ offer.title }}</td>
+    
     </tr>
           </tbody>
         </table>
