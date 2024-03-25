@@ -10,7 +10,6 @@
                 
           <!-- ton annuler nest pas définie raph -->
             <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
-
             <button class="ajout" type="submit"><i class="fas fa-save"></i>Sauvegarder</button>
             
             <div class="groupe-titre-entreprise">
