@@ -1,7 +1,47 @@
 @use '../general/variables';
 @use '../general/mixins';
 
-.formulaire {
+
+%font-headings {
+    font-family: variables.$font-headings;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: variables.$spacing-small;
+    border: 2px solid variables.$light-gray;
+    box-shadow: inset 0 0 10px 1px #eeeeee87;
+    @extend %font-headings;
+}
+
+label {
+    @include mixins.font(null, 1rem, variables.$bold);
+    @extend %font-headings;
+}
+
+
+.form-fiche {
+
+    &__wrapper-titre {
+        @include mixins.border-left(null);
+
+        h1 {
+            margin-bottom: variables.$spacing-small * 1.5;
+        }
+    }
+    
+    &__nom-section {
+        font-weight: variables.$bold;
+    }
+
+    &__sous-titre {
+        width: fit-content;
+        padding: variables.$spacing-xsmall;
+        background-color: variables.$white;
+        @include mixins.font(variables.$font-headings, variables.$font-style-h5, variables.$bold)
+    }
 
     &__input-hors-encadre {
         width: 100%;
@@ -11,12 +51,53 @@
     &__encadre {
         width: 100%;
         background-color: variables.$white;
+        @include mixins.flex(column, null, null, variables.$spacing-large);
         @include mixins.border(0, null, 10px);
-        @include mixins.padding(variables.$spacing-large, variables.$spacing-large);
+        @include mixins.padding(variables.$spacing-xlarge, variables.$spacing-large);
+    }
+
+    &__wrapper-titre-groupe-inputs {
+        @include mixins.flex(column, null, null, variables.$spacing-large);
+
+        h3 {
+            font-size: variables.$font-style-p;
+        }
+    }
+
+
+    &__colonnes-inputs {
+        @include mixins.grid(2, variables.$spacing-medium);
+    }
+
+    &__colonne-inputs {
+        @include mixins.flex(column, null, null, variables.$spacing-medium);
     }
 
     &__label-input-horizontal {
         @include mixins.flex(row, null, center, variables.$spacing-small);
-    
+
+        label {
+            flex-basis: 5%;
+        }
+    }
+
+    &__label-input-vertical {
+        @include mixins.flex(column, null, null, variables.$spacing-small);
+        @include mixins.border-left(variables.$charcoal);
+
+        h4 {
+            font-size: variables.$font-style-p;
+            @extend %font-headings;
+        }
+    }
+
+    &__label {
+        &--cache {
+            display: none;
+        }
+    }
+
+    &__wrapper-input-msg-erreur {
+        width: 100%;
     }
 }

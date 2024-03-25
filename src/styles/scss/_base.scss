@@ -9,6 +9,11 @@
     padding: 0px;
 }
 
+html,
+button {
+    font-size: 18px;
+}
+
 .no-margin {
     margin-block: 0;
 }
@@ -16,17 +21,17 @@
 body {
     margin: 0;
     background-color: variables.$light-gray;
+    color: variables.$gray;
 }
 
 .headings {
     font-family: variables.$font-headings;
-    font-weight: 700;
+    font-weight: variables.$bold;
     @extend .no-margin;
 }
 
-p,
-label {
-    @include mixins.font(variables.$font-body, 1rem, 400);
+p {
+    @include mixins.font(variables.$font-body, 1rem, variables.$regular);
     @extend .no-margin;
 }
 
@@ -42,6 +47,13 @@ h3 {
     font-size: variables.$font-style-h3;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     @extend .headings;
+}
+
+a,
+button {
+    cursor: pointer;
 }

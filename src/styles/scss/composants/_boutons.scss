@@ -3,18 +3,43 @@
 
 .bouton {
     color: variables.$white;
-    font-weight: 700;
+    font-weight: variables.$bold;
     @include mixins.padding(variables.$spacing-small, variables.$spacing-small);
     @include mixins.border(0, none, 5px);
 
     &--transparent {
-        background: transparent;
+        font-weight: variables.$regular;
+        background-color: variables.$light-gray;
         color: variables.$gray;
         @include mixins.border(1px, variables.$gray, null);
+
+        &:hover {
+            background-color: darken(variables.$light-gray, 5%);
+        }
     }
 
     &--mauve {
-        background: variables.$purple;
+        background-color: variables.$purple;
+
+        &:hover {
+            background-color: darken(variables.$purple, 5%);
+        }
+    }
+
+    &--rouge {
+        background-color: variables.$bouton-action-red;
+
+        &:hover {
+            background-color: darken(variables.$bouton-action-red, 5%);
+        }
+    }
+
+    &--vert {
+        background-color: variables.$bouton-action-green;
+
+        &:hover {
+            background-color: darken(variables.$bouton-action-green, 5%);
+        }
     }
 }
 
@@ -24,4 +49,41 @@
 
 .icone-libelle {
     @include mixins.flex(row, null, center, variables.$spacing-xsmall);
+}
+
+.boutons-action {
+
+    @include mixins.flex(null, null, center, variables.$spacing-small);
+
+    button {
+        border-width: 0;
+    }
+
+    i {
+        font-size: 1.3rem;
+    }
+
+    &__crochet {
+        color: variables.$bouton-action-green;
+
+        &:hover {
+            color: darken(variables.$bouton-action-green, 5%);
+        }
+    }
+
+    &__modifier {
+        color: variables.$bouton-action-blue;
+
+        &:hover {
+            color: darken(variables.$bouton-action-blue, 5%);
+        }
+    }
+
+    &__supprimer {
+        color: variables.$bouton-action-red;
+
+        &:hover {
+            color: darken(variables.$bouton-action-red, 5%);
+        }
+    }
 }

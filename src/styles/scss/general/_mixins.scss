@@ -19,6 +19,13 @@
     border-radius: $radius;
 }
 
+@mixin border-left($color) {
+    border-left-width: 8px;
+    border-left-style: solid;
+    border-left-color: $color;
+    padding-left: variables.$spacing-small;
+}
+
 @mixin flex($direction, $justify, $align, $gap) {
     display: flex;
     flex-direction: $direction;
