@@ -139,16 +139,6 @@ if (entreprisesResponse.value && Array.isArray(entreprisesResponse.value)){
 } else {
   console.error("La réponse n'est pas un tableau:", entreprisesResponse.value);
 }
-    onMounted(async () => {
-    ////////////////////////
-    const entreprisesData = await getAllEntreprises();
-    entreprises.value = entreprisesData.data;
-    if (entreprisesResponse.value && Array.isArray(entreprisesResponse.value)){
-        entreprises.value = entreprisesResponse.value;
-        console.log("Entreprises chargées:", entreprises.value); 
-    } else {
-        console.error("La réponse n'est pas un tableau:", entreprisesResponse.value);
-    }
 
 if (entreprisesError.value) {
   console.error("Erreur lors du chargement des entreprises:", entreprisesError.value);
@@ -178,28 +168,40 @@ try {
 });
 
 const offerData = ref({
-title: "",
-description: "",
-//est ce que l'entreprise à été transformeé en id ?
-enterprise: { _id: "" }, 
-startDate: "",
-endDate: "",
-weeklyWorkHours: 0,
-salary: 0,
-province: { _id: "" },
-//attention ici verifier si je peux mettre plus d'un string dans le tableau de skills
-requiredSkills: [],
-internshipType: { _id: "" },
-paid: "DISCRETIONARY",
-isActive: true
+  title: "",
+  description: "",
+  //est ce que l'entreprise à été transformeé en id ?
+  enterprise: { _id: "" }, 
+  startDate: "",
+  endDate: "",
+  weeklyWorkHours: 0,
+  salary: 0,
+  province: { _id: "" },
+  //attention ici verifier si je peux mettre plus d'un string dans le tableau de skills
+  requiredSkills: [],
+  internshipType: { _id: "" },
+  paid: "DISCRETIONARY",
+  isActive: true
 });
 
 const submitForm = async () => {
-console.log(offerData.value)
-await ajouterOffre(offerData.value);
- console.log("Offre ajoutée avec succès");
+  console.log(offerData.value)
+  await ajouterOffre(offerData.value);
+   console.log("Offre ajoutée avec succès");
 
 };
 </script>
 
 <style></style>
+
+
+<!-- // onMounted(async () => {
+//     ////////////////////////
+//     const entreprisesData = await getAllEntreprises();
+//     entreprises.value = entreprisesData.data;
+//     if (entreprisesResponse.value && Array.isArray(entreprisesResponse.value)){
+//         entreprises.value = entreprisesResponse.value;
+//         console.log("Entreprises chargées:", entreprises.value); 
+//     } else {
+//         console.error("La réponse n'est pas un tableau:", entreprisesResponse.value);
+//     } -->
