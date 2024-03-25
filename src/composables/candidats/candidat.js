@@ -10,12 +10,12 @@ export function useCandidat() {
   const error = ref(null);
   const loading = ref(false);
 
-
   // GET tous les candidats - JO
   const getAllCandidats = async () => {
     try {
         response.value = await axios.get(`${API_BASE_URL}/candidates`);
         // console.log("Appel réussi pour récupérer tous les candidats", response.value.data);
+        console.log("GET ALL Candidates - OK", response.value.data);
         return response.value;
     } catch (error) {
         console.error("Erreur lors de la récupération de tous les candidats :", error);

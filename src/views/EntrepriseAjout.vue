@@ -23,11 +23,10 @@
       <div class="section">
         <h2 class="section-title"><span>Courte présentation</span></h2>
         <textarea id="presentation" v-model="entreprise.description"></textarea>
-        <p v-if="erreurs.address" class="error">Ce champ est obligatoire</p>
+        <p v-if="erreurs.description" class="error">Ce champ est obligatoire</p>
         <h3>Personne contact</h3>
-        <!-- Champ de saisie vide pour la personne de contact -->
         <input id="contactPerson" type="text" v-model="entreprise.contactPerson" />
-        <p v-if="erreurs.address" class="error">Ce champ est obligatoire</p>
+        <p v-if="erreurs.contactPerson" class="error">Ce champ est obligatoire</p>
       </div>
 
       <div class="section">
@@ -41,17 +40,17 @@
           <div class="form-group">
             <label for="telephone">Téléphone</label>
             <input id="telephone" type="tel" v-model="entreprise.phone" />
-            <p v-if="erreurs.address" class="error">Ce champ est obligatoire</p>
+            <p v-if="erreurs.phone" class="error">Ce champ est obligatoire</p>
           </div>
           <div class="form-group">
             <label for="ville">Ville</label>
             <input id="ville" type="text" v-model="entreprise.city" />
-            <p v-if="erreurs.address" class="error">Ce champ est obligatoire</p>
+            <p v-if="erreurs.city" class="error">Ce champ est obligatoire</p>
           </div>
           <div class="form-group">
             <label for="courriel">Courriel</label>
             <input id="courriel" type="email" v-model="entreprise.email" />
-            <p v-if="erreurs.address" class="error">Ce champ est obligatoire</p>
+            <p v-if="erreurs.email" class="error">Ce champ est obligatoire</p>
           </div>
           <div class="form-group">
             <label for="province">Province</label>
@@ -65,7 +64,7 @@
           <div class="form-group">
             <label for="cp">Code postal</label>
             <input id="cp" type="text" v-model="entreprise.postalCode" />
-            <p v-if="erreurs.address" class="error">Ce champ est obligatoire</p>
+            <p v-if="erreurs.postalCode" class="error">Ce champ est obligatoire</p>
           </div>
         </div>
       </div>
@@ -77,13 +76,13 @@
   </div>
 </template>
 
+
 <script setup>
   // Ajout entreprise - Dona
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   import { useEntreprise } from '@/composables/entreprises/entreprise';
   import { fetchProvinces } from '@/composables/api';
-  import logoEntreprise from '@/assets/logo-ent.jpg';
 
   const router = useRouter();
 

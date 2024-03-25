@@ -20,6 +20,21 @@ export function useInternshipOffers() {
     }
   };
 
+  const supprimerOffre = async (id) => {
+    loading.value = true;
+    try {
+      await axios.delete(`https://api-3.fly.dev/internship-offers/${id}`);
+      console.log("Suppression réussie de l'offre");
+      // Vous pouvez ici mettre à jour votre état local ou effectuer une action supplémentaire après la suppression réussie.
+    } catch (err) {
+      error.value = err;
+      console.error("Échec de la suppression de l'offre", err);
+    } finally {
+      loading.value = false;
+    }
+  };
+  
+
   const getAllOffers = async () => {
     loading.value = true;
     try {
@@ -59,7 +74,7 @@ const getInternshipOfferById = async (id) => {
   }
 };
 
-  return {ajouterOffre, getAllOffers, getInternshipOfferById, edditerOffre, response, error, loading };
+  return {ajouterOffre, getAllOffers, getInternshipOfferById, edditerOffre, supprimerOffre, response, error, loading };
 }
 
 // Ex d'importation les amis   IMPORT

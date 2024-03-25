@@ -22,7 +22,7 @@
       <td>
         <router-link :to="`/offre-de-stage-details/${offer._id}`">{{ offer.title }}</router-link>
       </td>
-      <td>{{ offer.title }}</td>
+    
     </tr>
           </tbody>
         </table>

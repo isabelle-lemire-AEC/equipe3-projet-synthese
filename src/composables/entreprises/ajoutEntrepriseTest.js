@@ -6,7 +6,7 @@ import { ref } from 'vue';
 const entrepriseData = {
   "image": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8HwQACgAB/1TD9R8AAAAASUVORK5CYII=",
   "name": "Les réseaux du nord",
-  "address": "6767 des Colibries",
+  "address": "6666",
   "postalCode": "J5T 0B4",
   "city": "St-Zenon",
   "province": {
