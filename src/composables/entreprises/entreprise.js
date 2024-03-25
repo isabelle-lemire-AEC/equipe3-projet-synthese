@@ -8,7 +8,7 @@ export function useEntreprise() {
     const entreprise = ref({});
     const error = ref(null);
     const loading = ref(false);
-
+ 
     const chargerEntreprises = async () => {
         loading.value = true;
         try {
