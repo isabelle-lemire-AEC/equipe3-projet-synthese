@@ -1,4 +1,4 @@
-<!-- NavBar.vue - Nacer  -->
+<!-- NavBar.vue - Nacer / prog isa pour identification  -->
 <template>
 
   <!-- Boutons d'ajout -->
@@ -23,8 +23,8 @@
 
     <div class="utilisateur">
       <div class="utilisateur__details">
-        <p class="utilisateur__nom">John Doe</p>
-        <p class="utilisateu__courriel">Courriel</p>
+        <p class="utilisateur__nom">{{ nomPrenom }}</p>
+        <p class="utilisateu__courriel">{{ courriel }}</p>
       </div>
       <div class="utilisateur__img">
         <img src="../assets/user.png" alt="Utilisateur">
@@ -34,9 +34,12 @@
 </template>
 
 <script setup>
-  import {
-    useRouter
-  } from 'vue-router';
+  import { useRouter } from 'vue-router';
+
+  // pour utilisateur
+  import { utilisateurStore } from '@/stores/utilisateur';
+  const { nomPrenom, courriel } = utilisateurStore;
+
 
   const router = useRouter();
 

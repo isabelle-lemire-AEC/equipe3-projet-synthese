@@ -1,5 +1,6 @@
 <!-- EntrepriseMiseAjour -->
 <template>
+    
   <div class="ajouter-entreprise-container">
     <div class="entreprise-header-card">
         <div class="entreprise-header-card">
@@ -136,6 +137,10 @@
 
 
 <style scoped>
+
+.entete{
+  background-color: brown;
+}
   .ajouter-entreprise-container {
     width: 90%;
     margin: auto;

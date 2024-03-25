@@ -79,7 +79,17 @@ const demandeDeStageAAjouter = {
     value: ""
   },
   additionalInformation: "J'aime le Ping-Pong",
-  isActive: true
+  isActive: true,
+
+
+    program: "Design graphique",
+    activitySector: "Nouvelles technologies",
+    etablissement: "Collège de Maisonneuve",
+    remuneration: [
+    "Rémunéré",
+    "Non-rémunéré",
+    "À la discrétion de l'entreprise",
+    ]
 }
 
 const testAPI = async () => {

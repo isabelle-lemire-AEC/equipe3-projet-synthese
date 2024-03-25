@@ -1,4 +1,4 @@
-<!-- Accueil.vue -->
+<!-- Accueil.vue / prog ISA-->
 <template>
   <div class="app-container">
     <div class="logo-container">
@@ -9,35 +9,51 @@
       <div class="login-panel">
         <h1>Identification</h1>
         <p>Lorem ipsum magna aliqua ut enim ad minim veniam, quis <br> nostrud exercitation ullamco laboris nisi consequat</p>
+
+        <!-- Début du formulaire d'identification -->
         <form @submit.prevent="submitForm">
           <div class="form-group">
-          <input type="text" id="name" v-model="name" placeholder="Votre nom et prénom" required>
+          <input type="text" id="nomPrenom" v-model="nomPrenom" placeholder="Votre nom et prénom" required>
         </div>
         <div class="form-group">
-          <input type="email" id="email" v-model="email" placeholder="Votre courriel" required>
+          <input type="email" id="courriel" v-model="courriel" placeholder="Votre courriel" required>
         </div>
           <button type="submit">Accéder maintenant</button>
         </form>
+
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      name: '',
-      email: ''
-    }
-  },
-  methods: {
-    submitForm() {
-      // Logique pour le formulaire
-    }
-  }
-}
+<script setup>
+  import { useRouter } from 'vue-router';
+  import { utilisateurStore } from '@/stores/utilisateur';
+  import { ref } from 'vue';
+
+  const router = useRouter();
+  const nomPrenom = ref(''); // Initialiser nomPrenom en tant que ref avec une chaîne vide
+  const courriel = ref(''); // Initialiser courriel en tant que ref avec une chaîne vide
+
+  const submitForm = () => {
+    const nomPrenomValue = nomPrenom.value;
+    const courrielValue = courriel.value;
+
+    // Afficher les valeurs avant la mise à jour du store
+    console.log('Valeur actuelle de nomPrenom avant mise à jour:', nomPrenomValue);
+    console.log('Valeur actuelle de courriel avant mise à jour:', courrielValue);
+
+    // Mettre à jour les informations de l'utilisateur dans le store
+    utilisateurStore.updateInfo(nomPrenomValue, courrielValue);
+
+    // Afficher les valeurs après la mise à jour du store
+    console.log('Nouvelle valeur de nomPrenom mise à jour:', utilisateurStore.nomPrenom);
+    console.log('Nouvelle valeur de courriel mise à jour:', utilisateurStore.courriel);
+
+    router.push({ name: 'TableauDeBord' });
+  };
 </script>
+
 
 <style scoped>
 .app-container {
