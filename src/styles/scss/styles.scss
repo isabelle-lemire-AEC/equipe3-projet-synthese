@@ -6,12 +6,12 @@
 @use 'composants/carte-entreprises';
 @use 'composants/listes';
 @use 'composants/formulaires';
+@use 'composants/modal';
 
 @use 'layout/footer';
 @use 'layout/header';
 @use 'layout/sidebar';
 
-@use 'views/candidat-ajout';
 @use 'views/candidats';
 
 @use 'app';

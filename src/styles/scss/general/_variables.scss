@@ -15,16 +15,24 @@ $dark-blue: #5E7EB5;
 $orange: #F9A35E;
 $turquoise : #0C9DA4;
 
+$bouton-action-green: #06A14C;
+$bouton-action-blue: #2E456D;
+$bouton-action-red: #A20A07;
 
 
 $font-body: 'Roboto';
 $font-headings: 'Lato';
 
-$font-style-h1: clamp(2.4883rem, 2.3756rem + 0.5634vi, 3.0518rem);
-$font-style-h2: clamp(2.0736rem, 2rem + 0.3678vi, 2.4414rem);
-$font-style-h3: clamp(1.728rem, 1.683rem + 0.2251vi, 1.9531rem);
-$font-style-h4: clamp(1.44rem, 1.4155rem + 0.1225vi, 1.5625rem);
+/* https://utopia.fyi/type/calculator?c=320,16,1.125,1920,18,1.2,5,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12  */
+$font-style-p: 1rem;
+$font-style-h1: clamp(1.802rem, 1.6026rem + 0.9973vi, 2.7994rem);
+$font-style-h2: clamp(1.6018rem, 1.4556rem + 0.731vi, 2.3328rem);
+$font-style-h3: clamp(1.4238rem, 1.3198rem + 0.5202vi, 1.944rem);
+$font-style-h4: clamp(1.2656rem, 1.1948rem + 0.3544vi, 1.62rem);
+$font-style-h5: clamp(1.125rem, 1.08rem + 0.225vi, 1.35rem);
 
+$regular: 400;
+$bold: 700;
 
 
 $spacing-xsmall: 0.5rem;
