@@ -1,63 +1,80 @@
 <template>
-    <div class="">
+  <section class="entete">
+      <h3>Offre de stage</h3>
+      <h1>{{ offerData.title }}</h1>
+      <h2>{{ offerData.enterprise.name }}</h2>
+  </section>
 
-        <select v-model="offerSelection" @change="loadSelectedOffer">
+  <select v-model="offerSelection" @change="loadSelectedOffer">
+    <option disabled value="">Sélectionnez une offre</option>
+    <option v-for="offer in offers" :key="offer._id" :value="offer._id">{{ offer.title }}</option>
+  </select>
 
-            <option disabled value="">Sélectionnez une offre</option>
-            <option v-for="offer in offers" :key="offer._id" :value="offer._id">{{ offer.title }}</option>
-        </select>
-      <form class="" @submit.prevent="submitForm">
-
-        <div class="">
-          <!-- ton annuler nest pas définie raph -->
-                <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
-                <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Sauvegarder</button>
-            </div>
-     
-        <input class="" v-model="offerData.title" type="text" placeholder="Titre de l'offre" />
-  
-        <textarea v-model="offerData.description" placeholder="Description"></textarea>
-  
-        <select class="" v-model="offerData.province._id">
-          <option disabled value="">Sélectionnez une province</option>
-          <option v-for="province in provinces" :key="province._id" :value="province._id">{{ province.value }}</option>
-        </select>
-
-        <select class="" v-model="offerData.internshipType._id">
-          <option disable value="">select Type temps plein ou partiel</option>
-          <option v-for="internshipType in  internshipTypes" :key="internshipType._id" :value="internshipType._id">{{ internshipType.value }}</option>
-        </select>
-  
-       <div class="">
-        <input class="" v-model="offerData.startDate" type="date" placeholder="Date de début" />
-        <input v-model="offerData.endDate" type="date" placeholder="Date de fin" />
-      </div>
+  <form class="" @submit.prevent="submitForm">
 
       <div class="">
-        <label for="weeklyWorkHours">Heures de travail par semaine :</label>
-        <input v-model.number="offerData.weeklyWorkHours" type="number" placeholder="Heures de travail par semaine" />
+        <!-- ton annuler nest pas définie raph -->
+        <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
+        <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Sauvegarder</button>
       </div>
-       
-        <div class="">
-          <label class="" for="Salaire">Salair / demaine; </label>
-        <input v-model.number="offerData.salary" type="number" placeholder="Salaire" />
-        </div>
-      
-        <input  class="" v-model="offerData.requiredSkills" type="text" placeholder="Compétences requises" />
-  
-        <select  class="" v-model="offerData.enterprise">
-           <option disabled value="">Sélectionnez une entreprise</option>
-            <option v-for="entreprise in entreprises" :key="entreprise._id" :value="entreprise">
-           {{ entreprise.name }} 
-          </option>
-        </select>
 
-        <button class="" type="submit">Éditer l'offre</button>
-      <button class="" type="button" @click="annulerAjout">Annuler</button>
 
-      </form>
-    </div>
-  </template>
+      <div class="groupe-tache">
+          <label for="offreMiseAjour-description">Description de la tâche</label>
+          <textarea v-model.trim="offerData.description" id="offerData.description"></textarea>
+      </div>
+
+      <div class="groupe-programme">
+          <h3>Programme de formation</h3>
+          <input type="text" id="programme">
+      </div>
+
+      <div class="groupe-exigence">
+          <label for="offreMiseAjour-exigences">Exigences</label>
+          <textarea v-model="offerData.requiredSkills" id="offreMiseAjour-exigences"></textarea>
+      </div>
+
+      <div class="groupe-info-stage">
+          <h3>Informations sur le stage recherché</h3>
+
+          <div class="groupe-gauche">
+              <label for="offreMiseAjour-type">Type de stage</label>
+              <select v-model="offerData.internshipType._id" placeholder="Veuillez effectuer un choix" name="type" id="offreMiseAjour-type">
+                  <option v-for="internshipType in  internshipTypes" :key="internshipType._id" :value="internshipType._id">{{ internshipType.value }}></option>
+              </select>
+
+              <label for="offreMiseAjour-heure">Nombre d'heures par semaine</label>
+              <input v-model.number="offerData.weeklyWorkHours" type="number" placeholder="Veuillez effectuer un choix" />
+
+              <h3>Rénumération</h3>
+
+              <input type="checkbox" id="remuneration1" name="remuneration1" value="discuter">
+              <label for="remuneration1"> À discuter</label><br>
+              <input type="checkbox" id="remuneration2" name="remuneration2" value="remunere">
+              <label for="remuneration2"> Stage rémunéré</label><br>
+              <input type="checkbox" id="remuneration3" name="remuneration3" value="nonRemunere">
+              <label for="remuneration3"> Stage non rémunéré</label>
+          </div>
+
+          <div class="groupe-droite">
+              <label for="offreMiseAjour-dateDebut">Date de début</label>
+              <input v-model="offerData.startDate" type="date" id="offreMiseAjour-dateDebut" name="dateDebut">
+
+              <label for="offreMiseAjour-dateFin">Date de fin</label>
+              <input v-model="offerData.endDate" type="date" id="offreMiseAjour-dateFin" name="dateFin">
+          </div>
+      </div>
+
+      <section class="info-sup">
+          <h3>Informations suplémentaires</h3>
+          <textarea id="info-sup-form"></textarea>
+      </section>
+
+  </form> 
+
+</template>
+
+
 
 <!-- //raph & caro -->
 <script setup>
@@ -169,72 +186,69 @@ const submitForm = async () => {
 
 
 
+<!--<template>
+    <div class="">
+      
+      
 
-<!-- <template>
-    <section class="entete">
-        <h3>Offre de stage</h3>
-        <h1>Intégrateur Web junior api titre</h1>
-        <h2>api entreprise.name</h2>
-    </section>
+        <select v-model="offerSelection" @change="loadSelectedOffer">
 
-    <form>
+            <option disabled value="">Sélectionnez une offre</option>
+            <option v-for="offer in offers" :key="offer._id" :value="offer._id">{{ offer.title }}</option>
+        </select>
+      <form class="" @submit.prevent="submitForm">
+        
 
-        <button>Annuler</button>
-        <button>Mettre à jour</button>
-
-        <div class="groupe-tache">
-            <h1>Description de la tâche</h1>
-            <textarea id="description-tache"></textarea>
+        <div class="">
+           ton annuler nest pas définie raph 
+                <button class="annuler" type="submit" @click="annulerAjout">Annuler</button>
+                <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Sauvegarder</button>
         </div>
+     
+        <input class="" v-model="offerData.title" type="text" placeholder="Titre de l'offre" />
+  
+        <textarea v-model="offerData.description" placeholder="Description"></textarea>
+  
+        <select class="" v-model="offerData.province._id">
+          <option disabled value="">Sélectionnez une province</option>
+          <option v-for="province in provinces" :key="province._id" :value="province._id">{{ province.value }}</option>
+        </select>
 
-        <div class="groupe-programme">
-            <h3>Programme de formation</h3>
-            <input type="text" id="programme">
+        <select class="" v-model="offerData.internshipType._id">
+          <option disable value="">select Type temps plein ou partiel</option>
+          <option v-for="internshipType in  internshipTypes" :key="internshipType._id" :value="internshipType._id">{{ internshipType.value }}</option>
+        </select>
+  
+       <div class="">
+        <input class="" v-model="offerData.startDate" type="date" placeholder="Date de début" />
+        <input v-model="offerData.endDate" type="date" placeholder="Date de fin" />
+      </div>
+
+      <div class="">
+        <label for="weeklyWorkHours">Heures de travail par semaine :</label>
+        <input v-model.number="offerData.weeklyWorkHours" type="number" placeholder="Heures de travail par semaine" />
+      </div>
+       
+        <div class="">
+          <label class="" for="Salaire">Salair / demaine; </label>
+        <input v-model.number="offerData.salary" type="number" placeholder="Salaire" />
         </div>
+      
+        <input  class="" v-model="offerData.requiredSkills" type="text" placeholder="Compétences requises" />
+  
+        <select  class="" v-model="offerData.enterprise">
+           <option disabled value="">Sélectionnez une entreprise</option>
+            <option v-for="entreprise in entreprises" :key="entreprise._id" :value="entreprise">
+           {{ entreprise.name }} 
+          </option>
+        </select>
 
-        <div class="groupe-exigence">
-            <h3>Exigences</h3>
-            <textarea id="exigences"></textarea>
-        </div>
+        <button class="" type="submit">Éditer l'offre</button>
+      <button class="" type="button" @click="annulerAjout">Annuler</button>
 
-        <div class="groupe-info-stage">
-            <h3>Informations sur le stage recherché</h3>
+      </form>
+    </div>
+  </template>-->
 
-            <div class="groupe-gauche">
-                <h3>Type de stage</h3>
-                <label for="type">Veuillez effectuer un choix</label>
-                <select name="type" id="type">
-                    <option value=""></option>
-                </select>
 
-                <h3>Nombre d'heures par semaine</h3>
-                <label for="heure">Veuillez effectuer un choix</label>
-                <select name="heure" id="heure">
-                    <option value=""></option>
-                </select>
 
-                <h3>Rénumération</h3>
-
-                <input type="checkbox" id="remuneration1" name="remuneration1" value="discuter">
-                <label for="remuneration1"> À discuter</label><br>
-                <input type="checkbox" id="remuneration2" name="remuneration2" value="remunere">
-                <label for="remuneration2"> Stage rémunéré</label><br>
-                <input type="checkbox" id="remuneration3" name="remuneration3" value="nonRemunere">
-                <label for="remuneration3"> Stage non rémunéré</label>
-            </div>
-
-            <div class="groupe-droite">
-                <h3>Date de début</h3>
-                <input type="date" id="dateDebut" name="dateDebut">
-
-                <h3>Date de fin</h3>
-                <input type="date" id="dateFin" name="dateFin">
-            </div>
-        </div>
-
-        <section class="info-sup">
-            <h3>Informations suplémentaires</h3>
-            <textarea id="info-sup-form"></textarea>
-        </section>
-
-    </form> -->

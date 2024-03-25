@@ -1,0 +1,41 @@
+@use 'variables';
+
+@mixin font($family, $size, $weight) {
+    font-family: $family;
+    font-size: $size;
+    font-weight: $weight;
+    line-height: 1.1;
+}
+
+@mixin padding($block, $inline) {
+    padding-block: $block;
+    padding-inline: $inline;
+}
+
+@mixin border($width, $color, $radius) {
+    border-width: $width;
+    border-style: solid;
+    border-color: $color;
+    border-radius: $radius;
+}
+
+@mixin border-left($color) {
+    border-left-width: 8px;
+    border-left-style: solid;
+    border-left-color: $color;
+    padding-left: variables.$spacing-small;
+}
+
+@mixin flex($direction, $justify, $align, $gap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}
+
+@mixin grid($columns, $gap) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: $gap;
+}

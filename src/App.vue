@@ -1,39 +1,41 @@
 <!-- App.vue -->
 <template>
-
-  <div class="container">
+  <header class="layout-header">
     <NavBar></NavBar>
-    <div class="main flex">
+    <nav>
       <Sidebar></Sidebar>
-      <div class="content">
-        <router-view />
-      </div>
-    </div>
+    </nav>
+  </header>
+  <main>
+    <section class="container">
+      <router-view />
+    </section>
+  </main>
+  <footer>
     <Footer></Footer>
-  </div>
-  
+  </footer>
 </template>
 
 <script>
+  import {
+    RouterView
+  } from 'vue-router';
 
-  import { RouterView } from 'vue-router';
+  import NavBar from './components/NavBar.vue';
+  import Sidebar from './components/Sidebar.vue';
 
-import NavBar from './components/NavBar.vue';
-import Sidebar from './components/Sidebar.vue';
+  import Footer from './components/Footer.vue';
 
-import Footer from './components/Footer.vue';
-
-export default {
-  components: {
-    NavBar,
-    Sidebar,
-    
-    Footer
+  export default {
+    components: {
+      NavBar,
+      Sidebar,
+      Footer
+    }
   }
-}
 </script>
 
-<style>
+<style scoped>
   .main {
     margin-bottom: 200px;
   }

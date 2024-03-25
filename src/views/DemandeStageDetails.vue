@@ -9,7 +9,7 @@
         <div class="btnsContainer">
             <button>Activer</button>
             <button @click="redirigerVersMiseAJour(demande._id)">Modifier</button>
-            <button>Fermer</button>
+            <button @click="afficherConfirmationModal()">Effacer</button>
         </div>
         <div class="infoContainer">
             <div>
@@ -56,6 +56,17 @@
             <button class="btnTelechargerCV">Télécharger le C.V.</button>
 
         </div>
+
+        <!-- Modal de confirmation de suppression -->
+        <div class="modal" v-if="showConfirmationModal">
+            <div class="modal-content">
+                <p>Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
+                <div class="modal-buttons">
+                <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
+                <button class="btn confirm" @click="deleteDemande()">Confirmer</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -63,12 +74,29 @@
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js'
     import { ref, reactive, onMounted } from 'vue';
     import { useRoute, useRouter } from 'vue-router'
-
+    const { deleteRequest } = useInternshipRequests();
     const { getRequestById } = useInternshipRequests();
 
     const route = useRoute();
     const router = useRouter();
     const demande = ref(null);
+    const showConfirmationModal = ref(false);
+
+    const deleteDemande = async () => {
+        await deleteRequest(demande.value._id);
+        showConfirmationModal.value = false;
+        router.push({ name: 'DemandesStages' }); 
+    }
+
+    // Fonction pour afficher la modal de confirmation
+    const afficherConfirmationModal = () => {
+        showConfirmationModal.value = true;
+    };
+
+    // Fonction pour annuler la suppression
+    const annulerSuppression = () => {
+        showConfirmationModal.value = false;
+    };
 
     const redirigerVersMiseAJour = (id) => {
         router.push({ name: 'DemandeStageMiseAjour', params: { id } });
@@ -78,11 +106,7 @@
         try {
             const response = await getRequestById(route.params.id);
             demande.value = response.data;
-            // console.log("response: ", response);
-            // console.log("response.data: ", demande.value);
-            // console.log("demande: ", demande);
             console.log("demande.value: ", demande.value);
-            // console.log("demande.value.data.candidate.firstName: ", demande.value.data.candidate.firstName);
         } catch (error) {
             console.error("Error:", error.response ? error.response.data : error.message);
         }
@@ -159,4 +183,64 @@
     .skills {
         display: inline;
     }
+
+
+    .btn {
+        cursor: pointer;
+        border: none;
+    }
+
+    
+    /* Styles pour le modal */
+    .modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+
+    .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn.confirm {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn.cancel {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+    }
+
 </style>

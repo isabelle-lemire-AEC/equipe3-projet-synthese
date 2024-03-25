@@ -8,14 +8,14 @@
           <thead>
             <tr>
               <th scope="col">Titre</th>
-              <th scope="col">Entreprise</th>
+              <th scope="col">Entreprise</th> 
         
             </tr>
           </thead>
           <tbody>
             <tr v-for="offer in offers" :key="offer._id">
-              <!-- <td>{{ offer.title }}</td> -->
-          
+              <td>{{ offer.title }}</td>
+              
   
             </tr>
             <tr v-for="offer in offers" :key="offer._id">

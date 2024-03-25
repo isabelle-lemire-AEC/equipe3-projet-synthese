@@ -1,0 +1,62 @@
+@use '../general/variables';
+@use '../general/mixins';
+
+
+/* Général à plusieurs views de candidats */
+
+.form-fiche {
+    &__wrapper-titre {
+        border-color: variables.$purple;
+    }
+}
+
+#ajout-candidat,
+.form-fiche__wrapper-boutons-encadre {
+    @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
+}
+
+
+
+/* Spécifique pour la view Candidats */
+
+.candidats {
+    h1 {
+        margin-bottom: variables.$spacing-xlarge;
+    }
+
+    .bouton {
+        &--mauve {
+            margin-bottom: variables.$spacing-xlarge;
+        }
+    }
+
+    &__liste {
+        @include mixins.grid(3, variables.$spacing-large);
+    }
+
+}
+
+/* Spécifique pour la view CandidatAjout */
+
+.formulaire-ajout-candidat {
+
+    .form-fiche__wrapper-titre {
+        margin-bottom: variables.$spacing-large * 4;
+    }
+
+    h2,
+    h3 {
+        color: variables.$turquoise;
+    }
+}
+
+
+/* Spécifique pour la view CandidatDetail */
+
+.fiche-candidat-details {
+
+    h2,
+    h3 {
+        color: variables.$purple;
+    }
+}

@@ -1,0 +1,27 @@
+@use '../general/variables';
+@use '../general/mixins';
+
+.carte-candidat {
+    background-color: variables.$white;
+    @include mixins.padding(variables.$spacing-medium, variables.$spacing-medium);
+    @include mixins.flex(row, null, center, variables.$spacing-small);
+
+    &__img {
+        background-color: variables.$purple;
+        @include mixins.padding(variables.$spacing-small, variables.$spacing-small);
+
+    }
+
+    &__texte {
+        @include mixins.flex(column, null, flex-start, variables.$spacing-small);
+
+        h2 {
+            font-size: variables.$font-style-h3;
+            color: variables.$black;
+        }
+
+        p {
+            font-family: variables.$font-headings;
+        }
+    }
+}
