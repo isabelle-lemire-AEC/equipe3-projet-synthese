@@ -1,13 +1,15 @@
 <template>
-	<section>
+	<section v-if="demande">
 		<p>Demande de stage</p>
 		<h1> {{ demande.title }}</h1>
 
 		<div>
-			btn à faire à la fin
+			<!-- COMPONENT?? Classe pour flex les boutons -->
+			<button>Annuler</button>
+			<button @click="soumettreFormulaire()">Mettre à jour</button>
 		</div>
 
-		<form id="edit-demande-stage" @submit.prevent="soumettreFormulaire">
+		<form id="edit-demande-stage">
 			<div>
 				<!-- Classe pour encadré blanc -->
 
@@ -18,7 +20,7 @@
 						type="text"
 						id="edit-demande-candidat"
 						name="edit-demande-candidat"
-						v-model.trim="demande.candidate.firstName" />
+						v-model.trim="nomDuCandidat" />
 					<!-- <p v-if="errors.fullName" class="error-message">
 						Veuillez fournir le nom du candidat.
 					</p> -->
@@ -45,7 +47,7 @@
 								type="text"
 								id="edit-demande-programme"
 								name="edit-demande-programme"
-								v-model="demande.activitySector" />
+								v-model="demande.title" />
 							<!-- <p v-if="errors.activitySector" class="error-message">
 								Veuillez fournir un programme de formation.
 							</p> -->
@@ -53,9 +55,17 @@
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="edit-demande-secteur">Secteur d'activité</label>
-							<select id="edit-demande-secteur" name="edit-demande-secteur">
+							<select id="edit-demande-secteur"
+									name="edit-demande-secteur">
 								<option value="">Veuillez effectuer un choix</option>
-								<!-- Autres options de l'API -->
+								<option
+									v-for="secteurActivite in secteursActivites"
+									:key="secteurActivite._id"
+									:value="secteurActivite"
+									selected>
+									{{ secteurActivite.value }}
+								</option>
+
 							</select>
 						</div>
 					</div>
@@ -69,7 +79,8 @@
 							<input
 								type="text"
 								id="edit-demande-etablissement"
-								name="edit-demande-etablissement" />
+								name="edit-demande-etablissement"
+								value="Cégep de Trois-Rivières" />
 							<!-- <p v-if="errors.activitySector" class="error-message">
 								Veuillez fournir un programme de formation.
 							</p> -->
@@ -94,10 +105,21 @@
 					<div
 						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 						<label for="edit-demande-region">Région</label>
-						<select id="edit-demande-region" name="demande-region">
+						<select
+							id="edit-demande-region"
+							name="edit-demande-region"
+							v-model.trim="demande.province">
 							<option value="">Veuillez effectuer un choix</option>
-							<!-- Autres options de l'API -->
+							<option
+								v-for="province in provinces"
+								:key="province._id"
+								:value="province">
+								{{ province.value }}
+							</option>
 						</select>
+						<!-- <p v-if="erreurs.province" class="validForm">
+								Veuillez effectuer un choix.
+						</p> -->
 					</div>
 
 					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -120,18 +142,28 @@
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="edit-demande-type">Type de stage</label>
-							<select id="edit-demande-type" name="edit-demande-type">
+							<select id="edit-demande-type" name="ajout-demande-type" v-model.trim="demande.internshipType">
 								<option value="">Veuillez effectuer un choix</option>
-								<!-- Autres options de l'API -->
-							</select>
+								<option
+									v-for="internshipType in internshipTypes"
+									:key="internshipType._id"
+									:value="internshipType">
+									{{ internshipType.value }}
+								</option></select>
+								<!-- <p v-if="erreurs.internshipType" class="validForm">
+							Veuillez effectuer un choix.
+						</p> -->
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="edit-demande-heures">Nombre d'heures par semaine</label>
-							<select id="edit-demande-heures" name="edit-demande-heures">
-								<option value="">Veuillez effectuer un choix</option>
-								<!-- Autres options de l'API -->
-							</select>
+							<input
+								id="edit-demande-heures"
+								name="edit-demande-heures"
+								v-model="demande.weeklyWorkHours" />
+							<!-- <p v-if="errors.description" class="error-message">
+								Veuillez fournir une présentation.
+							</p> -->
 						</div>
 					</div>
 
@@ -143,7 +175,7 @@
 								type="date"
 								id="edit-demande-date-debut"
 								name="edit-demande-date-debut"
-								v-model="demande.startDate" />
+								v-model.trim="dateDebut" />
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -152,7 +184,7 @@
 								type="date"
 								id="edit-demande-date-fin"
 								name="edit-demande-date-fin"
-								v-model="demande.endDate" />
+								v-model.trim="dateFin" />
 						</div>
 					</div>
 
@@ -160,16 +192,17 @@
 						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 						<label for="edit-demande-remuneration">Rémunération</label>
 						<div>
-							<input type="checkbox" id="edit-demande-discretion"
+							<input type="radio" id="edit-demande-discretion"
 								name="edit-demande-remuneration"
 								value="discretion"
-								v-model="remunerationType" />
+								v-model="remunerationType"
+								checked="checked" />
 							<label for="edit-demande-discretion">À la discrétion de l'entreprise</label>
 						</div>
 						<!-- Wrapper case checkbox + label -->
 						<div>
 							<input
-								type="checkbox"
+								type="radio"
 								id="edit-demande-remunere"
 								name="edit-demande-remuneration"
 								value="remunere"
@@ -179,7 +212,7 @@
 						<!-- Wrapper case checkbox + label -->
 						<div>
 							<input
-								type="checkbox"
+								type="radio"
 								id="edit-demande-non-renumere"
 								name="edit-demande-remuneration"
 								value="non-remunere"
@@ -207,11 +240,6 @@
 				</fieldset>
 			</div>
 
-			<div>
-				<!-- COMPONENT?? Classe pour flex les boutons -->
-				<button>Annuler</button>
-				<button type="submit">Mettre à jour</button>
-			</div>
 		</form>
 	</section>
 </template>
@@ -224,35 +252,28 @@
 	import {useProvinces} from "../composables/provinces/provinces";
 	import {useInternshipRequests} from "../composables/demandes_stages/demandeDeStage";
 	import {useInternshipTypes} from "../composables/types_stage/types_stage";
-	const {getCandidatById} = useCandidat();
-	const {getAllProvinces} = useProvinces();
-	const {editRequest} = useInternshipRequests();
-	const {getAllInternshipTypes} = useInternshipTypes();
-
+	import {useActivitySectors} from "../composables/secteurs_activites/secteurs_activites";
 	import {useRoute} from "vue-router";
+	const {getCandidatById, getAllCandidats} = useCandidat();
+	const {getAllProvinces} = useProvinces();
+	const {getRequestById, editRequest} = useInternshipRequests();
+	const {getAllInternshipTypes} = useInternshipTypes();
+	const {getAllActivitySectors} = useActivitySectors();
+
 	const route = useRoute();
-
-	/* const remunerationType = ref([]); */
-
-	/* const demande = reactive({
-		fullName: "",
-		description: "",
-		activitySector: "",
-		city: "",
-		province: "",
-		skills: "",
-		internshipType: "",
-		weeklyWorkHours: "",
-		startDate: "",
-		endDate: "",
-		paid: "",
-		additionalInformation: "",
-	}); */
+	const remunerationType = ref([]);
 	const provinces = ref([]);
+	const internshipTypes = ref([]);
+	const id = route.params.id;
+	const demandeResponse = ref([]);
+	const nomDuCandidat = ref([]);
+	const dateDebut = ref([]);
+	const dateFin = ref([]);
+	const secteursActivites = ref([]);
 
-	const demande = reactive({
-		title: "Designer web",
-		description: "Bonjour je suis un desinger web à la recherche de travail!",
+	const demande = ref({
+		title: "",
+		description: "",
 		candidate: {
 			_id: "",
 			description: "",
@@ -269,34 +290,34 @@
 			},
 			postalCode: "",
 		},
-		startDate: "2024-03-19T17:36:02.007Z",
-		endDate: "2024-03-19T17:36:02.007Z",
-		weeklyWorkHours: 40,
+		startDate: "",
+		endDate: "",
+		weeklyWorkHours: 0,
 		province: {
 			_id: "",
 			value: "",
 		},
-		skills: ["Front-end", "Design"],
+		skills: [""],
 		internshipType: {
 			_id: "",
 			value: "",
 		},
-		additionalInformation: "J'aime le Ping-Pong",
+		additionalInformation: "",
 		isActive: true,
+
+		program: "Design graphique",
+		activitySector: ["Design", "Graphisme"],
+		etablissement: "Collège de Maisonneuve",
+		remuneration: [
+			"Rémunéré",
+			"Non-rémunéré",
+			"À la discrétion de l'entreprise",
+		]
 	});
 
 	const modifDemande = async () => {
-		const id = route.params.id;
 		try {
-			/* if (!validerFormulaire()) {
-				throw new Error("Veuillez remplir tous les champs obligatoires.");
-			} */
-			/* console.log("Tentative de modification du candidat :", demande.value);
-			console.log(
-				"URL de la requête PATCH :",
-				`https://api-3.fly.dev/internship-requests/${demande.value._id}`
-			); */
-			await editRequest(id, demande);
+			await editRequest(id, demande.value);
 			console.log("Request edited successfully");
 		} catch (error) {
 			console.error("Erreur lors de la modification de la demande :", error);
@@ -304,11 +325,17 @@
 	};
 
 	onMounted(async () => {
-		await Promise.all([
-			getAllProvinces(),
-			getCandidatById(),
-			getAllInternshipTypes(),
-		]);
+		secteursActivites.value = await getAllActivitySectors();
+		const provincesData = await getAllProvinces();
+		provinces.value = provincesData.data;
+		const internshipTypesData = await getAllInternshipTypes();
+		internshipTypes.value = internshipTypesData.data;
+		const demandeData = await getRequestById(id);
+		demande.value = demandeData.data;
+		console.log("demande: ", demande)
+		nomDuCandidat.value = demande.value.candidate.firstName + ' ' + demande.value.candidate.lastName;
+		dateDebut.value = demande.value.startDate.substring(0, demande.value.startDate.indexOf('T'));
+		dateFin.value = demande.value.endDate.substring(0, demande.value.startDate.indexOf('T'));;
 	});
 
 	/* 	const errors = reactive({
@@ -363,9 +390,18 @@
 
 	/* const validForm = ref(false); */
 
-	const soumettreFormulaire = (e) => {
-		e.preventDefault();
-		modifDemande();
+	const soumettreFormulaire = async () => {
+		// e.preventDefault();
+		// console.log("nomDuCandidat.value: ", nomDuCandidat.value);
+
+		demande.value.candidate.firstName = nomDuCandidat.value.substring(0, nomDuCandidat.value.indexOf(' '));
+		demande.value.candidate.lastName = nomDuCandidat.value.substring(nomDuCandidat.value.indexOf(' ') + 1);
+		console.log("demande.candidate.firstName: ", demande.value.candidate.firstName);
+		console.log("demande.candidate.lastName: ", demande.value.candidate.lastName);
+
+		await modifDemande();
+
+		// modifDemande();
 
 		/* if (demande.fullName === "") {
 			errors.fullName = true;
