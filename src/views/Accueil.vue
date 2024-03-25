@@ -2,7 +2,7 @@
 <template>
   <div class="app-container">
     <div class="logo-container">
-    <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
+      <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
     </div>
     <div class="content-container">
       <img src="../assets/accueil.png" alt="Image" class="half-page-image"> 
@@ -13,11 +13,11 @@
         <!-- Début du formulaire d'identification -->
         <form @submit.prevent="submitForm">
           <div class="form-group">
-          <input type="text" id="nomPrenom" v-model="nomPrenom" placeholder="Votre nom et prénom" required>
-        </div>
-        <div class="form-group">
-          <input type="email" id="courriel" v-model="courriel" placeholder="Votre courriel" required>
-        </div>
+            <input type="text" id="nomPrenom" v-model="nomPrenom" placeholder="Votre nom et prénom" required>
+          </div>
+          <div class="form-group">
+            <input type="email" id="courriel" v-model="courriel" placeholder="Votre courriel" required>
+          </div>
           <button type="submit">Accéder maintenant</button>
         </form>
 
@@ -28,7 +28,6 @@
 
 <script setup>
   import { useRouter } from 'vue-router';
-  import { utilisateurStore } from '@/stores/utilisateur';
   import { ref } from 'vue';
 
   const router = useRouter();
@@ -39,20 +38,14 @@
     const nomPrenomValue = nomPrenom.value;
     const courrielValue = courriel.value;
 
-    // Afficher les valeurs avant la mise à jour du store
-    console.log('Valeur actuelle de nomPrenom avant mise à jour:', nomPrenomValue);
-    console.log('Valeur actuelle de courriel avant mise à jour:', courrielValue);
-
-    // Mettre à jour les informations de l'utilisateur dans le store
-    utilisateurStore.updateInfo(nomPrenomValue, courrielValue);
-
-    // Afficher les valeurs après la mise à jour du store
-    console.log('Nouvelle valeur de nomPrenom mise à jour:', utilisateurStore.nomPrenom);
-    console.log('Nouvelle valeur de courriel mise à jour:', utilisateurStore.courriel);
+    // Stocker les informations dans le localStorage
+    localStorage.setItem('nomPrenom', nomPrenomValue);
+    localStorage.setItem('courriel', courrielValue);
 
     router.push({ name: 'TableauDeBord' });
   };
 </script>
+
 
 
 <style scoped>
