@@ -5,7 +5,7 @@
 
 		<div>
 			<!-- COMPONENT?? Classe pour flex les boutons -->
-			<button>Annuler</button>
+			<button @click="retour()">Annuler</button>
 			<button @click="soumettreFormulaire()">Mettre à jour</button>
 		</div>
 
@@ -32,7 +32,7 @@
 					<textarea
 						id="edit-demande-presentation"
 						name="edit-demande-presentation"
-						v-model="demande.candidate.description"></textarea>
+						v-model="demande.description"></textarea>
 					<!-- <p v-if="errors.description" class="error-message">
 						Veuillez fournir une présentation.
 					</p> -->
@@ -188,8 +188,7 @@
 						</div>
 					</div>
 
-					<div
-						><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 						<label for="edit-demande-remuneration">Rémunération</label>
 						<div>
 							<input type="radio" id="edit-demande-discretion"
@@ -254,6 +253,8 @@
 	import {useInternshipTypes} from "../composables/types_stage/types_stage";
 	import {useActivitySectors} from "../composables/secteurs_activites/secteurs_activites";
 	import {useRoute} from "vue-router";
+	import {useRouter} from 'vue-router';
+
 	const {getCandidatById, getAllCandidats} = useCandidat();
 	const {getAllProvinces} = useProvinces();
 	const {getRequestById, editRequest} = useInternshipRequests();
@@ -270,6 +271,7 @@
 	const dateDebut = ref([]);
 	const dateFin = ref([]);
 	const secteursActivites = ref([]);
+    const router = useRouter();
 
 	const demande = ref({
 		title: "",
@@ -338,6 +340,10 @@
 		dateFin.value = demande.value.endDate.substring(0, demande.value.startDate.indexOf('T'));;
 	});
 
+	const retour = () => {
+		router.push({name: "DemandesStages"});
+	}
+
 	/* 	const errors = reactive({
 		fullName: false,
 		description: false,
@@ -400,6 +406,8 @@
 		console.log("demande.candidate.lastName: ", demande.value.candidate.lastName);
 
 		await modifDemande();
+
+		retour();
 
 		// modifDemande();
 
