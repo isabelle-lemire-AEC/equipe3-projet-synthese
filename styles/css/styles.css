@@ -253,10 +253,17 @@ label {
   margin-left: auto;
 }
 
-.header-items {
+.header__items {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.header__icone-boutons-ajout {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
   gap: 1rem;
 }
@@ -289,6 +296,7 @@ label {
   text-decoration: none;
 }
 
+/* .boutons-ajout {} */
 /* Général à plusieurs views de candidats */
 .form-fiche__wrapper-titre {
   border-color: #7F2987;
@@ -338,6 +346,17 @@ label {
   margin: 0 auto;
   padding-block: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
   padding-inline: clamp(1.25rem, 0rem + 6.25vi, 7.5rem);
+}
+
+.wrapper-sidebar-main-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.wrapper-main-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 *,

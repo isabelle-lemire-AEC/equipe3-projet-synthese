@@ -1,9 +1,11 @@
 <!-- Sidebar.vue - Nacer -->
 <template>
   <!-- Logo -->
-  <div class="logo">
-    <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
-  </div>
+
+  
+    <div class="logo">
+      <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
+    </div>
 
     <ul class="navbar__menu">
       <li class="navbar__menu-item tableau-de-bord">
@@ -37,8 +39,10 @@
         </router-link>
       </li>
     </ul>
-  
-<!-- CODE DONA
+
+
+
+  <!-- CODE DONA
     <div class="sidebar">
     <div class="menu-item" :class="{ active: currentPage === 'dashboard' }">
       <span>Tableau de bord</span>
@@ -60,16 +64,16 @@
 </template>
 
 <script>
-// Code DONA
-//export default {
- // name: 'Sidebar',
+  // Code DONA
+  //export default {
+  // name: 'Sidebar',
   //data() {return {currentPage: 'dashboard' }
   //}
-//}
+  //}
 </script>
 
 <style scoped>
-  .navbar {
+  /*  .navbar {
     grid-column: 1;
     grid-row: 1 / -1;
     padding: 20px;
@@ -84,9 +88,9 @@
   .navbar li {
     margin-bottom: 30px;
     position: relative;
-  }
+  } */
 
-/*   .navbar a {
+  /*   .navbar a {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -94,7 +98,7 @@
     gap: 2rem;
   } */
 
-  .tableau-de-bord i,
+  /* .tableau-de-bord i,
   .tableau-de-bord span {
     color: #069da4;
   }
@@ -114,9 +118,9 @@
   .entreprises span {
     color: #89a9e6;
   }
+ */
 
-
-  .tableau-de-bord:hover::after,
+  /* .tableau-de-bord:hover::after,
   .demandes-stage:hover::after,
   .offres-stage:hover::after,
   .candidats:hover::after,
@@ -143,16 +147,16 @@
   }
   .entreprises:hover::after {
     background-color: #89a9e6;
-  }
+  } */
 
   /* Styles pour la version mobile */
-  @media screen and (max-width: 768px) {
+  /*  @media screen and (max-width: 768px) {
     .navbar {
       grid-column: 1 / -1;
       grid-row: 1;
     }
-  }
-/* STYLE DONA
+  } */
+  /* STYLE DONA
 .sidebar {
   width: 200px;
   height: 100vh;

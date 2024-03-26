@@ -2,9 +2,14 @@
 @use '../general/mixins';
 
 
-.header-items {
-    @include mixins.flex(row, space-between, center, 1rem);
+.header {
+    &__items {
+        @include mixins.flex(row, space-between, center, 1rem);
+    }
 
+    &__icone-boutons-ajout {
+        @include mixins.flex(row, flex-end, center, 1rem);
+    }
 }
 
 .nav-items,

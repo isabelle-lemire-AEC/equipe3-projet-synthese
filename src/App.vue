@@ -1,42 +1,48 @@
 <!-- App.vue -->
 <template>
-  <header class="layout-header">
-    <NavBar></NavBar>
-    <nav>
+  <div class="wrapper-sidebar-main-content">
+    <transition name="sidebar-slide">
+    <nav v-show="isMenuOpen">
       <Sidebar></Sidebar>
     </nav>
-  </header>
-  <main>
-    <section class="container">
-      <router-view />
-    </section>
-  </main>
-  <footer>
-    <Footer></Footer>
-  </footer>
+    </transition>
+    <div class="wrapper-main-content">
+      <header class="layout-header">
+        <Header @menu-toggled="handleMenuToggle"></Header>
+      </header>
+      <main>
+        <section class="container">
+          <router-view />
+        </section>
+      </main>
+      <footer>
+        <Footer></Footer>
+      </footer>
+    </div>
+  </div>
 </template>
 
-<script>
+<script setup>
   import {
     RouterView
   } from 'vue-router';
-
-  import NavBar from './components/NavBar.vue';
+  import Header from './components/Header.vue';
   import Sidebar from './components/Sidebar.vue';
-
   import Footer from './components/Footer.vue';
+  import {
+    ref
+  } from 'vue';
 
-  export default {
-    components: {
-      NavBar,
-      Sidebar,
-      Footer
-    }
-  }
+
+  /* Menu toggable */
+
+  const isMenuOpen = ref(false);
+
+  const handleMenuToggle = (isOpen) => {
+    isMenuOpen.value = isOpen;
+  };
 </script>
 
 <style scoped>
-  .main {
-    margin-bottom: 200px;
-  }
+
 </style>
