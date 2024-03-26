@@ -14,6 +14,8 @@ select {
     border: 2px solid variables.$light-gray;
     box-shadow: inset 0 0 10px 1px #eeeeee87;
     @extend %font-headings;
+    color: variables.$gray;
+    font-size: 1rem;
 }
 
 label {

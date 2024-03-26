@@ -6,3 +6,12 @@
     margin: 0 auto;
     @include mixins.padding(variables.$spacing-block-section, variables.$spacing-inline-section);
 }
+
+.wrapper-sidebar-main-content {
+    @include mixins.flex(row, null, null, null);
+}
+
+.wrapper-main-content {
+    @include mixins.flex(column, null, null, null);
+    width: 100%;
+}
