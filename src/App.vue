@@ -1,11 +1,9 @@
 <!-- App.vue -->
 <template>
   <div class="wrapper-sidebar-main-content">
-    <transition name="sidebar-slide">
     <nav v-show="isMenuOpen">
       <Sidebar></Sidebar>
     </nav>
-    </transition>
     <div class="wrapper-main-content">
       <header class="layout-header">
         <Header @menu-toggled="handleMenuToggle"></Header>
