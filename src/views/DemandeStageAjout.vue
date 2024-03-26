@@ -4,13 +4,11 @@
 
 		<form id="ajout-demande-stage" @submit.prevent="soumettreFormulaire">
 			<div>
-				<!-- COMPONENT?? Classe pour flex les boutons -->
 				<button>Annuler</button>
 				<button type="submit">Sauvegarder</button>
 			</div>
 
 			<div>
-				<!-- Classe pour regrouper le input et le label side by side -->
 				<label for="ajout-demande-titre">Titre</label>
 				<input
 					type="text"
@@ -23,15 +21,8 @@
 			</div>
 
 			<div>
-				<!-- Classe pour encadré blanc -->
-
 				<div>
-					<!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 					<label for="ajout-demande-nom-prenom">Nom et prénom</label>
-					<!-- <input
-						type="text"
-						id="ajout-demande-nom-prenom"
-						name="ajout-demande-nom-prenom" /> -->
 					<select id="ajout-demande-nom-prenom" name="ajout-demande-nom-prenom" v-model.trim="demande.candidate">
 						<option value="">Veuillez effectuer un choix</option>
 						<option
@@ -39,10 +30,9 @@
 							:key="candidate._id"
 							:value="candidate">
 							{{ candidate.firstName }} {{ candidate.lastName }}
-						</option></select>
-						<p v-if="erreurs.firstName" class="validForm"></p>
-
-					<!-- Autres options de l'API -->
+						</option>
+					</select>
+					<p v-if="erreurs.firstName" class="validForm"></p>
 					<!-- <p v-if="errors.fullName" class="error-message">
                         Veuillez fournir votre nom complet.
                     </p> -->
@@ -62,32 +52,28 @@
 				<div>
 					<!-- Classe pour groupe de deux inputs qui occupent 50% de l'espace -->
 					<div><!-- Classe pour regrouper DEUX INPUTS UN EN DESSOUS DE L'AUTRES-->
-						<div
-							><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<!-- <label for="ajout-demande-programme"
-								>Programme de formation</label
-							>
+						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+							<label for="ajout-demande-programme">Programme de formation</label>
 							<input
 								type="text"
 								id="ajout-demande-programme"
-								name="ajout-demande-programme"
-								v-model.trim="demande.program" /> -->
-							<!-- <p v-if="errors.activitySector" class="error-message">
+								name="ajout-demande-programme"/>
+							<p v-if="errors.activitySector" class="error-message">
                                 Veuillez fournir un programme de formation.
-                            </p> -->
+                            </p>
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<!-- <label for="ajout-demande-secteur">Secteur d'activité</label>
+							<label for="ajout-demande-secteur">Secteur d'activité</label>
 							<select id="ajout-demande-secteur" name="ajout-demande-secteur">
 								<option value="">Veuillez effectuer un choix</option>
 								<option
-									v-for="activitySector in demande.activitySector"
+									v-for="activitySector in allSecteursDActivites"
 									:key="activitySector"
 									:value="activitySector">
-									{{ activitySector }}
+									{{ activitySector.value }}
 								</option>
-							</select> -->
+							</select>
 						</div>
 					</div>
 				</div>
@@ -96,17 +82,14 @@
 					<!-- Classe pour groupe de deux inputs qui occupent 50% de l'espace -->
 					<div><!-- Classe pour regrouper deux inputs side by side-->
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<!-- <label for="ajout-demande-etablissement"
-								>Établissement scolaire</label
-							>
+							<label for="ajout-demande-etablissement">Établissement scolaire</label>
 							<input
 								type="text"
 								id="ajout-demande-etablissement"
-								name="ajout-demande-etablissement"
-								v-model="demande.etablissement" />
+								name="ajout-demande-etablissement" />
 							<p v-if="errors.etablissement" class="error-message">
 								Veuillez fournir un établissement
-							</p> -->
+							</p>
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -114,7 +97,8 @@
 							<input
 								type="text"
 								id="ajout-demande-ville"
-								name="ajout-demande-ville"/>
+								name="ajout-demande-ville"
+								v-model.trim="demande.candidate.city"/>
 							<p v-if="erreurs.city" class="validForm">
 								Veuillez fournir une ville.
 							</p>
@@ -133,13 +117,14 @@
 							<option
 								v-for="province in provinces"
 								:key="province._id"
-								:value="province">
+								:value="province"
+								:selected="province._id === demande.candidate.province._id">
 								{{ province.value }}
 							</option>
 						</select>
 						<p v-if="erreurs.province" class="validForm">
-								Veuillez effectuer un choix.
-							</p>
+							Veuillez effectuer un choix.
+						</p>
 					</div>
 
 					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -176,9 +161,7 @@
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-heures"
-								>Nombre d'heures par semaine</label>
-
+							<label for="ajout-demande-heures">Nombre d'heures par semaine</label>
 							<input
 								type="number"
 								id="ajout-demande-heures"
@@ -217,18 +200,35 @@
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<!-- <label for="ajout-demande-remuneration">Rémunération</label> -->
-							<!-- Remplacer par legend? Faire une recherche. -->
-
-							<!-- <div v-for="(type, index) in demande.remuneration" :key="index">
+							<label for="edit-demande-remuneration">Rémunération</label>
+							<div>
+								<input type="radio" id="edit-demande-discretion"
+									name="edit-demande-remuneration"
+									value="discretion"
+									v-model="remunerationType"
+									checked="checked" />
+								<label for="edit-demande-discretion">À la discrétion de l'entreprise</label>
+							</div>
+							<!-- Wrapper case checkbox + label -->
+							<div>
 								<input
-									type="checkbox"
-									:id="'ajout-demande-' + type"
-									name="ajout-demande-remuneration"
-									:value="type"
+									type="radio"
+									id="edit-demande-remunere"
+									name="edit-demande-remuneration"
+									value="remunere"
 									v-model="remunerationType" />
-								<label :for="'ajout-demande-' + type">{{ type }}</label>
-							</div> -->
+								<label for="edit-demande-remunere">Rémunéré</label>
+							</div>
+							<!-- Wrapper case checkbox + label -->
+							<div>
+								<input
+									type="radio"
+									id="edit-demande-non-renumere"
+									name="edit-demande-remuneration"
+									value="non-remunere"
+									v-model="remunerationType" />
+								<label for="edit-demande-non-renumere">Non-rémunéré</label>
+							</div>
 						</div>
 					</div>
 				</fieldset>
@@ -251,10 +251,7 @@
 			</div>
 
 			<div>
-				<!-- COMPONENT?? Classe pour flex les boutons -->
-				<!-- <button>Annuler</button>
-				<button type="submit">Sauvegarder</button> -->
-			</div>
+		</div>
 		</form>
 	</section>
 </template>
@@ -267,15 +264,21 @@
 	import {useCandidat} from "../composables/candidats/candidat.js";
 	import {useProvinces} from "../composables/provinces/provinces.js";
 	import {useInternshipTypes} from "@/composables/types_stage/types_stage.js";
+	import {useActivitySectors} from "../composables/secteurs_activites/secteurs_activites.js";
+	import {useRouter} from 'vue-router';
+
 	const {addRequest, getAllRequests} = useInternshipRequests();
 	const {getAllCandidats} = useCandidat();
 	const {getAllProvinces} = useProvinces();
 	const {getAllInternshipTypes} = useInternshipTypes();
+	const {getAllActivitySectors} = useActivitySectors();
 
 	const candidates = ref([]);
 	const provinces = ref([]);
 	const internshipTypes = ref([]);
 	const remunerationType = ref([]);
+	const allSecteursDActivites = ref([]);
+    const router = useRouter();
 
 	const demande = ref({
 		title: "",
@@ -309,20 +312,10 @@
 			value: "",
 		},
 		additionalInformation: "",
-		isActive: true,
-
-		program: "Design graphique",
-		activitySector: ["Design", "Graphisme"],
-		etablissement: "Collège de Maisonneuve",
-		remuneration: [
-			"Rémunéré",
-			"Non-rémunéré",
-			"À la discrétion de l'entreprise",
-		],
+		isActive: true
 	});
 
 	// validation formulaire
-
 	const erreurs = ref({
         title: false,
         firstName: false,
@@ -339,7 +332,6 @@
     });
 
 	const validerFormulaire = () => {
-  
 		erreurs.value.title= demande.value.title === '',
 		erreurs.value.firstName= demande.value.candidate.firstName === '',
 		erreurs.value.lastName= demande.value.candidate.lastName === '',
@@ -352,7 +344,6 @@
 		erreurs.value.internshipType= demande.value.internshipType.value === '',
 		erreurs.value.weeklyWorkHours= demande.value.weeklyWorkHours === 0
 		
-
 		console.log("Erreurs :", erreurs.value);
 		// Vérifie s'il y a des erreurs dans le formulaire
 		return Object.values(erreurs.value).some(err => err);
@@ -375,6 +366,10 @@ const soumettreFormulaire = async () => {
         }
 }
 
+
+const retour = () => {
+		router.push({name: "DemandesStages"});
+	}
 
 /*const soumettreFormulaire = async (e) => {
 		try {
@@ -402,11 +397,11 @@ const soumettreFormulaire = async () => {
 			 if (validerFormulaire()) {
 				throw new Error("Veuillez remplir tous les champs obligatoires.");
 			} 
-			console.log("Tentative d'ajout du candidat :", demande);
-			await addRequest(demande);
+			console.log("Tentative d'ajout d'une demande :", demande.value);
+			await addRequest(demande.value);
 			console.log("Nouvelle demande ajoutée");
-			await getAllRequests();
-			/* router.push({name: "Candidats"}); */
+			// await getAllRequests();
+			retour();
 		} catch (error) {
 			console.error("Erreur lors de l'ajout de la demande :", error);
 		}
@@ -435,16 +430,22 @@ const soumettreFormulaire = async () => {
 			const intershipTypesData = await getAllInternshipTypes();
 			internshipTypes.value = intershipTypesData.data;
 		} catch (error) {
-			console.error(
-				"Erreur lors de la récupération des types de stages :",
-				error
-			);
+			console.error("Erreur lors de la récupération des types de stages :", error);
 		}
 	};
 
+	const initSecteursDActivites = async () => {
+		try {
+			allSecteursDActivites.value = await getAllActivitySectors();
+		} catch (error) {
+			console.error("Erreur lors de la récupération des secteurs d'activitées :", error);
+		}
+	}
+	
 	initTypes();
-	initCandidats();
 	initProvinces();
+	initCandidats();
+	initSecteursDActivites();
 
 	
 
