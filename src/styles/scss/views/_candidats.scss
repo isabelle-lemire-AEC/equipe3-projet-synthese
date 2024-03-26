@@ -11,6 +11,7 @@
 }
 
 #ajout-candidat,
+#edition-candidat,
 .form-fiche__wrapper-boutons-encadre {
     @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
 }
@@ -51,9 +52,10 @@
 }
 
 
-/* Spécifique pour la view CandidatDetail */
+/* Spécifique pour la view CandidatDetail et CandidatMiseAJour */
 
-.fiche-candidat-details {
+.fiche-candidat-details,
+.formulaire-edition-candidat {
 
     h2,
     h3 {

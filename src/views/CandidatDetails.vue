@@ -25,7 +25,7 @@
         <!-- Section de description du candidat -->
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h2>Courte présentation</h2>
-          <p>{{ candidat.description }}slkdjflkdsfjlksdfj</p>
+          <p>{{ candidat.description }}</p>
         </div>
         <!-- Section d'informations personnelles du candidat -->
         <div class="form-fiche__wrapper-titre-groupe-inputs">
