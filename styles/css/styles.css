@@ -127,6 +127,8 @@ select {
   padding: 1rem;
   border: 2px solid #EEEEEE;
   box-shadow: inset 0 0 10px 1px rgba(238, 238, 238, 0.5294117647);
+  color: #707070;
+  font-size: 1rem;
 }
 
 label {
@@ -293,6 +295,7 @@ label {
 }
 
 #ajout-candidat,
+#edition-candidat,
 .form-fiche__wrapper-boutons-encadre {
   display: flex;
   flex-direction: column;
@@ -322,9 +325,11 @@ label {
   color: #0C9DA4;
 }
 
-/* Spécifique pour la view CandidatDetail */
+/* Spécifique pour la view CandidatDetail et CandidatMiseAJour */
 .fiche-candidat-details h2,
-.fiche-candidat-details h3 {
+.fiche-candidat-details h3,
+.formulaire-edition-candidat h2,
+.formulaire-edition-candidat h3 {
   color: #7F2987;
 }
 
