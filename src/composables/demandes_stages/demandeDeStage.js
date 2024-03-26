@@ -8,21 +8,6 @@ export function useInternshipRequests() {
   const error = ref(null);
   const loading = ref(false);
 
-  // Ajouter une demande de stage
-  const addRequest = async (requestData) => {
-    loading.value = true;
-    try {
-      response.value = await axios.post(`${API_BASE_URL}/internship-requests`, requestData);
-      console.log("POST Demande de stage - OK", response.value.data);
-      return response.value;
-    } catch (err) {
-      error.value = err;
-      console.log("POST Demande de stage - ERREUR", err);
-    } finally {
-      loading.value = false;
-    }
-  };
-
   // Obtenir toutes les demandes de stage
   const getAllRequests = async () => {
     loading.value = true;
@@ -38,6 +23,23 @@ export function useInternshipRequests() {
     }
   };
 
+  // Obtenir toutes les demandes de stage en attente de validation
+  // IMPORTANT - Remettre à false quand on aura des demande en attente de validation
+  const getAllNotActiveRequests = async () => {
+    loading.value = true;
+    try {
+      const response = await axios.get(`${API_BASE_URL}/internship-requests`);
+      console.log("GET ALL Demandes de stage non active - OK", response.data);
+      const nonActiveRequests = response.data.filter(request => request.isActive === true);
+      return nonActiveRequests;
+    } catch (err) {
+      error.value = err;
+      console.log("GET ALL Demandes de stage non active - ERREUR", err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
   // Obtenir une demande de stage avec le ID
   const getRequestById = async (id) => {
     loading.value = true;
@@ -48,6 +50,21 @@ export function useInternshipRequests() {
     } catch (err) {
       error.value = err;
       console.log("GET Demandes de stage BY ID - ERREUR", err);
+    } finally {
+      loading.value = false;
+    }
+  };  
+
+  // Ajouter une demande de stage
+  const addRequest = async (requestData) => {
+    loading.value = true;
+    try {
+      response.value = await axios.post(`${API_BASE_URL}/internship-requests`, requestData);
+      console.log("POST Demande de stage - OK", response.value.data);
+      return response.value;
+    } catch (err) {
+      error.value = err;
+      console.log("POST Demande de stage - ERREUR", err);
     } finally {
       loading.value = false;
     }
@@ -83,7 +100,7 @@ export function useInternshipRequests() {
     }
   };
 
-  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, response, error, loading };
+  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, getAllNotActiveRequests, response, error, loading };
 }
 
 

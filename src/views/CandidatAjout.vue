@@ -154,7 +154,7 @@
         lastName: '',
         poste: '',
         description: '',
-        skills: "test",
+        skills: "React, Vue.js et css",
         address: '',
         phone: '',
         city: '',

@@ -48,10 +48,7 @@
                     <p>Date</p>
                     <p>Actions</p>
                 </div>
-                <TBListeDemandeStageAttente></TBListeDemandeStageAttente>
-                <TBListeDemandeStageAttente></TBListeDemandeStageAttente>
-                <TBListeDemandeStageAttente></TBListeDemandeStageAttente>
-                <TBListeDemandeStageAttente></TBListeDemandeStageAttente>
+                <TBListeDemandeStageAttente v-for="demande in demandes" :key="demande._id" :demande="demande" />
             </div>
 
             
@@ -88,11 +85,22 @@
 </template>
 
 <script setup>
+    import { ref, onMounted } from 'vue';
+    import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage';
+
     import TBListeDemandeStageAttente from '../components/TBListeDemandeStageAttente.vue'
     import TBListeOffreStageAttente from '../components/TBListeOffreStageAttente.vue'
+
+    const { getAllNotActiveRequests } = useInternshipRequests();
+    const demandes = ref([]);
+
+    onMounted(async () => {
+        demandes.value = await getAllNotActiveRequests();
+    });
+
 </script>
 
-<style>
+<style scoped>
  .flex {
     display: flex;
  }
