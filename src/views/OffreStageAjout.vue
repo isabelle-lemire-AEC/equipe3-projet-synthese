@@ -16,7 +16,7 @@
                 <h3>Titre:</h3>
 
                 <input v-model.trim="offerData.title" type="text" placeholder="Titre de l'offre" />
-                <p class="validForm" v-if="erreurs.title">Veuillez remplir ce champ</p>
+                
 
                 <h3>Entreprise:</h3>
                 <label for="type">Veuillez effectuer un choix</label>
@@ -27,25 +27,25 @@
                         {{ entreprise.name }} 
                     </option>
                 </select>
-                <p class="validForm" v-if="erreurs.name">Veuillez effectuer un choix</p>
+                
             </div>
 
             <div class="groupe-tache">
                 <h1>Description de la tâche</h1>
                 <textarea v-model.trim="offerData.description" placeholder="Description"></textarea>
-                <p class="validForm" v-if="erreurs.description">Veuillez remplir ce champ</p>
+               
             </div>
 
             <div class="groupe-programme">
                 <h3>Programme de formation</h3>
                 <input type="text" id="ajout-programme" v-model.trim="offerData.enterprise.activitySector">
-                <p class="validForm" v-if="erreurs.activitySector">Veuillez remplir ce champ</p>
+                
             </div>
 
             <div class="groupe-exigence">
                 <h3>Exigences</h3>
                 <input v-model.trim="offerData.requiredSkills" type="text" placeholder="Compétences requises" />
-                <p class="validForm" v-if="erreurs.requiredSkills">Veuillez remplir ce champ</p>
+                
             </div>
 
 
@@ -59,12 +59,12 @@
                         <option disable value="">select Type temps plein ou partiel</option>
                         <option v-for="internshipType in  internshipTypes" :key="internshipType._id" :value="internshipType._id">{{ internshipType.value }}</option>
                     </select>
-                    <p class="validForm" v-if="erreurs.internshipType">Veuillez effectuer un choix</p>
+                    
 
                     <h3>Nombre d'heures par semaine</h3>
                     <label for="weeklyWorkHours">Heures de travail par semaine :</label>
                     <input v-model.number="offerData.weeklyWorkHours" type="number" placeholder="Heures de travail par semaine" />
-                    <p class="validForm" v-if="erreurs.weeklyWorkHours">Veuillez effectuer un choix</p>
+                    
                 
                     <h3>Rénumération</h3>
                     <input type="checkbox" id="ajout-remuneration1" name="ajout-remuneration1" value="discuter">
@@ -74,18 +74,18 @@
                     <input type="checkbox" id="ajout-remuneration3" name="ajout-remuneration3" value="nonRemunere">
                     <label for="ajout-remuneration3"> Stage non rémunéré</label>
                     <label for="Salaire">Salaire / semaine; </label>
-                    <p class="validForm" v-if="erreurs.salary">Veuillez effectuer un choix</p>
+                    
                     <!--<input v-model.number="offerData.salary" type="number" placeholder="Salaire" />-->
                 </div>
 
                 <div>
                     <h3>Date de début</h3>
                     <input v-model="offerData.startDate" type="date" placeholder="Date de début" />
-                    <p class="validForm" v-if="erreurs.startDate">Veuillez effectuer un choix</p>
+                    
 
                     <h3>Date de fin</h3>
                     <input v-model="offerData.endDate" type="date" placeholder="Date de fin" />
-                    <p class="validForm" v-if="erreurs.endDate">Veuillez effectuer un choix</p>
+                    
 
                     <select v-model="offerData.province._id">
                         <option disabled value="">Sélectionnez une province</option>

@@ -34,8 +34,9 @@ const router = createRouter({
     { path: '/tableau-de-bord', name: 'TableauDeBord', component: TableauDeBord },
 
     { path: '/offres-de-stages', name: 'OffresStages', component: OffresStages },
-    { path: '/offres-de-stages/offre-de-stage-details', name: 'OffreStageDetails', component: OffreStageDetails },
+    { path: '/offre-de-stage-details/:id', name: 'OffreStageDetails', component: OffreStageDetails },
     { path: '/offre-de-stage-mise-a-jour', name: 'OffreStageMiseAjour', component: OffreStageMiseAjour },
+    { path: '/offre-de-stage-mise-a-jour/:id', name: 'OffreStageMiseAjour', component: OffreStageMiseAjour },
     { path: '/offre-de-stage-ajout', name: 'OffreStageAjout', component: OffreStageAjout },
 
     { path: '/demandes-de-stages', name: 'DemandesStages', component: DemandesStages },

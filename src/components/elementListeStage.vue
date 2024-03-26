@@ -2,11 +2,11 @@
     <div class="elementStage" v-if="showThisElement">
         <div>
             <div class="poste">
-            <div class="iconTemp"></div>
-            <div class="posteEtNom">
-                <span>{{ props.stage.title }}</span>
-                <span>{{ props.stage.candidate.firstName }} {{ props.stage.candidate.lastName }}</span>
-            </div>
+                <div class="iconTemp"></div>
+                <div class="posteEtNom">
+                    <span>{{ props.stage.title }}</span>
+                    <span>{{ props.stage.candidate.firstName }} {{ props.stage.candidate.lastName }}</span>
+                </div>
             </div>
         </div>
         <div class="secteurActivite">
