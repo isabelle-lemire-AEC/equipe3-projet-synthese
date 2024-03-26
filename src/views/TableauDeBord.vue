@@ -32,6 +32,7 @@
             </div>
         </section>
 
+        <!-- Demande de stage -->
         <section class="dernieresDemandes">
             <div class="flex">
                 <div>
@@ -40,17 +41,22 @@
                 </div>
                 <button>Valider toutes les demandes</button>
             </div>
-
-            <div class="flex">
-                <p>Profil - </p>
-                <p>Etablissement - </p>
-                <p>Date - </p>
-                <p>Actions</p>
+            <div>
+                <div class="flex">
+                    <p>Poste</p>
+                    <p>Etablissement</p>
+                    <p>Date</p>
+                    <p>Actions</p>
+                </div>
+                <TBListeDemandeStageAttente v-for="demande in demandes" :key="demande._id" :demande="demande" />
             </div>
+
+            
         </section>
 
         <hr style="margin: 25px 0;"> <!-- à deleter, seulement pour faire section -->
 
+        <!-- Offre de stage -->
         <section class="dernieresOffres">
             <div class="flex">
                 <div>
@@ -60,11 +66,18 @@
                 <button>Valider toutes les offres</button>
             </div>
 
-            <div class="flex">
-                <p>Poste - </p>
-                <p>Etablissement - </p>
-                <p>Date - </p>
-                <p>Actions</p>
+            <div>
+                <div class="flex">
+                    <p>Poste</p>
+                    <p>Ville</p>
+                    <p>Date</p>
+                    <p>Action</p>
+                </div>
+                <TBListeOffreStageAttente></TBListeOffreStageAttente>
+                <TBListeOffreStageAttente></TBListeOffreStageAttente>
+                <TBListeOffreStageAttente></TBListeOffreStageAttente>
+                <TBListeOffreStageAttente></TBListeOffreStageAttente>
+
             </div>
             
         </section>
@@ -72,10 +85,22 @@
 </template>
 
 <script setup>
+    import { ref, onMounted } from 'vue';
+    import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage';
+
+    import TBListeDemandeStageAttente from '../components/TBListeDemandeStageAttente.vue'
+    import TBListeOffreStageAttente from '../components/TBListeOffreStageAttente.vue'
+
+    const { getAllNotActiveRequests } = useInternshipRequests();
+    const demandes = ref([]);
+
+    onMounted(async () => {
+        demandes.value = await getAllNotActiveRequests();
+    });
 
 </script>
 
-<style>
+<style scoped>
  .flex {
     display: flex;
  }
