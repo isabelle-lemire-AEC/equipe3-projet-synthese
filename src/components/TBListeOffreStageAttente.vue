@@ -14,10 +14,10 @@
             <button>
                 <i class="fa-solid fa-eye"></i>
             </button>
-            <button class="boutons-action__modifier"> <!-- @click="fonction(????._id)" -->
+            <button class="boutons-action__modifier">
                 <i class="fas fa-pen-to-square"></i>
             </button>
-            <button class="boutons-action__supprimer"> <!-- @click="afficherConfirmationModal" -->
+            <button class="boutons-action__supprimer">
                 <i class="fa-solid fa-trash-can"></i>
             </button>
         </div>
