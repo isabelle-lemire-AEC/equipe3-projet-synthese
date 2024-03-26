@@ -1,63 +1,83 @@
 <!-- CandidatMiseAjour.vue - Isa  -->
 
 <template>
-    <div class="container">
-        <div class="border-left-titre" v-if="candidat">
-            <h3>Candidat</h3>
+    <div class="form-fiche formulaire-edition-candidat">
+        <div class="form-fiche__wrapper-titre" v-if="candidat">
+            <p class="form-fiche__nom-section">Candidat</p>
             <h1>{{ candidat.firstName }} {{ candidat.lastName }}</h1>
-            <h2>UX Designer</h2>
+            <p class="form-fiche__sous-titre">UX Designer</p>
         </div>
 
         <form id="edition-candidat" @submit.prevent="soumettreFormulaire">
-            
-            <div>
-                <button class="annuler" type="submit" @click="annulerModif">Annuler</button>
-                <button class="mettre-a-jour" type="submit"><i class="fas fa-save"></i>Mettre à jour</button>
+
+            <div class="boutons">
+                <button class="bouton bouton--transparent" type="submit" @click="annulerModif">Annuler</button>
+                <button class="bouton bouton--mauve" type="submit">
+                    <div class="icone-libelle">
+                        <i class="fas fa-save"></i>
+                        <span>Mettre à jour</span>
+                    </div>
+                </button>
             </div>
 
-            <div class="section">
-                <div>
+            <div class="form-fiche__encadre">
+                <div class="form-fiche__wrapper-titre-groupe-inputs">
                     <h2>Courte présentation</h2>
-                    <label for="description"></label>
-                    <textarea name="description" id="description" cols="30" rows="10" v-model="candidat.description"></textarea>
+                    <div>
+                        <label for="description"></label>
+                        <textarea name="description" id="description" cols="30" rows="10"
+                                  v-model="candidat.description"></textarea>
+                    </div>
                 </div>
-                
-                <div>
-                    <h3>Inormations personnelles</h3>
-                    <div class="flex">
-                        <div class="col-gauche padding-right-15 border-left">
-                            <label for="address">Adresse</label>
-                            <input type="text" id="address" v-model="candidat.address">
-                        </div>
-                        <div class="col-droite border-left">
-                            <label for="phone">Téléphone</label>
-                            <input type="text" id="phone" v-model="candidat.phone">
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <div class="col-gauche padding-right-15 border-left">
-                            <label for="city">Ville</label>
-                            <input type="text" id="city" v-model="candidat.city">
-                        </div>
-                        <div class="col-droite border-left">
-                            <label for="email">Courriel</label>
-                            <input type="email" id="email" v-model="candidat.email">
-                        </div>
-                    </div>
-                    <div class="border-left">
-                        <label for="province"></label>
-                        <select id="province" v-model="candidat.province">
-                            <option value="">Province</option>
-                            <option v-for="province in provinces" 
-                                :key="province._id" 
-                                :value="province">{{ province.value }}
-                            </option>
 
-                        </select>
-                    </div>
-                    <div class="border-left">
-                        <label for="postalCode">Code postal</label>
-                        <input type="text" id="postalCode" v-model="candidat.postalCode">
+                <div class="form-fiche__wrapper-titre-groupe-inputs">
+                    <h3>Informations personnelles</h3>
+                    <div class="form-fiche__colonnes-inputs">
+                        <div class="form-fiche__colonne-inputs">
+                            <div class="form-fiche__label-input-vertical">
+                                <label for="address">Adresse</label>
+                                <input type="text" id="address" v-model="candidat.address">
+                            </div>
+
+                            <div class="form-fiche__label-input-vertical">
+                                <label for="city">Ville</label>
+                                <input type="text" id="city" v-model="candidat.city">
+                            </div>
+
+                            <div class="form-fiche__label-input-vertical">
+                                <label for="province"></label>
+                                <select id="province" v-model="candidat.province">
+                                    <option value="">Province</option>
+                                    <option v-for="province in provinces"
+                                            :key="province._id"
+                                            :value="province">{{ province.value }}
+                                    </option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-fiche__label-input-vertical">
+                                <label for="city">Ville</label>
+                                <input type="text" id="city" v-model="candidat.city">
+                            </div>
+
+                            <div class="form-fiche__label-input-vertical">
+                                <label for="postalCode">Code postal</label>
+                                <input type="text" id="postalCode" v-model="candidat.postalCode">
+                            </div>
+                        </div>
+
+                        <div class="form-fiche__colonne-inputs">
+                            <div class="form-fiche__label-input-vertical">
+                                <label for="phone">Téléphone</label>
+                                <input type="text" id="phone" v-model="candidat.phone">
+                            </div>
+
+                            <div class="form-fiche__label-input-vertical">
+                                <label for="email">Courriel</label>
+                                <input type="email" id="email" v-model="candidat.email">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,20 +91,34 @@
 
 
 <script setup>
-    import { useCandidat } from '@/composables/candidats/candidat';
-    import { fetchProvinces } from '@/composables/api';
-    
-    const { getCandidatById, editCandidat } = useCandidat();
-    
-    import { ref, onMounted } from 'vue';
-    import { useRoute } from 'vue-router';
-    import { useRouter } from 'vue-router';
+    import {
+        useCandidat
+    } from '@/composables/candidats/candidat';
+    import {
+        fetchProvinces
+    } from '@/composables/api';
+
+    const {
+        getCandidatById,
+        editCandidat
+    } = useCandidat();
+
+    import {
+        ref,
+        onMounted
+    } from 'vue';
+    import {
+        useRoute
+    } from 'vue-router';
+    import {
+        useRouter
+    } from 'vue-router';
 
     const route = useRoute();
     const router = useRouter();
 
     const provinces = ref([]);
-    
+
     const candidat = ref({
         firstName: '',
         lastName: '',
@@ -95,7 +129,10 @@
         phone: '',
         city: '',
         email: '',
-        province: { _id: '', value: '' },
+        province: {
+            _id: '',
+            value: ''
+        },
         postalCode: ''
     });
 
@@ -114,9 +151,12 @@
             }
             console.log("Tentative de modification du candidat :", candidat.value);
             console.log("URL de la requête PATCH :", `https://api-3.fly.dev/candidates/${candidat.value._id}`);
-            await editCandidat(candidat.value._id, candidat.value); // Passez candidat.value._id en premier argument
+            await editCandidat(candidat.value._id, candidat
+                .value); // Passez candidat.value._id en premier argument
             console.log("Candidat modifié");
-            router.push({ name: 'Candidats' });
+            router.push({
+                name: 'Candidats'
+            });
         } catch (error) {
             console.error("Erreur lors de la modification du candidat :", error);
         }
@@ -124,7 +164,9 @@
 
     const annulerModif = () => {
         console.log("Annuler la modification du candidat");
-        route.push({ name: 'Candidats' });
+        route.push({
+            name: 'Candidats'
+        });
     }
 
     const soumettreFormulaire = async () => {
@@ -162,7 +204,7 @@
 </script>
 
 <style scoped>
-    .container {
+    /* .container {
         padding:80px 200px 80px 200px;
         background-color: #ececee;
     }
@@ -237,5 +279,5 @@
 
     button {
         margin-right: 15px;
-    }
+    } */
 </style>
