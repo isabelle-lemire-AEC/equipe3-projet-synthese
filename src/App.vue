@@ -25,7 +25,7 @@
   import Header from './components/Header.vue';
   import Sidebar from './components/Sidebar.vue';
   import Footer from './components/Footer.vue';
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
 
   const route = useRoute();
   const isMenuOpen = ref(false);
@@ -34,10 +34,8 @@
     isMenuOpen.value = isOpen;
   };
 
-  // Fonction masquer la navbar, le header et le footer sur la page d'accueil
-  const isHomePage = () => {
-    return route.name === 'accueil';
-  };
+  // Fonction pour vérifier si la page actuelle est la page d'accueil
+  const isHomePage = computed(() => route.name === 'accueil');
 </script>
 
 <style scoped>
