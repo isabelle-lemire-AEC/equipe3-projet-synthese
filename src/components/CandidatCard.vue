@@ -15,25 +15,26 @@
   </div>
 </template>
 
-<script>
-  export default {
-    props: {
-      candidate: {
-        type: Object,
-        required: true
+<script setup>
+  import { useRouter } from 'vue-router';
+
+  const { push } = useRouter();
+
+  const redirectToDetails = () => {
+    push({
+      name: 'CandidatDetails',
+      params: {
+        id: props.candidate._id
       }
-    },
-    methods: {
-      redirectToDetails() {
-        this.$router.push({
-          name: 'CandidatDetails',
-          params: {
-            id: this.candidate._id
-          }
-        });
-      }
+    });
+  };
+
+  const props = defineProps({
+    candidate: {
+      type: Object,
+      required: true
     }
-  }
+  });
 </script>
 
 
