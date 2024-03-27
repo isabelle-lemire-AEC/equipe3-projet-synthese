@@ -41,6 +41,7 @@ export function useInternshipOffers() {
       const res = await axios.get('https://api-3.fly.dev/internship-offers');
       response.value = res.data; 
       console.log("get offer ça marche", res.data);
+      //return response.value;
     } catch (err) {
       error.value = err;
       console.log("get offer ça marche pas", err);
