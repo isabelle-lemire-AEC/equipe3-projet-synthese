@@ -1,33 +1,33 @@
-//  _candidats.scss
+// _entreprises.scss
 @use '../general/variables';
 @use '../general/mixins';
 
 
-/* Général à plusieurs views de candidats */
+/* Général à plusieurs views d'entreprises */
 
 .form-fiche {
     &__wrapper-titre {
-        border-color: variables.$purple;
+        border-color: variables.$blue;
     }
 }
 
-#ajout-candidat,
-#edition-candidat,
+#ajout-entreprise,
+#edition-entreprise,
 .form-fiche__wrapper-boutons-encadre {
     @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
 }
 
 
 
-/* Spécifique pour la view Candidats */
+/* Spécifique pour la view Entreprises */
 
-.candidats {
+.entreprises {
     h1 {
         margin-bottom: variables.$spacing-xlarge;
     }
 
     .bouton {
-        &--mauve {
+        &--blue {
             margin-bottom: variables.$spacing-xlarge;
         }
     }
@@ -38,9 +38,9 @@
 
 }
 
-/* Spécifique pour la view CandidatAjout */
+/* Spécifique pour la view EntrepriseAjout */
 
-.formulaire-ajout-candidat {
+.formulaire-ajout-entreprise {
 
     .form-fiche__wrapper-titre {
         margin-bottom: variables.$spacing-large * 4;
@@ -48,18 +48,18 @@
 
     h2,
     h3 {
-        color: variables.$turquoise;
+        color: variables.$blue;
     }
 }
 
 
-/* Spécifique pour la view CandidatDetail et CandidatMiseAJour */
+/* Spécifique pour la view EntrepriseDetail et EntrepriseMiseAJour */
 
-.fiche-candidat-details,
-.formulaire-edition-candidat {
+.fiche-entreprise-details,
+.formulaire-edition-entreprise {
 
     h2,
     h3 {
-        color: variables.$purple;
+        color: variables.$blue;
     }
 }
