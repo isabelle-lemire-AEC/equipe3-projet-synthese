@@ -8,7 +8,7 @@
     <form id="ajout-entreprise" @submit.prevent="soumettreFormulaireEntreprise">
 
       <div class="boutons">
-        <button class="bouton bouton--transparent" type="button" @click="annulerAjout">Annuler</button>
+        <button class="bouton bouton--transparent" type="button"  @click="$router.go(-1)">Annuler</button>
         <button class="bouton bouton--bleu" type="submit">
           <div class="icone-libelle">
             <i class="fas fa-save"></i>
@@ -67,10 +67,28 @@
               </div>
 
               <div class="form-fiche__label-input-vertical">
+                <label for="telephone">Téléphone :</label>
+                <div>
+                  <input type="text" id="telephone" v-model.trim="entreprise.phone">
+                  <p class="validForm" v-if="erreurs.phone">Ce champ est obligatoire</p>
+                </div>
+              </div>
+
+              <div class="form-fiche__label-input-vertical">
                 <label for="ville">Ville :</label>
                 <div>
                   <input type="text" id="ville" v-model.trim="entreprise.city">
                   <p class="validForm" v-if="erreurs.city">Ce champ est obligatoire</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-fiche__colonne-inputs">
+              <div class="form-fiche__label-input-vertical">
+                <label for="courriel">Courriel :</label>
+                <div>
+                  <input type="email" id="courriel" v-model.trim="entreprise.email">
+                  <p class="validForm" v-if="erreurs.email">Ce champ est obligatoire</p>
                 </div>
               </div>
 
@@ -85,6 +103,7 @@
                   <p class="validForm" v-if="erreurs.province">Ce champ est obligatoire</p>
                 </div>
               </div>
+
               <div class="form-fiche__label-input-vertical">
                 <label for="cp">Code postal :</label>
                 <div>
@@ -93,30 +112,12 @@
                 </div>
               </div>
             </div>
-
-            <div class="form-fiche__colonne-inputs">
-              <div class="form-fiche__label-input-vertical">
-                <label for="telephone">Téléphone :</label>
-                <div>
-                  <input type="text" id="telephone" v-model.trim="entreprise.phone">
-                  <p class="validForm" v-if="erreurs.phone">Ce champ est obligatoire</p>
-                </div>
-              </div>
-
-              <div class="form-fiche__label-input-vertical">
-                <label for="courriel">Courriel :</label>
-                <div>
-                  <input type="email" id="courriel" v-model.trim="entreprise.email">
-                  <p class="validForm" v-if="erreurs.email">Ce champ est obligatoire</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
       <div class="boutons">
-        <button class="bouton bouton--transparent" type="button" @click="annulerAjout">Annuler</button>
+        <button class="bouton bouton--transparent" type="button" @click="$router.go(-1)">Annuler</button>
         <button class="bouton bouton--bleu" type="submit">
           <div class="icone-libelle">
             <i class="fas fa-save"></i>
@@ -128,7 +129,6 @@
     </form>
   </div>
 </template>
-
 
 <script setup>
   // Ajout entreprise - Dona
