@@ -37,7 +37,7 @@
     try {
         const response = await getAllOffers();
         toutesOffres.value = response.data;
-        console.log("toutesDemandes: ", toutesOffres);
+        console.log("toutesOffres: ", toutesOffres);
     } catch (error) {
         console.error("Error:", error.response ? error.response.data : error.message);
     }
