@@ -1,4 +1,4 @@
-<!-- CandidatAjout.vue - Isa  -->
+<!-- CandidatAjout.vue -->
 <template>
 
     <div class="form-fiche formulaire-ajout-candidat">
@@ -119,8 +119,14 @@
                 </div>
             </div>
 
-            <div>
-                btn à mettre quand prog ok
+            <div class="boutons">
+                <button class="bouton bouton--transparent" type="submit" @click="annulerAjout">Annuler</button>
+                <button class="bouton bouton--mauve" type="submit">
+                    <div class="icone-libelle">
+                        <i class="fas fa-save"></i>
+                        <span>Sauvegarder</span>
+                    </div>
+                </button>
             </div>
 
         </form>
@@ -129,19 +135,11 @@
 
 
 <script setup>
-    import {
-        ref
-    } from 'vue';
-    import {
-        useRouter
-    } from 'vue-router';
+    import { ref } from 'vue';
+    import { useRouter } from 'vue-router';
 
-    import {
-        useCandidat
-    } from '@/composables/candidats/candidat';
-    import {
-        fetchProvinces
-    } from '@/composables/api';
+    import { useCandidat } from '@/composables/candidats/candidat';
+    import { fetchProvinces } from '@/composables/api';
 
     const router = useRouter();
     const {

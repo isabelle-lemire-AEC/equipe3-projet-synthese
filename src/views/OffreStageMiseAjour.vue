@@ -25,8 +25,8 @@
       </div>
 
       <div class="groupe-programme">
-          <h3>Programme de formation</h3>
-          <input type="text" id="programme">
+          <label for="offreMiseAjour-programme">Programme de formation</label>
+          <input type="text" id="offreMiseAjour-programme">
       </div>
 
       <div class="groupe-exigence">
@@ -46,14 +46,14 @@
               <label for="offreMiseAjour-heure">Nombre d'heures par semaine</label>
               <input v-model.number="offerData.weeklyWorkHours" type="number" placeholder="Veuillez effectuer un choix" />
 
-              <h3>Rénumération</h3>
+              <label for="remuneration">Rénumération</label>
 
-              <input type="checkbox" id="remuneration1" name="remuneration1" value="discuter">
-              <label for="remuneration1"> À discuter</label><br>
-              <input type="checkbox" id="remuneration2" name="remuneration2" value="remunere">
-              <label for="remuneration2"> Stage rémunéré</label><br>
-              <input type="checkbox" id="remuneration3" name="remuneration3" value="nonRemunere">
-              <label for="remuneration3"> Stage non rémunéré</label>
+              <input type="checkbox" id="miseAjourRemuneration1" name="miseAjourRemuneration1" value="discuter">
+              <label for="miseAjourRemuneration1"> À discuter</label><br>
+              <input type="checkbox" id="miseAjourRemuneration2" name="miseAjourRemuneration2" value="remunere">
+              <label for="miseAjourRemuneration2"> Stage rémunéré</label><br>
+              <input type="checkbox" id="miseAjourRemuneration3" name="miseAjourRemuneration3" value="nonRemunere">
+              <label for="miseAjourRemuneration3"> Stage non rémunéré</label>
           </div>
 
           <div class="groupe-droite">
@@ -66,8 +66,8 @@
       </div>
 
       <section class="info-sup">
-          <h3>Informations suplémentaires</h3>
-          <textarea id="info-sup-form"></textarea>
+          <label for="">Informations suplémentaires</label>
+          <textarea id="offreMiseAjour-info-sup-form"></textarea>
       </section>
 
   </form> 

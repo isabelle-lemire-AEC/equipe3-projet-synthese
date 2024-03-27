@@ -6,10 +6,10 @@
                 <h1>{{ demande.title }}</h1>
             </div>
         </div>
-        <div class="btnsContainer">
-            <button>Activer</button>
-            <button @click="redirigerVersMiseAJour(demande._id)">Modifier</button>
-            <button @click="afficherConfirmationModal()">Effacer</button>
+        <div class="btnsContainer boutons-action">
+            <button class="boutons-action__crochet"><i class="fas fa-check"></i></button>
+            <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(demande._id)"><i class="fas fa-pen-to-square"></i></button>
+            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i class="fa-solid fa-trash-can"></i></button>
         </div>
         <div class="infoContainer">
             <div>

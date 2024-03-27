@@ -1,4 +1,4 @@
-<!-- Accueil.vue / prog ISA-->
+<!-- Accueil.vue -->
 <template>
   <div class="app-container">
     <div class="logo-container">

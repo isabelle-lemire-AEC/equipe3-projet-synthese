@@ -18,16 +18,16 @@
         <div class="dateInscription">
             <span>{{ date }}</span>
         </div>
-        <div class="groupeBtns">
+        <div class="groupeBtns boutons-action">
             <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.stage._id}}">
-                <button>Oeil</button>
+                <button><i class="fa-solid fa-eye"></i></button>
             </RouterLink>
 
             <RouterLink :to="{name: 'DemandeStageMiseAjour', params: {id: props.stage._id}}">
-                <button>Edit</button>
+                <button class="boutons-action__modifier"><i class="fas fa-pen-to-square"></i></button>
             </RouterLink>
 
-            <button @click="afficherConfirmationModal()">Trash</button>
+            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i class="fa-solid fa-trash-can"></i></button>
         </div>
 
         <!-- Modal de confirmation de suppression -->
