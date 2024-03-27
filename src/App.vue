@@ -1,11 +1,11 @@
 <!-- App.vue -->
 <template>
   <div class="wrapper-sidebar-main-content">
-    <nav v-show="isMenuOpen">
+    <nav v-if="!isHomePage">
       <Sidebar></Sidebar>
     </nav>
     <div class="wrapper-main-content">
-      <header class="layout-header">
+      <header class="layout-header" v-if="!isHomePage">
         <Header @menu-toggled="handleMenuToggle"></Header>
       </header>
       <main>
@@ -13,7 +13,7 @@
           <router-view />
         </section>
       </main>
-      <footer>
+      <footer v-if="!isHomePage">
         <Footer></Footer>
       </footer>
     </div>
@@ -21,26 +21,25 @@
 </template>
 
 <script setup>
-  import {
-    RouterView
-  } from 'vue-router';
+  import { RouterView, useRoute } from 'vue-router';
   import Header from './components/Header.vue';
   import Sidebar from './components/Sidebar.vue';
   import Footer from './components/Footer.vue';
-  import {
-    ref
-  } from 'vue';
+  import { ref } from 'vue';
 
-
-  /* Menu toggable */
-
+  const route = useRoute();
   const isMenuOpen = ref(false);
 
   const handleMenuToggle = (isOpen) => {
     isMenuOpen.value = isOpen;
   };
+
+  // Fonction masquer la navbar, le header et le footer sur la page d'accueil
+  const isHomePage = () => {
+    return route.name === 'accueil';
+  };
 </script>
 
 <style scoped>
-
+/* Styles */
 </style>
