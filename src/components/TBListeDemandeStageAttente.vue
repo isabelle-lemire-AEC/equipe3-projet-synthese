@@ -13,10 +13,10 @@
         <div class="boutons-action">
             <button>Accepter</button>
             <button>
-                <i class="fa-solid fa-eye"></i>
+                    <i class="fa-solid fa-eye"></i>
             </button>
             <button class="boutons-action__modifier">
-                <i class="fas fa-pen-to-square"></i>
+                    <i class="fas fa-pen-to-square"></i>
             </button>
             <button class="boutons-action__supprimer">
                 <i class="fa-solid fa-trash-can"></i>
@@ -27,6 +27,9 @@
 
 <script setup>
     import { defineProps } from 'vue';
+    import { useRouter } from 'vue-router';
+    
+    const router = useRouter();
 
     const props = defineProps({
         demande: Object

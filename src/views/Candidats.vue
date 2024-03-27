@@ -11,24 +11,14 @@
 
 <script setup>
   import CandidatCard from '@/components/CandidatCard.vue';
-  import {
-    useCandidat
-  } from '@/composables/candidats/candidat';
-  import {
-    ref,
-    onMounted
-  } from 'vue';
-  import {
-    useRouter
-  } from 'vue-router';
-
+  import { useCandidat } from '@/composables/candidats/candidat';
+  import { ref, onMounted } from 'vue';
+  import { useRouter } from 'vue-router';
 
   const candidates = ref([]);
 
   // Importation de la fonction getAllCandidats depuis le fichier candidat.js
-  const {
-    getAllCandidats
-  } = useCandidat();
+  const { getAllCandidats } = useCandidat();
 
   const router = useRouter();
 
