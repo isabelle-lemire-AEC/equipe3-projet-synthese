@@ -1,77 +1,130 @@
 <!-- EntrepriseAjout -->
 <template>
-  <div class="ajouter-entreprise-container">
-    <div class="entreprise-header-card">
-      <div class="nom-container">
-        <h2 class="entreprise-nom">Ajouter une entreprise</h2>
-      </div>
+  <div class="form-fiche formulaire-ajout-entreprise">
+    <div class="form-fiche__wrapper-titre">
+      <h1>Ajouter une entreprise</h1>
     </div>
-    <form @submit.prevent="soumettreFormulaireEntreprise" class="entreprise-detail-wrapper">
-      <div class="form-group">
-        <label for="nom">Entreprise</label>
-        <input id="nom" type="text" v-model="entreprise.name" />
-        <p v-if="erreurs.name" class="error">Ce champ est obligatoire</p>
+
+    <form id="ajout-entreprise" @submit.prevent="soumettreFormulaireEntreprise">
+
+      <div class="boutons">
+        <button class="bouton bouton--transparent" type="button" @click="annulerAjout">Annuler</button>
+        <button class="bouton bouton--bleu" type="submit">
+          <div class="icone-libelle">
+            <i class="fas fa-save"></i>
+            <span>Sauvegarder</span>
+          </div>
+        </button>
       </div>
 
-      <div class="form-group">
-        <label for="logo">Logo (URL)</label>
-        <input id="logo" type="text" v-model="entreprise.image"
-          placeholder="Entrez l'URL de l'image ou laissez vide pour l'image par défaut" />
-        <p v-if="erreurs.image" class="error">Ce champ est obligatoire</p>
-      </div>
+      <div class="form-fiche__input-hors-encadre">
+        <div class="form-fiche__label-input-horizontal">
+          <label for="nom">Entreprise :</label>
+          <div class="form-fiche__wrapper-input-msg-erreur">
+            <input type="text" id="nom" v-model.trim="entreprise.name">
+            <p class="validForm" v-if="erreurs.name">Ce champ est obligatoire</p>
+          </div>
+        </div>
 
-      <div class="section">
-        <h2 class="section-title"><span>Courte présentation</span></h2>
-        <textarea id="presentation" v-model="entreprise.description"></textarea>
-        <p v-if="erreurs.description" class="error">Ce champ est obligatoire</p>
-        <h3>Personne contact</h3>
-        <input id="contactPerson" type="text" v-model="entreprise.contactPerson" />
-        <p v-if="erreurs.contactPerson" class="error">Ce champ est obligatoire</p>
-      </div>
-
-      <div class="section">
-        <h3 class="section-title">Informations de contact</h3>
-        <div class="grid-container">
-          <div class="form-group">
-            <label for="adresse">Adresse</label>
-            <input id="adresse" type="text" v-model="entreprise.address" />
-            <p v-if="erreurs.address" class="error">Ce champ est obligatoire</p>
-          </div>
-          <div class="form-group">
-            <label for="telephone">Téléphone</label>
-            <input id="telephone" type="tel" v-model="entreprise.phone" />
-            <p v-if="erreurs.phone" class="error">Ce champ est obligatoire</p>
-          </div>
-          <div class="form-group">
-            <label for="ville">Ville</label>
-            <input id="ville" type="text" v-model="entreprise.city" />
-            <p v-if="erreurs.city" class="error">Ce champ est obligatoire</p>
-          </div>
-          <div class="form-group">
-            <label for="courriel">Courriel</label>
-            <input id="courriel" type="email" v-model="entreprise.email" />
-            <p v-if="erreurs.email" class="error">Ce champ est obligatoire</p>
-          </div>
-          <div class="form-group">
-            <label for="province">Province</label>
-            <select id="province" v-model="entreprise.province._id">
-              <option v-for="province in provinces" :key="province._id" :value="province._id">
-                {{ province.value }}
-              </option>
-            </select>
-            <p v-if="erreurs.province" class="error">Ce champ est obligatoire</p>
-          </div>
-          <div class="form-group">
-            <label for="cp">Code postal</label>
-            <input id="cp" type="text" v-model="entreprise.postalCode" />
-            <p v-if="erreurs.postalCode" class="error">Ce champ est obligatoire</p>
+        <div class="form-fiche__label-input-horizontal">
+          <label for="logo">Logo (URL) :</label>
+          <div class="form-fiche__wrapper-input-msg-erreur">
+            <input type="text" id="logo" v-model.trim="entreprise.image" placeholder="Entrez l'URL de l'image ou laissez vide pour l'image par défaut">
+            <p class="validForm" v-if="erreurs.image">Ce champ est obligatoire</p>
           </div>
         </div>
       </div>
-      <div class="form-buttons">
-        <button type="button" class="cancel-button" @click="$router.go(-1)">Annuler</button>
-        <button type="submit" class="save-button"><i class="fas fa-save"></i> Sauvegarder</button>
+
+      <div class="form-fiche__encadre">
+        <div class="form-fiche__wrapper-titre-groupe-inputs">
+          <h2>Courte présentation</h2>
+          <div>
+            <label for="presentation" class="form-fiche__label--cache">Présentation</label>
+            <textarea name="presentation" id="presentation" cols="30" rows="10" v-model.trim="entreprise.description"></textarea>
+            <p class="validForm" v-if="erreurs.description">Ce champ est obligatoire</p>
+          </div>
+        </div>
+
+        <div class="form-fiche__label-input-vertical form-fiche__colonne-inputs">
+          <label for="contactPerson">Personne contact :</label>
+          <div>
+            <input type="text" id="contactPerson" v-model.trim="entreprise.contactPerson" class="largeur-100">
+            <p class="validForm" v-if="erreurs.contactPerson">Ce champ est obligatoire</p>
+          </div>
+        </div>
+
+        <div class="form-fiche__wrapper-titre-groupe-inputs">
+          <h3>Informations de contact</h3>
+
+          <div class="form-fiche__colonnes-inputs">
+            <div class="form-fiche__colonne-inputs">
+              <div class="form-fiche__label-input-vertical">
+                <label for="adresse">Adresse :</label>
+                <div>
+                  <input type="text" id="adresse" v-model.trim="entreprise.address">
+                  <p class="validForm" v-if="erreurs.address">Ce champ est obligatoire</p>
+                </div>
+              </div>
+
+              <div class="form-fiche__label-input-vertical">
+                <label for="ville">Ville :</label>
+                <div>
+                  <input type="text" id="ville" v-model.trim="entreprise.city">
+                  <p class="validForm" v-if="erreurs.city">Ce champ est obligatoire</p>
+                </div>
+              </div>
+
+              <div class="form-fiche__label-input-vertical">
+                <label for="province">Province :</label>
+                <div>
+                  <select id="province" v-model="entreprise.province._id">
+                    <option v-for="province in provinces" :key="province._id" :value="province._id">
+                      {{ province.value }}
+                    </option>
+                  </select>
+                  <p class="validForm" v-if="erreurs.province">Ce champ est obligatoire</p>
+                </div>
+              </div>
+              <div class="form-fiche__label-input-vertical">
+                <label for="cp">Code postal :</label>
+                <div>
+                  <input type="text" id="cp" v-model.trim="entreprise.postalCode">
+                  <p class="validForm" v-if="erreurs.postalCode">Ce champ est obligatoire</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-fiche__colonne-inputs">
+              <div class="form-fiche__label-input-vertical">
+                <label for="telephone">Téléphone :</label>
+                <div>
+                  <input type="text" id="telephone" v-model.trim="entreprise.phone">
+                  <p class="validForm" v-if="erreurs.phone">Ce champ est obligatoire</p>
+                </div>
+              </div>
+
+              <div class="form-fiche__label-input-vertical">
+                <label for="courriel">Courriel :</label>
+                <div>
+                  <input type="email" id="courriel" v-model.trim="entreprise.email">
+                  <p class="validForm" v-if="erreurs.email">Ce champ est obligatoire</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <div class="boutons">
+        <button class="bouton bouton--transparent" type="button" @click="annulerAjout">Annuler</button>
+        <button class="bouton bouton--bleu" type="submit">
+          <div class="icone-libelle">
+            <i class="fas fa-save"></i>
+            <span>Sauvegarder</span>
+          </div>
+        </button>
+      </div>
+
     </form>
   </div>
 </template>
@@ -209,8 +262,8 @@
 
 
 
-<style scoped>
-  .ajouter-entreprise-container {
+<style scoped lang="scss">
+ /* .ajouter-entreprise-container {
     width: 90%;
     margin: auto;
     padding: 1rem;
@@ -339,5 +392,5 @@
 
   .error {
     color: red;
-  }
+  }*/
 </style>

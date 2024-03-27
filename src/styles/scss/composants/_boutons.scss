@@ -26,6 +26,15 @@
         }
     }
 
+    //Ajout bouton bleu entreprise
+    &--bleu {
+        background-color: variables.$blue;
+
+        &:hover {
+            background-color: darken(variables.$blue, 5%);
+        }
+    }
+
     &--rouge {
         background-color: variables.$bouton-action-red;
 
