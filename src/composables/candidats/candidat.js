@@ -80,6 +80,16 @@ export function useCandidat() {
     }
   };
 
+  const getCandidatsCount = async () => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/candidates/count`);
+        console.log("GET COUNT - Candidats - OK");
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération du candidat par ID :", error);
+        throw new Error("Erreur lors de la récupération du candidat par ID");
+    }
+  };  
 
 
     // Fonction pour chercher un candidat par ID - RAPH
@@ -99,5 +109,5 @@ export function useCandidat() {
     //}
   //};
 
-  return { addCandidat, getCandidatById, getAllCandidats, editCandidat, deleteCandidat, response, error, loading };
+  return { addCandidat, getCandidatById, getAllCandidats, editCandidat, deleteCandidat, getCandidatsCount, response, error, loading };
 }
