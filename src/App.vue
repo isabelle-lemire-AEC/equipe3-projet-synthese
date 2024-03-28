@@ -18,6 +18,9 @@
       </footer>
     </div>
   </div>
+  <section>
+          <router-view />
+  </section>  
 </template>
 
 <script setup>
