@@ -335,17 +335,18 @@ label {
 
 /* .boutons-ajout {} */
 /* Général à plusieurs views de candidats */
-.form-fiche__wrapper-titre {
-  border-color: #7F2987;
-}
-
 #ajout-candidat,
-#edition-candidat,
-.form-fiche__wrapper-boutons-encadre {
+#edition-candidat {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2rem;
+}
+
+.formulaire-ajout-candidat .form-fiche__wrapper-titre,
+.formulaire-edition-candidat .form-fiche__wrapper-titre,
+.fiche-candidat-details .form-fiche__wrapper-titre {
+  border-color: #7F2987;
 }
 
 /* Spécifique pour la view Candidats */
@@ -370,7 +371,15 @@ label {
   color: #0C9DA4;
 }
 
-/* Spécifique pour la view CandidatDetail et CandidatMiseAJour */
+/* Spécifique pour la view CandidatDetails */
+.fiche-candidat-details .form-fiche__wrapper-boutons-encadre {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+/* Spécifique pour la view CandidatDetails et CandidatMiseAJour */
 .fiche-candidat-details h2,
 .fiche-candidat-details h3,
 .formulaire-edition-candidat h2,
@@ -379,17 +388,16 @@ label {
 }
 
 /* Général à plusieurs views d'entreprises */
-.form-fiche__wrapper-titre {
-  border-color: #86A9E6;
-}
-
 #ajout-entreprise,
-#edition-entreprise,
-.form-fiche__wrapper-boutons-encadre {
+#edition-entreprise {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2rem;
+}
+
+.formulaire-ajout-entreprise .form-fiche__wrapper-titre {
+  border-color: #86A9E6;
 }
 
 /* Spécifique pour la view Entreprises */

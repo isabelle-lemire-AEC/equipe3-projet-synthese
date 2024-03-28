@@ -5,19 +5,21 @@
 
 /* Général à plusieurs views de candidats */
 
-.form-fiche {
-    &__wrapper-titre {
-        border-color: variables.$purple;
-    }
-}
 
 #ajout-candidat,
-#edition-candidat,
-.form-fiche__wrapper-boutons-encadre {
+#edition-candidat {
     @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
 }
 
-
+.formulaire-ajout-candidat,
+.formulaire-edition-candidat,
+.fiche-candidat-details {
+    .form-fiche {
+        &__wrapper-titre {
+            border-color: variables.$purple;
+        }
+    }
+}
 
 /* Spécifique pour la view Candidats */
 
@@ -52,8 +54,17 @@
     }
 }
 
+/* Spécifique pour la view CandidatDetails */
 
-/* Spécifique pour la view CandidatDetail et CandidatMiseAJour */
+.fiche-candidat-details {
+    .form-fiche {
+        &__wrapper-boutons-encadre {
+            @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
+        }
+    }
+}
+
+/* Spécifique pour la view CandidatDetails et CandidatMiseAJour */
 
 .fiche-candidat-details,
 .formulaire-edition-candidat {

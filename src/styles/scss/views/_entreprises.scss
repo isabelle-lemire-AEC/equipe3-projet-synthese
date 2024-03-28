@@ -5,16 +5,17 @@
 
 /* Général à plusieurs views d'entreprises */
 
-.form-fiche {
-    &__wrapper-titre {
-        border-color: variables.$blue;
-    }
+#ajout-entreprise,
+#edition-entreprise {
+    @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
 }
 
-#ajout-entreprise,
-#edition-entreprise,
-.form-fiche__wrapper-boutons-encadre {
-    @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
+.formulaire-ajout-entreprise {
+    .form-fiche {
+        &__wrapper-titre {
+            border-color: variables.$blue;
+        }
+    }
 }
 
 /* Spécifique pour la view Entreprises */
