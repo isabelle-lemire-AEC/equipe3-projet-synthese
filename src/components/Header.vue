@@ -1,36 +1,40 @@
 <!-- NavBar.vue - Nacer / prog isa pour identification  -->
 <template>
   <!-- Boutons d'ajout -->
-  <div class="header" v-if="nomPrenom && courriel">
+  <div class="header" v-if="nomPrenom && courriel"> 
     <div class="header__items">
       <div class="header__icone-boutons-ajout">
-        <i class="fa-solid fa-bars" id="icone-menu" @click="toggleMenu"></i>
-        <div class="boutons-ajout">
-          <button class="add-button add-offer" @click="ajouterOffre">
-            <i class="fas fa-plus"></i> Ajouter une offre de stage
-          </button>
-          <button class="add-button add-request" @click="ajouterDemande">
-            <i class="fas fa-plus"></i> Ajouter une demande de stage
-          </button>
-          <button class="add-button add-company" @click="ajouterEntreprise">
-            <i class="fas fa-plus"></i> Ajouter une entreprise
-          </button>
-          <button class="add-button add-candidate" @click="ajouterCandidat">
-            <i class="fas fa-plus"></i> Ajouter un candidat
-          </button>
-        </div>
-        <div class="utilisateur">
-          <div class="utilisateur__details">
-            <!-- Utilisation des données de l'utilisateur provenant du localStorage -->
-            <p class="utilisateur__nom">{{ nomPrenom }}</p>
-            <p class="utilisateur__courriel">{{ courriel }}</p>
+          <i class="fa-solid fa-bars" id="icone-menu" @click="toggleMenu"></i>
+          <div class="boutons-ajout">
+            <button class="add-button add-offer" @click="ajouterOffre">
+              <i class="fas fa-plus"></i> Ajouter une offre de stage
+            </button>
+            <button class="add-button add-request" @click="ajouterDemande">
+              <i class="fas fa-plus"></i> Ajouter une demande de stage
+            </button>
+            <button class="add-button add-company" @click="ajouterEntreprise">
+              <i class="fas fa-plus"></i> Ajouter une entreprise
+            </button>
+            <button class="add-button add-candidate" @click="ajouterCandidat">
+              <i class="fas fa-plus"></i> Ajouter un candidat
+            </button>
           </div>
-        </div>
+        </div>  
+        
+          <div class="utilisateur">
+            <div class="utilisateur__details">
+              <!-- Utilisation des données de l'utilisateur provenant du localStorage -->
+              <p class="utilisateur__nom">{{ nomPrenom }}</p>
+              <p class="utilisateur__courriel">{{ courriel }}</p>
+            </div>
+          
 
-        <div class="utilisateur__img">
-          <img src="../assets/user.png" alt="Utilisateur" />
-        </div>
-      </div>
+            <div class="utilisateur__img">
+              <img src="../assets/user.png" alt="Utilisateur" />
+            </div>
+          </div>
+        
+      
     </div>
 
   </div>
@@ -87,7 +91,7 @@
 </script>
 
 
-<style scoped>
+<!--<style scoped>
   .navbar {
     display: grid;
     grid-template-columns: 20% 60% 20%;
@@ -177,4 +181,4 @@
   .flex {
     align-items: center;
   }
-</style>
+</style>-->
