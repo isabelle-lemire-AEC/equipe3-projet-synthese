@@ -13,28 +13,27 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.get(`${API_BASE_URL}/internship-requests`);
-      console.log("GET ALL Demandes de stage - OK", response.value.data);
+      console.log("GET ALL - Demandes de stage - OK", response.value.data);
       return response.value;
     } catch (err) {
       error.value = err;
-      console.log("GET ALL Demandes de stage - ERREUR", err);
+      console.log("GET ALL - Demandes de stage - ERREUR", err);
     } finally {
       loading.value = false;
     }
   };
 
   // Obtenir toutes les demandes de stage en attente de validation
-  // IMPORTANT - Remettre à false quand on aura des demande en attente de validation
   const getAllNotActiveRequests = async () => {
     loading.value = true;
     try {
       const response = await axios.get(`${API_BASE_URL}/internship-requests`);
-      console.log("GET ALL Demandes de stage non active - OK", response.data);
-      const nonActiveRequests = response.data.filter(request => request.isActive === true);
+      console.log("GET ALL - Demandes de stage non active - OK", response.data);
+      const nonActiveRequests = response.data.filter(request => request.isActive === false);
       return nonActiveRequests;
     } catch (err) {
       error.value = err;
-      console.log("GET ALL Demandes de stage non active - ERREUR", err);
+      console.log("GET ALL - Demandes de stage non active - ERREUR", err);
     } finally {
       loading.value = false;
     }
@@ -45,11 +44,11 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.get(`${API_BASE_URL}/internship-requests/${id}`);
-      console.log("GET Demandes de stage BY ID - OK", response.value.data);
+      console.log("GET BY ID - Demandes de stage - OK", response.value.data);
       return response.value;
     } catch (err) {
       error.value = err;
-      console.log("GET Demandes de stage BY ID - ERREUR", err);
+      console.log("GET BY ID - Demandes de stage  - ERREUR", err);
     } finally {
       loading.value = false;
     }
@@ -60,11 +59,11 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.post(`${API_BASE_URL}/internship-requests`, requestData);
-      console.log("POST Demande de stage - OK", response.value.data);
+      console.log("POST - Demande de stage - OK", response.value.data);
       return response.value;
     } catch (err) {
       error.value = err;
-      console.log("POST Demande de stage - ERREUR", err);
+      console.log("POST - Demande de stage - ERREUR", err);
     } finally {
       loading.value = false;
     }
@@ -75,13 +74,24 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.patch(`${API_BASE_URL}/internship-requests/${id}`, requestData);
-      console.log(`PATCH Demande de stage avec le id ${id} OK`, response.value.data);
-      return response.value;
+      console.log(`PATCH - Demande de stage avec le id ${id} - OK`, response.value.data);
+      return response.value.data;
     } catch (err) {
       error.value = err;
-      console.log(`PATCH Demande de stage avec le id ${id} ERREUR`, err);
+      console.log(`PATCH - Demande de stage avec le id ${id} ERREUR`, err);
     } finally {
       loading.value = false;
+    }
+  };
+
+  // Il ne faudrait pas utiliser PATCH au lieu de PUT? donc la fonction 'editRequest'?
+  // Mettre isActive à true
+  const updateRequestStatus = async (demandeId, isActive) => {
+    try {
+        await axios.put(`${API_BASE_URL}/internship-requests/${demandeId}`, { isActive });
+    } catch (error) {
+        console.error(`Erreur lors de la mise à jour de la demande ${demandeId} :`, error);
+        throw error;
     }
   };
 
@@ -100,7 +110,37 @@ export function useInternshipRequests() {
     }
   };
 
-  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, getAllNotActiveRequests, response, error, loading };
+  // Obtenir le nombre de demandes de stage
+  const getRequestsCount = async () => {
+    loading.value = true;
+    try {
+      response.value = await axios.get(`${API_BASE_URL}/internship-requests/count`);
+      console.log("GET COUNT - Demandes de stage - OK", response.value.data);
+      return response.value.data;
+    } catch (err) {
+      error.value = err;
+      console.log("GET COUNT - Demandes de stage - ERREUR", err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  const activateRequest = async (id) => {
+    loading.value = true;
+    try {
+      const response = await axios.get(`${API_BASE_URL}/internship-requests/${id}`);
+      response.data.isActive = !response.data.isActive;
+      await editRequest(id, response.data);
+      console.log("ACTIVATE - Demande de stage non active - OK", response.data);
+    } catch (err) {
+      error.value = err;
+      console.log("ACTIVATE - Demande de stage non active - ERREUR", err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, getAllNotActiveRequests, updateRequestStatus, getRequestsCount, activateRequest, response, error, loading };
 }
 
 

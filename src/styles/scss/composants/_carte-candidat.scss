@@ -16,7 +16,7 @@
         @include mixins.flex(column, null, flex-start, variables.$spacing-small);
 
         h2 {
-            font-size: variables.$font-style-h3;
+            font-size: variables.$font-style-h4;
             color: variables.$black;
         }
 

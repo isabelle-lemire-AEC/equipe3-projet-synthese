@@ -34,14 +34,12 @@ const router = createRouter({
     { path: '/tableau-de-bord', name: 'TableauDeBord', component: TableauDeBord },
 
     { path: '/offres-de-stages', name: 'OffresStages', component: OffresStages },
-    { path: '/offre-de-stage-details/:id', name: 'OffreStageDetails', component: OffreStageDetails },
-    { path: '/offre-de-stage-mise-a-jour', name: 'OffreStageMiseAjour', component: OffreStageMiseAjour },
-    { path: '/offre-de-stage-mise-a-jour/:id', name: 'OffreStageMiseAjour', component: OffreStageMiseAjour },
+    { path: '/offre-de-stage-details/:id', name: 'OffreStageDetails', component: OffreStageDetails, props: true  },
+    { path: '/offre-de-stage-mise-a-jour/:id', name: 'OffreStageMiseAjour', component: OffreStageMiseAjour, props: true },
     { path: '/offre-de-stage-ajout', name: 'OffreStageAjout', component: OffreStageAjout },
 
     { path: '/demandes-de-stages', name: 'DemandesStages', component: DemandesStages },
     { path: '/demande-de-stage-details/:id', name: 'DemandeStageDetails', component: DemandeStageDetails, props: true },
-    //{ path: '/demande-de-stage-mise-a-jour', name: 'DemandeStageMiseAjour', component: DemandeStageMiseAjour }, // à effacer? ça ne devrait pas exister - JO
     { path: '/demande-de-stage-mise-a-jour/:id', name: 'DemandeStageMiseAjour', component: DemandeStageMiseAjour, props: true },
     { path: '/demande-de-stage-ajout', name: 'DemandeStageAjout', component: DemandeStageAjout },
 
@@ -56,15 +54,6 @@ const router = createRouter({
     { path: '/entreprise-ajout', name: 'EntrepriseAjout', component: EntrepriseAjout },
 
     { path: '/:pathMatch(.*)*', name: 'erreur', component: Erreur },
-
-    
-    {
-      // raph
-      path: '/offre-de-stage-details/:id',
-      name: 'OffreStageDetails',
-      component: OffreStageDetails,
-      props: true,
-    }
   ],
 });
 

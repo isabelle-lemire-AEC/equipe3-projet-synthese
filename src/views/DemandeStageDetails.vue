@@ -7,47 +7,65 @@
             </div>
         </div>
         <div class="btnsContainer boutons-action">
-            <button class="boutons-action__crochet"><i class="fas fa-check"></i></button>
+            <button :class="{ 'boutons-action__crochet': demande.isActive }" @click="activate()"><i class="fas fa-check"></i></button>
             <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(demande._id)"><i class="fas fa-pen-to-square"></i></button>
             <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i class="fa-solid fa-trash-can"></i></button>
         </div>
         <div class="infoContainer">
+
             <div>
                 <h3>{{ demande.candidate.firstName }} {{ demande.candidate.lastName }}</h3>
                 <p>{{ demande.candidate.description }}</p>
             </div>
+
             <div class="grilleStage">
                 <div class="grilleStageCellule bordureGauche">
-                        <h4>Ville</h4>
-                        <span>{{ demande.candidate.city }}</span>
+                    <h4>Programme de formation</h4>
+                    <span>Développement Web</span> <!-- Info pas fournie par l'API -->
                 </div>
                 <div class="grilleStageCellule bordureGauche">
-                        <h4>Compétences</h4>
-                        <span class="skills" v-for="skill in demande.candidate.skills" :key="skill">{{ skill }}</span>
+                    <h4>Établissement d'enseignement</h4>
+                    <span>Cégep de Trois-Rivières</span> <!-- Info pas fournie par l'API -->
+                </div>
+                <div class="grilleStageCellule bordureGauche" v-if="randomActivitySector">
+                    <h4>Secteur d'activité</h4>
+                    <span>{{ randomActivitySector.value }}</span> <!-- Info pas lié avec une demande, alors on en affiche une aléatoirement -->
                 </div>
                 <div class="grilleStageCellule bordureGauche">
-                        <h4>Région</h4>
-                        <span>{{ demande.province.value }}</span>
+                    <h4>Ville</h4>
+                    <span>{{ demande.candidate.city }}</span>
+                </div>
+                <div class="grilleStageCellule bordureGauche">
+                    <h4>Compétences</h4>
+                    <span class="skills">{{ competences }}</span>
+                </div>
+                <div class="grilleStageCellule bordureGauche">
+                    <h4>Région</h4>
+                    <span>{{ demande.province.value }}</span>
                 </div>            
             </div>
 
             <h4>Informations sur le stage recherché</h4>
             <div class="grilleStage">
                 <div class="grilleStageCellule bordureGauche">
-                        <h4>Type de stage</h4>
-                        <span>{{ demande.internshipType.value }}</span>
+                    <h4>Type de stage</h4>
+                    <span>{{ demande.internshipType.value }}</span>
                 </div>
                 <div class="grilleStageCellule bordureGauche">
-                        <h4>Date de début</h4>
-                        <span>{{ demande.startDate }}</span>
+                    <h4>Date de début</h4>
+                    <span>{{ dateDebut }}</span>
                 </div>   
                 <div class="grilleStageCellule bordureGauche">
-                        <h4>Nombre d'heures par semaine</h4>
-                        <span>{{ demande.weeklyWorkHours }}</span>
+                    <h4>Nombre d'heures par semaine</h4>
+                    <span>{{ demande.weeklyWorkHours }}</span>
                 </div>   
                 <div class="grilleStageCellule bordureGauche">
-                        <h4>Date de fin</h4>
-                        <span>{{ demande.endDate }}</span>
+                    <h4>Date de fin</h4>
+                    <span>{{ dateFin }}</span>
+                </div>  
+                <div class="grilleStageCellule bordureGauche">
+                    <h4>Rénumération</h4>
+                    <span>À la discrétion de l'entreprise</span>
                 </div>            
             </div>
 
@@ -71,16 +89,26 @@
 </template>
 
 <script setup>
-    import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js'
+    import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { ref, reactive, onMounted } from 'vue';
-    import { useRoute, useRouter } from 'vue-router'
-    const { deleteRequest } = useInternshipRequests();
-    const { getRequestById } = useInternshipRequests();
+    import { useRoute, useRouter } from 'vue-router';
+    import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js';
 
+    const { getAllActivitySectors } = useActivitySectors();
+    const { getRequestById, editRequest, deleteRequest  } = useInternshipRequests();
     const route = useRoute();
     const router = useRouter();
     const demande = ref(null);
     const showConfirmationModal = ref(false);
+    const randomActivitySector = ref(null);
+    const dateDebut = ref(null);
+    const dateFin = ref(null);
+    const competences = ref(null);
+
+    const getActivitySectors = async () => {
+        const actSectors = await getAllActivitySectors();
+        randomActivitySector.value = actSectors[Math.floor(Math.random()*actSectors.length)];
+    }
 
     const deleteDemande = async () => {
         await deleteRequest(demande.value._id);
@@ -104,13 +132,28 @@
 
     onMounted(async () => {
         try {
+            getActivitySectors();
             const response = await getRequestById(route.params.id);
             demande.value = response.data;
             console.log("demande.value: ", demande.value);
+
+            // Afin d'afficher les dates dans le bon format
+            dateDebut.value = demande.value.startDate.substring(0, demande.value.startDate.indexOf('T'));
+            dateFin.value = demande.value.endDate.substring(0, demande.value.startDate.indexOf('T'));
+
+            // Afin d'afficher les "skills" comme il faut (sans la dernière virgule)
+            competences.value = demande.value.skills.join(', ');
         } catch (error) {
             console.error("Error:", error.response ? error.response.data : error.message);
         }
+
+
     });
+
+    const activate = async () => {
+        demande.value.isActive = !demande.value.isActive;
+        demande.value = await editRequest(demande.value._id, demande.value);
+    }
 
 </script>
 
@@ -189,7 +232,6 @@
         cursor: pointer;
         border: none;
     }
-
     
     /* Styles pour le modal */
     .modal {

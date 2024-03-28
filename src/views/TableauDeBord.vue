@@ -6,28 +6,28 @@
                 <i class="fa-solid fa-file-lines"></i>
                 <div>
                     <p>Demandes de stage</p>
-                    <p>125</p>
+                    <p>{{ demandesCount }}</p>
                 </div>
             </div>
             <div class="infoRapide-offres flex">
                 <i class="fa-solid fa-paper-plane"></i>
                 <div>
                     <p>Offres de stage</p>
-                    <p>58</p>
+                    <p>{{ offresCount }}</p>
                 </div>
             </div>
             <div class="infoRapide-candidats flex">
                 <i class="fa-solid fa-user"></i>
                 <div>
                     <p>Candidats</p>
-                    <p>125</p>
+                    <p>{{ candidatsCount }}</p>
                 </div>
             </div>
             <div class="infoRapide-entreprises flex">
                 <i class="fa-solid fa-computer-mouse"></i>
                 <div>
                     <p>Entreprises</p>
-                    <p>125</p>
+                    <p>{{ entreprisesCount }}</p>
                 </div>
             </div>
         </section>
@@ -39,7 +39,7 @@
                     <h2>Dernières <span>demandes</span> de stage</h2>
                     <h4>En attente de validation</h4>
                 </div>
-                <button>Valider toutes les demandes</button>
+                <button @click="validerToutesLesDemandes">Valider toutes les demandes</button> <!-- non fonctionnel -->
             </div>
             <div>
                 <div class="flex">
@@ -48,9 +48,32 @@
                     <p>Date</p>
                     <p>Actions</p>
                 </div>
-                <TBListeDemandeStageAttente v-for="demande in demandes" :key="demande._id" :demande="demande" />
-            </div>
 
+                <div v-if="demandes">
+                    <ElementListeStage v-for="demande in demandes"
+                        :key="demande._id"
+                        :posteTitre="demande.title"
+                        :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName"
+                        :region="demande.province.value"
+                        :date="demande.startDate"
+                        :id="demande._id"
+                        :isDemande="true"
+                        :isTableauDeBord="true"
+                        :isActive="demande.isActive"></ElementListeStage>
+                </div>
+                <!-- <div v-if="demandes.length > 0">
+                    <TBListeDemandeStageAttente 
+                        v-for="demande in demandes" 
+                        :key="demande._id" 
+                        :demande="demande" 
+                        @viewDetails="navigateToDemandeDetails"
+                        @editRequest="navigateToDemandeEdit"
+                    />
+                </div>
+                <div v-else>
+                    <p>Il n'y a pas de demande de stage en attente de validation</p>
+                </div> -->
+            </div>
             
         </section>
 
@@ -73,29 +96,80 @@
                     <p>Date</p>
                     <p>Action</p>
                 </div>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-
+                <div v-if="offres">
+                    <ElementListeStage v-for="offre in offres"
+                        :key="offre._id"
+                        :posteTitre="offre.title"
+                        :posteNom="offre.enterprise.name"
+                        :region="offre.province.value"
+                        :date="offre.startDate"
+                        :id="offre._id"
+                        :isDemande="false"
+                        :isTableauDeBord="true"
+                        :isActive="offre.isActive"></ElementListeStage>
+                </div>
             </div>
             
         </section>
     </div>
 </template>
-
 <script setup>
+    import ElementListeStage from '../components/ElementListeStage.vue'
     import { ref, onMounted } from 'vue';
-    import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage';
+    import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
+    import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
+    import { useCandidat } from '../composables/candidats/candidat.js';
+    import { useEntreprise } from '../composables/entreprises/entreprise.js';
+    import TBListeDemandeStageAttente from '../components/TBListeDemandeStageAttente.vue';
+    import TBListeOffreStageAttente from '../components/TBListeOffreStageAttente.vue';
+    // import { page } from '../composables/enums.js';
 
-    import TBListeDemandeStageAttente from '../components/TBListeDemandeStageAttente.vue'
-    import TBListeOffreStageAttente from '../components/TBListeOffreStageAttente.vue'
-
-    const { getAllNotActiveRequests } = useInternshipRequests();
+    const { getAllNotActiveRequests, updateRequestStatus, getRequestsCount } = useInternshipRequests();
+    const { getAllOffers, getInternshipOfferCount } = useInternshipOffers();
+    const { getCandidatsCount } = useCandidat();
+    const { getEntreprisesCount } = useEntreprise();
     const demandes = ref([]);
+    const offres = ref([]);
+    const demandesCount = ref(null);
+    const offresCount = ref(null);
+    const candidatsCount = ref(null);
+    const entreprisesCount = ref(null);
+    const isTableauDeBord = ref(true);
+
+    const navigateToDemandeDetails = (demandeId) => {
+        router.push({ 
+            path: `/demande-de-stage-details/${demandeId}`, 
+            name: 'DemandeStageDetails', 
+            props: true
+        });
+    };
+
+    const navigateToDemandeEdit = (demandeId) => {
+        router.push({
+            path: `/demande-de-stage-mise-a-jour/${demandeId}`,
+            name: 'DemandeStageMiseAjour',
+            props: true
+        });
+    };
+
+    const validerToutesLesDemandes = async () => {
+        try {
+            await Promise.all(demandes.value.map(async (demande) => {
+                await updateRequestStatus(demande._id, true);
+                demande.isActive = true;
+            }));
+        } catch (error) {
+            console.error("Erreur lors de la validation des demandes :", error);
+        }
+    };
 
     onMounted(async () => {
         demandes.value = await getAllNotActiveRequests();
+        offres.value = await getAllOffers();
+        demandesCount.value = await getRequestsCount();
+        offresCount.value = await getInternshipOfferCount();
+        candidatsCount.value = await getCandidatsCount();
+        entreprisesCount.value = await getEntreprisesCount();
     });
 
 </script>

@@ -1,0 +1,32 @@
+@use '../general/variables';
+@use '../general/mixins';
+
+.carte-entreprise {
+
+    background-color: variables.$white;
+    align-items: center;
+    height: 100%;
+    @include mixins.grid(2, variables.$spacing-medium);
+    @include mixins.padding(variables.$spacing-large, variables.$spacing-medium);
+
+    &__img {
+        min-width: 150px; /* À valider si on garde ou pas quand on sera rendu au responsive */
+        max-width: 70%;
+        margin-inline: auto;
+    }
+
+    &__texte {
+        @include mixins.flex(column, null, flex-start, variables.$spacing-small);
+
+        h2 {
+            font-size: variables.$font-style-h4;
+            color: variables.$black;
+            margin-bottom: variables.$spacing-xsmall;
+        }
+
+        p {
+            font-family: variables.$font-body;
+            color: variables.$gray;
+        }
+    }
+}

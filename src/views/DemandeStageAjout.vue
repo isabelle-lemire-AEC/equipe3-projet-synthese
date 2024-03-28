@@ -132,7 +132,7 @@
 						<textarea
 							id="ajout-demande-competences"
 							name="ajout-demande-competences"
-							v-model="demande.candidate.skills"></textarea>
+							v-model="competences"></textarea>
 						<p v-if="erreurs.skills" class="validForm">
 							Veuillez fournir des compétences.
 						</p>
@@ -279,6 +279,7 @@
 	const remunerationType = ref([]);
 	const allSecteursDActivites = ref([]);
     const router = useRouter();
+	const competences = ref(null);
 
 	const demande = ref({
 		title: "",
@@ -306,13 +307,13 @@
 			_id: "",
 			value: "",
 		},
-		skills: ["Front-end", "Design"],
+		skills: [""],
 		internshipType: {
 			_id: "",
 			value: "",
 		},
 		additionalInformation: "",
-		isActive: true
+		isActive: false
 	});
 
 	// validation formulaire
@@ -344,63 +345,41 @@
 		erreurs.value.internshipType= demande.value.internshipType.value === '',
 		erreurs.value.weeklyWorkHours= demande.value.weeklyWorkHours === 0
 		
-		console.log("Erreurs :", erreurs.value);
+		// console.log("Erreurs :", erreurs.value);
 		// Vérifie s'il y a des erreurs dans le formulaire
 		return Object.values(erreurs.value).some(err => err);
 	};
 
-const formulaireValide = ref(false);
+	const formulaireValide = ref(false);
 
-const soumettreFormulaire = async () => {
-        try {
-            formulaireValide.value = validerFormulaire();
-            if (!formulaireValide.value) {
-                await ajouterDemande();
-            }else {
-            throw new Error("Veuillez remplir tous les champs obligatoires.");
-        }
-            console.log("Soumettre le formulaire"); 
-           
-        } catch (error) {
-            console.error("Erreur lors de la soumission du formulaire :", error);
-        }
-}
+	const soumettreFormulaire = async () => {
+			try {
+				formulaireValide.value = validerFormulaire();
+				if (!formulaireValide.value) {
+					await ajouterDemande();
+				}else {
+				throw new Error("Veuillez remplir tous les champs obligatoires.");
+			}
+			
+			} catch (error) {
+				console.error("Erreur lors de la soumission du formulaire :", error);
+			}
+	}
 
-
-const retour = () => {
+	const retour = () => {
 		router.push({name: "DemandesStages"});
 	}
 
-/*const soumettreFormulaire = async (e) => {
-		try {
-			// Prevent default form submission
-			e.preventDefault();
-
-			// Validate the form
-			await validate(e);
-
-			// If form is valid, proceed with adding request
-			if (validForm.value) {
-				await ajouterDemande();
-			} else {
-				console.log(
-					"Form validation failed. Please fill in all required fields."
-				);
-			}
-		} catch (error) {
-			console.error("Erreur lors de la soumission du formulaire :", error);
-		}
-	};*/
+	const listerCompetences = () => {
+		competences.value = competences.value.replace(/ /g,'');
+		demande.value.skills = competences.value.split(',');
+	}
 
 	const ajouterDemande = async () => {
 		try {
-			 if (validerFormulaire()) {
-				throw new Error("Veuillez remplir tous les champs obligatoires.");
-			} 
-			console.log("Tentative d'ajout d'une demande :", demande.value);
+			listerCompetences();
 			await addRequest(demande.value);
 			console.log("Nouvelle demande ajoutée");
-			// await getAllRequests();
 			retour();
 		} catch (error) {
 			console.error("Erreur lors de l'ajout de la demande :", error);

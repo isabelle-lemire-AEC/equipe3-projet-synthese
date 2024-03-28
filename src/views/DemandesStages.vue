@@ -11,7 +11,16 @@
                 <span>Région</span>
                 <span>Date d'inscription</span>
             </div>
-            <ElementListeStage v-for="demande in toutesDemandes" :key="demande._id" :stage="demande"></ElementListeStage>
+            <ElementListeStage v-for="demande in toutesDemandes" 
+            :key="demande._id" 
+            :posteTitre="demande.title" 
+            :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName" 
+            :region="demande.province.value" 
+            :date="demande.startDate" 
+            :id="demande._id" 
+            :isDemande="true"
+            :isTableauDeBord="false"
+            :isActive="demande.isActive"></ElementListeStage>
         </div>
     </div>
 </template>
@@ -40,7 +49,6 @@ onMounted(async () => {
         console.error("Error:", error.response ? error.response.data : error.message);
     }
 });
-
 
 const demandeDeStageAAjouter = {
   title: "Designer web",
@@ -79,7 +87,7 @@ const demandeDeStageAAjouter = {
     value: ""
   },
   additionalInformation: "J'aime le Ping-Pong",
-  isActive: true,
+  isActive: false,
 
 
     program: "Design graphique",
@@ -133,7 +141,7 @@ const testAPI = async () => {
 }
 
 // exécuter la fonction de test des calls API
-testAPI();
+// testAPI();
 
 </script>
 

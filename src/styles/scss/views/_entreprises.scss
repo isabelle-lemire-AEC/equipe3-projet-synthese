@@ -5,35 +5,43 @@
 
 /* Général à plusieurs views d'entreprises */
 
-.form-fiche {
-    &__wrapper-titre {
-        border-color: variables.$blue;
-    }
-}
-
 #ajout-entreprise,
-#edition-entreprise,
-.form-fiche__wrapper-boutons-encadre {
+#edition-entreprise {
     @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
 }
 
-
+.formulaire-ajout-entreprise {
+    .form-fiche {
+        &__wrapper-titre {
+            border-color: variables.$blue;
+        }
+    }
+}
 
 /* Spécifique pour la view Entreprises */
 
 .entreprises {
     h1 {
         margin-bottom: variables.$spacing-xlarge;
-    }
-
-    .bouton {
-        &--blue {
-            margin-bottom: variables.$spacing-xlarge;
-        }
+        color: variables.$gray;
     }
 
     &__liste {
-        @include mixins.grid(3, variables.$spacing-large);
+        @include mixins.grid(2, variables.$spacing-large);
+
+        a {
+            text-decoration: none; // Enlever lors de l'uniformisation avec la carte Candidat?????
+        }
+    }
+
+    .bouton {
+        &--bleu {
+            display: inline-block; // Enlever lors de l'uniformisation avec la carte Candidat?????
+            text-decoration: none; // Enlever lors de l'uniformisation avec la carte Candidat?????
+            font-family: variables.$font-headings; // Enlever lors de l'uniformisation avec la carte Candidat?????
+            color: variables.$bouton-action-blue;
+            margin-bottom: variables.$spacing-large;
+        }
     }
 
 }

@@ -1,21 +1,26 @@
 <!-- App.vue -->
 <template>
-  <div class="wrapper-sidebar-main-content">
-    <nav v-if="!isHomePage">
-      <Sidebar></Sidebar>
-    </nav>
-    <div class="wrapper-main-content">
-      <header class="layout-header" v-if="!isHomePage">
-        <Header @menu-toggled="handleMenuToggle"></Header>
-      </header>
-      <main>
-        <section class="container">
-          <router-view />
-        </section>
-      </main>
-      <footer v-if="!isHomePage">
-        <Footer></Footer>
-      </footer>
+  <div>
+    <section v-if="isHomePage">
+      <Accueil></Accueil>
+    </section>
+    <div v-else class="wrapper-sidebar-main-content">
+      <nav>
+        <Sidebar></Sidebar>
+      </nav>
+      <div class="wrapper-main-content">
+        <header class="layout-header">
+          <Header @menu-toggled="handleMenuToggle"></Header>
+        </header>
+        <main>
+          <section class="container">
+            <router-view />
+          </section>
+        </main>
+        <footer>
+          <Footer></Footer>
+        </footer>
+      </div>
     </div>
   </div>
 </template>
@@ -26,6 +31,7 @@
   import Sidebar from './components/Sidebar.vue';
   import Footer from './components/Footer.vue';
   import { ref, computed } from 'vue';
+import Accueil from './views/Accueil.vue';
 
   const route = useRoute();
   const isMenuOpen = ref(false);

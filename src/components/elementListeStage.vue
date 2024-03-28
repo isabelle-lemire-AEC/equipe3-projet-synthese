@@ -4,26 +4,44 @@
             <div class="poste">
             <div class="iconTemp"></div>
                 <div class="posteEtNom">
-                    <span>{{ props.stage.title }}</span>
-                    <span v-if="props.stage.candidate">{{ props.stage.candidate.firstName }} {{ props.stage.candidate.lastName }}</span>
+                    <span>{{ props.posteTitre }}</span>
+                    <span>{{ props.posteNom }}</span>
                 </div>
             </div>
         </div>
         <div class="secteurActivite">
-            <span>{{ props.stage.activitySector }}</span>
+            <span>TODO</span>
         </div>
         <div class="region">
-            <span>{{ props.stage.province.value }}</span>
+            <span>{{ props.region }}</span>
         </div>
         <div class="dateInscription">
             <span>{{ date }}</span>
         </div>
-        <div class="groupeBtns boutons-action">
-            <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.stage._id}}">
+        <div class="boutonActiver">
+            <button @click="activer()">Activer</button>
+        </div>
+
+        <!-- Boutons pour les DEMANDES de stage -->
+        <div class="groupeBtns boutons-action" v-if="props.isDemande">
+            <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.id}}">
                 <button><i class="fa-solid fa-eye"></i></button>
             </RouterLink>
 
-            <RouterLink :to="{name: 'DemandeStageMiseAjour', params: {id: props.stage._id}}">
+            <RouterLink :to="{name: 'DemandeStageMiseAjour', params: {id: props.id}}">
+                <button class="boutons-action__modifier"><i class="fas fa-pen-to-square"></i></button>
+            </RouterLink>
+
+            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+
+        <!-- Boutons pour les OFFRES de stage -->
+        <div class="groupeBtns boutons-action" v-if="!props.isDemande">
+            <RouterLink :to="{name: 'OffreStageDetails', params: {id: props.id}}">
+                <button><i class="fa-solid fa-eye"></i></button>
+            </RouterLink>
+
+            <RouterLink :to="{name: 'OffreStageMiseAjour', params: {id: props.id}}">
                 <button class="boutons-action__modifier"><i class="fas fa-pen-to-square"></i></button>
             </RouterLink>
 
@@ -33,7 +51,8 @@
         <!-- Modal de confirmation de suppression -->
         <div class="modal" v-if="showConfirmationModal">
             <div class="modal-content">
-                <p>Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
+                <p v-if="props.isDemande">Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
+                <p v-if="!props.isDemande">Êtes-vous sûr de vouloir supprimer cette offre de stage?</p>
                 <div class="modal-buttons">
                 <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
                 <button class="btn confirm" @click="deleteDemande()">Confirmer</button>
@@ -46,21 +65,30 @@
 
 <script setup>
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
+    import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
     import { ref } from 'vue';
-    const { deleteRequest } = useInternshipRequests();
+    import { useRoute } from 'vue-router';
+    import { page } from '../composables/enums.js';
 
-    const props = defineProps(['stage']);
+    const route = useRoute();
+    const { deleteRequest, activateRequest } = useInternshipRequests();
+    const { supprimerOffre, activateOffer } = useInternshipOffers();
+    const props = defineProps(['posteTitre', 'posteNom', 'region', 'date', 'id', 'isDemande', 'isTableauDeBord', 'isActive']);
     const showConfirmationModal = ref(false);
-    let showThisElement = ref(true);
-    let date = ref([]);
+    const showThisElement = ref(true);
+    const date = ref([]);
 
-    date = props.stage.startDate;
-    date = date.substring(0, 10);
+    if(props.isTableauDeBord && props.isActive) {
+        showThisElement.value = false;
+    }
+
+    date.value = props.date;
+    date.value = date.value.substring(0, 10);
 
     const deleteDemande = async () => {
-        await deleteRequest(props.stage._id);
+        props.isDemande ? await deleteRequest(props.id) : await supprimerOffre(props.id);
         showConfirmationModal.value = false;
-        showThisElement = false;
+        showThisElement.value = false;
     }
 
     // Fonction pour afficher la modal de confirmation
@@ -72,6 +100,25 @@
     const annulerSuppression = () => {
     showConfirmationModal.value = false;
     };
+
+    const lienDetails = ref(null);
+    const lienMiseAJour = ref(null);
+    if (props.isDemande) {
+        lienDetails.value = 'DemandeStageDetails';
+        lienMiseAJour.value = 'DemandeStageMiseAjour';
+    } else {
+        lienDetails.value = 'OffreStageDetails';
+        lienMiseAJour.value = 'OffreStageMiseAjour';
+    }
+
+    const activer = async () => {
+        if(props.isDemande) {
+            await activateRequest(props.id);
+        } else {
+            await activateOffer(props.id);
+        }
+        showThisElement.value = false;
+    }
 
 </script>
 
@@ -152,6 +199,65 @@
 
     .btn:hover {
         opacity: 0.8;
+    }
+
+    html, body {
+        background-color: rgb(222, 222, 222);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    h1 {
+        margin: 0 0 3rem 0;
+        padding: 0;
+    }
+
+    .pageContainer {
+        padding: 2rem;
+        margin: 2rem;
+    }
+
+    .listeStagesHeader {
+        display: none;
+    }
+
+    .listeStages {
+        background-color: white;
+        padding: 4rem 2rem 2rem 2rem;
+        border-radius: 1rem;
+    }
+
+    .ajouterDemande {
+        margin: 0 0 1rem 0;
+        padding: 0.8rem;
+        border-radius: 0.3rem;
+        border: 0px solid white;
+        background-color: orange;
+        color: white;
+    }
+
+    .iconTemp {
+        background-color: orange;
+        width: 40px;
+        height: 40px;
+        border-radius: 0.5rem;
+    }
+
+    .elementStage {
+        display: flex;
+        justify-content: space-between;
+        margin: 2rem 0 0 0;
+        padding: 0 0 1rem 0;
+        border-bottom: 0.1rem solid rgb(193, 193, 193);
+    }
+
+    .barreVerticale {
+        width: 0.3rem;
+        background-color: orange;
+    }
+
+    .poste {
+        display: flex;
+        flex-direction: column;
     }
 
 </style>

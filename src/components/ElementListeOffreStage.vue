@@ -36,7 +36,7 @@
         <!-- Modal de confirmation de suppression -->
         <div class="modal" v-if="showConfirmationModal">
             <div class="modal-content">
-                <p>Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
+                <p>Êtes-vous sûr de vouloir supprimer cette offre?</p>
                 <div class="modal-buttons">
                 <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
                 <button class="btn confirm" @click="deleteDemande()">Confirmer</button>
@@ -51,7 +51,7 @@
 <script setup>
 
 
-    import { ref } from 'vue';
+    import { ref, defineProps } from 'vue';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage'; 
 
     const { deleteRequest } = useInternshipOffers();
@@ -65,19 +65,19 @@
     date = date.substring(0, 10);
 
     const deleteDemande = async () => {
-        await deleteRequest(props.stage._id);
-        showConfirmationModal.value = false;
-        showThisElement = false;
+        await deleteRequest(props.offer._id);
+        showConfirmationModal = false;
+        showThisElement.value = false;
     }
 
     // Fonction pour afficher la modal de confirmation
     const afficherConfirmationModal = () => {
-    showConfirmationModal.value = true;
+    showConfirmationModal = true;
     };
 
     // Fonction pour annuler la suppression
     const annulerSuppression = () => {
-    showConfirmationModal.value = false;
+    showConfirmationModal = false;
     };
 
 </script>
