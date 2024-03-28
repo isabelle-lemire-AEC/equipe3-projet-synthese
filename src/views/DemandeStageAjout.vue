@@ -312,7 +312,7 @@
 			value: "",
 		},
 		additionalInformation: "",
-		isActive: true
+		isActive: false
 	});
 
 	// validation formulaire

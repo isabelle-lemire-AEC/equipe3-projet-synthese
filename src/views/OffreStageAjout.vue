@@ -179,7 +179,7 @@ const offerData = ref({
   requiredSkills: [],
   internshipType: { _id: "" },
   paid: "DISCRETIONARY",
-  isActive: true
+  isActive: false
 });
 
 const submitForm = async () => {
