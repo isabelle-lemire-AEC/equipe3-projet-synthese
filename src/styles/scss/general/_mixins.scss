@@ -8,7 +8,7 @@
 }
 
 @mixin padding($block, $inline) {
-    padding-block: $block;
+    padding-block: $block; 
     padding-inline: $inline;
 }
 

@@ -24,13 +24,12 @@ export function useInternshipRequests() {
   };
 
   // Obtenir toutes les demandes de stage en attente de validation
-  // IMPORTANT - Remettre à false quand on aura des demande en attente de validation
   const getAllNotActiveRequests = async () => {
     loading.value = true;
     try {
       const response = await axios.get(`${API_BASE_URL}/internship-requests`);
       console.log("GET ALL Demandes de stage non active - OK", response.data);
-      const nonActiveRequests = response.data.filter(request => request.isActive === true);
+      const nonActiveRequests = response.data.filter(request => request.isActive === false);
       return nonActiveRequests;
     } catch (err) {
       error.value = err;
@@ -75,13 +74,23 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.patch(`${API_BASE_URL}/internship-requests/${id}`, requestData);
-      console.log(`PATCH Demande de stage avec le id ${id} OK`, response.value.data);
-      return response.value;
+      console.log(`PATCH - Demande de stage avec le id ${id} - OK`, response.value.data);
+      return response.value.data;
     } catch (err) {
       error.value = err;
       console.log(`PATCH Demande de stage avec le id ${id} ERREUR`, err);
     } finally {
       loading.value = false;
+    }
+  };
+
+  // Mettre isActive à true
+  const updateRequestStatus = async (demandeId, isActive) => {
+    try {
+        await axios.put(`${API_BASE_URL}/internship-requests/${demandeId}`, { isActive });
+    } catch (error) {
+        console.error(`Erreur lors de la mise à jour de la demande ${demandeId} :`, error);
+        throw error;
     }
   };
 
@@ -100,7 +109,7 @@ export function useInternshipRequests() {
     }
   };
 
-  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, getAllNotActiveRequests, response, error, loading };
+  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, getAllNotActiveRequests, updateRequestStatus, response, error, loading };
 }
 
 

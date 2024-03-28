@@ -3,20 +3,56 @@
 
 
 .header {
+    background-color: variables.$white;
+    padding: 1rem 0 ;
+
     &__items {
         @include mixins.flex(row, space-between, center, 1rem);
     }
 
     &__icone-boutons-ajout {
-        @include mixins.flex(row, flex-end, center, 1rem);
+        @include mixins.flex(row, space-between, center, 1rem);
+       #icone-menu{
+        padding: 0 3rem 0 1rem;
+       }
     }
+    
+    
 }
 
 .nav-items,
 .boutons-ajout {
+       
     @include mixins.flex(row, flex-start, null, 1rem);
+    .add-offer{
+        @include mixins.padding(0.5rem, 0.5rem);
+        color: variables.$red;
+        @include mixins.border(null, variables.$red, 0.5rem);   
+    }
+    .add-request{
+        padding: 0.5rem;
+        color: variables.$gold;
+        @include mixins.border(null, variables.$gold, 0.5rem);    
+    }
+    .add-company{
+        padding: 0.5rem;
+        color: variables.$blue;
+        @include mixins.border(null, variables.$blue, 0.5rem);
+    }
+    .add-candidate{
+        padding: 0.5rem;
+        color: variables.$purple;
+        @include mixins.border(null, variables.$purple, 0.5rem);
+    }
+    
 }
 
+
 .utilisateur {
-    @include mixins.flex(row, flex-start, center, 1rem);
+    padding: 0 1rem 0 0;
+    @include mixins.flex(row, flex-end, center, 1rem);
+    .utilisateur__details{
+        text-align: right;
+    }
 }
+

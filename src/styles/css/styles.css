@@ -290,6 +290,10 @@ label {
   margin-left: auto;
 }
 
+.header {
+  background-color: #FFFFFF;
+  padding: 1rem 0;
+}
 .header__items {
   display: flex;
   flex-direction: row;
@@ -300,9 +304,12 @@ label {
 .header__icone-boutons-ajout {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
+}
+.header__icone-boutons-ajout #icone-menu {
+  padding: 0 3rem 0 1rem;
 }
 
 .nav-items,
@@ -312,13 +319,50 @@ label {
   justify-content: flex-start;
   gap: 1rem;
 }
+.nav-items .add-offer,
+.boutons-ajout .add-offer {
+  padding-block: 0.5rem;
+  padding-inline: 0.5rem;
+  color: #BB2026;
+  border-style: solid;
+  border-color: #BB2026;
+  border-radius: 0.5rem;
+}
+.nav-items .add-request,
+.boutons-ajout .add-request {
+  padding: 0.5rem;
+  color: #CB912B;
+  border-style: solid;
+  border-color: #CB912B;
+  border-radius: 0.5rem;
+}
+.nav-items .add-company,
+.boutons-ajout .add-company {
+  padding: 0.5rem;
+  color: #86A9E6;
+  border-style: solid;
+  border-color: #86A9E6;
+  border-radius: 0.5rem;
+}
+.nav-items .add-candidate,
+.boutons-ajout .add-candidate {
+  padding: 0.5rem;
+  color: #7F2987;
+  border-style: solid;
+  border-color: #7F2987;
+  border-radius: 0.5rem;
+}
 
 .utilisateur {
+  padding: 0 1rem 0 0;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
   gap: 1rem;
+}
+.utilisateur .utilisateur__details {
+  text-align: right;
 }
 
 .logo {
@@ -388,14 +432,25 @@ label {
 }
 
 /* Général à plusieurs views d'entreprises */
+<<<<<<< HEAD
 #ajout-entreprise,
 #edition-entreprise {
+=======
+.form-fiche__wrapper-titre {
+  border-color: #86A9E6;
+}
+
+#ajout-entreprise,
+#edition-entreprise,
+.form-fiche__wrapper-boutons-encadre {
+>>>>>>> origin
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2rem;
 }
 
+<<<<<<< HEAD
 .formulaire-ajout-entreprise .form-fiche__wrapper-titre {
   border-color: #86A9E6;
 }
@@ -420,6 +475,20 @@ label {
   color: #2E456D;
   margin-bottom: 3rem;
 }
+=======
+/* Spécifique pour la view Entreprises */
+.entreprises h1 {
+  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+}
+.entreprises .bouton--blue {
+  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+}
+.entreprises__liste {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+>>>>>>> origin
 
 /* Spécifique pour la view EntrepriseAjout */
 .formulaire-ajout-entreprise .form-fiche__wrapper-titre {

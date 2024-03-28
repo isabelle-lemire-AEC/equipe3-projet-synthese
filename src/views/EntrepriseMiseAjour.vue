@@ -1,26 +1,29 @@
 <!-- EntrepriseMiseAjour -->
 <template>
-  <div class="ajouter-entreprise-container">
-    <div class="entreprise-header-card">
-      <div class="entreprise-header-card">
-        <div class="logo-container">
-          <!-- Affichage du logo de l'entreprise -->
-          <img class="entreprise-logo" :src="logoEntreprise" alt="Logo de l'entreprise" />
-        </div>
-        <div class="nom-container">
-          <h3>Entreprise</h3>
-          <h2 class="entreprise-nom">{{ entreprise.name }}</h2>
-        </div>
-      </div>
+  <div class="form-fiche formulaire-edition-entreprise">
+    <div class="form-fiche__wrapper-titre" v-if="entreprise">
+      <p class="form-fiche__nom-section">Entreprise</p>
+      <h1>{{ entreprise.name }}</h1>
+      <p class="form-fiche__sous-titre">UX Designer</p>
     </div>
-  </div>
-  <div class="form-buttons">
-    <button type="button" class="cancel-button" @click="$router.go(-1)">
-      Annuler
-    </button>
-    <button type="button" class="save-button" @click="mettreAJourEntreprise">Mettre à jour</button>
-  </div>
-  <form @submit.prevent="mettreAJourEntreprise" class="entreprise-detail-wrapper">
+
+    <form id="edition-entreprise" @submit.prevent="mettreAJourEntreprise">
+
+      <!-- Logo de l'entreprise -->
+      <div class="logo-container">
+        <img class="entreprise-logo" :src="logoEntreprise" alt="Logo de l'entreprise" />
+      </div>
+
+      <div class="boutons">
+        <button class="bouton bouton--transparent" type="button" @click="$router.go(-1)">Annuler</button>
+        <button class="bouton bouton--blue" type="submit">
+          <div class="icone-libelle">
+            <i class="fas fa-save"></i>
+            <span>Mettre à jour</span>
+          </div>
+        </button>
+      </div>
+
     <div class="entreprise-info-card">
       <div class="form-group">
         <label for="nom">Entreprises</label>
@@ -33,56 +36,76 @@
       </div>
     </div>
 
-    <div class="section">
-      <h2 class="section-title"><span>Courte présentation</span></h2>
-      <textarea id="presentation" v-model="entreprise.description"></textarea>
-      <h3>Personne contact</h3>
-      <input id="contactPerson" type="text" v-model="entreprise.contactPerson" />
-    </div>
-
-    <div class="section">
-      <h3 class="section-title">Informations de contact</h3>
-      <div class="grid-container">
-        <div class="form-group">
-          <label for="adresse">Adresse</label>
-          <input id="adresse" type="text" v-model="entreprise.address" />
-        </div>
-        <div class="form-group">
-          <label for="telephone">Téléphone</label>
-          <input id="telephone" type="tel" v-model="entreprise.phone" />
-        </div>
-        <div class="form-group">
-          <label for="ville">Ville</label>
-          <input id="ville" type="text" v-model="entreprise.city" />
-        </div>
-        <div class="form-group">
-          <label for="courriel">Courriel</label>
-          <input id="courriel" type="email" v-model="entreprise.email" />
-        </div>
-        <div class="form-group">
-          <label for="province">Province</label>
-          <select id="province" v-model="entreprise.province._id">
-            <option v-for="province in provinces" :key="province._id" :value="province._id">
-              {{ province.value }}
-            </option>
-          </select>
+      <div class="form-fiche__encadre">
+        <div class="form-fiche__wrapper-titre-groupe-inputs">
+          <h2>Courte présentation</h2>
+          <div>
+            <label for="presentation">Présentation de l'entreprise</label>
+            <textarea name="presentation" id="presentation" cols="30" rows="10" v-model="entreprise.description"></textarea>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="cp">Code postal</label>
-          <input id="cp" type="text" v-model="entreprise.postalCode" />
+        <!-- Personne de contact -->
+        <div class="form-fiche__label-input-vertical">
+          <label for="contactPerson">Personne de contact</label>
+          <input id="contactPerson" type="text" v-model="entreprise.contactPerson" />
+        </div>
+
+       <!-- Informations de contact -->
+       <div class="form-fiche__colonnes-inputs">
+          <div class="form-fiche__colonne-inputs">
+            <div class="form-fiche__label-input-vertical">
+              <label for="adresse">Adresse</label>
+              <input type="text" id="adresse" v-model="entreprise.address" />
+            </div>
+
+            <div class="form-fiche__label-input-vertical">
+              <label for="ville">Ville</label>
+              <input type="text" id="ville" v-model="entreprise.city" />
+            </div>
+
+            <div class="form-fiche__label-input-vertical">
+              <label for="province">Province</label>
+              <select id="province" v-model="entreprise.province._id">
+                <option v-for="province in provinces" :key="province._id" :value="province._id">
+                  {{ province.value }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-fiche__label-input-vertical">
+              <label for="cp">Code postal</label>
+              <input type="text" id="cp" v-model="entreprise.postalCode" />
+            </div>
+          </div>
+
+          <div class="form-fiche__colonne-inputs">
+            <div class="form-fiche__label-input-vertical">
+              <label for="telephone">Téléphone</label>
+              <input type="text" id="telephone" v-model="entreprise.phone" />
+            </div>
+
+            <div class="form-fiche__label-input-vertical">
+              <label for="courriel">Courriel</label>
+              <input type="email" id="courriel" v-model="entreprise.email" />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-buttons">
-      <button type="button" class="cancel-button" @click="$router.go(-1)">
-        Annuler
-      </button>
-      <button type="submit" class="save-button">Mettre à jour</button>
-    </div>
-  </form>
+      <div class="boutons">
+        <button class="bouton bouton--transparent" type="button" @click="$router.go(-1)">Annuler</button>
+        <button class="bouton bouton--blue" type="submit">
+          <div class="icone-libelle">
+            <i class="fas fa-save"></i>
+            <span>Mettre à jour</span>
+          </div>
+        </button>
+      </div>
+    </form>
+  </div>
 </template>
+
 
 <script>
 import axios from "axios";
@@ -154,7 +177,7 @@ export default {
 </script>
 
 <style scoped>
-.entete {
+/*.entete {
   background-color: brown;
 }
 
@@ -283,7 +306,7 @@ textarea {
 
 .save-button i.fas.fa-save {
   margin-right: 8px;
-}
+}*/
 
 .logo-container {
   flex: 0 1 20%;
@@ -293,7 +316,10 @@ textarea {
 }
 
 .entreprise-logo {
-  max-width: 60%;
+  max-width: 20%;
   height: auto;
 }
+
+
+
 </style>

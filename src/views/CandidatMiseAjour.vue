@@ -1,5 +1,4 @@
 <!-- CandidatMiseAjour.vue - Isa  -->
-
 <template>
     <div class="form-fiche formulaire-edition-candidat">
         <div class="form-fiche__wrapper-titre" v-if="candidat">
@@ -82,8 +81,14 @@
                 </div>
             </div>
 
-            <div>
-                btn à mettre quand prog ok
+            <div class="boutons">
+                <button class="bouton bouton--transparent" type="submit" @click="annulerModif">Annuler</button>
+                <button class="bouton bouton--mauve" type="submit">
+                    <div class="icone-libelle">
+                        <i class="fas fa-save"></i>
+                        <span>Mettre à jour</span>
+                    </div>
+                </button>
             </div>
         </form>
     </div>
