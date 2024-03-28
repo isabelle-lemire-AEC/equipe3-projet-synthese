@@ -48,7 +48,13 @@
                     <p>Date</p>
                     <p>Actions</p>
                 </div>
-                <TBListeDemandeStageAttente v-for="demande in demandes" :key="demande._id" :demande="demande" @viewDetails="navigateToDetails"/>
+                <TBListeDemandeStageAttente 
+                    v-for="demande in demandes" 
+                    :key="demande._id" 
+                    :demande="demande" 
+                    @viewDetails="navigateToDemandeDetails"
+                    @editRequest="navigateToDemandeEdit"
+                />
             </div>
 
             
@@ -94,10 +100,18 @@
     const { getAllNotActiveRequests } = useInternshipRequests();
     const demandes = ref([]);
 
-    const navigateToDetails = (demandeId) => {
+    const navigateToDemandeDetails = (demandeId) => {
         router.push({ 
             path: `/demande-de-stage-details/${demandeId}`, 
             name: 'DemandeStageDetails', 
+            props: true
+        });
+    };
+
+    const navigateToDemandeEdit = (demandeId) => {
+        router.push({
+            path: `/demande-de-stage-mise-a-jour/${demandeId}`,
+            name: 'DemandeStageMiseAjour',
             props: true
         });
     };

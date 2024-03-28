@@ -15,7 +15,7 @@
             <button @click="redirectToDetails">
                     <i class="fa-solid fa-eye"></i>
             </button>
-            <button class="boutons-action__modifier">
+            <button class="boutons-action__modifier" @click="redirectToEdit">
                     <i class="fas fa-pen-to-square"></i>
             </button>
             <button class="boutons-action__supprimer">
@@ -46,6 +46,13 @@
             params: {
                 id: props.demande._id
             }
+        });
+    };
+
+    const redirectToEdit = () => {
+        router.push({
+            name: 'DemandeStageMiseAjour',
+            params: { id: props.demande._id }
         });
     };
 
