@@ -59,11 +59,11 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.post(`${API_BASE_URL}/internship-requests`, requestData);
-      console.log("POST Demande de stage - OK", response.value.data);
+      console.log("POST - Demande de stage - OK", response.value.data);
       return response.value;
     } catch (err) {
       error.value = err;
-      console.log("POST Demande de stage - ERREUR", err);
+      console.log("POST - Demande de stage - ERREUR", err);
     } finally {
       loading.value = false;
     }
@@ -78,12 +78,13 @@ export function useInternshipRequests() {
       return response.value.data;
     } catch (err) {
       error.value = err;
-      console.log(`PATCH Demande de stage avec le id ${id} ERREUR`, err);
+      console.log(`PATCH - Demande de stage avec le id ${id} ERREUR`, err);
     } finally {
       loading.value = false;
     }
   };
 
+  // Il ne faudrait pas utiliser PATCH au lieu de PUT? donc la fonction 'editRequest'?
   // Mettre isActive à true
   const updateRequestStatus = async (demandeId, isActive) => {
     try {
