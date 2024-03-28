@@ -48,7 +48,7 @@
                     <p>Date</p>
                     <p>Actions</p>
                 </div>
-                <TBListeDemandeStageAttente v-for="demande in demandes" :key="demande._id" :demande="demande" />
+                <TBListeDemandeStageAttente v-for="demande in demandes" :key="demande._id" :demande="demande" @viewDetails="navigateToDetails"/>
             </div>
 
             
@@ -93,6 +93,14 @@
 
     const { getAllNotActiveRequests } = useInternshipRequests();
     const demandes = ref([]);
+
+    const navigateToDetails = (demandeId) => {
+        router.push({ 
+            path: `/demande-de-stage-details/${demandeId}`, 
+            name: 'DemandeStageDetails', 
+            props: true
+        });
+    };
 
     onMounted(async () => {
         demandes.value = await getAllNotActiveRequests();
