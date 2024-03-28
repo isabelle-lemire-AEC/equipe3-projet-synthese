@@ -74,8 +74,8 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.patch(`${API_BASE_URL}/internship-requests/${id}`, requestData);
-      console.log(`PATCH Demande de stage avec le id ${id} OK`, response.value.data);
-      return response.value;
+      console.log(`PATCH - Demande de stage avec le id ${id} - OK`, response.value.data);
+      return response.value.data;
     } catch (err) {
       error.value = err;
       console.log(`PATCH Demande de stage avec le id ${id} ERREUR`, err);

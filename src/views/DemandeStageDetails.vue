@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="btnsContainer boutons-action">
-            <button class="boutons-action__crochet"><i class="fas fa-check"></i></button>
+            <button :class="{ 'boutons-action__crochet': demande.isActive }" @click="activate()"><i class="fas fa-check"></i></button>
             <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(demande._id)"><i class="fas fa-pen-to-square"></i></button>
             <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i class="fa-solid fa-trash-can"></i></button>
         </div>
@@ -74,9 +74,8 @@
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js'
     import { ref, reactive, onMounted } from 'vue';
     import { useRoute, useRouter } from 'vue-router'
-    const { deleteRequest } = useInternshipRequests();
-    const { getRequestById } = useInternshipRequests();
 
+    const { getRequestById, editRequest, deleteRequest  } = useInternshipRequests();
     const route = useRoute();
     const router = useRouter();
     const demande = ref(null);
@@ -111,6 +110,11 @@
             console.error("Error:", error.response ? error.response.data : error.message);
         }
     });
+
+    const activate = async () => {
+        demande.value.isActive = !demande.value.isActive;
+        demande.value = await editRequest(demande.value._id, demande.value);
+    }
 
 </script>
 

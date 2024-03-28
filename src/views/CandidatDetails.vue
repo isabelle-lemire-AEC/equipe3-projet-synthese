@@ -10,7 +10,7 @@
     <div class="form-fiche__wrapper-boutons-encadre">
 
       <div class="boutons-action">
-        <button class="boutons-action__crochet">
+        <button class="boutons-action__crochet" @click="activate()">
           <i class="fas fa-check"></i>
         </button>
         <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(candidat._id)">
@@ -154,6 +154,11 @@
       console.error("Error:", error.response ? error.response.data : error.message);
     }
   });
+
+  const activate = () => {
+
+  }
+  
 </script>
 
 
