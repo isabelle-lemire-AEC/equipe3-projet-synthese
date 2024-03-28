@@ -30,7 +30,7 @@ export function useInternshipRequests() {
     try {
       const response = await axios.get(`${API_BASE_URL}/internship-requests`);
       console.log("GET ALL Demandes de stage non active - OK", response.data);
-      const nonActiveRequests = response.data.filter(request => request.isActive === true);
+      const nonActiveRequests = response.data.filter(request => request.isActive === false);
       return nonActiveRequests;
     } catch (err) {
       error.value = err;
