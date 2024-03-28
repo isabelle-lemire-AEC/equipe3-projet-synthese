@@ -13,10 +13,10 @@
     <div v-else>Aucune information disponible</div>
   </template>
   
-  <!-- //raph & caro -->
+
   <script setup>
   import { ref, onMounted } from 'vue';
-  // const router = useRouter();
+  import { useRouter } from 'vue-router';
   import { useRoute } from 'vue-router';
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
 
@@ -24,10 +24,11 @@
 
   const supprimer = async () => {
   await supprimerOffre(route.params.id);
-  router.push('/chemin-vers-la-liste-des-offres'); // Redirigez l'utilisateur après la suppression
+  route.push('/chemin-vers-la-liste-des-offres');
 };
   
   const route = useRoute();
+  const router = useRouter(); 
   const { getInternshipOfferById, response, loading, error } = useInternshipOffers();
   const offerDetails = ref({});
   
