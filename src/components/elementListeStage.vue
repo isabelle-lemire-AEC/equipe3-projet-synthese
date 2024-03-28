@@ -4,26 +4,41 @@
             <div class="poste">
             <div class="iconTemp"></div>
                 <div class="posteEtNom">
-                    <span>{{ props.stage.title }}</span>
-                    <span v-if="props.stage.candidate">{{ props.stage.candidate.firstName }} {{ props.stage.candidate.lastName }}</span>
+                    <span>{{ props.posteTitre }}</span>
+                    <span>{{ props.posteNom }}</span>
                 </div>
             </div>
         </div>
         <div class="secteurActivite">
-            <span>{{ props.stage.activitySector }}</span>
+            <span>TODO</span>
         </div>
         <div class="region">
-            <span>{{ props.stage.province.value }}</span>
+            <span>{{ props.region }}</span>
         </div>
         <div class="dateInscription">
             <span>{{ date }}</span>
         </div>
-        <div class="groupeBtns boutons-action">
-            <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.stage._id}}">
+
+        <!-- Boutons pour les DEMANDES de stage -->
+        <div class="groupeBtns boutons-action" v-if="props.isDemande">
+            <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.id}}">
                 <button><i class="fa-solid fa-eye"></i></button>
             </RouterLink>
 
-            <RouterLink :to="{name: 'DemandeStageMiseAjour', params: {id: props.stage._id}}">
+            <RouterLink :to="{name: 'DemandeStageMiseAjour', params: {id: props.id}}">
+                <button class="boutons-action__modifier"><i class="fas fa-pen-to-square"></i></button>
+            </RouterLink>
+
+            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+
+        <!-- Boutons pour les OFFRES de stage -->
+        <div class="groupeBtns boutons-action" v-if="!props.isDemande">
+            <RouterLink :to="{name: 'OffreStageDetails', params: {id: props.id}}">
+                <button><i class="fa-solid fa-eye"></i></button>
+            </RouterLink>
+
+            <RouterLink :to="{name: 'OffreStageMiseAjour', params: {id: props.id}}">
                 <button class="boutons-action__modifier"><i class="fas fa-pen-to-square"></i></button>
             </RouterLink>
 
@@ -33,7 +48,8 @@
         <!-- Modal de confirmation de suppression -->
         <div class="modal" v-if="showConfirmationModal">
             <div class="modal-content">
-                <p>Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
+                <p v-if="props.isDemande">Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
+                <p v-if="!props.isDemande">Êtes-vous sûr de vouloir supprimer cette offre de stage?</p>
                 <div class="modal-buttons">
                 <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
                 <button class="btn confirm" @click="deleteDemande()">Confirmer</button>
@@ -46,19 +62,24 @@
 
 <script setup>
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
+    import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
     import { ref } from 'vue';
-    const { deleteRequest } = useInternshipRequests();
 
-    const props = defineProps(['stage']);
+    const { deleteRequest } = useInternshipRequests();
+    const { supprimerOffre } = useInternshipOffers();
+    // const props = defineProps(['stage']); old, to delete
+    const props = defineProps(['posteTitre', 'posteNom', 'region', 'date', 'id', 'isDemande']);
+
+
     const showConfirmationModal = ref(false);
     let showThisElement = ref(true);
-    let date = ref([]);
+    const date = ref([]);
 
-    date = props.stage.startDate;
-    date = date.substring(0, 10);
+    date.value = props.date;
+    date.value = date.value.substring(0, 10);
 
     const deleteDemande = async () => {
-        await deleteRequest(props.stage._id);
+        isDemande ? await deleteRequest(props.id) : await supprimerOffre(props.id); 
         showConfirmationModal.value = false;
         showThisElement = false;
     }
@@ -73,6 +94,15 @@
     showConfirmationModal.value = false;
     };
 
+    const lienDetails = ref(null);
+    const lienMiseAJour = ref(null);
+    if (props.isDemande) {
+        lienDetails.value = 'DemandeStageDetails';
+        lienMiseAJour.value = 'DemandeStageMiseAjour';
+    } else {
+        lienDetails.value = 'OffreStageDetails';
+        lienMiseAJour.value = 'OffreStageMiseAjour';
+    }
 </script>
 
 <style scoped>
