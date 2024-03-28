@@ -38,13 +38,12 @@ export function useInternshipOffers() {
   const getAllOffers = async () => {
     loading.value = true;
     try {
-      const res = await axios.get('https://api-3.fly.dev/internship-offers');
-      response.value = res.data; 
-      console.log("get offer ça marche", res.data);
-      //return response.value;
+      const response = await axios.get('https://api-3.fly.dev/internship-offers');
+      console.log("GET ALL - Offres de stage - OK", response.data);
+      return response.data; 
     } catch (err) {
       error.value = err;
-      console.log("get offer ça marche pas", err);
+      console.log("GET ALL - Offres de stage - ERREUR", err);
     } finally {
       loading.value = false;
     }
