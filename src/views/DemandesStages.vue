@@ -1,8 +1,8 @@
 <template>
-    <div class="pageContainer">
+    <div class="">
         <h1>Demandes de stage</h1>
         <RouterLink to="/demande-de-stage-ajout">
-            <button>Ajouter une demande</button>
+            <button class="bouton bouton--mauve">Ajouter une demande</button>
         </RouterLink>
         <div class="listeStages">
             <div class="listeStagesHeader">
@@ -196,7 +196,4 @@ h1 {
     display: flex;
     flex-direction: column;
 }
-
-/*.groupeBtns {
-}*/
 </style>
