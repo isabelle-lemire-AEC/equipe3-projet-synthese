@@ -48,7 +48,20 @@
                     <p>Date</p>
                     <p>Actions</p>
                 </div>
-                <div v-if="demandes.length > 0">
+
+                <div v-if="demandes">
+                    <ElementListeStage v-for="demande in demandes"
+                        :key="demande._id"
+                        :posteTitre="demande.title"
+                        :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName"
+                        :region="demande.province.value"
+                        :date="demande.startDate"
+                        :id="demande._id"
+                        :isDemande="true"
+                        :isTableauDeBord="true"
+                        :isActive="demande.isActive"></ElementListeStage>
+                </div>
+                <!-- <div v-if="demandes.length > 0">
                     <TBListeDemandeStageAttente 
                         v-for="demande in demandes" 
                         :key="demande._id" 
@@ -59,7 +72,7 @@
                 </div>
                 <div v-else>
                     <p>Il n'y a pas de demande de stage en attente de validation</p>
-                </div>
+                </div> -->
             </div>
             
         </section>
@@ -83,18 +96,25 @@
                     <p>Date</p>
                     <p>Action</p>
                 </div>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-
+                <div v-if="offres">
+                    <ElementListeStage v-for="offre in offres"
+                        :key="offre._id"
+                        :posteTitre="offre.title"
+                        :posteNom="offre.enterprise.name"
+                        :region="offre.province.value"
+                        :date="offre.startDate"
+                        :id="offre._id"
+                        :isDemande="false"
+                        :isTableauDeBord="true"
+                        :isActive="offre.isActive"></ElementListeStage>
+                </div>
             </div>
             
         </section>
     </div>
 </template>
-/Users/jonathan/Projects/aec-dev-web/bloc-4/projet-synthese/projet-synthese/equipe3-projet-synthese/src/composables/candidats/candidat.js
 <script setup>
+    import ElementListeStage from '../components/ElementListeStage.vue'
     import { ref, onMounted } from 'vue';
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
@@ -102,16 +122,19 @@
     import { useEntreprise } from '../composables/entreprises/entreprise.js';
     import TBListeDemandeStageAttente from '../components/TBListeDemandeStageAttente.vue';
     import TBListeOffreStageAttente from '../components/TBListeOffreStageAttente.vue';
+    // import { page } from '../composables/enums.js';
 
     const { getAllNotActiveRequests, updateRequestStatus, getRequestsCount } = useInternshipRequests();
-    const { getInternshipOfferCount } = useInternshipOffers();
+    const { getAllOffers, getInternshipOfferCount } = useInternshipOffers();
     const { getCandidatsCount } = useCandidat();
     const { getEntreprisesCount } = useEntreprise();
     const demandes = ref([]);
+    const offres = ref([]);
     const demandesCount = ref(null);
     const offresCount = ref(null);
     const candidatsCount = ref(null);
     const entreprisesCount = ref(null);
+    const isTableauDeBord = ref(true);
 
     const navigateToDemandeDetails = (demandeId) => {
         router.push({ 
@@ -142,6 +165,7 @@
 
     onMounted(async () => {
         demandes.value = await getAllNotActiveRequests();
+        offres.value = await getAllOffers();
         demandesCount.value = await getRequestsCount();
         offresCount.value = await getInternshipOfferCount();
         candidatsCount.value = await getCandidatsCount();

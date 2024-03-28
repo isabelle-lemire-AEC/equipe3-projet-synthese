@@ -125,7 +125,22 @@ export function useInternshipRequests() {
     }
   };
 
-  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, getAllNotActiveRequests, updateRequestStatus, getRequestsCount, response, error, loading };
+  const activateRequest = async (id) => {
+    loading.value = true;
+    try {
+      const response = await axios.get(`${API_BASE_URL}/internship-requests/${id}`);
+      response.data.isActive = !response.data.isActive;
+      await editRequest(id, response.data);
+      console.log("ACTIVATE - Demande de stage non active - OK", response.data);
+    } catch (err) {
+      error.value = err;
+      console.log("ACTIVATE - Demande de stage non active - ERREUR", err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, getAllNotActiveRequests, updateRequestStatus, getRequestsCount, activateRequest, response, error, loading };
 }
 
 

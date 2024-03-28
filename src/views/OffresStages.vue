@@ -12,7 +12,16 @@
                 <span>Date d'inscription</span>
             </div>
             <!-- <ElementListeOffreStage v-for="offre in toutesOffres" :key="offre._id" :offer="offre"></ElementListeOffreStage> COMPONENT À CARO -->
-            <ElementListeStage v-for="offre in toutesOffres" :key="offre._id" :posteTitre="offre.title" :posteNom="offre.enterprise.name" :region="offre.province.value" :date="offre.startDate" :id="offre._id" :isDemande="false"></ElementListeStage>
+            <ElementListeStage v-for="offre in toutesOffres"
+              :key="offre._id"
+              :posteTitre="offre.title"
+              :posteNom="offre.enterprise.name" 
+              :region="offre.province.value" 
+              :date="offre.startDate" 
+              :id="offre._id" 
+              :isDemande="false"
+              :isTableauDeBord="false"
+              :isActive="offre.isActive"></ElementListeStage>
         </div>
     </div>
 </template>
