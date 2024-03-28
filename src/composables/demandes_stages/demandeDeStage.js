@@ -13,11 +13,11 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.get(`${API_BASE_URL}/internship-requests`);
-      console.log("GET ALL Demandes de stage - OK", response.value.data);
+      console.log("GET ALL - Demandes de stage - OK", response.value.data);
       return response.value;
     } catch (err) {
       error.value = err;
-      console.log("GET ALL Demandes de stage - ERREUR", err);
+      console.log("GET ALL - Demandes de stage - ERREUR", err);
     } finally {
       loading.value = false;
     }
@@ -28,12 +28,12 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       const response = await axios.get(`${API_BASE_URL}/internship-requests`);
-      console.log("GET ALL Demandes de stage non active - OK", response.data);
+      console.log("GET ALL - Demandes de stage non active - OK", response.data);
       const nonActiveRequests = response.data.filter(request => request.isActive === false);
       return nonActiveRequests;
     } catch (err) {
       error.value = err;
-      console.log("GET ALL Demandes de stage non active - ERREUR", err);
+      console.log("GET ALL - Demandes de stage non active - ERREUR", err);
     } finally {
       loading.value = false;
     }
@@ -44,11 +44,11 @@ export function useInternshipRequests() {
     loading.value = true;
     try {
       response.value = await axios.get(`${API_BASE_URL}/internship-requests/${id}`);
-      console.log("GET Demandes de stage BY ID - OK", response.value.data);
+      console.log("GET BY ID - Demandes de stage - OK", response.value.data);
       return response.value;
     } catch (err) {
       error.value = err;
-      console.log("GET Demandes de stage BY ID - ERREUR", err);
+      console.log("GET BY ID - Demandes de stage  - ERREUR", err);
     } finally {
       loading.value = false;
     }
@@ -110,7 +110,22 @@ export function useInternshipRequests() {
     }
   };
 
-  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, getAllNotActiveRequests, updateRequestStatus, response, error, loading };
+  // Obtenir le nombre de demandes de stage
+  const getRequestsCount = async () => {
+    loading.value = true;
+    try {
+      response.value = await axios.get(`${API_BASE_URL}/internship-requests/count`);
+      console.log("GET COUNT - Demandes de stage - OK", response.value.data);
+      return response.value.data;
+    } catch (err) {
+      error.value = err;
+      console.log("GET COUNT - Demandes de stage - ERREUR", err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, getAllNotActiveRequests, updateRequestStatus, getRequestsCount, response, error, loading };
 }
 
 

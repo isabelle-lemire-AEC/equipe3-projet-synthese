@@ -75,6 +75,20 @@ export function useEntreprise() {
             loading.value = false;
         }
     };
+ 
+    const getEntreprisesCount = async () => {
+        loading.value = true;
+        try {
+            const response = await axios.get(`${apiBaseUrl}/enterprises/count`);
+            console.log("GET COUNT - Entreprises - OK");
+            return response.data;
+        } catch (err) {
+            error.value = err;
+            console.error('GET COUNT - Entreprises - ERREUR', err);
+        } finally {
+            loading.value = false;
+        }
+    };
 
     return {
         entreprises,
@@ -84,6 +98,7 @@ export function useEntreprise() {
         ajouterEntreprise,
         mettreAjourEntreprise,
         supprimerEntreprise,
+        getEntreprisesCount,
         error,
         loading
     };

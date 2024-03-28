@@ -73,8 +73,19 @@ const getInternshipOfferById = async (id) => {
     error.value = err;
   }
 };
+  
+const getInternshipOfferCount = async () => {
+  try {
+    const response = await axios.get(`https://api-3.fly.dev/internship-offers/count`);
+    console.log("GET COUNT - Offres de stage - OK", response.data);
+    return response.data;
+  } catch (err) {
+    console.error("GET COUNT - Offres de stage - ERREUR", err);
+    error.value = err;
+  }
+};
 
-  return {ajouterOffre, getAllOffers, getInternshipOfferById, edditerOffre, supprimerOffre, response, error, loading };
+  return {ajouterOffre, getAllOffers, getInternshipOfferById, edditerOffre, supprimerOffre, getInternshipOfferCount, response, error, loading };
 }
 
 // Ex d'importation les amis   IMPORT
