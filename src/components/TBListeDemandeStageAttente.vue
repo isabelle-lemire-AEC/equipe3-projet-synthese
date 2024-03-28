@@ -12,7 +12,7 @@
         <p class="marginRight">{{ formatDate(demande.startDate) }}</p>
         <div class="boutons-action">
             <button>Accepter</button>
-            <button>
+            <button @click="redirectToDetails">
                     <i class="fa-solid fa-eye"></i>
             </button>
             <button class="boutons-action__modifier">
@@ -31,9 +31,23 @@
     
     const router = useRouter();
 
+    const { push } = useRouter();
+
     const props = defineProps({
-        demande: Object
+        demande: {
+        type: Object,
+        required: true
+        }
     });
+
+    const redirectToDetails = () => {
+        push({
+            name: 'DemandeStageDetails',
+            params: {
+                id: props.demande._id
+            }
+        });
+    };
 
     // Méthode pour formater la date
     const formatDate = (dateString) => {
