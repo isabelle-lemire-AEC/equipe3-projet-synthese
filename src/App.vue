@@ -1,11 +1,11 @@
 <!-- App.vue -->
 <template>
-  <div class="wrapper-sidebar-main-content">
-    <nav v-if="!isHomePage">
+  <div class="wrapper-sidebar-main-content" v-if="!isHomePage">
+    <nav>
       <Sidebar></Sidebar>
     </nav>
     <div class="wrapper-main-content">
-      <header class="layout-header" v-if="!isHomePage">
+      <header class="layout-header">
         <Header @menu-toggled="handleMenuToggle"></Header>
       </header>
       <main>
@@ -13,11 +13,12 @@
           <router-view />
         </section>
       </main>
-      <footer v-if="!isHomePage">
+      <footer>
         <Footer></Footer>
       </footer>
     </div>
   </div>
+  <router-view />
 </template>
 
 <script setup>
