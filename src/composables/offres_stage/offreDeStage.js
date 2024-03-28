@@ -1,6 +1,8 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
+const API_BASE_URL = 'https://api-3.fly.dev';
+
 export function useInternshipOffers() {
   const response = ref([]);
   const error = ref(null);
@@ -52,9 +54,10 @@ export function useInternshipOffers() {
   const edditerOffre = async (id, offerData) => {
     loading.value = true;
     try {
+        console.log("Edition avant", offerData);
         const url = `https://api-3.fly.dev/internship-offers/${id}`; 
-        response.value = await axios.patch(url, offerData);
-        console.log("Edition réussie", response.value.data);
+        const response = await axios.patch(url, offerData);
+        console.log("Edition réussie", response.data);
     } catch (err) {
         error.value = err;
         console.error("Échec de l'édition", err);
@@ -85,7 +88,22 @@ const getInternshipOfferCount = async () => {
   }
 };
 
-  return {ajouterOffre, getAllOffers, getInternshipOfferById, edditerOffre, supprimerOffre, getInternshipOfferCount, response, error, loading };
+const activateOffer = async (id) => {
+  loading.value = true;
+  try {
+    const response = await axios.get(`${API_BASE_URL}/internship-offers/${id}`);
+    response.data.isActive = !response.data.isActive;
+    await edditerOffre(id, response.data);
+    console.log("ACTIVATE - Offre de stage non active - OK", response.data);
+  } catch (err) {
+    error.value = err;
+    console.log("ACTIVATE - Offre de stage non active - ERREUR", err);
+  } finally {
+    loading.value = false;
+  }
+};
+
+  return {ajouterOffre, getAllOffers, getInternshipOfferById, edditerOffre, supprimerOffre, getInternshipOfferCount, activateOffer, response, error, loading };
 }
 
 // Ex d'importation les amis   IMPORT

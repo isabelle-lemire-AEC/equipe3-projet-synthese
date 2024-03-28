@@ -11,7 +11,16 @@
                 <span>Région</span>
                 <span>Date d'inscription</span>
             </div>
-            <ElementListeStage v-for="demande in toutesDemandes" :key="demande._id" :posteTitre="demande.title" :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName" :region="demande.province.value" :date="demande.startDate" :id="demande._id" :isDemande="true"></ElementListeStage>
+            <ElementListeStage v-for="demande in toutesDemandes" 
+            :key="demande._id" 
+            :posteTitre="demande.title" 
+            :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName" 
+            :region="demande.province.value" 
+            :date="demande.startDate" 
+            :id="demande._id" 
+            :isDemande="true"
+            :isTableauDeBord="false"
+            :isActive="demande.isActive"></ElementListeStage>
         </div>
     </div>
 </template>
