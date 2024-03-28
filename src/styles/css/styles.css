@@ -113,11 +113,42 @@
   gap: 1rem;
 }
 .carte-candidat__texte h2 {
-  font-size: clamp(1.4238rem, 1.3198rem + 0.5202vi, 1.944rem);
+  font-size: clamp(1.2656rem, 1.1948rem + 0.3544vi, 1.62rem);
   color: #111111;
 }
 .carte-candidat__texte p {
   font-family: "Lato";
+}
+
+.carte-entreprise {
+  background-color: #FFFFFF;
+  align-items: center;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding-block: 3rem;
+  padding-inline: 2rem;
+}
+.carte-entreprise__img {
+  min-width: 150px; /* À valider si on garde ou pas quand on sera rendu au responsive */
+  max-width: 70%;
+  margin-inline: auto;
+}
+.carte-entreprise__texte {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.carte-entreprise__texte h2 {
+  font-size: clamp(1.2656rem, 1.1948rem + 0.3544vi, 1.62rem);
+  color: #111111;
+  margin-bottom: 0.5rem;
+}
+.carte-entreprise__texte p {
+  font-family: "Roboto";
+  color: #707070;
 }
 
 .form-fiche__label-input-vertical h4, label, input,
@@ -348,17 +379,18 @@ label {
 
 /* .boutons-ajout {} */
 /* Général à plusieurs views de candidats */
-.form-fiche__wrapper-titre {
-  border-color: #7F2987;
-}
-
 #ajout-candidat,
-#edition-candidat,
-.form-fiche__wrapper-boutons-encadre {
+#edition-candidat {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2rem;
+}
+
+.formulaire-ajout-candidat .form-fiche__wrapper-titre,
+.formulaire-edition-candidat .form-fiche__wrapper-titre,
+.fiche-candidat-details .form-fiche__wrapper-titre {
+  border-color: #7F2987;
 }
 
 /* Spécifique pour la view Candidats */
@@ -383,7 +415,15 @@ label {
   color: #0C9DA4;
 }
 
-/* Spécifique pour la view CandidatDetail et CandidatMiseAJour */
+/* Spécifique pour la view CandidatDetails */
+.fiche-candidat-details .form-fiche__wrapper-boutons-encadre {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+/* Spécifique pour la view CandidatDetails et CandidatMiseAJour */
 .fiche-candidat-details h2,
 .fiche-candidat-details h3,
 .formulaire-edition-candidat h2,
@@ -392,6 +432,10 @@ label {
 }
 
 /* Général à plusieurs views d'entreprises */
+<<<<<<< HEAD
+#ajout-entreprise,
+#edition-entreprise {
+=======
 .form-fiche__wrapper-titre {
   border-color: #86A9E6;
 }
@@ -399,12 +443,39 @@ label {
 #ajout-entreprise,
 #edition-entreprise,
 .form-fiche__wrapper-boutons-encadre {
+>>>>>>> origin
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2rem;
 }
 
+<<<<<<< HEAD
+.formulaire-ajout-entreprise .form-fiche__wrapper-titre {
+  border-color: #86A9E6;
+}
+
+/* Spécifique pour la view Entreprises */
+.entreprises h1 {
+  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+  color: #707070;
+}
+.entreprises__liste {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+.entreprises__liste a {
+  text-decoration: none;
+}
+.entreprises .bouton--bleu {
+  display: inline-block;
+  text-decoration: none;
+  font-family: "Lato";
+  color: #2E456D;
+  margin-bottom: 3rem;
+}
+=======
 /* Spécifique pour la view Entreprises */
 .entreprises h1 {
   margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
@@ -417,6 +488,7 @@ label {
   grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
 }
+>>>>>>> origin
 
 /* Spécifique pour la view EntrepriseAjout */
 .formulaire-ajout-entreprise .form-fiche__wrapper-titre {
