@@ -186,6 +186,7 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -432,25 +433,14 @@ label {
 }
 
 /* Général à plusieurs views d'entreprises */
-<<<<<<< HEAD
 #ajout-entreprise,
 #edition-entreprise {
-=======
-.form-fiche__wrapper-titre {
-  border-color: #86A9E6;
-}
-
-#ajout-entreprise,
-#edition-entreprise,
-.form-fiche__wrapper-boutons-encadre {
->>>>>>> origin
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2rem;
 }
 
-<<<<<<< HEAD
 .formulaire-ajout-entreprise .form-fiche__wrapper-titre {
   border-color: #86A9E6;
 }
@@ -475,20 +465,6 @@ label {
   color: #2E456D;
   margin-bottom: 3rem;
 }
-=======
-/* Spécifique pour la view Entreprises */
-.entreprises h1 {
-  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
-}
-.entreprises .bouton--blue {
-  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
-}
-.entreprises__liste {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
-}
->>>>>>> origin
 
 /* Spécifique pour la view EntrepriseAjout */
 .formulaire-ajout-entreprise .form-fiche__wrapper-titre {
@@ -579,4 +555,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}/*# sourceMappingURL=styles.css.map */
+}
