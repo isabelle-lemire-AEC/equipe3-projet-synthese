@@ -24,7 +24,6 @@ export function useInternshipRequests() {
   };
 
   // Obtenir toutes les demandes de stage en attente de validation
-  // IMPORTANT - Remettre à false quand on aura des demande en attente de validation
   const getAllNotActiveRequests = async () => {
     loading.value = true;
     try {
@@ -85,6 +84,16 @@ export function useInternshipRequests() {
     }
   };
 
+  // Mettre isActive à true
+  const updateRequestStatus = async (demandeId, isActive) => {
+    try {
+        await axios.put(`${API_BASE_URL}/internship-requests/${demandeId}`, { isActive });
+    } catch (error) {
+        console.error(`Erreur lors de la mise à jour de la demande ${demandeId} :`, error);
+        throw error;
+    }
+  };
+
   // Effacer une demande de stage
   const deleteRequest = async (id) => {
     loading.value = true;
@@ -100,7 +109,7 @@ export function useInternshipRequests() {
     }
   };
 
-  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, getAllNotActiveRequests, response, error, loading };
+  return {addRequest, getAllRequests, getRequestById, editRequest, deleteRequest, getAllNotActiveRequests, updateRequestStatus, response, error, loading };
 }
 
 
