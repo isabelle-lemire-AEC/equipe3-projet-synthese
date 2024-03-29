@@ -18,7 +18,7 @@
         <div class="dateInscription">
             <span>{{ date }}</span>
         </div>
-        <div class="boutonActiver">
+        <div class="boutonActiver" v-if="props.isTableauDeBord">
             <button @click="activer()">Activer</button>
         </div>
 
@@ -68,7 +68,6 @@
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
     import { ref } from 'vue';
     import { useRoute } from 'vue-router';
-    import { page } from '../composables/enums.js';
 
     const route = useRoute();
     const { deleteRequest, activateRequest } = useInternshipRequests();

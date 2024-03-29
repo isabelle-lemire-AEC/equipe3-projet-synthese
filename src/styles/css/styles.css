@@ -10,6 +10,7 @@
   border-style: solid;
   border-color: none;
   border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 .bouton--transparent {
   font-weight: 400;
@@ -297,6 +298,7 @@ label {
 .header {
   background-color: #FFFFFF;
   padding: 1rem 0;
+  margin-left: 0.5rem;
 }
 .header__items {
   display: flex;
@@ -323,38 +325,70 @@ label {
   justify-content: flex-start;
   gap: 1rem;
 }
+.nav-items .fa-plus,
+.boutons-ajout .fa-plus {
+  padding-right: 0.5rem;
+}
 .nav-items .add-offer,
 .boutons-ajout .add-offer {
   padding-block: 0.5rem;
   padding-inline: 0.5rem;
-  color: #BB2026;
   border-style: solid;
-  border-color: #BB2026;
+  border-color: #821519;
   border-radius: 0.5rem;
+  background-color: #FFFFFF;
+  color: #BB2026;
+  transition: background-color 0.3s ease;
+}
+.nav-items .add-offer:hover,
+.boutons-ajout .add-offer:hover {
+  background-color: #821519;
+  color: #FFFFFF;
 }
 .nav-items .add-request,
 .boutons-ajout .add-request {
   padding: 0.5rem;
+  background-color: #FFFFFF;
   color: #CB912B;
   border-style: solid;
-  border-color: #CB912B;
+  border-color: #986D22;
   border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+.nav-items .add-request:hover,
+.boutons-ajout .add-request:hover {
+  background-color: #986D22;
+  color: #FFFFFF;
 }
 .nav-items .add-company,
 .boutons-ajout .add-company {
   padding: 0.5rem;
-  color: #86A9E6;
+  background-color: #FFFFFF;
+  color: #5E7EB5;
   border-style: solid;
   border-color: #86A9E6;
   border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+.nav-items .add-company:hover,
+.boutons-ajout .add-company:hover {
+  background-color: #5E7EB5;
+  color: #FFFFFF;
 }
 .nav-items .add-candidate,
 .boutons-ajout .add-candidate {
   padding: 0.5rem;
+  background-color: #FFFFFF;
   color: #7F2987;
   border-style: solid;
-  border-color: #7F2987;
+  border-color: #4A1150;
   border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+.nav-items .add-candidate:hover,
+.boutons-ajout .add-candidate:hover {
+  background-color: #4A1150;
+  color: #FFFFFF;
 }
 
 .utilisateur {
@@ -368,17 +402,72 @@ label {
 .utilisateur .utilisateur__details {
   text-align: right;
 }
+.utilisateur .utilisateur__nom {
+  color: #111111;
+  font-weight: bold;
+}
+.utilisateur .utilisateur__courriel {
+  color: #707070;
+}
+
+.container-menu {
+  background-color: #FFFFFF;
+  min-width: 250px;
+  height: 100%;
+}
 
 .logo {
   max-width: 150px;
+  padding: 1rem;
 }
 
+.navbar {
+  /*.tableau-de-bord i, .tableau-de-bord span{
+      color: variables.$turquoise;
+  }
+  .demandes-stage i, span{
+      color: variables.$gold;
+  }*/
+}
 .navbar__menu {
   list-style: none;
-  padding-left: 0;
+  padding: 1rem;
 }
 .navbar__menu-item a {
   text-decoration: none;
+}
+.navbar__menu-item i {
+  padding: 1rem;
+}
+.navbar__menu-item.tableau-de-bord i, .navbar__menu-item.tableau-de-bord span {
+  color: #0C9DA4;
+}
+.navbar__menu-item.tableau-de-bord i:hover, .navbar__menu-item.tableau-de-bord span:hover {
+  color: #0a868c;
+}
+.navbar__menu-item.demandes-stage i, .navbar__menu-item.demandes-stage span {
+  color: #CB912B;
+}
+.navbar__menu-item.demandes-stage i:hover, .navbar__menu-item.demandes-stage span:hover {
+  color: #b68227;
+}
+.navbar__menu-item.offres-stage i, .navbar__menu-item.offres-stage span {
+  color: #BB2026;
+}
+.navbar__menu-item.offres-stage i:hover, .navbar__menu-item.offres-stage span:hover {
+  color: #a51c22;
+}
+.navbar__menu-item.candidats i, .navbar__menu-item.candidats span {
+  color: #7F2987;
+}
+.navbar__menu-item.candidats i:hover, .navbar__menu-item.candidats span:hover {
+  color: #6d2373;
+}
+.navbar__menu-item.entreprises i, .navbar__menu-item.entreprises span {
+  color: #86A9E6;
+}
+.navbar__menu-item.entreprises i:hover, .navbar__menu-item.entreprises span:hover {
+  color: #719ae2;
 }
 
 /* .boutons-ajout {} */

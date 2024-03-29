@@ -22,7 +22,7 @@
 
 			<div>
 				<div>
-					<label for="ajout-demande-nom-prenom">Nom et prénom</label>
+					<label for="ajout-demande-nom-prenom">Candidat</label>
 					<select id="ajout-demande-nom-prenom" name="ajout-demande-nom-prenom" v-model.trim="demande.candidate">
 						<option value="">Veuillez effectuer un choix</option>
 						<option
@@ -32,10 +32,9 @@
 							{{ candidate.firstName }} {{ candidate.lastName }}
 						</option>
 					</select>
-					<p v-if="erreurs.firstName" class="validForm"></p>
-					<!-- <p v-if="errors.fullName" class="error-message">
+					<p v-if="erreurs.candidat" class="validForm">
                         Veuillez fournir votre nom complet.
-                    </p> -->
+                    </p>
 				</div>
 
 				<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -57,15 +56,18 @@
 							<input
 								type="text"
 								id="ajout-demande-programme"
-								name="ajout-demande-programme"/>
-							<p v-if="errors.activitySector" class="error-message">
+								name="ajout-demande-programme"
+								v-model.trim="formationInput"/>
+							<p v-if="erreurs.formation" class="error-message">
                                 Veuillez fournir un programme de formation.
                             </p>
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="ajout-demande-secteur">Secteur d'activité</label>
-							<select id="ajout-demande-secteur" name="ajout-demande-secteur">
+							<select id="ajout-demande-secteur"
+									name="ajout-demande-secteur"
+									v-model="activitySectorInput">
 								<option value="">Veuillez effectuer un choix</option>
 								<option
 									v-for="activitySector in allSecteursDActivites"
@@ -74,6 +76,9 @@
 									{{ activitySector.value }}
 								</option>
 							</select>
+							<p v-if="erreurs.activitySector" class="error-message">
+                                Veuillez fournir un secteur d'activité de formation.
+                            </p>
 						</div>
 					</div>
 				</div>
@@ -86,9 +91,10 @@
 							<input
 								type="text"
 								id="ajout-demande-etablissement"
-								name="ajout-demande-etablissement" />
-							<p v-if="errors.etablissement" class="error-message">
-								Veuillez fournir un établissement
+								name="ajout-demande-etablissement"
+								v-model="etablissementInput" />
+							<p v-if="erreurs.etablissement" class="error-message">
+								Veuillez fournir un établissement scolaire.
 							</p>
 						</div>
 
@@ -117,13 +123,12 @@
 							<option
 								v-for="province in provinces"
 								:key="province._id"
-								:value="province"
-								:selected="province._id === demande.candidate.province._id">
+								:value="province">
 								{{ province.value }}
 							</option>
 						</select>
 						<p v-if="erreurs.province" class="validForm">
-							Veuillez effectuer un choix.
+							Veuillez choisir une région.
 						</p>
 					</div>
 
@@ -141,10 +146,8 @@
 
 				<fieldset>
 					<legend>Informations sur le stage recherché</legend>
-
 					<div>
 						<!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 50 % de l'espace-->
-
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="ajout-demande-type">Type de stage</label>
 							<select id="ajout-demande-type" name="ajout-demande-type" v-model.trim="demande.internshipType">
@@ -154,10 +157,11 @@
 									:key="internshipType._id"
 									:value="internshipType">
 									{{ internshipType.value }}
-								</option></select>
-								<p v-if="erreurs.internshipType" class="validForm">
-							Veuillez effectuer un choix.
-						</p>
+								</option>
+							</select>
+							<p v-if="erreurs.internshipType" class="validForm">
+								Veuillez choisir un type de stage.
+							</p>
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -168,7 +172,7 @@
 								name="ajout-demande-heures"
 								v-model.trim="demande.weeklyWorkHours" />
 								<p v-if="erreurs.weeklyWorkHours" class="validForm">
-								Veuillez effectuer un choix.
+								Veuillez inscrire le nombre d'heures par semaine.
 							</p>
 						</div>
 					</div>
@@ -194,7 +198,7 @@
 								id="ajout-demande-date-fin"
 								name="ajout-demande-date-fin"
 								v-model.trim="demande.endDate" />
-							<p v-if="erreurs.startDate" class="validForm">
+							<p v-if="erreurs.endDate" class="validForm">
 								Veuillez fournir une date de fin.
 							</p>
 						</div>
@@ -243,9 +247,9 @@
 							name="ajout-demande-infos-supp"
 							v-model="demande.additionalInformation">
 						</textarea>
-						<!-- <p v-if="errors.additionalInformation" class="error-message">
+						<p v-if="erreurs.additionalInformation" class="error-message">
                             Veuillez fournir des informations supplémentaires.
-                        </p> -->
+                        </p>
 					</div>
 				</fieldset>
 			</div>
@@ -279,7 +283,11 @@
 	const remunerationType = ref([]);
 	const allSecteursDActivites = ref([]);
     const router = useRouter();
-	const competences = ref(null);
+	const competences = ref('');
+	const formationInput = ref('');
+	const etablissementInput = ref('');
+	const activitySectorInput = ref('');
+	
 
 	const demande = ref({
 		title: "",
@@ -319,33 +327,37 @@
 	// validation formulaire
 	const erreurs = ref({
         title: false,
-        firstName: false,
-		lastName: false,
+        candidat: false,
         description: false,
+		formation: false,
+		activitySector: false,
         city: false,
 		province: false,
+		etablissement: false,
         startDate: false,
         endDate: false,
         skills: false,
         internshipType: false,
         weeklyWorkHours: false,
-        
+		additionalInformation: false
     });
 
 	const validerFormulaire = () => {
-		erreurs.value.title= demande.value.title === '',
-		erreurs.value.firstName= demande.value.candidate.firstName === '',
-		erreurs.value.lastName= demande.value.candidate.lastName === '',
-		erreurs.value.description= demande.value.candidate.description === '',
-		erreurs.value.city= demande.value.candidate.city === '',
-		erreurs.value.province= demande.value.candidate.province.value === '',
-		erreurs.value.startDate= demande.value.startDate === '',
-		erreurs.value.endDate= demande.value.endDate ==='',
-		erreurs.value.skills= demande.value.skills === '',
-		erreurs.value.internshipType= demande.value.internshipType.value === '',
-		erreurs.value.weeklyWorkHours= demande.value.weeklyWorkHours === 0
+		erreurs.value.title = demande.value.title === '',
+		erreurs.value.candidat = demande.value.candidate.firstName === '',
+		erreurs.value.description = demande.value.candidate.description === '',
+		erreurs.value.formation = formationInput.value === '',
+		erreurs.value.activitySector = activitySectorInput.value === '',
+		erreurs.value.city = demande.value.candidate.city === '',
+		erreurs.value.province = demande.value.candidate.province.value === '',
+		erreurs.value.etablissement = etablissementInput.value === '',
+		erreurs.value.startDate = demande.value.startDate === '',
+		erreurs.value.endDate = demande.value.endDate === '',
+		erreurs.value.skills = competences.value === '',
+		erreurs.value.internshipType = demande.value.internshipType.value === '',
+		erreurs.value.weeklyWorkHours = demande.value.weeklyWorkHours === 0,
+		erreurs.value.additionalInformation = demande.value.additionalInformation === ''
 		
-		// console.log("Erreurs :", erreurs.value);
 		// Vérifie s'il y a des erreurs dans le formulaire
 		return Object.values(erreurs.value).some(err => err);
 	};
