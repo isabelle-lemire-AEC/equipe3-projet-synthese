@@ -56,11 +56,6 @@
                             </div>
 
                             <div class="form-fiche__label-input-vertical">
-                                <label for="city">Ville</label>
-                                <input type="text" id="city" v-model="candidat.city">
-                            </div>
-
-                            <div class="form-fiche__label-input-vertical">
                                 <label for="postalCode">Code postal</label>
                                 <input type="text" id="postalCode" v-model="candidat.postalCode">
                             </div>
