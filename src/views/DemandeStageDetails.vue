@@ -1,8 +1,8 @@
 <template>
-    <div class="pageContainer" v-if="demande">
+    <div v-if="demande">
         <div>
-            <div class="bordureGauche">
-                <h2>Demande de stage</h2>
+            <div class="form-fiche__wrapper-titre">
+                <p class="form-fiche__nom-section">Demande de stage</p>
                 <h1>{{ demande.title }}</h1>
             </div>
         </div>
