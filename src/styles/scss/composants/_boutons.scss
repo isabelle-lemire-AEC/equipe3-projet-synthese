@@ -6,6 +6,7 @@
     font-weight: variables.$bold;
     @include mixins.padding(variables.$spacing-small, variables.$spacing-small);
     @include mixins.border(0, none, 5px);
+    transition: background-color 0.3s ease;
 
     &--transparent {
         font-weight: variables.$regular;

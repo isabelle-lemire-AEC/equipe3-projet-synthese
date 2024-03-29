@@ -1,18 +1,96 @@
+@use '../general/variables';
+@use '../general/mixins';
+
+
+.container-menu{
+    background-color: variables.$white;
+    min-width: 250px;
+    height: 100%;
+    
+}
+
+
 .logo {
     max-width: 150px;
+    padding: 1rem ;
 }
 
 .navbar {
+    
     &__menu {
         list-style: none;
-        padding-left: 0;
+        padding: 1rem;
+        
     }
 
     &__menu-item {
         a {
             text-decoration: none;
         }
+        i{
+            padding: 1rem;
+        }
+        
+           &.tableau-de-bord{
+                i, span{
+                    color: variables.$turquoise;
+                    &:hover{
+                        color: darken(variables.$turquoise, 5%);
+                    }
+                }
+                
+            }
+
+            &.demandes-stage{
+                i, span{
+                    color: variables.$gold;
+                    &:hover{
+                        color: darken(variables.$gold, 5%);
+                    }  
+                }
+                
+            }
+            
+            &.offres-stage{
+                i, span{
+                    color: variables.$red;
+                    &:hover{
+                        color: darken(variables.$red, 5%);
+                    }  
+                }
+                
+            }
+
+            &.candidats{
+                i, span{
+                    color: variables.$purple;
+                    &:hover{
+                        color: darken(variables.$purple, 5%);
+                    }    
+                }
+                
+            }
+        
+            &.entreprises{
+                i, span{
+                    color: variables.$blue;
+                    &:hover{
+                        color: darken(variables.$blue, 5%);
+                    }      
+                }
+                
+            }
     }
+
+    /*.tableau-de-bord i, .tableau-de-bord span{
+        color: variables.$turquoise;
+    }
+    .demandes-stage i, span{
+        color: variables.$gold;
+    }*/
+
+    
+    
 }
 
 /* .boutons-ajout {} */
