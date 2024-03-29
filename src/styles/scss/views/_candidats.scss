@@ -56,13 +56,13 @@
 
 /* Spécifique pour la view CandidatDetails */
 
-.fiche-candidat-details {
+/* .fiche-candidat-details {
     .form-fiche {
         &__wrapper-boutons-encadre {
             @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
         }
     }
-}
+} */
 
 /* Spécifique pour la view CandidatDetails et CandidatMiseAJour */
 
