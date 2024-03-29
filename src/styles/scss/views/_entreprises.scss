@@ -10,13 +10,21 @@
     @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
 }
 
-.formulaire-ajout-entreprise {
+.formulaire-ajout-entreprise,
+.fiche-entreprise-details {
     .form-fiche {
         &__wrapper-titre {
             border-color: variables.$blue;
         }
     }
 }
+
+.entreprise-logo {
+    max-width: 150px;
+    /* À valider si on garde ou pas quand on sera rendu au responsive */
+    width: 70%;
+}
+
 
 /* Spécifique pour la view Entreprises */
 
@@ -70,4 +78,22 @@
     h3 {
         color: variables.$blue;
     }
+}
+
+/* Spécifique pour la view EntrepriseDetail */
+
+.fiche-entreprise-details {
+    .form-fiche {
+        &__wrapper-titre-logo {
+            @include mixins.flex(row, flex-start, center, variables.$spacing-medium);
+        }
+
+        &__wrapper-titre {
+            border-color: variables.$blue;
+        }
+    }
+}
+
+.nom-contact {
+    @include mixins.font(null, variables.$font-style-h4, variables.$bold)
 }
