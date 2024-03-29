@@ -1,71 +1,34 @@
-<!-- Entreprises -->
-<template>
-  <div class="entreprises">
-    <h1>Entreprises</h1>
-    <router-link to="/entreprise-ajout" class="bouton bouton--bleu">Ajouter une entreprise</router-link>
-
-    <div class="entreprises__liste">
-      <router-link v-for="entreprise in entreprises" :key="entreprise._id"
-                   :to="{ name: 'EntrepriseDetails', params: { id: entreprise._id } }">
-        <div class="carte-entreprise">
-          <!-- Affichage du logo de l'entreprise -->
-          <img :src="logoEntreprise" alt="Logo de l'entreprise" class="carte-entreprise__img" />
-          <div class="carte-entreprise__texte">
-            <div>
-              <h2>{{ entreprise.name }}</h2>
-              <p>{{ entreprise.address }}</p>
-            </div>
-            <div>
-              <p>Téléphone : {{ entreprise.phone }}</p>
-              <p>Courriel : {{ entreprise.email }}</p>
-            </div>
-          </div>
-        </div>
-      </router-link>
+  <!-- Entreprises.vue -->
+  <template>
+    <div class="entreprises">
+      <h1>Entreprises</h1>
+      <button class="bouton bouton--bleu" @click="goToEntrepriseAjout">Ajouter une entreprise</button>
+      <div class="entreprises__liste">
+        <EntrepriseCard v-for="entreprise in entreprises" :key="entreprise._id" :entreprise="entreprise"></EntrepriseCard>
+      </div>
     </div>
-  </div>
-</template>
-
-<script>
-  import {
-    useEntreprise
-  } from '@/composables/entreprises/entreprise'
-  import {
-    onMounted,
-    watch
-  } from 'vue'
-  import {
-    useRoute
-  } from 'vue-router'
-  import logoEntreprise from '@/assets/logo-ent.jpg';
-
-  export default {
-    name: 'ListeEntreprises',
-    setup() {
-      // Utilisation du composable Entreprise pour obtenir les entreprises et la fonction pour les charger
-      const {
-        entreprises,
-        chargerEntreprises
-      } = useEntreprise()
-      const route = useRoute()
-
-      // Chargement des entreprises au montage du composant
-      onMounted(chargerEntreprises)
-      console.log('Le composant est monté, chargement des entreprises...')
-
-      // Rechargement des entreprises lorsque le chemin de la route change
-      watch(() => route.path, chargerEntreprises, {
-        immediate: true
-      })
-
-      return {
-        entreprises,
-        logoEntreprise
-      }
-    }
-  }
-</script>
-
+  </template>
+  
+  <script setup>
+    import EntrepriseCard from '@/components/EntrepriseCard.vue';
+    import { useEntreprise } from '@/composables/entreprises/entreprise';
+    import { ref, onMounted, watch } from 'vue';
+    import { useRouter, useRoute } from 'vue-router';
+  
+    const { entreprises, chargerEntreprises } = useEntreprise();
+    const route = useRoute();
+    const router = useRouter();
+  
+    const goToEntrepriseAjout = () => {
+      router.push({
+        name: 'EntrepriseAjout'
+      });
+    };
+  
+    onMounted(chargerEntreprises);
+    watch(() => route.path, chargerEntreprises, { immediate: true });
+  </script>
+  
 
 
 <style scoped>

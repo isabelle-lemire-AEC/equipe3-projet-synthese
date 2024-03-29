@@ -20,7 +20,7 @@
 
             <div class="form-fiche__input-hors-encadre">
                 <div class="form-fiche__label-input-horizontal">
-                    <label for="firstName">Prénom :</label>
+                    <label for="firstName">Prénom:</label>
                     <div class="form-fiche__wrapper-input-msg-erreur">
                         <input type="text" id="firstName" v-model.trim="candidat.firstName">
                         <p class="validForm" v-if="erreurs.firstName">Veuillez remplir ce champ</p>

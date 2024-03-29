@@ -1,4 +1,4 @@
-<!-- Candidats.vue - Donaria  -->
+<!-- Candidats.vue -->
 <template>
   <div class="candidats">
     <h1>Candidats</h1>
