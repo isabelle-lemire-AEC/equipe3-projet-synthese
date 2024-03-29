@@ -1,16 +1,26 @@
 <template>
-    <div class="pageContainer" v-if="demande">
-        <div>
-            <div class="bordureGauche">
-                <h2>Demande de stage</h2>
+    <div v-if="demande">
+        <div class="form-fiche fiche-demandestage-details">
+            <div class="form-fiche__wrapper-titre">
+                <p class="form-fiche__nom-section">Demande de stage</p>
                 <h1>{{ demande.title }}</h1>
             </div>
         </div>
-        <div class="btnsContainer boutons-action">
-            <button :class="{ 'boutons-action__crochet': demande.isActive }" @click="activate()"><i class="fas fa-check"></i></button>
-            <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(demande._id)"><i class="fas fa-pen-to-square"></i></button>
-            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i class="fa-solid fa-trash-can"></i></button>
+
+        <div class="form-fiche__wrapper-boutons-encadre">
+            <div class="boutons-action">
+                <button :class="{ 'boutons-action__crochet': demande.isActive }" @click="activate()">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(demande._id)">
+                    <i class="fas fa-pen-to-square"></i>
+                </button>
+                <button class="boutons-action__supprimer" @click="afficherConfirmationModal()">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
         </div>
+
         <div class="infoContainer">
 
             <div>
