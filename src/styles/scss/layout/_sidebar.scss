@@ -25,7 +25,7 @@ $color-entreprises: variables.$blue;
     
     &__menu {
         list-style: none;
-        padding: 1rem;
+        padding: 1rem 0 1rem 1rem;
         
     }
 
@@ -44,7 +44,7 @@ $color-entreprises: variables.$blue;
             top: 0;
             bottom: 0;
             right: 0;
-            width: 3px;
+            width: 5px;
             background-color: transparent;
             transition: background-color 0.3s ease;
           }
@@ -53,33 +53,33 @@ $color-entreprises: variables.$blue;
           
         
           
-          /*&.active::after {
+          &.active::after {
             background-color: transparent; // Couleur de la ligne lorsque l'élément est actif (par défaut)
-          }*/
+          }
         
           // Appliquer les couleurs spécifiques au survol pour chaque classe spécifique
           &.tableau-de-bord:hover::after,
-          &.active::after{
+          &.tableau-de-bord.active::after{
             background-color: $color-tableau-de-bord;
           }
         
           &.demandes-stage:hover::after,
-          &.active::after {
+          &.demandes-stage.active::after {
             background-color: $color-demandes-stage;
           }
         
           &.offres-stage:hover::after,
-          &.active::after {
+          &.offres-stage.active::after {
             background-color: $color-offres-stage;
           }
         
           &.candidats:hover::after,
-          &.active::after {
+          &.candidats.active::after {
             background-color: $color-candidats;
           }
         
           &.entreprises:hover::after,
-          &.active::after {
+          &.entreprises.active::after {
             background-color: $color-entreprises;
           }
         
@@ -88,8 +88,8 @@ $color-entreprises: variables.$blue;
             position: absolute;
             top: 0;
             bottom: 0;
-            right: -3px;
-            width: 3px;
+            right: 0;
+            width: 5px;
             background-color: transparent;
           }
         
