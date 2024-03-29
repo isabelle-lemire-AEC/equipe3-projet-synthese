@@ -1,8 +1,8 @@
 <template>
-    <div class="pageContainer">
+    <div class="">
         <h1>Demandes de stage</h1>
         <RouterLink to="/demande-de-stage-ajout">
-            <button>Ajouter une demande</button>
+            <button class="bouton bouton--mauve">Ajouter une demande</button>
         </RouterLink>
         <div class="listeStages">
             <div class="listeStagesHeader">
@@ -11,7 +11,16 @@
                 <span>Région</span>
                 <span>Date d'inscription</span>
             </div>
-            <ElementListeStage v-for="demande in toutesDemandes" :key="demande._id" :posteTitre="demande.title" :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName" :region="demande.province.value" :date="demande.startDate" :id="demande._id" :isDemande="true"></ElementListeStage>
+            <ElementListeStage v-for="demande in toutesDemandes" 
+            :key="demande._id" 
+            :posteTitre="demande.title" 
+            :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName" 
+            :region="demande.province.value" 
+            :date="demande.startDate" 
+            :id="demande._id" 
+            :isDemande="true"
+            :isTableauDeBord="false"
+            :isActive="demande.isActive"></ElementListeStage>
         </div>
     </div>
 </template>
@@ -196,7 +205,4 @@ h1 {
     display: flex;
     flex-direction: column;
 }
-
-/*.groupeBtns {
-}*/
 </style>

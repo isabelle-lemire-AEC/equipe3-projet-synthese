@@ -39,7 +39,7 @@
                     <h2>Dernières <span>demandes</span> de stage</h2>
                     <h4>En attente de validation</h4>
                 </div>
-                <button @click="validerToutesLesDemandes">Valider toutes les demandes</button> <!-- non fonctionnel -->
+                <button @click="validerToutesLesDemandes()">Valider toutes les demandes</button>
             </div>
             <div>
                 <div class="flex">
@@ -48,20 +48,20 @@
                     <p>Date</p>
                     <p>Actions</p>
                 </div>
-                <div v-if="demandes.length > 0">
-                    <TBListeDemandeStageAttente 
-                        v-for="demande in demandes" 
-                        :key="demande._id" 
-                        :demande="demande" 
-                        @viewDetails="navigateToDemandeDetails"
-                        @editRequest="navigateToDemandeEdit"
-                    />
-                </div>
-                <div v-else>
-                    <p>Il n'y a pas de demande de stage en attente de validation</p>
+
+                <div v-if="demandes && afficherDemandes">
+                    <ElementListeStage v-for="demande in demandes"
+                        :key="demande._id"
+                        :posteTitre="demande.title"
+                        :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName"
+                        :region="demande.province.value"
+                        :date="demande.startDate"
+                        :id="demande._id"
+                        :isDemande="true"
+                        :isTableauDeBord="true"
+                        :isActive="demande.isActive"></ElementListeStage>
                 </div>
             </div>
-            
         </section>
 
         <hr style="margin: 25px 0;"> <!-- à deleter, seulement pour faire section -->
@@ -73,7 +73,7 @@
                     <h2>Dernières <span>offres</span> de stage</h2>
                     <h4>En attente de validation</h4>
                 </div>
-                <button>Valider toutes les offres</button>
+                <button @click="validerToutesLesOffres()">Valider toutes les offres</button>
             </div>
 
             <div>
@@ -83,18 +83,24 @@
                     <p>Date</p>
                     <p>Action</p>
                 </div>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-                <TBListeOffreStageAttente></TBListeOffreStageAttente>
-
+                <div v-if="offres && afficherOffres">
+                    <ElementListeStage v-for="offre in offres"
+                        :key="offre._id"
+                        :posteTitre="offre.title"
+                        :posteNom="offre.enterprise.name"
+                        :region="offre.province.value"
+                        :date="offre.startDate"
+                        :id="offre._id"
+                        :isDemande="false"
+                        :isTableauDeBord="true"
+                        :isActive="offre.isActive"></ElementListeStage>
+                </div>
             </div>
-            
         </section>
     </div>
 </template>
-/Users/jonathan/Projects/aec-dev-web/bloc-4/projet-synthese/projet-synthese/equipe3-projet-synthese/src/composables/candidats/candidat.js
 <script setup>
+    import ElementListeStage from '../components/ElementListeStage.vue'
     import { ref, onMounted } from 'vue';
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
@@ -103,15 +109,19 @@
     import TBListeDemandeStageAttente from '../components/TBListeDemandeStageAttente.vue';
     import TBListeOffreStageAttente from '../components/TBListeOffreStageAttente.vue';
 
-    const { getAllNotActiveRequests, updateRequestStatus, getRequestsCount } = useInternshipRequests();
-    const { getInternshipOfferCount } = useInternshipOffers();
+    const { getAllNotActiveRequests, updateRequestStatus, getRequestsCount, activateRequest } = useInternshipRequests();
+    const { getAllOffers, getInternshipOfferCount, activateOffer } = useInternshipOffers();
     const { getCandidatsCount } = useCandidat();
     const { getEntreprisesCount } = useEntreprise();
     const demandes = ref([]);
+    const offres = ref([]);
     const demandesCount = ref(null);
     const offresCount = ref(null);
     const candidatsCount = ref(null);
     const entreprisesCount = ref(null);
+    const isTableauDeBord = ref(true);
+    const afficherDemandes = ref(true);
+    const afficherOffres = ref(true);
 
     const navigateToDemandeDetails = (demandeId) => {
         router.push({ 
@@ -130,18 +140,22 @@
     };
 
     const validerToutesLesDemandes = async () => {
-        try {
-            await Promise.all(demandes.value.map(async (demande) => {
-                await updateRequestStatus(demande._id, true);
-                demande.isActive = true;
-            }));
-        } catch (error) {
-            console.error("Erreur lors de la validation des demandes :", error);
-        }
+        demandes.value.forEach(demande => {
+            activateRequest(demande._id);
+        });
+        afficherDemandes.value = !afficherDemandes.value;
+    };
+
+    const validerToutesLesOffres = async () => {
+        offres.value.forEach(offre => {
+            activateOffer(offre._id);
+        });
+        afficherOffres.value = !afficherOffres.value;
     };
 
     onMounted(async () => {
         demandes.value = await getAllNotActiveRequests();
+        offres.value = await getAllOffers();
         demandesCount.value = await getRequestsCount();
         offresCount.value = await getInternshipOfferCount();
         candidatsCount.value = await getCandidatsCount();

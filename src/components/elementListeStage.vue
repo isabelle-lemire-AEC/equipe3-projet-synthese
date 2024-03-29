@@ -18,6 +18,9 @@
         <div class="dateInscription">
             <span>{{ date }}</span>
         </div>
+        <div class="boutonActiver" v-if="props.isTableauDeBord">
+            <button @click="activer()">Activer</button>
+        </div>
 
         <!-- Boutons pour les DEMANDES de stage -->
         <div class="groupeBtns boutons-action" v-if="props.isDemande">
@@ -64,24 +67,27 @@
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
     import { ref } from 'vue';
+    import { useRoute } from 'vue-router';
 
-    const { deleteRequest } = useInternshipRequests();
-    const { supprimerOffre } = useInternshipOffers();
-    // const props = defineProps(['stage']); old, to delete
-    const props = defineProps(['posteTitre', 'posteNom', 'region', 'date', 'id', 'isDemande']);
-
-
+    const route = useRoute();
+    const { deleteRequest, activateRequest } = useInternshipRequests();
+    const { supprimerOffre, activateOffer } = useInternshipOffers();
+    const props = defineProps(['posteTitre', 'posteNom', 'region', 'date', 'id', 'isDemande', 'isTableauDeBord', 'isActive']);
     const showConfirmationModal = ref(false);
-    let showThisElement = ref(true);
+    const showThisElement = ref(true);
     const date = ref([]);
+
+    if(props.isTableauDeBord && props.isActive) {
+        showThisElement.value = false;
+    }
 
     date.value = props.date;
     date.value = date.value.substring(0, 10);
 
     const deleteDemande = async () => {
-        isDemande ? await deleteRequest(props.id) : await supprimerOffre(props.id); 
+        props.isDemande ? await deleteRequest(props.id) : await supprimerOffre(props.id);
         showConfirmationModal.value = false;
-        showThisElement = false;
+        showThisElement.value = false;
     }
 
     // Fonction pour afficher la modal de confirmation
@@ -103,6 +109,16 @@
         lienDetails.value = 'OffreStageDetails';
         lienMiseAJour.value = 'OffreStageMiseAjour';
     }
+
+    const activer = async () => {
+        if(props.isDemande) {
+            await activateRequest(props.id);
+        } else {
+            await activateOffer(props.id);
+        }
+        showThisElement.value = false;
+    }
+
 </script>
 
 <style scoped>
@@ -182,6 +198,65 @@
 
     .btn:hover {
         opacity: 0.8;
+    }
+
+    html, body {
+        background-color: rgb(222, 222, 222);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    h1 {
+        margin: 0 0 3rem 0;
+        padding: 0;
+    }
+
+    .pageContainer {
+        padding: 2rem;
+        margin: 2rem;
+    }
+
+    .listeStagesHeader {
+        display: none;
+    }
+
+    .listeStages {
+        background-color: white;
+        padding: 4rem 2rem 2rem 2rem;
+        border-radius: 1rem;
+    }
+
+    .ajouterDemande {
+        margin: 0 0 1rem 0;
+        padding: 0.8rem;
+        border-radius: 0.3rem;
+        border: 0px solid white;
+        background-color: orange;
+        color: white;
+    }
+
+    .iconTemp {
+        background-color: orange;
+        width: 40px;
+        height: 40px;
+        border-radius: 0.5rem;
+    }
+
+    .elementStage {
+        display: flex;
+        justify-content: space-between;
+        margin: 2rem 0 0 0;
+        padding: 0 0 1rem 0;
+        border-bottom: 0.1rem solid rgb(193, 193, 193);
+    }
+
+    .barreVerticale {
+        width: 0.3rem;
+        background-color: orange;
+    }
+
+    .poste {
+        display: flex;
+        flex-direction: column;
     }
 
 </style>
