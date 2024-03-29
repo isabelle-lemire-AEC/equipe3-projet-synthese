@@ -3,42 +3,44 @@
   <!-- Logo -->
 
   
-    <div class="logo">
-      <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
-    </div>
+    <div class="container-menu">
+      <div class="logo">
+        <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
+      </div>
 
-    <ul class="navbar__menu">
-      <li class="navbar__menu-item tableau-de-bord">
-        <router-link to="/tableau-de-bord">
-          <i class="fa-solid fa-gauge"></i>
-          <span>Tableau de bord</span>
-        </router-link>
-      </li>
-      <li class="navbar__menu-item demandes-stage">
-        <router-link to="/demandes-de-stages">
-          <i class="fa-solid fa-file-lines"></i>
-          <span>Demandes de stage</span>
-        </router-link>
-      </li>
-      <li class="navbar__menu-item offres-stage">
-        <router-link to="/offres-de-stages">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span>Offres de stage</span>
-        </router-link>
-      </li>
-      <li class="navbar__menu-item candidats">
-        <router-link to="/candidats">
-          <i class="fa-solid fa-user"></i>
-          <span>Candidats</span>
-        </router-link>
-      </li>
-      <li class="navbar__menu-item entreprises">
-        <router-link to="/entreprises">
-          <i class="fa-solid fa-computer-mouse"></i>
-          <span>Entreprises</span>
-        </router-link>
-      </li>
-    </ul>
+      <ul class="navbar__menu">
+        <li class="navbar__menu-item tableau-de-bord">
+          <router-link to="/tableau-de-bord">
+            <i class="fa-solid fa-gauge"></i>
+            <span>Tableau de bord</span>
+          </router-link>
+        </li>
+        <li class="navbar__menu-item demandes-stage">
+          <router-link to="/demandes-de-stages">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Demandes de stage</span>
+          </router-link>
+        </li>
+        <li class="navbar__menu-item offres-stage">
+          <router-link to="/offres-de-stages">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Offres de stage</span>
+          </router-link>
+        </li>
+        <li class="navbar__menu-item candidats">
+          <router-link to="/candidats">
+            <i class="fa-solid fa-user"></i>
+            <span>Candidats</span>
+          </router-link>
+        </li>
+        <li class="navbar__menu-item entreprises">
+          <router-link to="/entreprises">
+            <i class="fa-solid fa-computer-mouse"></i>
+            <span>Entreprises</span>
+          </router-link>
+        </li>
+      </ul>
+    </div>
 
 
 
