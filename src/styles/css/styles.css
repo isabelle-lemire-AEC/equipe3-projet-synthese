@@ -421,23 +421,54 @@ label {
   padding: 1rem;
 }
 
-.navbar {
-  /*.tableau-de-bord i, .tableau-de-bord span{
-      color: variables.$turquoise;
-  }
-  .demandes-stage i, span{
-      color: variables.$gold;
-  }*/
-}
 .navbar__menu {
   list-style: none;
-  padding: 1rem;
+  padding: 1rem 0 1rem 1rem;
+}
+.navbar__menu-item {
+  position: relative;
 }
 .navbar__menu-item a {
   text-decoration: none;
 }
 .navbar__menu-item i {
   padding: 1rem;
+}
+.navbar__menu-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 5px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+.navbar__menu-item.active::after {
+  background-color: transparent;
+}
+.navbar__menu-item.tableau-de-bord:hover::after, .navbar__menu-item.tableau-de-bord.active::after {
+  background-color: #0C9DA4;
+}
+.navbar__menu-item.demandes-stage:hover::after, .navbar__menu-item.demandes-stage.active::after {
+  background-color: #CB912B;
+}
+.navbar__menu-item.offres-stage:hover::after, .navbar__menu-item.offres-stage.active::after {
+  background-color: #BB2026;
+}
+.navbar__menu-item.candidats:hover::after, .navbar__menu-item.candidats.active::after {
+  background-color: #7F2987;
+}
+.navbar__menu-item.entreprises:hover::after, .navbar__menu-item.entreprises.active::after {
+  background-color: #86A9E6;
+}
+.navbar__menu-item > .line-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 5px;
+  background-color: transparent;
 }
 .navbar__menu-item.tableau-de-bord i, .navbar__menu-item.tableau-de-bord span {
   color: #0C9DA4;
@@ -470,7 +501,6 @@ label {
   color: #719ae2;
 }
 
-/* .boutons-ajout {} */
 /* Général à plusieurs views de candidats */
 #ajout-candidat,
 #edition-candidat {

@@ -1,6 +1,12 @@
 @use '../general/variables';
 @use '../general/mixins';
 
+$color-tableau-de-bord: variables.$turquoise;
+$color-demandes-stage: variables.$gold;
+$color-offres-stage: variables.$red;
+$color-candidats: variables.$purple;
+$color-entreprises: variables.$blue;
+
 
 .container-menu{
     background-color: variables.$white;
@@ -19,27 +25,86 @@
     
     &__menu {
         list-style: none;
-        padding: 1rem;
+        padding: 1rem 0 1rem 1rem;
         
     }
 
     &__menu-item {
+        position: relative;
         a {
             text-decoration: none;
         }
         i{
             padding: 1rem;
         }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 5px;
+            background-color: transparent;
+            transition: background-color 0.3s ease;
+          }
+        
+           
+          
+        
+          
+          &.active::after {
+            background-color: transparent; // Couleur de la ligne lorsque l'élément est actif (par défaut)
+          }
+        
+          // Appliquer les couleurs spécifiques au survol pour chaque classe spécifique
+          &.tableau-de-bord:hover::after,
+          &.tableau-de-bord.active::after{
+            background-color: $color-tableau-de-bord;
+          }
+        
+          &.demandes-stage:hover::after,
+          &.demandes-stage.active::after {
+            background-color: $color-demandes-stage;
+          }
+        
+          &.offres-stage:hover::after,
+          &.offres-stage.active::after {
+            background-color: $color-offres-stage;
+          }
+        
+          &.candidats:hover::after,
+          &.candidats.active::after {
+            background-color: $color-candidats;
+          }
+        
+          &.entreprises:hover::after,
+          &.entreprises.active::after {
+            background-color: $color-entreprises;
+          }
+        
+          // Conteneur pour positionner la ligne à droite
+          & > .line-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 5px;
+            background-color: transparent;
+          }
         
            &.tableau-de-bord{
                 i, span{
                     color: variables.$turquoise;
-                    &:hover{
+                    &:hover
+                    {
                         color: darken(variables.$turquoise, 5%);
                     }
                 }
                 
             }
+
+            
 
             &.demandes-stage{
                 i, span{
@@ -48,8 +113,8 @@
                         color: darken(variables.$gold, 5%);
                     }  
                 }
-                
-            }
+
+            }    
             
             &.offres-stage{
                 i, span{
@@ -58,6 +123,8 @@
                         color: darken(variables.$red, 5%);
                     }  
                 }
+
+               
                 
             }
 
@@ -68,6 +135,8 @@
                         color: darken(variables.$purple, 5%);
                     }    
                 }
+
+                
                 
             }
         
@@ -79,18 +148,16 @@
                     }      
                 }
                 
+                
             }
     }
 
-    /*.tableau-de-bord i, .tableau-de-bord span{
-        color: variables.$turquoise;
-    }
-    .demandes-stage i, span{
-        color: variables.$gold;
-    }*/
+   
+   
+  
+  
 
     
     
 }
 
-/* .boutons-ajout {} */
