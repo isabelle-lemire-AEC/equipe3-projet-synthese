@@ -220,6 +220,9 @@ label {
   align-items: flex-end;
   gap: 2rem;
 }
+.form-fiche__wrapper-radio-input {
+  padding-left: 0.5rem;
+}
 .form-fiche__encadre {
   width: 100%;
   background-color: #FFFFFF;
@@ -733,13 +736,6 @@ label {
   border-color: #0C9DA4;
   margin-bottom: 20px;
   width: 100%;
-}
-
-.bouton {
-  background-color: #0C9DA4;
-}
-.bouton:hover {
-  background-color: #0a868c;
 }
 
 .container {

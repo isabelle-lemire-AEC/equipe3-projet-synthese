@@ -109,16 +109,16 @@
 							</div>
 							<div class="form-fiche__label-input-vertical">
 								<label for="edit-demande-remuneration">Rémunération</label>
-								<div>
+								<div à>
 									<input type="radio" id="edit-demande-discretion" name="edit-demande-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
-									<label for="edit-demande-discretion">À la discrétion de l'entreprise</label>
+									<label for="edit-demande-discretion" class="form-fiche__wrapper-radio-input">À la discrétion de l'entreprise</label>
 								</div>
 								<div>
 									<input type="radio" id="edit-demande-remunere" name="edit-demande-remuneration" value="remunere" v-model="remunerationType" />
-									<label for="edit-demande-remunere">Rémunéré</label>
+									<label for="edit-demande-remunere" class="form-fiche__wrapper-radio-input">Rémunéré</label>
 								</div>
 								<div>
-									<input type="radio" id="edit-demande-non-renumere" name="edit-demande-remuneration" value="non-remunere" v-model="remunerationType" />
+									<input class="form-fiche__wrapper-radio-input" type="radio" id="edit-demande-non-renumere" name="edit-demande-remuneration" value="non-remunere" v-model="remunerationType" />
 									<label for="edit-demande-non-renumere">Non-rémunéré</label>
 								</div>
 							</div>
