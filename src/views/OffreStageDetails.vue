@@ -89,11 +89,11 @@
 
       <!-- A deleter quand ce sera ok -->
       <div>
-        OK <p>TITTLE: *{{ offerDetails.title }}</p>
-        OK <p>Entreprise: "non necessaire" ***{{ offerDetails.enterprise?.name }}</p>
-        OK <p>Description: ***{{ offerDetails.description }}</p>
+        <p>OK - TITTLE: *{{ offerDetails.title }}</p>
+        <p>OK - Entreprise: "non necessaire" ***{{ offerDetails.enterprise?.name }}</p>
+        <p>OK - Description: ***{{ offerDetails.description }}</p>
         <p>Exigences name: ***{{ offerDetails.enterprise.name }}</p>
-        OK <p>Exigences: ***{{ offerDetails.requiredSkills }}</p>
+        <p>OK - Exigences: ***{{ offerDetails.requiredSkills }}</p>
         <p>enterprise.image: ***{{ offerDetails.enterprise.image }}</p>
         <p>enterprise id: ***{{ offerDetails.enterprise._id }}</p>
         <p>enterprise adresse: ***{{ offerDetails.enterprise.address }}</p>
@@ -103,12 +103,12 @@
         <p>Exigences email: ***{{ offerDetails.enterprise.email }}</p>
       
         <p>description : ***{{ offerDetails.description }}</p>
-        OK <p>startDate: ***{{ offerDetails.startDate }}</p>
-        OK <p>endDate: ***{{ offerDetails.endDate }}</p>
+        <p>OK - startDate: ***{{ offerDetails.startDate }}</p>
+        <p>OK -endDate: ***{{ offerDetails.endDate }}</p>
         <p>Exigences salary: ***{{ offerDetails.salary }}</p>
         <p>Exigences province: ***{{ offerDetails.province }}</p>
-        OK <p>Exigences value: ***{{ offerDetails.internshipType.value }}</p>
-        OK <p>Exigences paid: ***{{ offerDetails.paid }}</p>
+        <p>OK - Exigences value: ***{{ offerDetails.internshipType.value }}</p>
+        <p>OK - Exigences paid: ***{{ offerDetails.paid }}</p>
       </div>
 
     </div>
