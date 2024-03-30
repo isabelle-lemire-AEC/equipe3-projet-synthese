@@ -11,6 +11,8 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .bouton--transparent {
   font-weight: 400;
@@ -46,6 +48,12 @@
 }
 .bouton--vert:hover {
   background-color: #058840;
+}
+.bouton--turquoise {
+  background-color: #0C9DA4;
+}
+.bouton--turquoise:hover {
+  background-color: #0a868c;
 }
 
 .boutons {

@@ -7,6 +7,7 @@
     @include mixins.padding(variables.$spacing-small, variables.$spacing-small);
     @include mixins.border(0, none, 5px);
     transition: background-color 0.3s ease;
+    width: fit-content;
 
     &--transparent {
         font-weight: variables.$regular;
@@ -50,6 +51,16 @@
             background-color: darken(variables.$bouton-action-green, 5%);
         }
     }
+
+    &--turquoise {
+        background-color: variables.$turquoise;
+
+        &:hover {
+            background-color: darken(variables.$turquoise, 5%);
+        }
+    }
+
+    
 }
 
 .boutons {
