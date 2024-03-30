@@ -34,10 +34,14 @@ $color-entreprises: variables.$blue;
 
         a {
             text-decoration: none;
+            @include mixins.font(variables.$font-body, null, null);
         }
 
         i {
-            padding: 1rem;
+            margin: 1rem;
+            width: 18px;
+            height: auto;
+            text-align: left;
         }
 
         &::after {
