@@ -736,6 +736,14 @@ label {
   color: #0C9DA4;
 }
 
+.fiche-offrestages-details .form-fiche__wrapper-titre {
+  border-color: #BB2026;
+}
+.fiche-offrestages-details h2,
+.fiche-offrestages-details h3 {
+  color: #BB2026;
+}
+
 .app-container {
   min-height: 100vh;
 }
