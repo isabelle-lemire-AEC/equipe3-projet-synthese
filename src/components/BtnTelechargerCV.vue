@@ -1,5 +1,5 @@
 <template>
-    <button @click="telechargerPDF" class="bouton bouton--mauve">
+    <button @click="telechargerPDF" class="bouton bouton--turquoise">
         <i class="fa-solid fa-cloud-arrow-down"></i>Télécharger le C.V.
     </button>
 </template>
@@ -12,11 +12,5 @@
 </script>
 
 <style scoped>
-    button {
-        background-color: #0C9DA4;
-    }
 
-    button:hover {
-        background-color: #054d51 !important;
-    }
 </style>
