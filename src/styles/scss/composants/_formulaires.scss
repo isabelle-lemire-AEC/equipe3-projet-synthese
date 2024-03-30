@@ -12,7 +12,7 @@
 
 }
 
-input,
+input:not([type="radio"]),
 textarea,
 select {
     width: 100%;
@@ -114,6 +114,11 @@ label {
         &--cache {
             display: none;
         }
+    }
+
+    &__label-radio-input {
+        padding-left: variables.$spacing-xsmall;
+        font-weight: variables.$regular;
     }
 
     &__wrapper-input-msg-erreur {

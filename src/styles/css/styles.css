@@ -11,6 +11,7 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -159,7 +160,7 @@
   color: #707070;
 }
 
-.form-fiche__label-input-vertical h4, label, input,
+.form-fiche__label-input-vertical h4, label, input:not([type=radio]),
 textarea,
 select {
   font-family: "Lato";
@@ -169,7 +170,7 @@ select {
   font-size: clamp(1rem, 0.975rem + 0.125vi, 1.125rem);
 }
 
-input,
+input:not([type=radio]),
 textarea,
 select {
   width: 100%;
@@ -201,6 +202,7 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -272,6 +274,10 @@ label {
 }
 .form-fiche__label--cache {
   display: none;
+}
+.form-fiche__label-radio-input {
+  padding-left: 0.5rem;
+  font-weight: 400;
 }
 .form-fiche__wrapper-input-msg-erreur {
   width: 100%;
@@ -711,9 +717,65 @@ label {
 .fiche-demandestages-details .form-fiche__wrapper-titre {
   border-color: #CB912B;
 }
+.formulaire-edition-demandestages h2,
+.formulaire-edition-demandestages h3,
 .fiche-demandestages-details h2,
 .fiche-demandestages-details h3 {
   color: #0C9DA4;
+}
+
+.app-container {
+  min-height: 100vh;
+}
+
+.logo-container {
+  background-color: #FFFFFF;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.content-container {
+  display: flex;
+  width: 100%;
+}
+
+.half-page-image {
+  width: 50%;
+  height: auto;
+}
+
+.login-panel {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0 0 0 3rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.login-panel .entete-login-panel {
+  width: 100%;
+  color: #111111;
+  padding: 0 0 2rem 0;
+  margin-bottom: 100px;
+}
+.login-panel .entete-login-panel h1 {
+  font-family: "Lato";
+  font-size: 70px;
+  line-height: 1.1;
+}
+.login-panel .entete-login-panel p {
+  font-family: "Roboto";
+  line-height: 1.1;
+  padding: 1rem 0;
+}
+
+.form-group input {
+  border-style: solid;
+  border-color: #0C9DA4;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .container {
@@ -788,4 +850,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}/*# sourceMappingURL=styles.css.map */
+}

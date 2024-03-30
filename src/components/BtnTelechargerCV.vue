@@ -1,6 +1,6 @@
 <template>
     <button @click="telechargerPDF" class="bouton bouton--turquoise">
-        <i class="fa-solid fa-cloud-arrow-down"></i>Télécharger le C.V.
+        <i class="fa-solid fa-cloud-arrow-down"></i> Télécharger le C.V.
     </button>
 </template>
 

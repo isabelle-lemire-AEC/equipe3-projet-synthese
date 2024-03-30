@@ -1,15 +1,15 @@
 <template>
-	<div class="form-fiche formulaire-edition-candidat">
+	<div class="form-fiche formulaire-edition-demandestages">
 		<div class="form-fiche__wrapper-titre" v-if="demande">
 			<p class="form-fiche__nom-section">Demande de stage</p>
 			<h1>{{ demande.title }}</h1>
 		</div>
 
-		<form id="edition-demande-stage" @submit.prevent="soumettreFormulaire">
+		<form id="edition-demandestages" @submit.prevent="soumettreFormulaire">
 			<!-- Boutons annuler et mettre à jour -->
 			<div class="boutons">
 				<button class="bouton bouton--transparent" type="submit" @click="retour()">Annuler</button>
-				<button class="bouton bouton--mauve" type="submit" @click="soumettreFormulaire()">
+				<button class="bouton bouton--turquoise" type="submit" @click="soumettreFormulaire()">
 					<div class="icone-libelle">
 						<i class="fas fa-save"></i>
 						<span>Mettre à jour</span>
@@ -21,23 +21,17 @@
 			<div class="form-fiche__encadre">
 				<!-- Section candidat -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
-					<h3>Candidats</h3>
-					<div>
-						<label for="edit-demande-candidat"></label>
-						<input type="text" id="edit-demande-candidat" name="edit-demande-candidat" v-model.trim="nomDuCandidat"/>
-						<!-- Validation -->
-						<!-- <p v-if="errors.fullName" class="error-message">Veuillez fournir le nom du candidat.</p> -->
-					</div>
+					<label for="edit-demande-candidat">Candidats</label>
+					<input type="text" id="edit-demande-candidat" name="edit-demande-candidat" v-model.trim="nomDuCandidat"/>
+					<!-- Validation -->
+					<!-- <p v-if="errors.fullName" class="error-message">Veuillez fournir le nom du candidat.</p> -->
 				</div>
 				<!-- Section Présentation -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
-					<h3>Présentation</h3>
-					<div>
-						<label for="edit-demande-presentation"></label>
-						<textarea id="edit-demande-presentation" name="edit-demande-presentation" v-model="demande.description"></textarea>
-						<!-- Validation -->
-						<!-- <p v-if="errors.description" class="error-message">Veuillez fournir une présentation.</p> -->
-					</div>
+					<label for="edit-demande-presentation">Présentation</label>
+					<textarea id="edit-demande-presentation" name="edit-demande-presentation" rows="10" v-model="demande.description"></textarea>
+					<!-- Validation -->
+					<!-- <p v-if="errors.description" class="error-message">Veuillez fournir une présentation.</p> -->
 				</div>
 				<!-- Section infos -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
@@ -87,55 +81,58 @@
 				<!-- Section compétences -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
 					<label for="edit-demande-competences">Compétences</label>
-						<textarea id="edit-demande-competences" name="edit-demande-competences" v-model="demande.skills">
-						</textarea>
-						<!-- Validation -->
-						<!-- <p v-if="errors.skills" class="error-message">Veuillez fournir des compétences.</p> -->
+					<textarea id="edit-demande-competences" name="edit-demande-competences" v-model="demande.skills"></textarea>
+					<!-- Validation -->
+					<!-- <p v-if="errors.skills" class="error-message">Veuillez fournir des compétences.</p> -->
 				</div>
 				<!-- Section info stage -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
 					<h3>Informations sur le stage recherché</h3>
 					<div class="form-fiche__colonnes-inputs">
+						<!-- colonne de gauche -->
 						<div class="form-fiche__colonne-inputs">
-							<label for="edit-demande-type">Type de stage</label>
-							<select id="edit-demande-type" name="ajout-demande-type" v-model.trim="demande.internshipType">
-								<option value="">Veuillez effectuer un choix</option>
-								<option v-for="internshipType in internshipTypes" :key="internshipType._id" :value="internshipType">
-									{{ internshipType.value }}
-								</option></select>
+							<div class="form-fiche__label-input-vertical">
+								<label for="edit-demande-type">Type de stage</label>
+								<select id="edit-demande-type" name="ajout-demande-type" v-model.trim="demande.internshipType">
+									<option value="">Veuillez effectuer un choix</option>
+									<option v-for="internshipType in internshipTypes" :key="internshipType._id" :value="internshipType">
+										{{ internshipType.value }}
+									</option></select>
+									<!-- Validation -->
+									<!-- <p v-if="erreurs.internshipType" class="validForm">Veuillez effectuer un choix.</p> -->
+							</div>
+							<div class="form-fiche__label-input-vertical">
+								<label for="edit-demande-heures">Nombre d'heures par semaine</label>
+								<input id="edit-demande-heures" name="edit-demande-heures" v-model="demande.weeklyWorkHours" />
 								<!-- Validation -->
-								<!-- <p v-if="erreurs.internshipType" class="validForm">Veuillez effectuer un choix.</p> -->
-						</div>
-						<div class="form-fiche__colonne-inputs">
-							<label for="edit-demande-heures">Nombre d'heures par semaine</label>
-							<input id="edit-demande-heures" name="edit-demande-heures" v-model="demande.weeklyWorkHours" />
-							<!-- Validation -->
-							<!-- <p v-if="errors.description" class="error-message">Veuillez fournir une présentation.</p> -->
-						</div>
-						<div class="form-fiche__colonne-inputs">
-							<label for="edit-demande-remuneration">Rémunération</label>
-							<div>
-								<input type="radio" id="edit-demande-discretion" name="edit-demande-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
-								<label for="edit-demande-discretion">À la discrétion de l'entreprise</label>
+								<!-- <p v-if="errors.description" class="error-message">Veuillez fournir une présentation.</p> -->
 							</div>
-							<div>
-								<input type="radio" id="edit-demande-remunere" name="edit-demande-remuneration" value="remunere" v-model="remunerationType" />
-								<label for="edit-demande-remunere">Rémunéré</label>
-							</div>
-							<div>
-								<input type="radio" id="edit-demande-non-renumere" name="edit-demande-remuneration" value="non-remunere" v-model="remunerationType" />
-								<label for="edit-demande-non-renumere">Non-rémunéré</label>
+							<div class="form-fiche__label-input-vertical">
+								<label for="edit-demande-remuneration">Rémunération</label>
+								<div à>
+									<input type="radio" id="edit-demande-discretion" name="edit-demande-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
+									<label for="edit-demande-discretion" class="form-fiche__label-radio-input">À la discrétion de l'entreprise</label>
+								</div>
+								<div>
+									<input type="radio" id="edit-demande-remunere" name="edit-demande-remuneration" value="remunere" v-model="remunerationType" />
+									<label for="edit-demande-remunere" class="form-fiche__label-radio-input">Rémunéré</label>
+								</div>
+								<div>
+									<input type="radio" id="edit-demande-non-renumere" name="edit-demande-remuneration" value="non-remunere" v-model="remunerationType" />
+									<label for="edit-demande-non-renumere" class="form-fiche__label-radio-input" >Non-rémunéré</label>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-fiche__colonnes-inputs">
+						<!-- colonne de droite -->
 						<div class="form-fiche__colonne-inputs">
-							<label for="edit-demande-date-debut">Date de début</label>
-							<input type="date" id="edit-demande-date-debut" name="edit-demande-date-debut" v-model.trim="dateDebut" />
-						</div>
-						<div class="form-fiche__colonne-inputs">
-							<label for="edit-demande-date-fin">Date de fin</label>
-							<input type="date" id="edit-demande-date-fin" name="edit-demande-date-fin" v-model.trim="dateFin" />
+							<div class="form-fiche__label-input-vertical">
+								<label for="edit-demande-date-debut">Date de début</label>
+								<input type="date" id="edit-demande-date-debut" name="edit-demande-date-debut" v-model.trim="dateDebut" />
+							</div>
+							<div class="form-fiche__label-input-vertical">
+								<label for="edit-demande-date-fin">Date de fin</label>
+								<input type="date" id="edit-demande-date-fin" name="edit-demande-date-fin" v-model.trim="dateFin" />
+							</div>
 						</div>
 					</div>
 				</div>
@@ -144,19 +141,20 @@
 					<h3>Informations sur le stage recherché</h3>
 					<div>
 						<label for="edit-demande-infos-supp"></label>
-						<textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" v-model="demande.additionalInformation"></textarea>
+						<textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="10" v-model="demande.additionalInformation"></textarea>
 						<!-- Validation -->
 						<!-- <p v-if="errors.additionalInformation" class="error-message"> Veuillez fournir des informations supplémentaires.</p> -->
 					</div>
 				</div>
 				<!-- Section Parcourir et télécharger CV -->
-				<div class="flex">
-					<div class="flex">
+				<div class="form-fiche__wrapper-titre-groupe-inputs">
+					<div>
+						
 						<div>
-							<label for=""></label>
-							<input type="text">
+							<label for="parcourir"></label>
+							<input type="text" id="parcourir" name="parcourir">
 						</div>
-						<button>Parcourir</button>
+						<button class="bouton">Parcourir</button>
 					</div>
 					<btnTelechargerCV></btnTelechargerCV>
 				</div>
@@ -166,7 +164,7 @@
 			<!-- Boutons annuler et mettre à jour -->
 			<div class="boutons">
 				<button class="bouton bouton--transparent" type="submit" @click="retour()">Annuler</button>
-				<button class="bouton bouton--mauve" type="submit" @click="soumettreFormulaire()">
+				<button class="bouton bouton--turquoise" type="submit" @click="soumettreFormulaire()">
 					<div class="icone-libelle">
 						<i class="fas fa-save"></i>
 						<span>Mettre à jour</span>
