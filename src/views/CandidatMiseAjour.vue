@@ -24,8 +24,7 @@
                     <h2>Courte présentation</h2>
                     <div>
                         <label for="description"></label>
-                        <textarea name="description" id="description" cols="30" rows="10"
-                                  v-model="candidat.description"></textarea>
+                        <textarea name="description" id="description" rows="10" v-model="candidat.description"></textarea>
                     </div>
                 </div>
 

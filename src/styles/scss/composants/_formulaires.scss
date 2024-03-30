@@ -12,7 +12,7 @@
 
 }
 
-input,
+input:not([type="radio"]),
 textarea,
 select {
     width: 100%;
@@ -59,6 +59,10 @@ label {
 
     &__wrapper-boutons-encadre {
         @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
+    }
+
+    &__wrapper-radio-input {
+        
     }
 
     &__encadre {
