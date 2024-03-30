@@ -1,28 +1,33 @@
 <!-- Accueil.vue -->
 <template>
   <div class="app-container">
+
     <div class="logo-container">
       <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
     </div>
+
     <div class="content-container">
-      <img src="../assets/accueil.png" alt="Image" class="half-page-image"> 
+      <img src="../assets/accueil.png" alt="Image" class="half-page-image">
+
       <div class="login-panel">
-        <h1>Identification</h1>
-        <p>Lorem ipsum magna aliqua ut enim ad minim veniam, quis <br> nostrud exercitation ullamco laboris nisi consequat</p>
+        <div class="entete-login-panel">
+          <h1>Identification</h1>
+          <p>Lorem ipsum magna aliqua ut enim ad minim veniam, quis <br> nostrud exercitation ullamco laboris nisi consequat</p>
+        </div>
 
         <!-- Début du formulaire d'identification -->
         <form @submit.prevent="submitForm">
           <div class="form-group">
             <input type="text" id="nomPrenom" v-model="nomPrenom" placeholder="Votre nom et prénom" required>
-          </div>
-          <div class="form-group">
             <input type="email" id="courriel" v-model="courriel" placeholder="Votre courriel" required>
           </div>
-          <button type="submit">Accéder maintenant</button>
-        </form>
 
+          <button class="bouton"type="submit">Accéder maintenant</button>
+        </form>
       </div>
+
     </div>
+
   </div>
 </template>
 
@@ -48,7 +53,7 @@
 
 
 
-<style scoped>
+<!--<style scoped>
 .app-container {
   min-height: 100vh;
 }
@@ -123,4 +128,4 @@ button {
 button:hover{
   background-color: rgb(38, 108, 101);
 }
-</style>
+</style>-->

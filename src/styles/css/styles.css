@@ -681,6 +681,67 @@ label {
   color: #0C9DA4;
 }
 
+.app-container {
+  min-height: 100vh;
+}
+
+.logo-container {
+  background-color: #FFFFFF;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.content-container {
+  display: flex;
+  width: 100%;
+}
+
+.half-page-image {
+  width: 50%;
+  height: auto;
+}
+
+.login-panel {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0 0 0 3rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.login-panel .entete-login-panel {
+  width: 100%;
+  color: #111111;
+  padding: 0 0 2rem 0;
+  margin-bottom: 100px;
+}
+.login-panel .entete-login-panel h1 {
+  font-family: "Lato";
+  font-size: 70px;
+  line-height: 1.1;
+}
+.login-panel .entete-login-panel p {
+  font-family: "Roboto";
+  line-height: 1.1;
+  padding: 1rem 0;
+}
+
+.form-group input {
+  border-style: solid;
+  border-color: #0C9DA4;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.bouton {
+  background-color: #0C9DA4;
+}
+.bouton:hover {
+  background-color: #0a868c;
+}
+
 .container {
   max-width: 1920px;
   margin: 0 auto;
