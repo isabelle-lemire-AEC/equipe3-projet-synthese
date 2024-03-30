@@ -726,10 +726,13 @@ label {
   padding: 1rem 0;
 }
 
+.form-group {
+  margin: 20px 0;
+}
 .form-group input {
   border-style: solid;
   border-color: #0C9DA4;
-  margin-bottom: 20px;
+  margin: 20px 0;
   width: 100%;
 }
 

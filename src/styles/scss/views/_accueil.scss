@@ -44,13 +44,16 @@
     }
 }
 .form-group{
-   
+    margin: 20px 0;
     input{
         @include mixins.border(null, variables.$turquoise, null);
-        margin-bottom: 20px;
+        margin: 20px 0;
         width: 100%;
       }
+      
+    
 }
+
 
 
     
