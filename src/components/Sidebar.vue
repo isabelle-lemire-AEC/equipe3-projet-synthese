@@ -9,32 +9,32 @@
       </div>
 
       <ul class="navbar__menu">
-        <li class="navbar__menu-item tableau-de-bord" :class="{ 'active': currentPage === 'dashboard' }">
-          <router-link to="/tableau-de-bord" @click.native="updateCurrentPage('dashboard')">
+        <li class="navbar__menu-item tableau-de-bord" :class="{ 'active': currentPage === 'TableauDeBord' }">
+          <router-link to="/tableau-de-bord" @click.native="updateCurrentPage('TableauDeBord')">
             <i class="fa-solid fa-gauge"></i>
             <span>Tableau de bord</span>
           </router-link>
         </li>
-        <li class="navbar__menu-item demandes-stage" :class="{ 'active': currentPage === 'requests' }">
-          <router-link to="/demandes-de-stages" @click="updateCurrentPage('requests')">
+        <li class="navbar__menu-item demandes-stage" :class="{ 'active': currentPage === 'DemandesStages'|| currentPage === 'DemandeStageDetails' || currentPage === 'DemandeStageMiseAjour' || currentPage === 'DemandeStageAjout'}">
+          <router-link to="/demandes-de-stages" @click="updateCurrentPage('DemandesStages')">
             <i class="fa-solid fa-file-lines"></i>
             <span>Demandes de stage</span>
           </router-link>
         </li>
-        <li class="navbar__menu-item offres-stage" :class="{ 'active': currentPage === 'offers' }">
-          <router-link to="/offres-de-stages" @click="updateCurrentPage('offers')">
+        <li class="navbar__menu-item offres-stage" :class="{ 'active': currentPage === 'OffresStages' || currentPage === 'OffreStageDetails' || currentPage === 'OffreStageMiseAjour' || currentPage === 'OffreStageAjout' }">
+          <router-link to="/offres-de-stages" @click="updateCurrentPage('OffresStages')">
             <i class="fa-solid fa-paper-plane"></i>
             <span>Offres de stage</span>
           </router-link>
         </li>
-        <li class="navbar__menu-item candidats" :class="{ 'active': currentPage === 'candidates' }">
-          <router-link to="/candidats" @click="updateCurrentPage('candidates')">
+        <li class="navbar__menu-item candidats" :class="{ 'active': currentPage === 'Candidats' || currentPage === 'CandidatDetails' || currentPage === 'CandidatMiseAjour' || currentPage === 'CandidatAjout' }">
+          <router-link to="/candidats" @click="updateCurrentPage('Candidats')">
             <i class="fa-solid fa-user"></i>
             <span>Candidats</span>
           </router-link>
         </li>
-        <li class="navbar__menu-item entreprises" :class="{ 'active': currentPage === 'companies' }">
-          <router-link to="/entreprises" @click="updateCurrentPage('companies')">
+        <li class="navbar__menu-item entreprises" :class="{ 'active': currentPage === 'Entreprises' || currentPage === 'EntrepriseDetails' || currentPage === 'EntrepriseMiseAjour' || currentPage === 'EntrepriseAjout' }">
+          <router-link to="/entreprises" @click="updateCurrentPage('Entreprises')">
             <i class="fa-solid fa-computer-mouse"></i>
             <span>Entreprises</span>
           </router-link>
