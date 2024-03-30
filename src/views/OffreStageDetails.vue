@@ -2,12 +2,33 @@
 <template>
 <!-- Raph ca marche mais j'ai une erreur dans la console mais ca delete pourtent  -->
 <button @click="supprimer">Supprimer l'offre</button>
+
+
     <div v-if="loading">Chargement...</div>
     <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>
+    
     <div v-else-if="offerDetails && offerDetails.title">
-      <h1>{{ offerDetails.title }}</h1>
-      <h2>Entreprise: {{ offerDetails.enterprise?.name }}</h2>
-      <p>Description: {{ offerDetails.description }}</p>
+
+      <h1>TITTLE: *{{ offerDetails.title }}</h1>
+      <h2>Entreprise: "non necessaire" ***{{ offerDetails.enterprise?.name }}</h2>
+      <p>Description: ***{{ offerDetails.description }}</p>
+      <p>Exigences name: ***{{ offerDetails.enterprise.name }}</p>
+      <p>Exigences: ***{{ offerDetails.requiredSkills }}</p>
+      <p>enterprise.image: ***{{ offerDetails.enterprise.image }}</p>
+      <p>enterprise id: ***{{ offerDetails.enterprise._id }}</p>
+      <p>enterprise adresse: ***{{ offerDetails.enterprise.address }}</p>
+      <p>Exigences postalCode: ***{{ offerDetails.enterprise.postalCode }}</p>
+      <p>Exigences province: ***{{ offerDetails.enterprise.province }}</p>
+      <p>Exigences phone: ***{{ offerDetails.enterprise.phone }}</p>
+      <p>Exigences email: ***{{ offerDetails.enterprise.email }}</p>
+    
+      <p>description : ***{{ offerDetails.description }}</p>
+      <p>startDate: ***{{ offerDetails.startDate }}</p>
+      <p>endDate: ***{{ offerDetails.endDate }}</p>
+      <p>Exigences salary: ***{{ offerDetails.salary }}</p>
+      <p>Exigences province: ***{{ offerDetails.province }}</p>
+      <p>Exigences value: ***{{ offerDetails.internshipType.value }}</p>
+      <p>Exigences paid: ***{{ offerDetails.paid }}</p>
 
     </div>
     <div v-else>Aucune information disponible</div>
