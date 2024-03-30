@@ -1,3 +1,19 @@
 //  _demandes-stages.scss
 @use '../general/variables';
 @use '../general/mixins';
+
+
+//.formulaire-ajout-candidat,
+//.formulaire-edition-candidat,
+.fiche-demandestages-details {
+    .form-fiche {
+        &__wrapper-titre {
+            border-color: variables.$gold;
+        }
+    }
+
+    h2,
+    h3 {
+        color: variables.$turquoise;
+    }
+}
