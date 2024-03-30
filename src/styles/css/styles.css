@@ -11,7 +11,6 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -199,7 +198,6 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
-  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -735,13 +733,6 @@ label {
   width: 100%;
 }
 
-.bouton {
-  background-color: #0C9DA4;
-}
-.bouton:hover {
-  background-color: #0a868c;
-}
-
 .container {
   max-width: 1920px;
   margin: 0 auto;
@@ -814,4 +805,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}
+}/*# sourceMappingURL=styles.css.map */
