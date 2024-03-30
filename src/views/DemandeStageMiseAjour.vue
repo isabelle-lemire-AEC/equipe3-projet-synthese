@@ -238,6 +238,16 @@
 					</div>
 				</fieldset>
 			</div>
+			<div class="flex">
+				<div class="flex">
+					<div>
+						<label for=""></label>
+						<input type="text">
+					</div>
+					<button>Parcourir</button>
+				</div>
+				<btnTelechargerCV></btnTelechargerCV>
+			</div>
 
 		</form>
 	</section>
@@ -254,6 +264,8 @@
 	import {useActivitySectors} from "../composables/secteurs_activites/secteurs_activites";
 	import {useRoute} from "vue-router";
 	import {useRouter} from 'vue-router';
+
+	import btnTelechargerCV from '../components/BtnTelechargerCV.vue'
 
 	const {getCandidatById, getAllCandidats} = useCandidat();
 	const {getAllProvinces} = useProvinces();
@@ -506,4 +518,8 @@
 	};
 </script>
 
-<style></style>
+<style>
+	.flex{
+		display: flex;
+	}
+</style>

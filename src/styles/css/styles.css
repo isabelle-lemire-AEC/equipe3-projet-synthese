@@ -191,6 +191,7 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -640,6 +641,14 @@ label {
   line-height: 1.1;
 }
 
+.fiche-demandestages-details .form-fiche__wrapper-titre {
+  border-color: #CB912B;
+}
+.fiche-demandestages-details h2,
+.fiche-demandestages-details h3 {
+  color: #0C9DA4;
+}
+
 .container {
   max-width: 1920px;
   margin: 0 auto;
@@ -712,4 +721,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}/*# sourceMappingURL=styles.css.map */
+}
