@@ -7,7 +7,12 @@
     font-family: variables.$font-headings;
 }
 
-input,
+%font-h6 {
+    font-size: variables.$font-style-h6;
+
+}
+
+input:not([type="radio"]),
 textarea,
 select {
     width: 100%;
@@ -34,10 +39,11 @@ label {
             margin-bottom: variables.$spacing-small * 1.5;
         }
     }
-    
+
     &__nom-section {
         font-weight: variables.$bold;
     }
+
 
     &__sous-titre {
         width: fit-content;
@@ -51,6 +57,10 @@ label {
         @include mixins.flex(column, null, null, variables.$spacing-small);
     }
 
+    &__wrapper-boutons-encadre {
+        @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
+    }
+
     &__encadre {
         width: 100%;
         background-color: variables.$white;
@@ -60,10 +70,10 @@ label {
     }
 
     &__wrapper-titre-groupe-inputs {
-        @include mixins.flex(column, null, null, variables.$spacing-large);
+        @include mixins.flex(column, null, null, variables.$spacing-medium);
 
         h3 {
-            font-size: variables.$font-style-p;
+            @extend %font-h6;
         }
     }
 
@@ -89,7 +99,7 @@ label {
         @include mixins.border-left(variables.$charcoal);
 
         h4 {
-            font-size: variables.$font-style-p;
+            @extend %font-h6;
             @extend %font-headings;
         }
     }
@@ -98,6 +108,11 @@ label {
         &--cache {
             display: none;
         }
+    }
+
+    &__label-radio-input {
+        padding-left: variables.$spacing-xsmall;
+        font-weight: variables.$regular;
     }
 
     &__wrapper-input-msg-erreur {

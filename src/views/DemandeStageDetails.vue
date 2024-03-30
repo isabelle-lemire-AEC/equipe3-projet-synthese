@@ -1,98 +1,125 @@
 <template>
-    <div class="pageContainer" v-if="demande">
-        <div>
-            <div class="bordureGauche">
-                <h2>Demande de stage</h2>
-                <h1>{{ demande.title }}</h1>
-            </div>
-        </div>
-        <div class="btnsContainer boutons-action">
-            <button :class="{ 'boutons-action__crochet': demande.isActive }" @click="activate()"><i class="fas fa-check"></i></button>
-            <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(demande._id)"><i class="fas fa-pen-to-square"></i></button>
-            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i class="fa-solid fa-trash-can"></i></button>
-        </div>
-        <div class="infoContainer">
-
-            <div>
-                <h3>{{ demande.candidate.firstName }} {{ demande.candidate.lastName }}</h3>
-                <p>{{ demande.candidate.description }}</p>
-            </div>
-
-            <div class="grilleStage">
-                <div class="grilleStageCellule bordureGauche">
-                    <h4>Programme de formation</h4>
-                    <span>Développement Web</span> <!-- Info pas fournie par l'API -->
-                </div>
-                <div class="grilleStageCellule bordureGauche">
-                    <h4>Établissement d'enseignement</h4>
-                    <span>Cégep de Trois-Rivières</span> <!-- Info pas fournie par l'API -->
-                </div>
-                <div class="grilleStageCellule bordureGauche" v-if="randomActivitySector">
-                    <h4>Secteur d'activité</h4>
-                    <span>{{ randomActivitySector.value }}</span> <!-- Info pas lié avec une demande, alors on en affiche une aléatoirement -->
-                </div>
-                <div class="grilleStageCellule bordureGauche">
-                    <h4>Ville</h4>
-                    <span>{{ demande.candidate.city }}</span>
-                </div>
-                <div class="grilleStageCellule bordureGauche">
-                    <h4>Compétences</h4>
-                    <span class="skills">{{ competences }}</span>
-                </div>
-                <div class="grilleStageCellule bordureGauche">
-                    <h4>Région</h4>
-                    <span>{{ demande.province.value }}</span>
-                </div>            
-            </div>
-
-            <h4>Informations sur le stage recherché</h4>
-            <div class="grilleStage">
-                <div class="grilleStageCellule bordureGauche">
-                    <h4>Type de stage</h4>
-                    <span>{{ demande.internshipType.value }}</span>
-                </div>
-                <div class="grilleStageCellule bordureGauche">
-                    <h4>Date de début</h4>
-                    <span>{{ dateDebut }}</span>
-                </div>   
-                <div class="grilleStageCellule bordureGauche">
-                    <h4>Nombre d'heures par semaine</h4>
-                    <span>{{ demande.weeklyWorkHours }}</span>
-                </div>   
-                <div class="grilleStageCellule bordureGauche">
-                    <h4>Date de fin</h4>
-                    <span>{{ dateFin }}</span>
-                </div>  
-                <div class="grilleStageCellule bordureGauche">
-                    <h4>Rénumération</h4>
-                    <span>À la discrétion de l'entreprise</span>
-                </div>            
-            </div>
-
-            <h4>Informations suplémentaires</h4>
-            <p>{{ demande.additionalInformation }}</p>
-            <button class="btnTelechargerCV">Télécharger le C.V.</button>
-
+    <div v-if="demande" class="form-fiche fiche-demandestages-details">
+        <div class="form-fiche__wrapper-titre">
+            <p class="form-fiche__nom-section">Demande de stage</p>
+            <h1>{{ demande.title }}</h1>
         </div>
 
-        <!-- Modal de confirmation de suppression -->
-        <div class="modal" v-if="showConfirmationModal">
-            <div class="modal-content">
-                <p>Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
-                <div class="modal-buttons">
-                <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
-                <button class="btn confirm" @click="deleteDemande()">Confirmer</button>
+        <div class="form-fiche__wrapper-boutons-encadre">
+            
+            <div class="boutons-action">
+                <button :class="{ 'boutons-action__crochet': demande.isActive }" @click="activate()">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(demande._id)">
+                    <i class="fas fa-pen-to-square"></i>
+                </button>
+                <button class="boutons-action__supprimer" @click="afficherConfirmationModal()">
+                    <i class="fas fa-square-xmark"></i>
+                </button>
+            </div>
+
+            <div class="form-fiche__encadre">
+                <!-- Section de description de la demande de stage -->
+                <div class="form-fiche__wrapper-titre-groupe-inputs">
+                    <h2>{{ demande.candidate.firstName }} {{ demande.candidate.lastName }}</h2>
+                    <p>{{ demande.candidate.description }}</p>
+                </div>
+                <!-- Section d'informations -->
+                <div class="form-fiche__wrapper-titre-groupe-inputs">
+                    <div class="form-fiche__colonnes-inputs">
+                        <div class="form-fiche__colonne-inputs">
+                            <div class="form-fiche__label-input-vertical">
+                                <h4>Programme de formation</h4>
+                                <p>Développement Web</p> <!-- Info pas fournie par l'API -->
+                            </div>
+                            <div class="form-fiche__label-input-vertical" v-if="randomActivitySector">
+                                <h4>Secteur d'activité</h4>
+                                <p>{{ randomActivitySector.value }}</p> <!-- Info pas lié avec une demande, alors on en affiche une aléatoirement -->
+                            </div>
+                            <div class="form-fiche__label-input-vertical">
+                            <h4>Compétences</h4>
+                                <p class="skills">{{ competences }}</p>
+                            </div>
+                        </div>
+                        <div class="form-fiche__colonne-inputs">
+                            <div class="form-fiche__label-input-vertical">
+                                <h4>Établissement d'enseignement</h4>
+                                <p>Cégep de Trois-Rivières</p> <!-- Info pas fournie par l'API -->
+                            </div>
+                            <div class="form-fiche__label-input-vertical">
+                                <h4>Ville</h4>
+                                <p>{{ demande.candidate.city }}</p>
+                            </div>
+                            <div class="form-fiche__label-input-vertical">
+                                <h4>Région</h4>
+                                <p>{{ demande.province.value }}</p>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+
+                <div class="form-fiche__wrapper-titre-groupe-inputs">
+                    <h3>Informations sur le stage recherché</h3>
+                    <div class="form-fiche__colonnes-inputs">
+                        <div class="form-fiche__colonne-inputs">
+                            <div class="form-fiche__label-input-vertical">
+                                <h4>Type de stage</h4>
+                                <p>{{ demande.internshipType.value }}</p>
+                            </div>
+                            <div class="form-fiche__label-input-vertical">
+                                <h4>Nombre d'heures par semaine</h4>
+                                <p>{{ demande.weeklyWorkHours }}</p>
+                            </div> 
+                            <div class="form-fiche__label-input-vertical">
+                                <h4>Rénumération</h4>
+                                <p>À la discrétion de l'entreprise</p>
+                            </div>   
+                        </div>  
+                        <div class="form-fiche__colonne-inputs">
+                            <div class="form-fiche__label-input-vertical">
+                                <h4>Date de début</h4>
+                                <p>{{ dateDebut }}</p>
+                            </div>  
+                            <div class="form-fiche__label-input-vertical">
+                                <h4>Date de fin</h4>
+                                <p>{{ dateFin }}</p>
+                            </div>  
+                        </div>                      
+                    </div>
+                </div>
+
+                <div class="form-fiche__wrapper-titre-groupe-inputs">
+                    <h3>Informations suplémentaires</h3>
+                    <p>{{ demande.additionalInformation }}</p>
+                </div>
+                
+                <btnTelechargerCV></btnTelechargerCV> <!-- arranger le css -->
+
+                </div>
+
+                <!-- Modal de confirmation de suppression -->
+                <div class="modal" v-if="showConfirmationModal">
+                    <div class="modal-content">
+                        <p>Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
+                        <div class="modal-buttons">
+                        <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
+                        <button class="btn confirm" @click="deleteDemande()">Confirmer</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</template>
+
+        </template>
 
 <script setup>
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { ref, reactive, onMounted } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
     import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js';
+
+    import btnTelechargerCV from '../components/BtnTelechargerCV.vue'
 
     const { getAllActivitySectors } = useActivitySectors();
     const { getRequestById, editRequest, deleteRequest  } = useInternshipRequests();
@@ -159,7 +186,8 @@
 
 <style scoped>
 
-    h2 {
+    /* 
+        h2 {
         margin-bottom: 0.5rem;
     }
 
@@ -232,6 +260,8 @@
         cursor: pointer;
         border: none;
     }
+    
+    */
     
     /* Styles pour le modal */
     .modal {

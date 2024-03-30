@@ -3,47 +3,49 @@
   <!-- Logo -->
 
   
-    <div class="logo">
-      <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
+    <div class="container-menu">
+      <div class="logo">
+        <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
+      </div>
+
+      <ul class="navbar__menu">
+        <li class="navbar__menu-item tableau-de-bord" :class="{ 'active': currentPage === 'TableauDeBord' }">
+          <router-link to="/tableau-de-bord" @click.native="updateCurrentPage('TableauDeBord')">
+            <i class="fa-solid fa-gauge"></i>
+            <span>Tableau de bord</span>
+          </router-link>
+        </li>
+        <li class="navbar__menu-item demandes-stage" :class="{ 'active': currentPage === 'DemandesStages'|| currentPage === 'DemandeStageDetails' || currentPage === 'DemandeStageMiseAjour' || currentPage === 'DemandeStageAjout'}">
+          <router-link to="/demandes-de-stages" @click="updateCurrentPage('DemandesStages')">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Demandes de stage</span>
+          </router-link>
+        </li>
+        <li class="navbar__menu-item offres-stage" :class="{ 'active': currentPage === 'OffresStages' || currentPage === 'OffreStageDetails' || currentPage === 'OffreStageMiseAjour' || currentPage === 'OffreStageAjout' }">
+          <router-link to="/offres-de-stages" @click="updateCurrentPage('OffresStages')">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Offres de stage</span>
+          </router-link>
+        </li>
+        <li class="navbar__menu-item candidats" :class="{ 'active': currentPage === 'Candidats' || currentPage === 'CandidatDetails' || currentPage === 'CandidatMiseAjour' || currentPage === 'CandidatAjout' }">
+          <router-link to="/candidats" @click="updateCurrentPage('Candidats')">
+            <i class="fa-solid fa-user"></i>
+            <span>Candidats</span>
+          </router-link>
+        </li>
+        <li class="navbar__menu-item entreprises" :class="{ 'active': currentPage === 'Entreprises' || currentPage === 'EntrepriseDetails' || currentPage === 'EntrepriseMiseAjour' || currentPage === 'EntrepriseAjout' }">
+          <router-link to="/entreprises" @click="updateCurrentPage('Entreprises')">
+            <i class="fa-solid fa-computer-mouse"></i>
+            <span>Entreprises</span>
+          </router-link>
+        </li>
+      </ul>
     </div>
 
-    <ul class="navbar__menu">
-      <li class="navbar__menu-item tableau-de-bord">
-        <router-link to="/tableau-de-bord">
-          <i class="fa-solid fa-gauge"></i>
-          <span>Tableau de bord</span>
-        </router-link>
-      </li>
-      <li class="navbar__menu-item demandes-stage">
-        <router-link to="/demandes-de-stages">
-          <i class="fa-solid fa-file-lines"></i>
-          <span>Demandes de stage</span>
-        </router-link>
-      </li>
-      <li class="navbar__menu-item offres-stage">
-        <router-link to="/offres-de-stages">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span>Offres de stage</span>
-        </router-link>
-      </li>
-      <li class="navbar__menu-item candidats">
-        <router-link to="/candidats">
-          <i class="fa-solid fa-user"></i>
-          <span>Candidats</span>
-        </router-link>
-      </li>
-      <li class="navbar__menu-item entreprises">
-        <router-link to="/entreprises">
-          <i class="fa-solid fa-computer-mouse"></i>
-          <span>Entreprises</span>
-        </router-link>
-      </li>
-    </ul>
 
 
-
-  <!-- CODE DONA
-    <div class="sidebar">
+   <!--CODE DONA
+  <div class="sidebar">
     <div class="menu-item" :class="{ active: currentPage === 'dashboard' }">
       <span>Tableau de bord</span>
     </div>
@@ -59,8 +61,8 @@
     <div class="menu-item" :class="{ active: currentPage === 'companies' }">
       <span>Entreprises</span>
     </div>
-  </div>
- -->
+  </div>-->
+ 
 </template>
 
 <script>
@@ -70,6 +72,31 @@
   //data() {return {currentPage: 'dashboard' }
   //}
   //}
+
+  export default {
+  data() {
+    return {
+      currentPage: null, // Initialiser avec la page actuelle
+    };
+  },
+  methods: {
+    updateCurrentPage(pageName) {
+      if (this.currentPage !== pageName) {
+        this.currentPage = pageName; // Mettre à jour la page active lorsqu'un lien est cliqué
+      }
+    },
+  },
+  watch: {
+    // Surveiller le changement de route pour mettre à jour la page active
+    $route(to) {
+      // Vérifier si la route a un nom et mettre à jour la page active
+      if (to.name && this.currentPage !== to.name) {
+        this.currentPage = to.name;
+      }
+    },
+  },
+};
+
 </script>
 
 <style scoped>
@@ -175,4 +202,12 @@
   background-color: purple;
 }
 */
+
+/*colors: {
+        'tableau-de-bord': '#0C9DA4', // Couleur pour le lien Tableau de bord
+        'demandes-stage': '#CB912B', // Couleur pour le lien Demandes de stage
+        'offres-stage': '#BB2026', // Couleur pour le lien Offres de stage
+        'candidats' : '#7F2987',// Ajoutez les autres couleurs pour chaque lien
+        'entreprises' : '#86A9E6',
+      }*/
 </style>

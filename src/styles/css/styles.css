@@ -10,6 +10,9 @@
   border-style: solid;
   border-color: none;
   border-radius: 5px;
+  transition: background-color 0.3s ease;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .bouton--transparent {
   font-weight: 400;
@@ -45,6 +48,12 @@
 }
 .bouton--vert:hover {
   background-color: #058840;
+}
+.bouton--turquoise {
+  background-color: #0C9DA4;
+}
+.bouton--turquoise:hover {
+  background-color: #0a868c;
 }
 
 .boutons {
@@ -129,11 +138,11 @@
   gap: 2rem;
   padding-block: 3rem;
   padding-inline: 2rem;
-}
-.carte-entreprise__img {
-  min-width: 150px; /* À valider si on garde ou pas quand on sera rendu au responsive */
-  max-width: 70%;
-  margin-inline: auto;
+  /*  &__img {
+       min-width: 150px;
+       max-width: 70%;
+       margin-inline: auto;
+   } */
 }
 .carte-entreprise__texte {
   display: flex;
@@ -151,13 +160,17 @@
   color: #707070;
 }
 
-.form-fiche__label-input-vertical h4, label, input,
+.form-fiche__label-input-vertical h4, label, input:not([type=radio]),
 textarea,
 select {
   font-family: "Lato";
 }
 
-input,
+.form-fiche__label-input-vertical h4, .form-fiche__wrapper-titre-groupe-inputs h3 {
+  font-size: clamp(1rem, 0.975rem + 0.125vi, 1.125rem);
+}
+
+input:not([type=radio]),
 textarea,
 select {
   width: 100%;
@@ -201,6 +214,12 @@ label {
   flex-direction: column;
   gap: 1rem;
 }
+.form-fiche__wrapper-boutons-encadre {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+}
 .form-fiche__encadre {
   width: 100%;
   background-color: #FFFFFF;
@@ -216,10 +235,7 @@ label {
 .form-fiche__wrapper-titre-groupe-inputs {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-}
-.form-fiche__wrapper-titre-groupe-inputs h3 {
-  font-size: 1rem;
+  gap: 2rem;
 }
 .form-fiche__colonnes-inputs {
   display: grid;
@@ -249,11 +265,12 @@ label {
   border-left-color: #5E5E5E;
   padding-left: 1rem;
 }
-.form-fiche__label-input-vertical h4 {
-  font-size: 1rem;
-}
 .form-fiche__label--cache {
   display: none;
+}
+.form-fiche__label-radio-input {
+  padding-left: 0.5rem;
+  font-weight: 400;
 }
 .form-fiche__wrapper-input-msg-erreur {
   width: 100%;
@@ -294,6 +311,7 @@ label {
 .header {
   background-color: #FFFFFF;
   padding: 1rem 0;
+  margin-left: 0.5rem;
 }
 .header__items {
   display: flex;
@@ -320,38 +338,78 @@ label {
   justify-content: flex-start;
   gap: 1rem;
 }
+.nav-items .fa-plus,
+.boutons-ajout .fa-plus {
+  padding-right: 0.5rem;
+}
 .nav-items .add-offer,
 .boutons-ajout .add-offer {
   padding-block: 0.5rem;
   padding-inline: 0.5rem;
-  color: #BB2026;
   border-style: solid;
-  border-color: #BB2026;
+  border-color: #821519;
   border-radius: 0.5rem;
+  font-family: "Roboto";
+  line-height: 1.1;
+  background-color: #FFFFFF;
+  color: #BB2026;
+  transition: background-color 0.3s ease;
+}
+.nav-items .add-offer:hover,
+.boutons-ajout .add-offer:hover {
+  background-color: #821519;
+  color: #FFFFFF;
 }
 .nav-items .add-request,
 .boutons-ajout .add-request {
   padding: 0.5rem;
+  background-color: #FFFFFF;
   color: #CB912B;
   border-style: solid;
-  border-color: #CB912B;
+  border-color: #986D22;
   border-radius: 0.5rem;
+  font-family: "Roboto";
+  line-height: 1.1;
+  transition: background-color 0.3s ease;
+}
+.nav-items .add-request:hover,
+.boutons-ajout .add-request:hover {
+  background-color: #986D22;
+  color: #FFFFFF;
 }
 .nav-items .add-company,
 .boutons-ajout .add-company {
   padding: 0.5rem;
-  color: #86A9E6;
+  background-color: #FFFFFF;
+  color: #5E7EB5;
   border-style: solid;
   border-color: #86A9E6;
   border-radius: 0.5rem;
+  font-family: "Roboto";
+  line-height: 1.1;
+  transition: background-color 0.3s ease;
+}
+.nav-items .add-company:hover,
+.boutons-ajout .add-company:hover {
+  background-color: #5E7EB5;
+  color: #FFFFFF;
 }
 .nav-items .add-candidate,
 .boutons-ajout .add-candidate {
   padding: 0.5rem;
+  background-color: #FFFFFF;
   color: #7F2987;
   border-style: solid;
-  border-color: #7F2987;
+  border-color: #4A1150;
   border-radius: 0.5rem;
+  font-family: "Roboto";
+  line-height: 1.1;
+  transition: background-color 0.3s ease;
+}
+.nav-items .add-candidate:hover,
+.boutons-ajout .add-candidate:hover {
+  background-color: #4A1150;
+  color: #FFFFFF;
 }
 
 .utilisateur {
@@ -364,21 +422,122 @@ label {
 }
 .utilisateur .utilisateur__details {
   text-align: right;
+  font-family: "Roboto";
+  line-height: 1.1;
+}
+.utilisateur .utilisateur__nom {
+  color: #111111;
+}
+.utilisateur .utilisateur__courriel {
+  color: #CCD4E0;
+}
+
+.container-menu {
+  background-color: #FFFFFF;
+  min-width: 250px;
+  height: 100%;
 }
 
 .logo {
   max-width: 150px;
+  padding: 1rem;
 }
 
 .navbar__menu {
   list-style: none;
-  padding-left: 0;
+  padding: 1rem 0 1rem 1rem;
+}
+.navbar__menu-item {
+  position: relative;
 }
 .navbar__menu-item a {
   text-decoration: none;
+  font-family: "Roboto";
+  line-height: 1.1;
+}
+.navbar__menu-item i {
+  margin: 1rem;
+  width: 18px;
+  height: auto;
+  text-align: left;
+}
+.navbar__menu-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 5px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+.navbar__menu-item.active::after {
+  background-color: transparent;
+}
+.navbar__menu-item.tableau-de-bord:hover::after, .navbar__menu-item.tableau-de-bord.active::after {
+  background-color: #0C9DA4;
+}
+.navbar__menu-item.demandes-stage:hover::after, .navbar__menu-item.demandes-stage.active::after {
+  background-color: #CB912B;
+}
+.navbar__menu-item.offres-stage:hover::after, .navbar__menu-item.offres-stage.active::after {
+  background-color: #BB2026;
+}
+.navbar__menu-item.candidats:hover::after, .navbar__menu-item.candidats.active::after {
+  background-color: #7F2987;
+}
+.navbar__menu-item.entreprises:hover::after, .navbar__menu-item.entreprises.active::after {
+  background-color: #86A9E6;
+}
+.navbar__menu-item > .line-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 5px;
+  background-color: transparent;
+}
+.navbar__menu-item.tableau-de-bord i,
+.navbar__menu-item.tableau-de-bord span {
+  color: #0C9DA4;
+}
+.navbar__menu-item.tableau-de-bord i:hover,
+.navbar__menu-item.tableau-de-bord span:hover {
+  color: #0a868c;
+}
+.navbar__menu-item.demandes-stage i,
+.navbar__menu-item.demandes-stage span {
+  color: #CB912B;
+}
+.navbar__menu-item.demandes-stage i:hover,
+.navbar__menu-item.demandes-stage span:hover {
+  color: #b68227;
+}
+.navbar__menu-item.offres-stage i,
+.navbar__menu-item.offres-stage span {
+  color: #BB2026;
+}
+.navbar__menu-item.offres-stage i:hover,
+.navbar__menu-item.offres-stage span:hover {
+  color: #a51c22;
+}
+.navbar__menu-item.candidats i,
+.navbar__menu-item.candidats span {
+  color: #7F2987;
+}
+.navbar__menu-item.candidats i:hover,
+.navbar__menu-item.candidats span:hover {
+  color: #6d2373;
+}
+.navbar__menu-item.entreprises i,
+.navbar__menu-item.entreprises span {
+  color: #86A9E6;
+}
+.navbar__menu-item.entreprises i:hover,
+.navbar__menu-item.entreprises span:hover {
+  color: #719ae2;
 }
 
-/* .boutons-ajout {} */
 /* Général à plusieurs views de candidats */
 #ajout-candidat,
 #edition-candidat {
@@ -417,13 +576,13 @@ label {
 }
 
 /* Spécifique pour la view CandidatDetails */
-.fiche-candidat-details .form-fiche__wrapper-boutons-encadre {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2rem;
-}
-
+/* .fiche-candidat-details {
+    .form-fiche {
+        &__wrapper-boutons-encadre {
+            @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
+        }
+    }
+} */
 /* Spécifique pour la view CandidatDetails et CandidatMiseAJour */
 .fiche-candidat-details h2,
 .fiche-candidat-details h3,
@@ -441,8 +600,15 @@ label {
   gap: 2rem;
 }
 
-.formulaire-ajout-entreprise .form-fiche__wrapper-titre {
+.formulaire-ajout-entreprise .form-fiche__wrapper-titre,
+.fiche-entreprise-details .form-fiche__wrapper-titre {
   border-color: #86A9E6;
+}
+
+.entreprise-logo {
+  max-width: 150px;
+  /* À valider si on garde ou pas quand on sera rendu au responsive */
+  width: 70%;
 }
 
 /* Spécifique pour la view Entreprises */
@@ -481,6 +647,96 @@ label {
 .formulaire-edition-entreprise h2,
 .formulaire-edition-entreprise h3 {
   color: #86A9E6;
+}
+
+/* Spécifique pour la view EntrepriseDetail */
+.fiche-entreprise-details .form-fiche__wrapper-titre-logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+}
+.fiche-entreprise-details .form-fiche__wrapper-titre {
+  border-color: #86A9E6;
+}
+
+.nom-contact {
+  font-size: clamp(1.2656rem, 1.1948rem + 0.3544vi, 1.62rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+#edition-demandestages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+.formulaire-edition-demandestages .form-fiche__wrapper-titre,
+.fiche-demandestages-details .form-fiche__wrapper-titre {
+  border-color: #CB912B;
+}
+.formulaire-edition-demandestages h2,
+.formulaire-edition-demandestages h3,
+.fiche-demandestages-details h2,
+.fiche-demandestages-details h3 {
+  color: #0C9DA4;
+}
+
+.app-container {
+  min-height: 100vh;
+}
+
+.logo-container {
+  background-color: #FFFFFF;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.content-container {
+  display: flex;
+  width: 100%;
+}
+
+.half-page-image {
+  width: 50%;
+  height: auto;
+}
+
+.login-panel {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0 0 0 3rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.login-panel .entete-login-panel {
+  width: 100%;
+  color: #111111;
+  padding: 0 0 2rem 0;
+  margin-bottom: 100px;
+}
+.login-panel .entete-login-panel h1 {
+  font-family: "Lato";
+  font-size: 70px;
+  line-height: 1.1;
+}
+.login-panel .entete-login-panel p {
+  font-family: "Roboto";
+  line-height: 1.1;
+  padding: 1rem 0;
+}
+
+.form-group input {
+  border-style: solid;
+  border-color: #0C9DA4;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .container {

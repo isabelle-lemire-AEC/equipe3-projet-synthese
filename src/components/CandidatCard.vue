@@ -1,4 +1,4 @@
-<!-- CandidatCard.vue - Donaria -->
+<!-- CandidatCard.vue --->
 <template>
   <div class="carte-candidat" @click="redirectToDetails">
     <img class="carte-candidat__img " src="../assets/icons8-account-96.png" alt="Candidate Icon">

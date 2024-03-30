@@ -24,8 +24,7 @@
                     <h2>Courte présentation</h2>
                     <div>
                         <label for="description"></label>
-                        <textarea name="description" id="description" cols="30" rows="10"
-                                  v-model="candidat.description"></textarea>
+                        <textarea name="description" id="description" rows="10" v-model="candidat.description"></textarea>
                     </div>
                 </div>
 
@@ -53,11 +52,6 @@
                                     </option>
 
                                 </select>
-                            </div>
-
-                            <div class="form-fiche__label-input-vertical">
-                                <label for="city">Ville</label>
-                                <input type="text" id="city" v-model="candidat.city">
                             </div>
 
                             <div class="form-fiche__label-input-vertical">
