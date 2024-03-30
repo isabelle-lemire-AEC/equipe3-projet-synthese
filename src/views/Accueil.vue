@@ -22,7 +22,7 @@
             <input type="email" id="courriel" v-model="courriel" placeholder="Votre courriel" required>
           </div>
 
-          <button class="bouton"type="submit">Accéder maintenant</button>
+          <button class="bouton bouton--turquoise"type="submit">Accéder maintenant</button>
         </form>
       </div>
 
