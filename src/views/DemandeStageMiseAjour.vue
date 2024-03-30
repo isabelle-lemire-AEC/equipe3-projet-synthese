@@ -81,7 +81,7 @@
 				<!-- Section compétences -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
 					<label for="edit-demande-competences">Compétences</label>
-					<textarea id="edit-demande-competences" name="edit-demande-competences" v-model="demande.skills"></textarea>
+					<textarea id="edit-demande-competences" name="edit-demande-competences" rows="10" v-model="demande.skills"></textarea>
 					<!-- Validation -->
 					<!-- <p v-if="errors.skills" class="error-message">Veuillez fournir des compétences.</p> -->
 				</div>
@@ -109,17 +109,17 @@
 							</div>
 							<div class="form-fiche__label-input-vertical">
 								<label for="edit-demande-remuneration">Rémunération</label>
-								<div>
+								<div à>
 									<input type="radio" id="edit-demande-discretion" name="edit-demande-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
-									<label for="edit-demande-discretion">À la discrétion de l'entreprise</label>
+									<label for="edit-demande-discretion" class="form-fiche__label-radio-input">À la discrétion de l'entreprise</label>
 								</div>
 								<div>
 									<input type="radio" id="edit-demande-remunere" name="edit-demande-remuneration" value="remunere" v-model="remunerationType" />
-									<label for="edit-demande-remunere">Rémunéré</label>
+									<label for="edit-demande-remunere" class="form-fiche__label-radio-input">Rémunéré</label>
 								</div>
 								<div>
 									<input type="radio" id="edit-demande-non-renumere" name="edit-demande-remuneration" value="non-remunere" v-model="remunerationType" />
-									<label for="edit-demande-non-renumere">Non-rémunéré</label>
+									<label for="edit-demande-non-renumere" class="form-fiche__label-radio-input" >Non-rémunéré</label>
 								</div>
 							</div>
 						</div>
@@ -138,7 +138,7 @@
 				</div>
 				<!-- Section infos supplémentaires -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
-					<h3>Informations sur le stage recherché</h3>
+					<h3>Informations supplémentaires</h3>
 					<div>
 						<label for="edit-demande-infos-supp"></label>
 						<textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="10" v-model="demande.additionalInformation"></textarea>
@@ -149,6 +149,7 @@
 				<!-- Section Parcourir et télécharger CV -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
 					<div>
+						
 						<div>
 							<label for="parcourir"></label>
 							<input type="text" id="parcourir" name="parcourir">

@@ -10,7 +10,7 @@
         <form id="edition-candidat" @submit.prevent="soumettreFormulaire">
 
             <div class="boutons">
-                <button class="bouton bouton--transparent" type="submit" @click="annulerModif">Annuler</button>
+                <button class="bouton bouton--transparent" @click="annulerModif">Annuler</button>
                 <button class="bouton bouton--mauve" type="submit">
                     <div class="icone-libelle">
                         <i class="fas fa-save"></i>

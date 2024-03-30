@@ -11,6 +11,7 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -174,7 +175,10 @@ textarea,
 select {
   width: 100%;
   padding: 1rem;
-  border: 2px solid #EEEEEE;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #DDDFE1;
+  border-radius: 0;
   box-shadow: inset 0 0 10px 1px rgba(238, 238, 238, 0.5294117647);
   color: #707070;
   font-size: 1rem;
@@ -198,6 +202,7 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -212,11 +217,12 @@ label {
   flex-direction: column;
   gap: 1rem;
 }
-.form-fiche__wrapper-boutons-encadre {
+.form-fiche__wrapper-boutons-encadre, .form-fiche__wrapper-boutons-inputs {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2rem;
+  width: 100%;
 }
 .form-fiche__encadre {
   width: 100%;
@@ -233,7 +239,7 @@ label {
 .form-fiche__wrapper-titre-groupe-inputs {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
 }
 .form-fiche__colonnes-inputs {
   display: grid;
@@ -263,11 +269,34 @@ label {
   border-left-color: #5E5E5E;
   padding-left: 1rem;
 }
+.form-fiche__label-input-demi {
+  width: calc(50% - 1rem);
+}
 .form-fiche__label--cache {
   display: none;
 }
+.form-fiche__label-radio-input {
+  padding-left: 0.5rem;
+  font-weight: 400;
+}
 .form-fiche__wrapper-input-msg-erreur {
   width: 100%;
+}
+.form-fiche__input-parcourir {
+  position: relative;
+}
+.form-fiche__input-parcourir button:disabled {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #DDDFE1;
+  border-radius: 0;
+  padding-inline: 2rem;
+  font-family: "Lato";
+  color: #ABAFB3;
+  background-color: #EFF0F1;
 }
 
 .modal {
@@ -586,12 +615,18 @@ label {
 }
 
 /* Général à plusieurs views d'entreprises */
-#ajout-entreprise,
-#edition-entreprise {
+#ajout-entreprise {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2rem;
+}
+
+#edition-entreprise {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 9rem;
 }
 
 .formulaire-ajout-entreprise .form-fiche__wrapper-titre,
@@ -603,6 +638,15 @@ label {
   max-width: 150px;
   /* À valider si on garde ou pas quand on sera rendu au responsive */
   width: 70%;
+}
+
+.formulaire-ajout-entreprise h2,
+.formulaire-ajout-entreprise h3,
+.fiche-entreprise-details h2,
+.fiche-entreprise-details h3,
+.formulaire-edition-entreprise h2,
+.formulaire-edition-entreprise h3 {
+  color: #86A9E6;
 }
 
 /* Spécifique pour la view Entreprises */
@@ -627,40 +671,50 @@ label {
 }
 
 /* Spécifique pour la view EntrepriseAjout */
+.formulaire-ajout-entreprise {
+  /*   h2,
+  h3 {
+      color: variables.$blue;
+  } */
+}
 .formulaire-ajout-entreprise .form-fiche__wrapper-titre {
   margin-bottom: 12rem;
 }
-.formulaire-ajout-entreprise h2,
-.formulaire-ajout-entreprise h3 {
-  color: #86A9E6;
-}
 
 /* Spécifique pour la view EntrepriseDetail et EntrepriseMiseAJour */
-.fiche-entreprise-details h2,
-.fiche-entreprise-details h3,
-.formulaire-edition-entreprise h2,
-.formulaire-edition-entreprise h3 {
-  color: #86A9E6;
+.fiche-entreprise-details,
+.formulaire-edition-entreprise {
+  /*   h2,
+  h3 {
+      color: variables.$blue;
+  } */
 }
-
-/* Spécifique pour la view EntrepriseDetail */
-.fiche-entreprise-details .form-fiche__wrapper-titre-logo {
+.fiche-entreprise-details .form-fiche__wrapper-titre-logo,
+.formulaire-edition-entreprise .form-fiche__wrapper-titre-logo {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   gap: 2rem;
 }
-.fiche-entreprise-details .form-fiche__wrapper-titre {
+.fiche-entreprise-details .form-fiche__wrapper-titre,
+.formulaire-edition-entreprise .form-fiche__wrapper-titre {
   border-color: #86A9E6;
 }
 
+/* Spécifique pour la view EntrepriseDetail */
 .nom-contact {
   font-size: clamp(1.2656rem, 1.1948rem + 0.3544vi, 1.62rem);
   font-weight: 700;
   line-height: 1.1;
 }
 
+/* Spécifique pour la view EntrepriseMiseAJour */
+#edition-entreprise .form-fiche__label-input-horizontal label {
+  flex-basis: 15%;
+}
+
+#ajout-demandestages,
 #edition-demandestages {
   display: flex;
   flex-direction: column;
@@ -668,10 +722,13 @@ label {
   gap: 2rem;
 }
 
+.formulaire-ajout-demandestages .form-fiche__wrapper-titre,
 .formulaire-edition-demandestages .form-fiche__wrapper-titre,
 .fiche-demandestages-details .form-fiche__wrapper-titre {
   border-color: #CB912B;
 }
+.formulaire-ajout-demandestages h2,
+.formulaire-ajout-demandestages h3,
 .formulaire-edition-demandestages h2,
 .formulaire-edition-demandestages h3,
 .fiche-demandestages-details h2,
@@ -811,4 +868,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}/*# sourceMappingURL=styles.css.map */
+}
