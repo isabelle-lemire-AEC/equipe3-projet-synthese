@@ -61,10 +61,6 @@ label {
         @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
     }
 
-    &__wrapper-radio-input {
-        padding-left: variables.$spacing-xsmall;
-    }
-
     &__encadre {
         width: 100%;
         background-color: variables.$white;
@@ -112,6 +108,11 @@ label {
         &--cache {
             display: none;
         }
+    }
+
+    &__label-radio-input {
+        padding-left: variables.$spacing-xsmall;
+        font-weight: variables.$regular;
     }
 
     &__wrapper-input-msg-erreur {

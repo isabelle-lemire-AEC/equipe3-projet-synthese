@@ -11,6 +11,7 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -198,6 +199,7 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -217,9 +219,6 @@ label {
   flex-direction: column;
   align-items: flex-end;
   gap: 2rem;
-}
-.form-fiche__wrapper-radio-input {
-  padding-left: 0.5rem;
 }
 .form-fiche__encadre {
   width: 100%;
@@ -268,6 +267,10 @@ label {
 }
 .form-fiche__label--cache {
   display: none;
+}
+.form-fiche__label-radio-input {
+  padding-left: 0.5rem;
+  font-weight: 400;
 }
 .form-fiche__wrapper-input-msg-erreur {
   width: 100%;
@@ -808,4 +811,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}/*# sourceMappingURL=styles.css.map */
+}

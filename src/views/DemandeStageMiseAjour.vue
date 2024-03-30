@@ -111,15 +111,15 @@
 								<label for="edit-demande-remuneration">Rémunération</label>
 								<div à>
 									<input type="radio" id="edit-demande-discretion" name="edit-demande-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
-									<label for="edit-demande-discretion" class="form-fiche__wrapper-radio-input">À la discrétion de l'entreprise</label>
+									<label for="edit-demande-discretion" class="form-fiche__label-radio-input">À la discrétion de l'entreprise</label>
 								</div>
 								<div>
 									<input type="radio" id="edit-demande-remunere" name="edit-demande-remuneration" value="remunere" v-model="remunerationType" />
-									<label for="edit-demande-remunere" class="form-fiche__wrapper-radio-input">Rémunéré</label>
+									<label for="edit-demande-remunere" class="form-fiche__label-radio-input">Rémunéré</label>
 								</div>
 								<div>
-									<input class="form-fiche__wrapper-radio-input" type="radio" id="edit-demande-non-renumere" name="edit-demande-remuneration" value="non-remunere" v-model="remunerationType" />
-									<label for="edit-demande-non-renumere">Non-rémunéré</label>
+									<input type="radio" id="edit-demande-non-renumere" name="edit-demande-remuneration" value="non-remunere" v-model="remunerationType" />
+									<label for="edit-demande-non-renumere" class="form-fiche__label-radio-input" >Non-rémunéré</label>
 								</div>
 							</div>
 						</div>
@@ -149,6 +149,7 @@
 				<!-- Section Parcourir et télécharger CV -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
 					<div>
+						
 						<div>
 							<label for="parcourir"></label>
 							<input type="text" id="parcourir" name="parcourir">
