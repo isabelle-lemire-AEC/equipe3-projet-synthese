@@ -5,9 +5,12 @@
 
 /* Général à plusieurs views d'entreprises */
 
-#ajout-entreprise,
-#edition-entreprise {
+#ajout-entreprise {
     @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
+}
+
+#edition-entreprise {
+    @include mixins.flex(column, null, flex-end, variables.$spacing-large*3);
 }
 
 .formulaire-ajout-entreprise,
@@ -24,6 +27,17 @@
     /* À valider si on garde ou pas quand on sera rendu au responsive */
     width: 70%;
 }
+
+.formulaire-ajout-entreprise,
+.fiche-entreprise-details,
+.formulaire-edition-entreprise {
+
+    h2,
+    h3 {
+        color: variables.$blue;
+    }
+}
+
 
 
 /* Spécifique pour la view Entreprises */
@@ -62,10 +76,10 @@
         margin-bottom: variables.$spacing-large * 4;
     }
 
-    h2,
+    /*   h2,
     h3 {
         color: variables.$blue;
-    }
+    } */
 }
 
 
@@ -74,15 +88,11 @@
 .fiche-entreprise-details,
 .formulaire-edition-entreprise {
 
-    h2,
+    /*   h2,
     h3 {
         color: variables.$blue;
-    }
-}
+    } */
 
-/* Spécifique pour la view EntrepriseDetail */
-
-.fiche-entreprise-details {
     .form-fiche {
         &__wrapper-titre-logo {
             @include mixins.flex(row, flex-start, center, variables.$spacing-medium);
@@ -94,6 +104,23 @@
     }
 }
 
+/* Spécifique pour la view EntrepriseDetail */
+
+
 .nom-contact {
     @include mixins.font(null, variables.$font-style-h4, variables.$bold)
+}
+
+/* Spécifique pour la view EntrepriseMiseAJour */
+
+#edition-entreprise {
+
+    .form-fiche {
+        &__label-input-horizontal {
+
+            label {
+                flex-basis: 15%;
+            }
+        }
+    }
 }
