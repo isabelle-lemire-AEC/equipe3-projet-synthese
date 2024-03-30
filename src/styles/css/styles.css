@@ -470,34 +470,44 @@ label {
   width: 5px;
   background-color: transparent;
 }
-.navbar__menu-item.tableau-de-bord i, .navbar__menu-item.tableau-de-bord span {
+.navbar__menu-item.tableau-de-bord i,
+.navbar__menu-item.tableau-de-bord span {
   color: #0C9DA4;
 }
-.navbar__menu-item.tableau-de-bord i:hover, .navbar__menu-item.tableau-de-bord span:hover {
+.navbar__menu-item.tableau-de-bord i:hover,
+.navbar__menu-item.tableau-de-bord span:hover {
   color: #0a868c;
 }
-.navbar__menu-item.demandes-stage i, .navbar__menu-item.demandes-stage span {
+.navbar__menu-item.demandes-stage i,
+.navbar__menu-item.demandes-stage span {
   color: #CB912B;
 }
-.navbar__menu-item.demandes-stage i:hover, .navbar__menu-item.demandes-stage span:hover {
+.navbar__menu-item.demandes-stage i:hover,
+.navbar__menu-item.demandes-stage span:hover {
   color: #b68227;
 }
-.navbar__menu-item.offres-stage i, .navbar__menu-item.offres-stage span {
+.navbar__menu-item.offres-stage i,
+.navbar__menu-item.offres-stage span {
   color: #BB2026;
 }
-.navbar__menu-item.offres-stage i:hover, .navbar__menu-item.offres-stage span:hover {
+.navbar__menu-item.offres-stage i:hover,
+.navbar__menu-item.offres-stage span:hover {
   color: #a51c22;
 }
-.navbar__menu-item.candidats i, .navbar__menu-item.candidats span {
+.navbar__menu-item.candidats i,
+.navbar__menu-item.candidats span {
   color: #7F2987;
 }
-.navbar__menu-item.candidats i:hover, .navbar__menu-item.candidats span:hover {
+.navbar__menu-item.candidats i:hover,
+.navbar__menu-item.candidats span:hover {
   color: #6d2373;
 }
-.navbar__menu-item.entreprises i, .navbar__menu-item.entreprises span {
+.navbar__menu-item.entreprises i,
+.navbar__menu-item.entreprises span {
   color: #86A9E6;
 }
-.navbar__menu-item.entreprises i:hover, .navbar__menu-item.entreprises span:hover {
+.navbar__menu-item.entreprises i:hover,
+.navbar__menu-item.entreprises span:hover {
   color: #719ae2;
 }
 

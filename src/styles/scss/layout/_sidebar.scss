@@ -8,33 +8,35 @@ $color-candidats: variables.$purple;
 $color-entreprises: variables.$blue;
 
 
-.container-menu{
+.container-menu {
     background-color: variables.$white;
     min-width: 250px;
     height: 100%;
-    
+
 }
 
 
 .logo {
     max-width: 150px;
-    padding: 1rem ;
+    padding: 1rem;
 }
 
 .navbar {
-    
+
     &__menu {
         list-style: none;
         padding: 1rem 0 1rem 1rem;
-        
+
     }
 
     &__menu-item {
         position: relative;
+
         a {
             text-decoration: none;
         }
-        i{
+
+        i {
             padding: 1rem;
         }
 
@@ -47,117 +49,130 @@ $color-entreprises: variables.$blue;
             width: 5px;
             background-color: transparent;
             transition: background-color 0.3s ease;
-          }
-        
-           
-          
-        
-          
-          &.active::after {
+        }
+
+
+
+
+
+        &.active::after {
             background-color: transparent; // Couleur de la ligne lorsque l'élément est actif (par défaut)
-          }
-        
-          // Appliquer les couleurs spécifiques au survol pour chaque classe spécifique
-          &.tableau-de-bord:hover::after,
-          &.tableau-de-bord.active::after{
+        }
+
+        // Appliquer les couleurs spécifiques au survol pour chaque classe spécifique
+        &.tableau-de-bord:hover::after,
+        &.tableau-de-bord.active::after {
             background-color: $color-tableau-de-bord;
-          }
-        
-          &.demandes-stage:hover::after,
-          &.demandes-stage.active::after {
+        }
+
+        &.demandes-stage:hover::after,
+        &.demandes-stage.active::after {
             background-color: $color-demandes-stage;
-          }
-        
-          &.offres-stage:hover::after,
-          &.offres-stage.active::after {
+        }
+
+        &.offres-stage:hover::after,
+        &.offres-stage.active::after {
             background-color: $color-offres-stage;
-          }
-        
-          &.candidats:hover::after,
-          &.candidats.active::after {
+        }
+
+        &.candidats:hover::after,
+        &.candidats.active::after {
             background-color: $color-candidats;
-          }
-        
-          &.entreprises:hover::after,
-          &.entreprises.active::after {
+        }
+
+        &.entreprises:hover::after,
+        &.entreprises.active::after {
             background-color: $color-entreprises;
-          }
-        
-          // Conteneur pour positionner la ligne à droite
-          & > .line-container {
+        }
+
+        // Conteneur pour positionner la ligne à droite
+        &>.line-container {
             position: absolute;
             top: 0;
             bottom: 0;
             right: 0;
             width: 5px;
             background-color: transparent;
-          }
-        
-           &.tableau-de-bord{
-                i, span{
-                    color: variables.$turquoise;
-                    &:hover
-                    {
-                        color: darken(variables.$turquoise, 5%);
-                    }
+        }
+
+        &.tableau-de-bord {
+
+            i,
+            span {
+                color: variables.$turquoise;
+
+                &:hover {
+                    color: darken(variables.$turquoise, 5%);
                 }
-                
             }
 
-            
+        }
 
-            &.demandes-stage{
-                i, span{
-                    color: variables.$gold;
-                    &:hover{
-                        color: darken(variables.$gold, 5%);
-                    }  
+
+
+        &.demandes-stage {
+
+            i,
+            span {
+                color: variables.$gold;
+
+                &:hover {
+                    color: darken(variables.$gold, 5%);
                 }
-
-            }    
-            
-            &.offres-stage{
-                i, span{
-                    color: variables.$red;
-                    &:hover{
-                        color: darken(variables.$red, 5%);
-                    }  
-                }
-
-               
-                
             }
 
-            &.candidats{
-                i, span{
-                    color: variables.$purple;
-                    &:hover{
-                        color: darken(variables.$purple, 5%);
-                    }    
-                }
+        }
 
-                
-                
-            }
-        
-            &.entreprises{
-                i, span{
-                    color: variables.$blue;
-                    &:hover{
-                        color: darken(variables.$blue, 5%);
-                    }      
+        &.offres-stage {
+
+            i,
+            span {
+                color: variables.$red;
+
+                &:hover {
+                    color: darken(variables.$red, 5%);
                 }
-                
-                
             }
+
+
+
+        }
+
+        &.candidats {
+
+            i,
+            span {
+                color: variables.$purple;
+
+                &:hover {
+                    color: darken(variables.$purple, 5%);
+                }
+            }
+
+
+
+        }
+
+        &.entreprises {
+
+            i,
+            span {
+                color: variables.$blue;
+
+                &:hover {
+                    color: darken(variables.$blue, 5%);
+                }
+            }
+
+
+        }
     }
 
-   
-   
-  
-  
 
-    
-    
+
+
+
+
+
+
 }
-
