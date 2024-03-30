@@ -39,6 +39,7 @@
 
   const handleMenuToggle = (isOpen) => {
     isMenuOpen.value = isOpen;
+    console.log("menu ouvert")
   };
 
   // Fonction pour vérifier si la page actuelle est la page d'accueil

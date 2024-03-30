@@ -61,8 +61,8 @@
 
                 <div class="form-fiche__wrapper-titre-groupe-inputs">
                     <h3>Informations sur le stage recherché</h3>
-                    <div class="form-fiche__colonne-inputs">
-                        <div class="form-fiche__colonnes-inputs">
+                    <div class="form-fiche__colonnes-inputs">
+                        <div class="form-fiche__colonne-inputs">
                             <div class="form-fiche__label-input-vertical">
                                 <h4>Type de stage</h4>
                                 <p>{{ demande.internshipType.value }}</p>
@@ -76,7 +76,7 @@
                                 <p>À la discrétion de l'entreprise</p>
                             </div>   
                         </div>  
-                        <div class="form-fiche__colonnes-inputs">
+                        <div class="form-fiche__colonne-inputs">
                             <div class="form-fiche__label-input-vertical">
                                 <h4>Date de début</h4>
                                 <p>{{ dateDebut }}</p>

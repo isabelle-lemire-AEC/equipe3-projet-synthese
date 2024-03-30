@@ -3,7 +3,7 @@
   <div v-if="entreprise" class="form-fiche fiche-entreprise-details">
     <!-- Affichage du logo de l'entreprise -->
     <div class="form-fiche__wrapper-titre-logo">
-      <img class="entreprise-logo" :src="logoEntreprise" alt="Logo de l'entreprise" />
+      <img class="entreprise-logo" :src="logoEntreprise" :alt="entreprise.name" />
       <div class="form-fiche__wrapper-titre">
         <p class="form-fiche__nom-section">Entreprise</p>
         <h1 class="entreprise-nom">{{ entreprise.name }}</h1>

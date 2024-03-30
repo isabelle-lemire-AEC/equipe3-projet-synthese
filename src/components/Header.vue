@@ -41,13 +41,9 @@
 </template>
 
 <script setup>
-  import {
-    ref,
-    defineEmits
-  } from 'vue';
-  import {
-    useRouter
-  } from "vue-router";
+  import { ref, defineEmits } from 'vue';
+  import { useRouter } from "vue-router";
+
 
   // Récupérer les informations à partir du localStorage
   const nomPrenom = ref(localStorage.getItem('nomPrenom'));
@@ -81,8 +77,8 @@
 
 
   /* Menu toggable */
-  const isMenuOpen = ref(false);
-  const emit = defineEmits(['menu-toggled']);
+const emit = defineEmits(['menu-toggled']);
+    const isMenuOpen = ref(false);
 
   const toggleMenu = () => {
     isMenuOpen.value = !isMenuOpen.value;
