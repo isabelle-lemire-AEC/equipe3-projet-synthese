@@ -709,6 +709,12 @@ label {
   line-height: 1.1;
 }
 
+/* Spécifique pour la view EntrepriseMiseAJour */
+#edition-entreprise .form-fiche__label-input-horizontal label {
+  flex-basis: 15%;
+}
+
+#ajout-demandestages,
 #edition-demandestages {
   display: flex;
   flex-direction: column;
@@ -716,6 +722,7 @@ label {
   gap: 2rem;
 }
 
+.formulaire-ajout-demandestages .form-fiche__wrapper-titre,
 .formulaire-edition-demandestages .form-fiche__wrapper-titre,
 .fiche-demandestages-details .form-fiche__wrapper-titre {
   border-color: #CB912B;
