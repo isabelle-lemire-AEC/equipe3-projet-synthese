@@ -6,7 +6,7 @@
 		<div>
 			<!-- COMPONENT?? Classe pour flex les boutons -->
 			<button @click="retour()">Annuler</button>
-			<button @click="soumettreFormulaire()">Mettre à jour</button>
+			<button @click="modifDemande()">Mettre à jour</button>
 		</div>
 
 		<form id="edit-demande-stage">
@@ -16,14 +16,21 @@
 				<div>
 					<!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 					<label for="edit-demande-candidat">Candidat</label>
-					<input
-						type="text"
-						id="edit-demande-candidat"
-						name="edit-demande-candidat"
-						v-model.trim="nomDuCandidat" />
-					<!-- <p v-if="errors.fullName" class="error-message">
-						Veuillez fournir le nom du candidat.
-					</p> -->
+					<select id="edit-demande-candidat"
+							name="edit-demande-candidat"
+							v-model.trim="demande.candidate"
+							@change="candidatChange()">
+						<option value="">Veuillez effectuer un choix</option>
+						<option
+							v-for="candidate in candidates"
+							:key="candidate._id"
+							:value="candidate">
+							{{ candidate.firstName }} {{ candidate.lastName }}
+						</option>
+					</select>
+					<p v-if="erreurs.candidat" class="validForm">
+                        Veuillez choisir un candidat.
+                    </p>
 				</div>
 
 				<div>
@@ -33,9 +40,9 @@
 						id="edit-demande-presentation"
 						name="edit-demande-presentation"
 						v-model="demande.description"></textarea>
-					<!-- <p v-if="errors.description" class="error-message">
+					<p v-if="erreurs.description" class="error-message">
 						Veuillez fournir une présentation.
-					</p> -->
+					</p>
 				</div>
 
 				<div>
@@ -47,26 +54,28 @@
 								type="text"
 								id="edit-demande-programme"
 								name="edit-demande-programme"
-								v-model="demande.title" />
-							<!-- <p v-if="errors.activitySector" class="error-message">
+								v-model.trim="formationInput"/>
+							<p v-if="erreurs.formation" class="error-message">
 								Veuillez fournir un programme de formation.
-							</p> -->
+							</p>
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
 							<label for="edit-demande-secteur">Secteur d'activité</label>
 							<select id="edit-demande-secteur"
-									name="edit-demande-secteur">
+									name="edit-demande-secteur"
+									v-model="activitySectorInput">
 								<option value="">Veuillez effectuer un choix</option>
 								<option
 									v-for="secteurActivite in secteursActivites"
 									:key="secteurActivite._id"
-									:value="secteurActivite"
-									selected>
+									:value="secteurActivite">
 									{{ secteurActivite.value }}
 								</option>
-
 							</select>
+							<p v-if="erreurs.activitySector" class="error-message">
+                                Veuillez fournir un secteur d'activité de formation.
+                            </p>
 						</div>
 					</div>
 				</div>
@@ -80,10 +89,11 @@
 								type="text"
 								id="edit-demande-etablissement"
 								name="edit-demande-etablissement"
-								value="Cégep de Trois-Rivières" />
-							<!-- <p v-if="errors.activitySector" class="error-message">
-								Veuillez fournir un programme de formation.
-							</p> -->
+								value="Cégep de Trois-Rivières"
+								v-model="etablissementInput" />
+							<p v-if="erreurs.etablissement" class="error-message">
+								Veuillez fournir un établissement scolaire.
+							</p>
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -93,9 +103,9 @@
 								id="edit-demande-ville"
 								name="edit-demande-ville"
 								v-model="demande.candidate.city" />
-							<!-- <p v-if="errors.city" class="error-message">
+							<p v-if="erreurs.city" class="error-message">
 								Veuillez fournir une ville.
-							</p> -->
+							</p>
 						</div>
 					</div>
 				</div>
@@ -117,9 +127,9 @@
 								{{ province.value }}
 							</option>
 						</select>
-						<!-- <p v-if="erreurs.province" class="validForm">
-								Veuillez effectuer un choix.
-						</p> -->
+						<p v-if="erreurs.province" class="validForm">
+							Veuillez choisir une région.
+						</p>
 					</div>
 
 					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -128,9 +138,9 @@
 							id="edit-demande-competences"
 							name="edit-demande-competences"
 							v-model="demande.skills"></textarea>
-						<!-- <p v-if="errors.skills" class="error-message">
+						<p v-if="erreurs.skills" class="error-message">
 							Veuillez fournir des compétences.
-						</p> -->
+						</p>
 					</div>
 				</div>
 
@@ -150,9 +160,9 @@
 									:value="internshipType">
 									{{ internshipType.value }}
 								</option></select>
-								<!-- <p v-if="erreurs.internshipType" class="validForm">
-							Veuillez effectuer un choix.
-						</p> -->
+								<p v-if="erreurs.internshipType" class="validForm">
+									Veuillez choisir un type de stage.
+								</p>
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -160,10 +170,11 @@
 							<input
 								id="edit-demande-heures"
 								name="edit-demande-heures"
-								v-model="demande.weeklyWorkHours" />
-							<!-- <p v-if="errors.description" class="error-message">
-								Veuillez fournir une présentation.
-							</p> -->
+								type="number"
+								v-model.trim="demande.weeklyWorkHours"/>
+							<p v-if="erreurs.weeklyWorkHours" class="error-message">
+								Veuillez inscrire le nombre d'heures par semaine.
+							</p>
 						</div>
 					</div>
 
@@ -176,6 +187,9 @@
 								id="edit-demande-date-debut"
 								name="edit-demande-date-debut"
 								v-model.trim="dateDebut" />
+							<p v-if="erreurs.startDate" class="validForm">
+								Veuillez fournir une date de début.
+							</p>
 						</div>
 
 						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
@@ -185,6 +199,9 @@
 								id="edit-demande-date-fin"
 								name="edit-demande-date-fin"
 								v-model.trim="dateFin" />
+							<p v-if="erreurs.endDate" class="validForm">
+								Veuillez fournir une date de fin.
+							</p>
 						</div>
 					</div>
 
@@ -225,16 +242,16 @@
 				<fieldset>
 					<legend>Informations supplémentaires</legend>
 					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-						<label for="edit-demande-infos-supp">Présentation</label>
+						<label for="edit-demande-infos-supp">Informations supplémentaires</label>
 						<!-- Classe pour cacher le label -->
 						<textarea
 							id="edit-demande-infos-supp"
 							name="edit-demande-infos-supp"
 							v-model="demande.additionalInformation">
 						</textarea>
-						<!-- <p v-if="errors.additionalInformation" class="error-message">
-							Veuillez fournir des informations supplémentaires.
-						</p> -->
+						<p v-if="erreurs.additionalInformation" class="error-message">
+                            Veuillez fournir des informations supplémentaires.
+                        </p>
 					</div>
 				</fieldset>
 			</div>
@@ -256,7 +273,7 @@
 	import {useRouter} from 'vue-router';
 
 	const {getCandidatById, getAllCandidats} = useCandidat();
-	const {getAllProvinces} = useProvinces();
+	const {getAllProvinces, getProvinceById} = useProvinces();
 	const {getRequestById, editRequest} = useInternshipRequests();
 	const {getAllInternshipTypes} = useInternshipTypes();
 	const {getAllActivitySectors} = useActivitySectors();
@@ -272,6 +289,13 @@
 	const dateFin = ref([]);
 	const secteursActivites = ref([]);
     const router = useRouter();
+	const candidates = ref([]);
+	const competences = ref('');
+	const formulaireValide = ref(false);
+	const formationInput = ref('Développement Web');
+	const activitySectorInput = ref('');
+	const etablissementInput = ref('Cégep de Trois-Rivières');
+	let ignoreFirstChange = true;
 
 	const demande = ref({
 		title: "",
@@ -305,205 +329,113 @@
 			value: "",
 		},
 		additionalInformation: "",
-		isActive: true,
-
-		program: "Design graphique",
-		activitySector: ["Design", "Graphisme"],
-		etablissement: "Collège de Maisonneuve",
-		remuneration: [
-			"Rémunéré",
-			"Non-rémunéré",
-			"À la discrétion de l'entreprise",
-		]
+		isActive: true
 	});
+
+	const erreurs = ref({
+        candidat: false,
+        description: false,
+		formation: false,
+		activitySector: false,
+        city: false,
+		province: false,
+		etablissement: false,
+        startDate: false,
+        endDate: false,
+        skills: false,
+        internshipType: false,
+        weeklyWorkHours: false,
+		additionalInformation: false
+    });
+
+	const validerFormulaire = () => {
+		erreurs.value.candidat = demande.value.candidate === '',
+		erreurs.value.description = ((demande.value.description === undefined) || (demande.value.description === '')),
+		erreurs.value.formation = formationInput.value === '',
+		erreurs.value.activitySector = activitySectorInput.value === '',
+		erreurs.value.city = ((demande.value.candidate.city === undefined) || (demande.value.candidate.city === '')),
+		erreurs.value.province = ((demande.value.province === undefined) || (demande.value.province === '')),
+		erreurs.value.etablissement = etablissementInput.value === '',
+		erreurs.value.startDate = demande.value.startDate === '',
+		erreurs.value.endDate = demande.value.endDate === '',
+		erreurs.value.skills = ((demande.value.skills === undefined) || (demande.value.skills === '')),
+		erreurs.value.internshipType = ((demande.value.internshipType === undefined) || (demande.value.internshipType === '')),
+		erreurs.value.weeklyWorkHours = demande.value.weeklyWorkHours === 0,
+		erreurs.value.additionalInformation = demande.value.additionalInformation === ''
+		
+		return Object.values(erreurs.value).some(err => err);
+	};
+
+	const candidatChange = async () => {
+		demande.value.description = demande.value.candidate.description;
+		if(demande.value.candidate) {
+			demande.value.province = await getProvinceById(demande.value.candidate.province);
+		}
+		demande.value.skills = demande.value.candidate.skills;
+	}
 
 	const modifDemande = async () => {
 		try {
-			await editRequest(id, demande.value);
-			console.log("Request edited successfully");
+			formulaireValide.value = validerFormulaire();
+			
+			if (!formulaireValide.value) {
+				demande.value.candidate.firstName = nomDuCandidat.value.substring(0, nomDuCandidat.value.indexOf(' '));
+				demande.value.candidate.lastName = nomDuCandidat.value.substring(nomDuCandidat.value.indexOf(' ') + 1);
+				listerCompetences();
+				// console.log("avant - demande.value.candidate.province: ", demande.value.candidate.province)
+				// demande.value.candidate.province = await getProvinceById(demande.value.candidate.province);
+				// console.log("après - demande.value.candidate.province: ", demande.value.candidate.province)
+				await editRequest(id, demande.value);
+				console.log("Request edited successfully");
+				retour();
+			} else {
+				throw new Error("Veuillez remplir tous les champs obligatoires.");
+			}
 		} catch (error) {
 			console.error("Erreur lors de la modification de la demande :", error);
 		}
 	};
 
+	const ajusterDonneesCandidats = () => {
+		candidates.value.forEach(candidate => {
+			candidate.province = candidate.province._id;
+		});
+	}
+
+	const listerCompetences = () => {
+		competences.value = demande.value.skills.toString();
+		competences.value = competences.value.replace(/ /g,'');
+		demande.value.skills = competences.value.split(',');
+	}
+
 	onMounted(async () => {
+		const candidatesData = await getAllCandidats();
+		candidates.value = candidatesData.data;
+		ajusterDonneesCandidats();
+		console.log("candidates.value: ", candidates.value);
 		secteursActivites.value = await getAllActivitySectors();
+		activitySectorInput.value = secteursActivites.value[Math.floor(Math.random()*secteursActivites.value.length)];
 		const provincesData = await getAllProvinces();
 		provinces.value = provincesData.data;
+		console.log("provinces.value: ", provinces.value);
 		const internshipTypesData = await getAllInternshipTypes();
 		internshipTypes.value = internshipTypesData.data;
 		const demandeData = await getRequestById(id);
+		console.log("demandeData: ", demandeData);
 		demande.value = demandeData.data;
-		console.log("demande: ", demande)
+		demande.value.candidate = demandeData.data.candidate;
+		console.log("demande.value: ", demande.value);
+		console.log("demande.value.candidate: ", demande.value.candidate);
+		console.log("demande.value.province: ", demande.value.province);
+		console.log("demande: ", demande.value)
 		nomDuCandidat.value = demande.value.candidate.firstName + ' ' + demande.value.candidate.lastName;
 		dateDebut.value = demande.value.startDate.substring(0, demande.value.startDate.indexOf('T'));
-		dateFin.value = demande.value.endDate.substring(0, demande.value.startDate.indexOf('T'));;
+		dateFin.value = demande.value.endDate.substring(0, demande.value.startDate.indexOf('T'));
 	});
 
 	const retour = () => {
 		router.push({name: "DemandesStages"});
 	}
-
-	/* 	const errors = reactive({
-		fullName: false,
-		description: false,
-		activitySector: false,
-		city: false,
-		province: false,
-		skills: false,
-		internshipType: false,
-		weeklyWorkHours: false,
-		startDate: false,
-		endDate: false,
-		paid: false,
-		additionalInformation: false,
-	}); */
-
-	/* 	const errors = reactive({
-		title: false,
-		description: false,
-		candidate: {
-			_id: false,
-			description: false,
-			email: false,
-			firstName: false,
-			lastName: false,
-			address: false,
-			phone: false,
-			city: false,
-			skills: false,
-			province: {
-				_id: false,
-				value: false,
-			},
-			postalCode: false,
-		},
-		startDate: false,
-		endDate: false,
-		weeklyWorkHours: false,
-		province: {
-			_id: false,
-			value: false,
-		},
-		skills: false,
-		internshipType: {
-			_id: false,
-			value: false,
-		},
-		additionalInformation: false,
-		isActive: false,
-	}); */
-
-	/* const validForm = ref(false); */
-
-	const soumettreFormulaire = async () => {
-		// e.preventDefault();
-		// console.log("nomDuCandidat.value: ", nomDuCandidat.value);
-
-		demande.value.candidate.firstName = nomDuCandidat.value.substring(0, nomDuCandidat.value.indexOf(' '));
-		demande.value.candidate.lastName = nomDuCandidat.value.substring(nomDuCandidat.value.indexOf(' ') + 1);
-		console.log("demande.candidate.firstName: ", demande.value.candidate.firstName);
-		console.log("demande.candidate.lastName: ", demande.value.candidate.lastName);
-
-		await modifDemande();
-
-		retour();
-
-		// modifDemande();
-
-		/* if (demande.fullName === "") {
-			errors.fullName = true;
-		} else {
-			errors.fullName = false;
-		}
-
-		if (demande.description === "") {
-			errors.description = true;
-		} else {
-			errors.description = false;
-		}
-
-		if (demande.activitySector === "") {
-			errors.activitySector = true;
-		} else {
-			errors.activitySector = false;
-		}
-
-		if (demande.city === "") {
-			errors.city = true;
-		} else {
-			errors.city = false;
-		}
-
-		if (demande.province === "") {
-			errors.province = true;
-		} else {
-			errors.province = false;
-		}
-
-		if (demande.skills === "") {
-			errors.skills = true;
-		} else {
-			errors.skills = false;
-		}
-
-		if (demande.internshipType === "") {
-			errors.internshipType = true;
-		} else {
-			errors.internshipType = false;
-		}
-
-		if (demande.weeklyWorkHours === "") {
-			errors.weeklyWorkHours = true;
-		} else {
-			errors.weeklyWorkHours = false;
-		}
-
-		if (demande.startDate === "") {
-			errors.startDate = true;
-		} else {
-			errors.startDate = false;
-		}
-
-		if (demande.endDate === "") {
-			errors.endDate = true;
-		} else {
-			errors.endDate = false;
-		}
-
-		if (demande.paid === "") {
-			errors.paid = true;
-		} else {
-			errors.paid = false;
-		}
-
-		if (demande.additionalInformation === "") {
-			errors.additionalInformation = true;
-		} else {
-			errors.additionalInformation = false;
-		}
-
-		if (
-			errors.fullName === false &&
-			errors.description === false &&
-			errors.activitySector === false &&
-			errors.city === false &&
-			errors.province === false &&
-			errors.skills === false &&
-			errors.internshipType === false &&
-			errors.weeklyWorkHours === false &&
-			errors.startDate === false &&
-			errors.endDate === false &&
-			errors.paid === false &&
-			errors.additionalInformation === false
-		) {
-			validForm.value = true;
-		} else {
-			validForm.value = false;
-		} */
-
-		console.log("Form submitted successfully!");
-	};
 </script>
 
 <style></style>

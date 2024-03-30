@@ -23,5 +23,20 @@ export function useProvinces() {
     }
   };
 
-  return { getAllProvinces, response, error, loading };
+  // Obtenir toutes les provinces
+  const getProvinceById = async (id) => {
+    loading.value = true;
+    try {
+      response.value = await axios.get(`${API_BASE_URL}/provinces/${id}`);
+      console.log("GET BY ID - Province - OK", response.value.data);
+      return response.value.data;
+    } catch (err) {
+      error.value = err;
+      console.log("GET BY ID - Province - ERREUR", err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return { getAllProvinces, getProvinceById, response, error, loading };
 }

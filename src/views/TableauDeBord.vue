@@ -54,6 +54,7 @@
                         :key="demande._id"
                         :posteTitre="demande.title"
                         :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName"
+                        :info2="secteurActivite.value"
                         :region="demande.province.value"
                         :date="demande.startDate"
                         :id="demande._id"
@@ -88,6 +89,7 @@
                         :key="offre._id"
                         :posteTitre="offre.title"
                         :posteNom="offre.enterprise.name"
+                        :info2="offre.enterprise.city"
                         :region="offre.province.value"
                         :date="offre.startDate"
                         :id="offre._id"
@@ -108,11 +110,14 @@
     import { useEntreprise } from '../composables/entreprises/entreprise.js';
     import TBListeDemandeStageAttente from '../components/TBListeDemandeStageAttente.vue';
     import TBListeOffreStageAttente from '../components/TBListeOffreStageAttente.vue';
+    import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js'; 
 
     const { getAllNotActiveRequests, updateRequestStatus, getRequestsCount, activateRequest } = useInternshipRequests();
     const { getAllOffers, getInternshipOfferCount, activateOffer } = useInternshipOffers();
     const { getCandidatsCount } = useCandidat();
     const { getEntreprisesCount } = useEntreprise();
+    const { getAllActivitySectors } = useActivitySectors();
+
     const demandes = ref([]);
     const offres = ref([]);
     const demandesCount = ref(null);
@@ -122,6 +127,8 @@
     const isTableauDeBord = ref(true);
     const afficherDemandes = ref(true);
     const afficherOffres = ref(true);
+    const secteursActivites = ref([]);
+    const secteurActivite = ref(null);
 
     const navigateToDemandeDetails = (demandeId) => {
         router.push({ 
@@ -154,6 +161,8 @@
     };
 
     onMounted(async () => {
+        secteursActivites.value = await getAllActivitySectors();
+        secteurActivite.value = secteursActivites.value[Math.floor(Math.random() * secteursActivites.value.length)];
         demandes.value = await getAllNotActiveRequests();
         offres.value = await getAllOffers();
         demandesCount.value = await getRequestsCount();
