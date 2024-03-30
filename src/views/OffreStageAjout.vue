@@ -74,7 +74,7 @@
                     <label for="ajout-remuneration3"> Stage non rémunéré</label>
                     
                     
-                    <!--<input v-model.number="offerData.salary" type="number" placeholder="Salaire" />-->
+                    <input v-model.number="offerData.salary" type="number" placeholder="Salaire" />
                 </div>
 
                 <div>
@@ -109,6 +109,8 @@
 <script setup>
 
     import { ref, onMounted } from 'vue';
+
+    // Probleme ligne 114 et ligne 
     import { useEntreprise } from '../composables/offres_stage/stageEntreprise';
     import { fetchProvinces } from '@/composables/api';
     import { fetchStageTypes } from '@/composables/api';
@@ -119,7 +121,7 @@
 
     const router = useRouter();
     const { ajouterOffre } = useInternshipOffers();
-    const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError, loading: entrepriseLoading} = useEntreprise();
+    const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError} = useEntreprise();
 
     const entreprises = ref([]);
     const provinces = ref([]);
