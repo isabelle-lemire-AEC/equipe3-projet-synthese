@@ -2,9 +2,13 @@
 @use '../general/variables';
 @use '../general/mixins';
 
+//#ajout-demandestages,
+#edition-demandestages {
+    @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
+}
 
-//.formulaire-ajout-candidat,
-//.formulaire-edition-candidat,
+//.formulaire-ajout-demandestages,
+.formulaire-edition-demandestages,
 .fiche-demandestages-details {
     .form-fiche {
         &__wrapper-titre {
