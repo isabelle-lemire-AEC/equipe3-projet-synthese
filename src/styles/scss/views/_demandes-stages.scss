@@ -2,12 +2,12 @@
 @use '../general/variables';
 @use '../general/mixins';
 
-//#ajout-demandestages,
+#ajout-demandestages,
 #edition-demandestages {
     @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
 }
 
-//.formulaire-ajout-demandestages,
+.formulaire-ajout-demandestages,
 .formulaire-edition-demandestages,
 .fiche-demandestages-details {
     .form-fiche {

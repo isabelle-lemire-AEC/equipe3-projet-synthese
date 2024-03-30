@@ -81,7 +81,7 @@
 				<!-- Section compétences -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
 					<label for="edit-demande-competences">Compétences</label>
-					<textarea id="edit-demande-competences" name="edit-demande-competences" v-model="demande.skills"></textarea>
+					<textarea id="edit-demande-competences" name="edit-demande-competences" rows="10" v-model="demande.skills"></textarea>
 					<!-- Validation -->
 					<!-- <p v-if="errors.skills" class="error-message">Veuillez fournir des compétences.</p> -->
 				</div>
@@ -138,7 +138,7 @@
 				</div>
 				<!-- Section infos supplémentaires -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
-					<h3>Informations sur le stage recherché</h3>
+					<h3>Informations supplémentaires</h3>
 					<div>
 						<label for="edit-demande-infos-supp"></label>
 						<textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="10" v-model="demande.additionalInformation"></textarea>

@@ -667,6 +667,7 @@ label {
   line-height: 1.1;
 }
 
+#ajout-demandestages,
 #edition-demandestages {
   display: flex;
   flex-direction: column;
@@ -674,10 +675,13 @@ label {
   gap: 2rem;
 }
 
+.formulaire-ajout-demandestages .form-fiche__wrapper-titre,
 .formulaire-edition-demandestages .form-fiche__wrapper-titre,
 .fiche-demandestages-details .form-fiche__wrapper-titre {
   border-color: #CB912B;
 }
+.formulaire-ajout-demandestages h2,
+.formulaire-ajout-demandestages h3,
 .formulaire-edition-demandestages h2,
 .formulaire-edition-demandestages h3,
 .fiche-demandestages-details h2,
