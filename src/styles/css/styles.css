@@ -37,6 +37,12 @@
 .bouton--bleu:hover {
   background-color: #719ae2;
 }
+.bouton--rougeOffre {
+  background-color: #BB2026;
+}
+.bouton--rougeOffre:hover {
+  background-color: #a51c22;
+}
 .bouton--rouge {
   background-color: #A20A07;
 }
@@ -736,9 +742,19 @@ label {
   color: #0C9DA4;
 }
 
+#edition-offrestages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+.formulaire-edition-offrestages .form-fiche__wrapper-titre,
 .fiche-offrestages-details .form-fiche__wrapper-titre {
   border-color: #BB2026;
 }
+.formulaire-edition-offrestages h2,
+.formulaire-edition-offrestages h3,
 .fiche-offrestages-details h2,
 .fiche-offrestages-details h3 {
   color: #BB2026;

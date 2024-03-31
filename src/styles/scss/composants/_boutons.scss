@@ -35,6 +35,14 @@
             background-color: darken(variables.$blue, 5%);
         }
     }
+    
+    &--rougeOffre {
+        background-color: variables.$red;
+
+        &:hover {
+            background-color: darken(variables.$red, 5%);
+        }
+    }
 
     &--rouge {
         background-color: variables.$bouton-action-red;
