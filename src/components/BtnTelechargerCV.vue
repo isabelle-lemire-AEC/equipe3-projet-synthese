@@ -1,6 +1,9 @@
 <template>
-    <button @click="telechargerPDF" class="bouton bouton--turquoise">
-        <i class="fa-solid fa-cloud-arrow-down"></i> Télécharger le C.V.
+    <button @click="telechargerPDF" class="bouton bouton--turquoise bouton--cv">
+        <div class="icone-libelle">
+            <i class="fa-solid fa-cloud-arrow-down"></i>
+            <span>Télécharger le C.V.</span>
+        </div>
     </button>
 </template>
 

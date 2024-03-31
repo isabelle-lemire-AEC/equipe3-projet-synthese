@@ -60,7 +60,11 @@
         }
     }
 
-    
+    &--cv {
+        font-size: variables.$font-style-h5;
+    }
+
+
 }
 
 .boutons {
