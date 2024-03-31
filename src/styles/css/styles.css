@@ -954,6 +954,58 @@ form {
   background-color: #5E7EB5;
 }
 
+.dernieresDemandes {
+  background-color: #FFFFFF;
+  color: #111111;
+  margin-top: 40px;
+  border-radius: 10px;
+  padding: 60px;
+}
+.dernieresDemandes span {
+  color: #CB912B;
+}
+.dernieresDemandes h4 {
+  color: #BB2026;
+  font-family: "Roboto";
+  line-height: 1.1;
+}
+
+.dernieresOffres {
+  background-color: #FFFFFF;
+  color: #111111;
+  margin-top: 40px;
+  border-radius: 10px;
+  padding: 60px;
+}
+.dernieresOffres span {
+  color: #BB2026;
+}
+.dernieresOffres h4 {
+  color: #BB2026;
+  font-family: "Roboto";
+  line-height: 1.1;
+}
+
+.entete-dernieresDemandes-Offres {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-dernieresDemandes-Offre {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  color: #5E5E5E;
+  margin-top: 60px;
+}
+.grid-dernieresDemandes-Offre p {
+  font-family: "Roboto";
+  font-weight: bold;
+  line-height: 1.1;
+}
+
 .container {
   max-width: 1920px;
   margin: 0 auto;

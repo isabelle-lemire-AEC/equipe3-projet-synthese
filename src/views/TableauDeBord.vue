@@ -45,20 +45,21 @@
 
         <!-- Demande de stage -->
         <section class="dernieresDemandes">
-            <div class="flex">
+            <div class="entete-dernieresDemandes-Offres">
                 <div>
                     <h2>Dernières <span>demandes</span> de stage</h2>
                     <h4>En attente de validation</h4>
                 </div>
-                <button @click="validerToutesLesDemandes()">Valider toutes les demandes</button>
+                <button class="bouton bouton--turquoise" @click="validerToutesLesDemandes()">Valider toutes les demandes</button>
             </div>
             <div>
-                <div class="flex">
+                <div class="grid-dernieresDemandes-Offre">
                     <p>Poste</p>
-                    <p>Etablissement</p>
+                     <p>Etablissement</p>
                     <p>Date</p>
                     <p>Actions</p>
                 </div>
+                
 
                 <div v-if="demandes && afficherDemandes">
                     <ElementListeStage v-for="demande in demandes"
@@ -80,16 +81,16 @@
 
         <!-- Offre de stage -->
         <section class="dernieresOffres">
-            <div class="flex">
+            <div class="entete-dernieresDemandes-Offres">
                 <div>
                     <h2>Dernières <span>offres</span> de stage</h2>
                     <h4>En attente de validation</h4>
                 </div>
-                <button @click="validerToutesLesOffres()">Valider toutes les offres</button>
+                <button class="bouton bouton--turquoise" @click="validerToutesLesOffres()">Valider toutes les offres</button>
             </div>
 
             <div>
-                <div class="flex">
+                <div class="grid-dernieresDemandes-Offre">
                     <p>Poste</p>
                     <p>Ville</p>
                     <p>Date</p>

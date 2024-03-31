@@ -101,3 +101,52 @@
     
 }
 
+
+
+.dernieresDemandes{
+    background-color: variables.$white;
+    color: variables.$black;
+    margin-top: 40px;
+    border-radius: 10px;
+    padding: 60px;
+    span{
+        color: variables.$gold;
+    }
+    h4{
+        color: variables.$red;
+        @include mixins.font(variables.$font-body, null, null);
+    }
+}
+
+.dernieresOffres{
+    background-color: variables.$white;
+    color: variables.$black;
+    margin-top: 40px;
+    border-radius: 10px;
+    padding: 60px;
+    span{
+        color: variables.$red;
+    }
+    h4{
+        color: variables.$red;
+        @include mixins.font(variables.$font-body, null, null);
+    }
+}
+
+
+
+.entete-dernieresDemandes-Offres{
+    @include mixins.flex(row, space-between, center, null);
+}
+
+.grid-dernieresDemandes-Offre{
+    @include mixins.grid(4, 1rem);
+    color: variables.$charcoal;
+    margin-top: 60px;
+
+   p{
+    @include mixins.font(variables.$font-body, null, bold);
+   }
+
+}
+
