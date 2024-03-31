@@ -62,15 +62,15 @@
                     <label for="edit-offre-remuneration">Rémunération</label>
                     <p style="color: red;">**** Il faudrait que ce soit ce qui est enregistrer dans la BD qui soit séclectionner par défaut</p>
                     <div>
-                      <input type="radio" id="edit-offre-discretion1" name="edit-offre-remuneration1" value="discretion" v-model="remunerationType" checked="checked" />
+                      <input type="radio" id="edit-offre-discretion" name="edit-offre-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
                       <label for="edit-offre-discretion" class="form-fiche__label-radio-input">À la discrétion de l'entreprise</label>
                     </div>
                     <div>
-                      <input type="radio" id="edit-offre-remunere2" name="edit-offre-remuneration2" value="remunere" v-model="remunerationType" />
+                      <input type="radio" id="edit-offre-remunere" name="edit-offre-remuneration" value="remunere" v-model="remunerationType" />
                       <label for="edit-offre-remunere" class="form-fiche__label-radio-input">Rémunéré</label>
                     </div>
                     <div>
-                      <input type="radio" id="edit-offre-non-renumere3" name="edit-offre-remuneration3" value="non-remunere" v-model="remunerationType" />
+                      <input type="radio" id="edit-offre-non-renumere" name="edit-offre-remuneration" value="non-remunere" v-model="remunerationType" />
                       <label for="edit-offre-non-renumere" class="form-fiche__label-radio-input" >Non-rémunéré</label>
                     </div>
                   </div>                                   
