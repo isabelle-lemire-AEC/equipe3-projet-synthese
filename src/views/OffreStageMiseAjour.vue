@@ -47,25 +47,30 @@
                 <div class="form-fiche__colonne-inputs">
                   <div class="form-fiche__label-input-vertical">
                     <label for="">Type de stage</label>
-                    <input type="text" placeholder="Mettre un drop down, absent du code de raph">
+                    <p style="color:red">*********Doit être sélectionner selon ce qu'il y a dans la bd????</p>
+                    <select v-model="offerData.internshipType._id">
+                        <option disable value="">Veuillez effectuer un choix</option>
+                        <option v-for="internshipType in  internshipTypes" :key="internshipType._id" :value="internshipType._id">{{ internshipType.value }}</option>
+                    </select>                  
                   </div>
                   <div class="form-fiche__label-input-vertical">
                     <label for="">Nombre d'heure par semaine</label>
-                    <input type="text" placeholder="absent du code de raph">
+                    <p style="color:red">*********Doit être prérempli selon ce qu'il y a dans la bd????</p>
+                    <input type="text">
                   </div> 
                   <div class="form-fiche__label-input-vertical">
                     <label for="edit-offre-remuneration">Rémunération</label>
                     <p style="color: red;">**** Il faudrait que ce soit ce qui est enregistrer dans la BD qui soit séclectionner par défaut</p>
-                    <div à>
-                      <input type="radio" id="edit-offre-discretion" name="edit-offre-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
+                    <div>
+                      <input type="radio" id="edit-offre-discretion1" name="edit-offre-remuneration1" value="discretion" v-model="remunerationType" checked="checked" />
                       <label for="edit-offre-discretion" class="form-fiche__label-radio-input">À la discrétion de l'entreprise</label>
                     </div>
                     <div>
-                      <input type="radio" id="edit-offre-remunere" name="edit-offre-remuneration" value="remunere" v-model="remunerationType" />
+                      <input type="radio" id="edit-offre-remunere2" name="edit-offre-remuneration2" value="remunere" v-model="remunerationType" />
                       <label for="edit-offre-remunere" class="form-fiche__label-radio-input">Rémunéré</label>
                     </div>
                     <div>
-                      <input type="radio" id="edit-offre-non-renumere" name="edit-offre-remuneration" value="non-remunere" v-model="remunerationType" />
+                      <input type="radio" id="edit-offre-non-renumere3" name="edit-offre-remuneration3" value="non-remunere" v-model="remunerationType" />
                       <label for="edit-offre-non-renumere" class="form-fiche__label-radio-input" >Non-rémunéré</label>
                     </div>
                   </div>                                   
@@ -74,10 +79,12 @@
                 <div class="form-fiche__colonne-inputs">
                   <div class="form-fiche__label-input-vertical">
                     <label for="edit-demande-date-debut">Date de début</label>
+                    <p style="color:red">*********Doit être prérempli selon ce qu'il y a dans la bd????</p>
                     <input class="" v-model="offerData.startDate" type="date" placeholder="Date de début" />
                   </div>
                   <div class="form-fiche__label-input-vertical">
                     <label for="edit-demande-date-fin">Date de fin</label>
+                    <p style="color:red">*********Doit être prérempli selon ce qu'il y a dans la bd????</p>
                     <input type="date" id="edit-demande-date-fin" name="edit-demande-date-fin" v-model.trim="dateFin" />
                   </div>
                 </div>                          

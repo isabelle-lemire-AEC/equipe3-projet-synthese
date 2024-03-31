@@ -1,22 +1,110 @@
 <!-- Offre de stage AJOUT - RAPH et Caro -->
 <template>
-      <div class="form-fiche formulaire-ajout-offrestages" v-if="offre">
+      <div class="form-fiche formulaire-ajout-offrestages">
         <div class="form-fiche__wrapper-titre">
           <h1>Offre de stage</h1>
         </div>
       </div>
 
-      <form id="ajout-demandestages" @submit.prevent="soumettreFormulaire">
+      <form id="ajout-offrestages" @submit.prevent="soumettreFormulaire">
             <!-- Boutons annuler et mettre à jour -->
             <div class="boutons">
                 <button class="bouton bouton--transparent" type="submit">Annuler</button>
-                <button class="bouton bouton--turquoise" type="submit">
+                <button class="bouton bouton--rougeOffre" type="submit">
                     <div class="icone-libelle">
                         <i class="fas fa-save"></i>
                         <span>Sauvegarder</span>
                     </div>
                 </button>
-            </div>      
+            </div>  
+            
+            <!-- Section titre -->
+            <div class="form-fiche__input-hors-encadre">
+              <div class="form-fiche__label-input-horizontal">
+                <label for="titreOffre">Titre :</label>
+                <input v-model.trim="offerData.title" id="titreOffre" type="text"/>
+              </div>
+            </div>  
+            <!-- Section Entreprise -->
+            <div class="form-fiche__input-hors-encadre">
+              <div class="form-fiche__label-input-horizontal">
+                <label for="titreOffre">Entreprise :</label>
+                <select v-model="offerData.enterprise" id="nomEntrepriseOffre" >
+                    <option disabled value="">Sélectionnez une entreprise</option>
+                    <option v-for="entreprise in entreprises" :key="entreprise._id" :value="entreprise">
+                        {{ entreprise.name }} 
+                    </option>
+                </select>
+              </div>
+            </div>
+            
+            <!-- Section encadré encadré blanc -->
+            <div class="form-fiche__encadre">
+              <div class="form-fiche__wrapper-titre-groupe-inputs">
+                <h2>Description de la tâche</h2>
+                <div>
+                  <label for="descriptionOffre"></label>
+                  <textarea v-model.trim="offerData.description" id="descriptionOffre" rows="5"></textarea>
+                </div>
+              </div>              
+
+            <!-- Section Programme et exigences -->
+            <div class="form-fiche__label-input-vertical">
+              <label for="">Programme de formation</label>
+              <input type="text" id="ajout-programme" v-model.trim="offerData.enterprise.activitySector">
+            </div>
+            <div class="form-fiche__label-input-vertical">
+              <h4>Exigences</h4>
+              <textarea v-model.trim="offerData.requiredSkills" id="exigence" type="text" rows="5"></textarea>
+            </div>  
+            
+            <!-- Section Information sur le stage -->
+            <div class="form-fiche__wrapper-titre-groupe-inputs">
+              <h3>Informations sur le stage recherché</h3>
+              <div class="form-fiche__colonnes-inputs">
+                <!-- Colonne de gauche -->
+                <div class="form-fiche__colonne-inputs">
+                  <div class="form-fiche__label-input-vertical">
+                    <label for="">Type de stage</label>
+                    <select v-model="offerData.internshipType._id">
+                        <option disable value="">Veuillez effectuer un choix</option>
+                        <option v-for="internshipType in  internshipTypes" :key="internshipType._id" :value="internshipType._id">{{ internshipType.value }}</option>
+                    </select>
+                  </div>
+                  <div class="form-fiche__label-input-vertical">
+                    <label for="">Nombre d'heure par semaine</label>
+                    <input v-model.number="offerData.weeklyWorkHours" type="number"/>
+                  </div> 
+                  <div class="form-fiche__label-input-vertical">
+                    <label for="ajout-offre-remuneration">Rémunération</label>
+                    <div>
+                      <input type="radio" id="ajout-offre-discretion1" name="ajout-offre-remuneration1" value="discretion" v-model="remunerationType" checked="checked" />
+                      <label for="ajout-offre-discretion" class="form-fiche__label-radio-input">À la discrétion de l'entreprise</label>
+                    </div>
+                    <div>
+                      <input type="radio" id="ajout-offre-remunere2" name="ajout-offre-remuneration2" value="remunere" v-model="remunerationType" />
+                      <label for="ajout-offre-remunere" class="form-fiche__label-radio-input">Rémunéré</label>
+                    </div>
+                    <div>
+                      <input type="radio" id="ajout-offre-non-renumere3" name="ajout-offre-remuneration3" value="non-remunere" v-model="remunerationType" />
+                      <label for="ajout-offre-non-renumere" class="form-fiche__label-radio-input" >Non-rémunéré</label>
+                    </div>
+                  </div>                   
+                </div> 
+                 
+                <!-- Colonne de droite -->
+                <div class="form-fiche__colonne-inputs">
+                  col droite
+                </div>                             
+              </div>
+
+
+            </div>            
+
+
+            </div>            
+            
+
       </form>
 
 

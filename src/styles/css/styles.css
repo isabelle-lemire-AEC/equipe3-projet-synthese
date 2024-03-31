@@ -11,6 +11,7 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -210,6 +211,7 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -732,6 +734,16 @@ label {
   flex-basis: 15%;
 }
 
+#ajout-demandestages,
+#edition-demandestages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+.formulaire-ajout-demandestages .form-fiche__wrapper-titre,
+.formulaire-edition-demandestages .form-fiche__wrapper-titre,
 .fiche-demandestages-details .form-fiche__wrapper-titre {
   border-color: #CB912B;
 }
@@ -744,6 +756,7 @@ label {
   color: #0C9DA4;
 }
 
+#ajout-offrestages,
 #edition-offrestages {
   display: flex;
   flex-direction: column;
@@ -751,10 +764,13 @@ label {
   gap: 2rem;
 }
 
+.formulaire-ajout-offrestages .form-fiche__wrapper-titre,
 .formulaire-edition-offrestages .form-fiche__wrapper-titre,
 .fiche-offrestages-details .form-fiche__wrapper-titre {
   border-color: #BB2026;
 }
+.formulaire-ajout-offrestages h2,
+.formulaire-ajout-offrestages h3,
 .formulaire-edition-offrestages h2,
 .formulaire-edition-offrestages h3,
 .fiche-offrestages-details h2,
@@ -894,4 +910,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}/*# sourceMappingURL=styles.css.map */
+}
