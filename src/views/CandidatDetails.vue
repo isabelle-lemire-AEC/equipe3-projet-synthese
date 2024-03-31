@@ -92,6 +92,14 @@
   const router = useRouter();
   const route = useRoute();
 
+  // Définir les propriétés du composant
+  const props = defineProps({
+    id: String
+  });
+
+  // Utiliser la propriété 'id' pour obtenir l'identifiant du candidat
+  const candidatId = props.id;
+
   // Importation de la fonction deleteCandidat depuis le fichier candidat.js
   const {
     deleteCandidat
