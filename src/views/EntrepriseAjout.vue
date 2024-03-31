@@ -39,7 +39,7 @@
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h2>Courte présentation</h2>
           <div>
-            <label for="presentation" class="form-fiche__label--cache">Présentation</label>
+            <label for="presentation" hidden>Présentation</label>
             <textarea name="presentation" id="presentation" cols="30" rows="10" v-model.trim="entreprise.description"></textarea>
             <p class="validForm" v-if="erreurs.description">Ce champ est obligatoire</p>
           </div>

@@ -48,7 +48,7 @@
                 <div class="form-fiche__wrapper-titre-groupe-inputs">
                     <h2>Courte présentation</h2>
                     <div>
-                        <label for="description" class="form-fiche__label--cache">Description</label>
+                        <label for="description" hidden>Description</label>
                         <textarea name="description" id="description" cols="30" rows="10"
                                   v-model.trim="candidat.description"></textarea>
                         <p class="validForm" v-if="erreurs.description">Veuillez remplir ce champ</p>
