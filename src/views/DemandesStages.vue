@@ -12,15 +12,16 @@
                 <span>Date d'inscription</span>
             </div>
             <ElementListeStage v-for="demande in toutesDemandes" 
-            :key="demande._id" 
-            :posteTitre="demande.title" 
-            :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName" 
-            :region="demande.province.value" 
-            :date="demande.startDate" 
-            :id="demande._id" 
-            :isDemande="true"
-            :isTableauDeBord="false"
-            :isActive="demande.isActive"></ElementListeStage>
+                :key="demande._id" 
+                :posteTitre="demande.title" 
+                :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName" 
+                :info2="secteurActivite.value"
+                :region="demande.province.value" 
+                :date="demande.startDate" 
+                :id="demande._id" 
+                :isDemande="true"
+                :isTableauDeBord="false"
+                :isActive="demande.isActive"></ElementListeStage>
         </div>
     </div>
 </template>
@@ -32,116 +33,29 @@ import { useCandidat } from '../composables/candidats/candidat.js'
 import { useProvinces } from '../composables/provinces/provinces.js'
 import { useInternshipTypes } from '@/composables/types_stage/types_stage.js'
 import { ref, onMounted } from 'vue';
+import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js'; 
 
 const { getAllRequests, editRequest } = useInternshipRequests();
 const { getAllCandidats } = useCandidat();
 const { getAllProvinces } = useProvinces();
 const { getAllInternshipTypes } = useInternshipTypes();
+const { getAllActivitySectors } = useActivitySectors();
 
 const toutesDemandes = ref([]);
+const secteursActivites = ref([]);
+const secteurActivite = ref(null);
 
 onMounted(async () => {
+    secteursActivites.value = await getAllActivitySectors();
+    secteurActivite.value = secteursActivites.value[Math.floor(Math.random() * secteursActivites.value.length)];
+
     try {
         const response = await getAllRequests();
         toutesDemandes.value = response.data;
-        console.log("toutesDemandes: ", toutesDemandes);
     } catch (error) {
         console.error("Error:", error.response ? error.response.data : error.message);
     }
 });
-
-const demandeDeStageAAjouter = {
-  title: "Designer web",
-  description: "Bonjour je suis un desinger web à la recherche de travail!",
-  candidate: {
-    _id: "",
-    description: "",
-    email: "",
-    firstName: "",
-    lastName: "",
-    address: "",
-    phone: "",
-    city: "",
-    skills: [
-      ""
-    ],
-    province: {
-      _id: "",
-      value: ""
-    },
-    postalCode: ""
-  },
-  startDate: "2024-03-19T17:36:02.007Z",
-  endDate: "2024-03-19T17:36:02.007Z",
-  weeklyWorkHours: 40,
-  province: {
-    _id: "",
-    value: ""
-  },
-  skills: [
-    "Front-end",
-    "Design"
-  ],
-  internshipType: {
-    _id: "",
-    value: ""
-  },
-  additionalInformation: "J'aime le Ping-Pong",
-  isActive: false,
-
-
-    program: "Design graphique",
-    activitySector: "Nouvelles technologies",
-    etablissement: "Collège de Maisonneuve",
-    remuneration: [
-    "Rémunéré",
-    "Non-rémunéré",
-    "À la discrétion de l'entreprise",
-    ]
-}
-
-const testAPI = async () => {
-
-    // Ici je vais chercher des objets dans la BD afin de construire
-    // mon objet demandeDeStageAAjouter, je vais chercher toutes les objets
-    // et je prend le premier simplement dans le but de faire des tests et de
-    // valider si le call à l'API fonctionne.
-
-    // je vais chercher le premier candidat et je l'assigne dans le 
-    // candidat de ma demandeDeStageAAjouter
-    const candidats = await getAllCandidats();
-    demandeDeStageAAjouter.candidate = candidats.data[0];
-    
-    // je vais chercher la première province et je l'assigne dans la 
-    // province de ma demandeDeStageAAjouter
-    const provinces = await getAllProvinces();
-    demandeDeStageAAjouter.province = provinces.data[0];
-    
-    // je vais chercher le premier type de stage et je l'assigne dans le 
-    // type de stage de ma demandeDeStageAAjouter
-    const internshipTypes = await getAllInternshipTypes();
-    demandeDeStageAAjouter.internshipType = internshipTypes.data[0];
-    
-    // console.log("demandeDeStageAAjouter: ", demandeDeStageAAjouter);
-
-    // *** IMPORTANT *** enlever les commentaires de la ligne ci-dessous pour ajouter une demande de stage
-    // vous pouvez modifier les données de l'objet demandeDeStageAAjouter afin de tester et différencier
-    // les différents objets
-    // await addRequest(demandeDeStageAAjouter);
-
-    // afin d'afficher dans la console toutes les demandes de stage, incluant celle que l'on vient
-    // d'ajouter dans la ligne précédante
-    const allRequests = await getAllRequests();
-
-    // *** IMPORTANT *** enlever les commentaires afin de tester l'édition d'une demande de stage
-    await editRequest(allRequests.data[0]._id, demandeDeStageAAjouter)
-
-    await getAllRequests();
-
-}
-
-// exécuter la fonction de test des calls API
-// testAPI();
 
 </script>
 

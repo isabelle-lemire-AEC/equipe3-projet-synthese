@@ -11,11 +11,11 @@
                 <span>Région</span>
                 <span>Date d'inscription</span>
             </div>
-            <!-- <ElementListeOffreStage v-for="offre in toutesOffres" :key="offre._id" :offer="offre"></ElementListeOffreStage> COMPONENT À CARO -->
             <ElementListeStage v-for="offre in toutesOffres"
               :key="offre._id"
               :posteTitre="offre.title"
               :posteNom="offre.enterprise.name" 
+              :info2="offre.enterprise.city"
               :region="offre.province.value" 
               :date="offre.startDate" 
               :id="offre._id" 
@@ -26,18 +26,13 @@
     </div>
 </template>
 
-
-
-
 <script setup>
   import ElementListeStage from '../components/ElementListeStage.vue'
-  import ElementListeOffreStage from '@/components/ElementListeOffreStage.vue';
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
   import { useProvinces } from '../composables/provinces/provinces.js'
   import { useInternshipTypes } from '@/composables/types_stage/types_stage.js'
   import { ref, onMounted } from 'vue';
   
-
   const { getAllOffers } = useInternshipOffers();
   const { getAllProvinces } = useProvinces();
   const { getAllInternshipTypes } = useInternshipTypes();
@@ -51,9 +46,7 @@
     } catch (error) {
         console.error("Error:", error.response ? error.response.data : error.message);
     }
-  });
-
-  
+  });  
 
   const offreStageListe = {
     title: "string",
@@ -106,8 +99,6 @@
     offreStageListe.internshipType = internshipTypes.data[0];
 
     const allOffers = await getAllOffers();
-
-    
 
     await getAllOffers();
   }
