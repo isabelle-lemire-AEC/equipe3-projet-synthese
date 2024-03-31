@@ -23,7 +23,7 @@
                 <!-- Section de description de la demande de stage -->
                 <div class="form-fiche__wrapper-titre-groupe-inputs">
                     <h2>{{ demande.candidate.firstName }} {{ demande.candidate.lastName }}</h2>
-                    <p>{{ demande.candidate.description }}</p>
+                    <p>{{ demande.description }}</p>
                 </div>
                 <!-- Section d'informations -->
                 <div class="form-fiche__wrapper-titre-groupe-inputs">
@@ -96,29 +96,27 @@
                 
                 <btnTelechargerCV></btnTelechargerCV> <!-- arranger le css -->
 
-                </div>
+            </div>
 
-                <!-- Modal de confirmation de suppression -->
-                <div class="modal" v-if="showConfirmationModal">
-                    <div class="modal-content">
-                        <p>Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
-                        <div class="modal-buttons">
+            <!-- Modal de confirmation de suppression -->
+            <div class="modal" v-if="showConfirmationModal">
+                <div class="modal-content">
+                    <p>Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
+                    <div class="modal-buttons">
                         <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
                         <button class="btn confirm" @click="deleteDemande()">Confirmer</button>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        </template>
+    </div>
+</template>
 
 <script setup>
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { ref, reactive, onMounted } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
     import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js';
-
     import btnTelechargerCV from '../components/BtnTelechargerCV.vue'
 
     const { getAllActivitySectors } = useActivitySectors();
@@ -169,12 +167,12 @@
             dateFin.value = demande.value.endDate.substring(0, demande.value.startDate.indexOf('T'));
 
             // Afin d'afficher les "skills" comme il faut (sans la dernière virgule)
+            console.log("demande.value.skills: ", demande.value.skills);
             competences.value = demande.value.skills.join(', ');
+            console.log("competences.value: ", competences.value);
         } catch (error) {
             console.error("Error:", error.response ? error.response.data : error.message);
         }
-
-
     });
 
     const activate = async () => {
@@ -185,83 +183,6 @@
 </script>
 
 <style scoped>
-
-    /* 
-        h2 {
-        margin-bottom: 0.5rem;
-    }
-
-    h3 {
-        color: rgb(34,166,172);
-        font-size: xx-large;
-        margin-top: 0;
-    }
-
-    h4 {
-        color: rgb(34,166,172);
-        margin: 0;
-    }
-
-    p {
-        color: grey;
-    }
-
-    .btnsContainer {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 1rem;
-    }
-
-    .infoContainer {
-        padding: 3rem;
-        background-color: white;
-        border-radius: 1rem;
-    }
-
-    .grilleStage {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-    }
-
-    .grilleStageCellule {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .barreVerticale {
-        width: 0.3rem;
-        height: 2rem;
-        background-color: grey;
-        margin-right: 1rem;
-    }
-
-    .bordureGauche {
-        border-left: 0.3rem solid grey;
-        padding-left: 0.6rem;
-    }
-
-    .btnTelechargerCV {
-        background-color: rgb(34,166,172);
-        border: 0 white solid;
-        padding: 0.7rem;
-        color: white;
-        font-weight: bold;
-        font-size: x-large;
-        border-radius: 0.5rem;
-    }
-
-    .skills {
-        display: inline;
-    }
-
-
-    .btn {
-        cursor: pointer;
-        border: none;
-    }
-    
-    */
     
     /* Styles pour le modal */
     .modal {
