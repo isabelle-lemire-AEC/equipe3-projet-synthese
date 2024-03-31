@@ -5,11 +5,11 @@
 			<h1>{{ demande.title }}</h1>
 		</div>
 
-		<form id="edition-demandestages" @submit.prevent="soumettreFormulaire">
+		<form id="edition-demandestages">
 			<!-- Boutons annuler et mettre à jour -->
 			<div class="boutons">
-				<button class="bouton bouton--transparent" type="submit" @click="retour()">Annuler</button>
-				<button class="bouton bouton--turquoise" type="submit" @click="modifDemande()">
+				<button class="bouton bouton--transparent" @click="retour()">Annuler</button>
+				<button class="bouton bouton--turquoise" @click="modifDemande()">
 					<div class="icone-libelle">
 						<i class="fas fa-save"></i>
 						<span>Mettre à jour</span>
@@ -220,8 +220,8 @@
 			
 			<!-- Boutons annuler et mettre à jour -->
 			<div class="boutons">
-				<button class="bouton bouton--transparent" type="submit" @click="retour()">Annuler</button>
-				<button class="bouton bouton--turquoise" type="submit" @click="soumettreFormulaire()">
+				<button class="bouton bouton--transparent" @click="retour()">Annuler</button>
+				<button class="bouton bouton--turquoise" @click="soumettreFormulaire()">
 					<div class="icone-libelle">
 						<i class="fas fa-save"></i>
 						<span>Mettre à jour</span>
