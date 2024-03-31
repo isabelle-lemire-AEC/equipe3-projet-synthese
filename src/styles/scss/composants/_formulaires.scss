@@ -12,12 +12,12 @@
 
 }
 
-input,
+input:not([type="radio"]),
 textarea,
 select {
     width: 100%;
     padding: variables.$spacing-small;
-    border: 2px solid variables.$light-gray;
+    @include mixins.border(1px, variables.$border-input, 0);
     box-shadow: inset 0 0 10px 1px #eeeeee87;
     @extend %font-headings;
     color: variables.$gray;
@@ -57,8 +57,10 @@ label {
         @include mixins.flex(column, null, null, variables.$spacing-small);
     }
 
-    &__wrapper-boutons-encadre {
+    &__wrapper-boutons-encadre,
+    &__wrapper-boutons-inputs {
         @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
+        width: 100%;
     }
 
     &__encadre {
@@ -70,7 +72,7 @@ label {
     }
 
     &__wrapper-titre-groupe-inputs {
-        @include mixins.flex(column, null, null, variables.$spacing-medium);
+        @include mixins.flex(column, null, null, variables.$spacing-large);
 
         h3 {
             @extend %font-h6;
@@ -104,13 +106,37 @@ label {
         }
     }
 
+    &__label-input-demi {
+        width: calc(50% - variables.$spacing-small);
+    }
+
     &__label {
         &--cache {
             display: none;
         }
     }
 
+    &__label-radio-input {
+        padding-left: variables.$spacing-xsmall;
+        font-weight: variables.$regular;
+    }
+
     &__wrapper-input-msg-erreur {
         width: 100%;
+    }
+
+    &__input-parcourir {
+        position: relative;
+
+        button:disabled {
+            position: absolute;
+            right: 0;
+            height: 100%;
+            @include mixins.border(1px, variables.$border-input, 0);
+            padding-inline: variables.$spacing-medium;
+            font-family: variables.$font-headings;
+            color: #ABAFB3;
+            background-color: #EFF0F1;
+        }
     }
 }

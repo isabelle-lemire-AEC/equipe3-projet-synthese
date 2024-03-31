@@ -1,5 +1,7 @@
 <template>
-    <button @click="telechargerPDF" class="bouton bouton--mauve"><i class="fa-solid fa-cloud-arrow-down"></i>Télécharger le C.V.</button>
+    <button @click="telechargerPDF" class="bouton bouton--turquoise">
+        <i class="fa-solid fa-cloud-arrow-down"></i> Télécharger le C.V.
+    </button>
 </template>
 
 <script setup>
@@ -8,3 +10,7 @@
         window.open(cheminPDF, "_blank");
     }
 </script>
+
+<style scoped>
+
+</style>

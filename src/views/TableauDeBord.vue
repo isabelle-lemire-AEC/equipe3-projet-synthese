@@ -16,18 +16,20 @@
                     <p>{{ offresCount }}</p>
                 </div>
             </div>
-            <div class="infoRapide-candidats flex">
-                <i class="fa-solid fa-user"></i>
-                <div>
-                    <p>Candidats</p>
-                    <p>{{ candidatsCount }}</p>
+            <div class="infoRapide-candidat-entreprise flex" >
+                <div class="infoRapide-candidats">
+                    <i class="fa-solid fa-user"></i>
+                    <div>
+                        <p>Candidats</p>
+                        <p>{{ candidatsCount }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="infoRapide-entreprises flex">
-                <i class="fa-solid fa-computer-mouse"></i>
-                <div>
-                    <p>Entreprises</p>
-                    <p>{{ entreprisesCount }}</p>
+                <div class="infoRapide-entreprises flex">
+                    <i class="fa-solid fa-computer-mouse"></i>
+                    <div>
+                        <p>Entreprises</p>
+                        <p>{{ entreprisesCount }}</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -173,7 +175,7 @@
 
 </script>
 
-<style scoped>
+<!--<style scoped>
  .flex {
     display: flex;
  }
@@ -188,4 +190,4 @@
     border-radius: 25px;
  }
 
-</style>
+</style>-->

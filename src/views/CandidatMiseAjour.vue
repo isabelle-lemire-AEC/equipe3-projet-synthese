@@ -10,7 +10,7 @@
         <form id="edition-candidat" @submit.prevent="soumettreFormulaire">
 
             <div class="boutons">
-                <button class="bouton bouton--transparent" type="submit" @click="annulerModif">Annuler</button>
+                <button class="bouton bouton--transparent" @click="annulerModif">Annuler</button>
                 <button class="bouton bouton--mauve" type="submit">
                     <div class="icone-libelle">
                         <i class="fas fa-save"></i>
@@ -24,8 +24,7 @@
                     <h2>Courte présentation</h2>
                     <div>
                         <label for="description"></label>
-                        <textarea name="description" id="description" cols="30" rows="10"
-                                  v-model="candidat.description"></textarea>
+                        <textarea name="description" id="description" rows="10" v-model="candidat.description"></textarea>
                     </div>
                 </div>
 
