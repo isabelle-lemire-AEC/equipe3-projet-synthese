@@ -1,263 +1,189 @@
-<template
-	><section v-if="demande">
-		<h1>Ajouter une demande de stage</h1>
+<template>
+    <div class="form-fiche formulaire-ajout-demandestages" v-if="demande">
+		<div class="form-fiche__wrapper-titre">
+			<h1>Ajouter une demande</h1>
+		</div>
 
-		<form id="ajout-demande-stage" @submit.prevent="soumettreFormulaire">
-			<div>
-				<button>Annuler</button>
-				<button type="submit">Sauvegarder</button>
+		<form id="ajout-demandestages" @submit.prevent="soumettreFormulaire">
+			<!-- Boutons annuler et mettre à jour -->
+			<div class="boutons">
+                <button class="bouton bouton--transparent" type="submit">Annuler</button>
+                <button class="bouton bouton--turquoise" type="submit">
+                    <div class="icone-libelle">
+                        <i class="fas fa-save"></i>
+                        <span>Sauvegarder</span>
+                    </div>
+                </button>
+            </div>
+
+			<!-- Section titre -->
+			<div class="form-fiche__input-hors-encadre">
+				<div class="form-fiche__label-input-horizontal">
+					<label for="ajout-demande-titre">Titre :</label>
+					<input type="text" id="ajout-demande-titre" name="ajout-demande-titre" v-model.trim="demande.title" />
+					<!-- Validation -->
+					<p v-if="erreurs.title" class="validForm">Veuillez fournir le titre du stage.</p>
+				</div>
 			</div>
 
-			<div>
-				<label for="ajout-demande-titre">Titre</label>
-				<input
-					type="text"
-					id="ajout-demande-titre"
-					name="ajout-demande-titre"
-					v-model.trim="demande.title" />
-				<p v-if="erreurs.title" class="validForm">
-					Veuillez fournir le titre du stage.
-				</p>
-			</div>
-
-			<div>
-				<div>
-					<label for="ajout-demande-nom-prenom">Candidat</label>
+			<!-- Section encadré encadré blanc -->
+			<div class="form-fiche__encadre">
+				<!-- Section candidat -->
+				<div class="form-fiche__wrapper-titre-groupe-inputs">
+					<label for="ajout-demande-nom-prenom">Nom et prénom</label>
 					<select id="ajout-demande-nom-prenom" name="ajout-demande-nom-prenom" v-model.trim="demande.candidate">
 						<option value="">Veuillez effectuer un choix</option>
-						<option
-							v-for="candidate in candidates"
-							:key="candidate._id"
-							:value="candidate">
+						<option v-for="candidate in candidates" :key="candidate._id" :value="candidate">
 							{{ candidate.firstName }} {{ candidate.lastName }}
 						</option>
 					</select>
-					<p v-if="erreurs.candidat" class="validForm">
-                        Veuillez fournir votre nom complet.
-                    </p>
+					<!-- Validation -->
+					<p v-if="erreurs.candidat" class="validForm">Veuillez fournir votre nom complet.</p>
 				</div>
-
-				<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
+				<!-- Section présentation -->
+				<div class="form-fiche__wrapper-titre-groupe-inputs">
 					<label for="ajout-demande-presentation">Présentation</label>
-					<textarea
-						id="ajout-demande-presentation"
-						name="ajout-demande-presentation"
-						v-model.trim="demande.description"></textarea>
-					<p v-if="erreurs.description" class="validForm">
-						Veuillez fournir une présentation.
-					</p>
+					<textarea id="ajout-demande-presentation" name="ajout-demande-presentation" rows="10" v-model.trim="demande.description"></textarea>
+					<!-- Validation -->
+					<p v-if="erreurs.description" class="validForm"> Veuillez fournir une présentation.</p>
 				</div>
-
-				<div>
-					<!-- Classe pour groupe de deux inputs qui occupent 50% de l'espace -->
-					<div><!-- Classe pour regrouper DEUX INPUTS UN EN DESSOUS DE L'AUTRES-->
-						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-programme">Programme de formation</label>
-							<input
-								type="text"
-								id="ajout-demande-programme"
-								name="ajout-demande-programme"
-								v-model.trim="formationInput"/>
-							<p v-if="erreurs.formation" class="error-message">
-                                Veuillez fournir un programme de formation.
-                            </p>
+				<!-- Section infos -->
+				<div class="form-fiche__wrapper-titre-groupe-inputs">
+					<div class="form-fiche__colonnes-inputs">
+						<div class="form-fiche__colonne-inputs">
+							<div class="form-fiche__label-input-vertical">
+								<label for="ajout-demande-programme">Programme de formation</label>
+								<input type="text" id="ajout-demande-programme" name="ajout-demande-programme" v-model.trim="formationInput"/>
+								<!-- Validation -->
+								<p v-if="erreurs.formation" class="error-message">Veuillez fournir un programme de formation.</p>
+							</div>
+							<div class="form-fiche__label-input-vertical">
+								<label for="ajout-demande-secteur">Secteur d'activité</label>
+								<select id="ajout-demande-secteur" name="ajout-demande-secteur" v-model="activitySectorInput">
+									<option value="">Veuillez effectuer un choix</option>
+									<option v-for="activitySector in allSecteursDActivites" :key="activitySector" :value="activitySector">
+										{{ activitySector.value }}
+									</option>
+								</select>
+								<!-- Validation -->
+								<p v-if="erreurs.activitySector" class="error-message">Veuillez fournir un secteur d'activité de formation.</p>
+							</div>
+							<div class="form-fiche__label-input-vertical">
+								<label for="ajout-demande-region">Région</label>
+								<select id="ajout-demande-region" name="ajout-demande-region" v-model.trim="demande.province">
+									<option value="">Veuillez effectuer un choix</option>
+									<option v-for="province in provinces" :key="province._id" :value="province">
+										{{ province.value }}
+									</option>
+								</select>
+								<!-- Validation -->
+								<p v-if="erreurs.province" class="validForm">Veuillez choisir une région.</p>
+							</div>					
 						</div>
-
-						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-secteur">Secteur d'activité</label>
-							<select id="ajout-demande-secteur"
-									name="ajout-demande-secteur"
-									v-model="activitySectorInput">
-								<option value="">Veuillez effectuer un choix</option>
-								<option
-									v-for="activitySector in allSecteursDActivites"
-									:key="activitySector"
-									:value="activitySector">
-									{{ activitySector.value }}
-								</option>
-							</select>
-							<p v-if="erreurs.activitySector" class="error-message">
-                                Veuillez fournir un secteur d'activité de formation.
-                            </p>
-						</div>
-					</div>
-				</div>
-
-				<div>
-					<!-- Classe pour groupe de deux inputs qui occupent 50% de l'espace -->
-					<div><!-- Classe pour regrouper deux inputs side by side-->
-						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-etablissement">Établissement scolaire</label>
-							<input
-								type="text"
-								id="ajout-demande-etablissement"
-								name="ajout-demande-etablissement"
-								v-model="etablissementInput" />
-							<p v-if="erreurs.etablissement" class="error-message">
-								Veuillez fournir un établissement scolaire.
-							</p>
-						</div>
-
-						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-ville">Ville</label>
-							<input
-								type="text"
-								id="ajout-demande-ville"
-								name="ajout-demande-ville"
-								v-model.trim="demande.candidate.city"/>
-							<p v-if="erreurs.city" class="validForm">
-								Veuillez fournir une ville.
-							</p>
+						<div class="form-fiche__colonne-inputs">
+							<div class="form-fiche__label-input-vertical">
+								<label for="ajout-demande-etablissement">Établissement scolaire</label>
+								<input type="text" id="ajout-demande-etablissement" name="ajout-demande-etablissement" v-model="etablissementInput"/>
+								<!-- Validation -->
+								<p v-if="erreurs.etablissement" class="error-message">Veuillez fournir un établissement scolaire.</p>
+							</div>
+							<div class="form-fiche__label-input-vertical">
+								<label for="ajout-demande-ville">Ville</label>
+								<input type="text" id="ajout-demande-ville" name="ajout-demande-ville" v-model.trim="demande.candidate.city"/>
+								<!-- Validation -->
+								<p v-if="erreurs.city" class="validForm"> Veuillez fournir une ville.</p>
+							</div>
 						</div>
 					</div>
 				</div>
-
-				<div><!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 100 % de l'espace-->
-					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-						<label for="ajout-demande-region">Région</label>
-						<select
-							id="ajout-demande-region"
-							name="ajout-demande-region"
-							v-model.trim="demande.province">
-							<option value="">Veuillez effectuer un choix</option>
-							<option
-								v-for="province in provinces"
-								:key="province._id"
-								:value="province">
-								{{ province.value }}
-							</option>
-						</select>
-						<p v-if="erreurs.province" class="validForm">
-							Veuillez choisir une région.
-						</p>
-					</div>
-
-					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-						<label for="ajout-demande-competences">Compétences</label>
-						<textarea
-							id="ajout-demande-competences"
-							name="ajout-demande-competences"
-							v-model="competences"></textarea>
-						<p v-if="erreurs.skills" class="validForm">
-							Veuillez fournir des compétences.
-						</p>
+				<!-- Section compétences -->
+				<div class="form-fiche__wrapper-titre-groupe-inputs">
+					<label for="ajout-demande-competences">Compétences</label>
+					<textarea id="ajout-demande-competences" name="ajout-demande-competences" rows="10" v-model="competences"></textarea>
+					<!-- Validation -->
+					<p v-if="erreurs.skills" class="validForm">Veuillez fournir des compétences.</p>
+				</div>
+				<!-- Section info stage -->
+				<div class="form-fiche__wrapper-titre-groupe-inputs">
+					<h3>Informations sur le stage recherché</h3>
+					<div class="form-fiche__colonnes-inputs">
+						<!-- colonne de gauche -->
+						<div class="form-fiche__colonne-inputs">
+							<div class="form-fiche__label-input-vertical">
+								<label for="ajout-demande-type">Type de stage</label>
+								<select id="ajout-demande-type" name="ajout-demande-type" v-model.trim="demande.internshipType">
+									<option value="">Veuillez effectuer un choix</option>
+									<option v-for="internshipType in internshipTypes" :key="internshipType._id" :value="internshipType">
+										{{ internshipType.value }}
+									</option>
+								</select>
+								<!-- Validation -->
+								<p v-if="erreurs.internshipType" class="validForm"> Veuillez choisir un type de stage. </p>
+							</div>
+							<div class="form-fiche__label-input-vertical">
+								<label for="ajout-demande-heures">Nombre d'heures par semaine</label>
+								<input type="number" id="ajout-demande-heures" name="ajout-demande-heures" v-model.trim="demande.weeklyWorkHours" />
+								<!-- Validation -->
+								<p v-if="erreurs.weeklyWorkHours" class="validForm"> Veuillez inscrire le nombre d'heures par semaine. </p>
+							</div>
+							<div class="form-fiche__label-input-vertical">
+								<label for="ajout-demande-remuneration">Rémunération</label>
+								<div>
+									<input type="radio" id="ajout-demande-discretion" name="ajout-demande-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
+									<label for="ajout-demande-discretion" class="form-fiche__label-radio-input">À la discrétion de l'entreprise</label>
+								</div>
+								<div>
+									<input type="radio" id="ajout-demande-remunere" name="ajout-demande-remuneration" value="remunere" v-model="remunerationType" />
+									<label for="ajout-demande-remunere" class="form-fiche__label-radio-input">Rémunéré</label>
+								</div>
+								<div>
+									<input type="radio" id="ajout-demande-non-renumere" name="ajout-demande-remuneration" value="non-remunere" v-model="remunerationType" />
+									<label for="ajout-demande-non-renumere" class="form-fiche__label-radio-input">Non-rémunéré</label>
+								</div>
+							</div>
+						</div>
+						<!-- colonne de droite -->
+						<div class="form-fiche__colonne-inputs">
+							<div class="form-fiche__label-input-vertical">
+								<label for="ajout-demande-date-debut">Date de début</label>
+								<input type="date" id="ajout-demande-date-fin" name="ajout-demande-date-fin" v-model.trim="demande.endDate" />
+								<!-- Vaidation -->
+								<p v-if="erreurs.endDate" class="validForm">Veuillez fournir une date de fin.</p>
+							</div>
+							<div class="form-fiche__label-input-vertical">
+								<label for="ajout-demande-date-fin">Date de fin</label>
+								<input type="date" id="ajout-demande-date-fin" name="ajout-demande-date-fin" v-model.trim="demande.endDate" />
+								<!-- Validation -->
+								<p v-if="erreurs.endDate" class="validForm"> Veuillez fournir une date de fin.</p>
+							</div>
+						</div>
 					</div>
 				</div>
-
-				<fieldset>
-					<legend>Informations sur le stage recherché</legend>
+				<!-- Section infos supplémentaires -->
+				<div class="form-fiche__wrapper-titre-groupe-inputs">
+					<h3>Informations supplémentaires</h3>
 					<div>
-						<!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 50 % de l'espace-->
-						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-type">Type de stage</label>
-							<select id="ajout-demande-type" name="ajout-demande-type" v-model.trim="demande.internshipType">
-								<option value="">Veuillez effectuer un choix</option>
-								<option
-									v-for="internshipType in internshipTypes"
-									:key="internshipType._id"
-									:value="internshipType">
-									{{ internshipType.value }}
-								</option>
-							</select>
-							<p v-if="erreurs.internshipType" class="validForm">
-								Veuillez choisir un type de stage.
-							</p>
-						</div>
-
-						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-heures">Nombre d'heures par semaine</label>
-							<input
-								type="number"
-								id="ajout-demande-heures"
-								name="ajout-demande-heures"
-								v-model.trim="demande.weeklyWorkHours" />
-								<p v-if="erreurs.weeklyWorkHours" class="validForm">
-								Veuillez inscrire le nombre d'heures par semaine.
-							</p>
-						</div>
+						<label for="ajout-demande-infos-supp"></label>
+						<textarea id="ajout-demande-infos-supp" name="ajout-demande-infos-supp" rows="10" v-model="demande.additionalInformation"></textarea>
+						<!-- Validation -->
+						<p v-if="erreurs.additionalInformation" class="error-message">Veuillez fournir des informations supplémentaires.</p>
 					</div>
-
+				</div>
+				<!-- Section Parcourir -->
+				<div class="form-fiche__wrapper-titre-groupe-inputs">
 					<div>
-						<!-- Classe pour regrouper deux inputs un en dessous de l'autre qui occupent 50 % de l'espace-->
-						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-date-debut">Date de début</label>
-							<input
-								type="date"
-								id="ajout-demande-date-debut"
-								name="ajout-demande-date-debut"
-								v-model.trim="demande.startDate" />
-							<p v-if="erreurs.startDate" class="validForm">
-								Veuillez fournir une date de début.
-							</p>
+						
+						<div>
+							<label for="parcourir"></label>
+							<input type="text" id="parcourir" name="parcourir">
 						</div>
-
-						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="ajout-demande-date-fin">Date de fin</label>
-							<input
-								type="date"
-								id="ajout-demande-date-fin"
-								name="ajout-demande-date-fin"
-								v-model.trim="demande.endDate" />
-							<p v-if="erreurs.endDate" class="validForm">
-								Veuillez fournir une date de fin.
-							</p>
-						</div>
-
-						<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-							<label for="edit-demande-remuneration">Rémunération</label>
-							<div>
-								<input type="radio" id="edit-demande-discretion"
-									name="edit-demande-remuneration"
-									value="discretion"
-									v-model="remunerationType"
-									checked="checked" />
-								<label for="edit-demande-discretion">À la discrétion de l'entreprise</label>
-							</div>
-							<!-- Wrapper case checkbox + label -->
-							<div>
-								<input
-									type="radio"
-									id="edit-demande-remunere"
-									name="edit-demande-remuneration"
-									value="remunere"
-									v-model="remunerationType" />
-								<label for="edit-demande-remunere">Rémunéré</label>
-							</div>
-							<!-- Wrapper case checkbox + label -->
-							<div>
-								<input
-									type="radio"
-									id="edit-demande-non-renumere"
-									name="edit-demande-remuneration"
-									value="non-remunere"
-									v-model="remunerationType" />
-								<label for="edit-demande-non-renumere">Non-rémunéré</label>
-							</div>
-						</div>
+						<button class="bouton">Parcourir</button>
 					</div>
-				</fieldset>
-
-				<fieldset>
-					<legend>Informations supplémentaires</legend>
-					<div><!-- Classe pour regrouper le input et le label un en dessous de l'autre-->
-						<label for="ajout-demande-infos-supp">Informations supplémentaires</label>
-						<!-- Classe pour cacher le label -->
-						<textarea
-							id="ajout-demande-infos-supp"
-							name="ajout-demande-infos-supp"
-							v-model="demande.additionalInformation">
-						</textarea>
-						<p v-if="erreurs.additionalInformation" class="error-message">
-                            Veuillez fournir des informations supplémentaires.
-                        </p>
-					</div>
-				</fieldset>
+				</div>
 			</div>
-
-			<div>
-		</div>
 		</form>
-	</section>
+	</div>
+
 </template>
 
 <!-- Il va rester à ajouter la validation pour les champs firstName et lastName (currently: fullName), Établissement scolaire, les champs select, checkbox et date.  -->

@@ -726,22 +726,24 @@ label {
   flex-basis: 15%;
 }
 
-#edition-demandestages {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2rem;
-}
-
-.formulaire-edition-demandestages .form-fiche__wrapper-titre,
 .fiche-demandestages-details .form-fiche__wrapper-titre {
   border-color: #CB912B;
 }
+.formulaire-ajout-demandestages h2,
+.formulaire-ajout-demandestages h3,
 .formulaire-edition-demandestages h2,
 .formulaire-edition-demandestages h3,
 .fiche-demandestages-details h2,
 .fiche-demandestages-details h3 {
   color: #0C9DA4;
+}
+
+.fiche-offrestages-details .form-fiche__wrapper-titre {
+  border-color: #BB2026;
+}
+.fiche-offrestages-details h2,
+.fiche-offrestages-details h3 {
+  color: #BB2026;
 }
 
 .app-container {
@@ -771,22 +773,22 @@ label {
   justify-content: center;
   align-items: flex-start;
   gap: 1rem;
-  padding: 0 0 0 3rem;
+  padding: 0 300px 0 3rem;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 .login-panel .entete-login-panel {
   width: 100%;
   color: #111111;
-  padding: 0 0 2rem 0;
   margin-bottom: 100px;
 }
 .login-panel .entete-login-panel h1 {
-  font-family: "Lato";
+  font-family: "Lora", serif;
   font-size: 70px;
+  font-weight: 400;
   line-height: 1.1;
 }
 .login-panel .entete-login-panel p {
-  font-family: "Roboto";
+  font-family: "Lato";
   line-height: 1.1;
   padding: 1rem 0;
 }
@@ -794,7 +796,13 @@ label {
 .form-group input {
   border-style: solid;
   border-color: #0C9DA4;
-  margin-bottom: 20px;
+}
+
+.bouton-acceuil {
+  margin-top: 40px;
+}
+
+form {
   width: 100%;
 }
 

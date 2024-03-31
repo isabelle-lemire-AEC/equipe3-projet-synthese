@@ -158,7 +158,7 @@
 				</div>
 				<!-- Section infos supplémentaires -->
 				<div class="form-fiche__wrapper-titre-groupe-inputs">
-					<h3>Informations sur le stage recherché</h3>
+					<h3>Informations supplémentaires</h3>
 					<div>
 						<label for="edit-demande-infos-supp"></label>
 						<textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="6"
