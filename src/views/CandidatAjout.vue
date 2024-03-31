@@ -9,7 +9,7 @@
         <form id="ajout-candidat" @submit.prevent="soumettreFormulaire">
 
             <div class="boutons">
-                <button class="bouton bouton--transparent" type="submit" @click="annulerAjout">Annuler</button>
+                <BtnAnnuler></BtnAnnuler>
                 <button class="bouton bouton--mauve" type="submit">
                     <div class="icone-libelle">
                         <i class="fas fa-save"></i>
@@ -141,6 +141,8 @@
     import { useCandidat } from '@/composables/candidats/candidat';
     import { fetchProvinces } from '@/composables/api';
 
+    import BtnAnnuler from '../components/BtnAnnuler.vue';
+
     const router = useRouter();
     const {
         addCandidat
@@ -172,12 +174,14 @@
         }
     }
 
+    /*     
     const annulerAjout = () => {
         console.log("Annuler l'ajout du candidat");
         router.push({
             name: 'Candidats'
         });
     }
+    */
 
     initProvinces();
 

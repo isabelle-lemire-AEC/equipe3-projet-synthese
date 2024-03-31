@@ -8,7 +8,7 @@
     <form id="ajout-entreprise" @submit.prevent="soumettreFormulaireEntreprise">
 
       <div class="boutons">
-        <button class="bouton bouton--transparent" type="button"  @click="$router.go(-1)">Annuler</button>
+        <BtnAnnuler></BtnAnnuler>
         <button class="bouton bouton--bleu" type="submit">
           <div class="icone-libelle">
             <i class="fas fa-save"></i>
@@ -136,6 +136,9 @@
   import { useRouter } from 'vue-router';
   import { useEntreprise } from '@/composables/entreprises/entreprise';
   import { fetchProvinces } from '@/composables/api';
+
+  import BtnAnnuler from '../components/BtnAnnuler.vue';
+
 
   const router = useRouter();
 

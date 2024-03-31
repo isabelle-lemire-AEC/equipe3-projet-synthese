@@ -7,7 +7,7 @@
 
 		<!-- Boutons annuler et mettre à jour -->
 		<div class="boutons">
-			<button class="bouton bouton--transparent" @click="retour()">Annuler</button>
+			<BtnAnnuler></BtnAnnuler>
 			<button class="bouton bouton--turquoise" @click="modifDemande()">
 				<div class="icone-libelle">
 					<i class="fas fa-save"></i>
@@ -272,6 +272,7 @@
 	} from 'vue-router';
 
 	import btnTelechargerCV from '../components/BtnTelechargerCV.vue'
+	import BtnAnnuler from '../components/BtnAnnuler.vue';
 
 	const {getCandidatById, getAllCandidats} = useCandidat();
 	const {getAllProvinces, getProvinceById} = useProvinces();

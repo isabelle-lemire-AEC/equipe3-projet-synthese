@@ -9,7 +9,7 @@
       <form id="ajout-offrestages" @submit.prevent="soumettreFormulaire">
             <!-- Boutons annuler et mettre à jour -->
             <div class="boutons">
-                <button class="bouton bouton--transparent" type="submit">Annuler</button>
+              <BtnAnnuler></BtnAnnuler>
                 <button class="bouton bouton--rougeOffre" type="submit">
                     <div class="icone-libelle">
                         <i class="fas fa-save"></i>
@@ -145,9 +145,9 @@
     import { fetchProvinces } from '@/composables/api';
     import { fetchStageTypes } from '@/composables/api';
     import { useRouter } from 'vue-router';
-
-    // type RAPH***
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
+
+    import BtnAnnuler from '../components/BtnAnnuler.vue';
 
     const router = useRouter();
     const { ajouterOffre } = useInternshipOffers();
