@@ -56,7 +56,7 @@
 
     const { deleteRequest } = useInternshipOffers();
     const props = defineProps(['offer']);
-    const showConfirmationModal = ref(false);
+    let showConfirmationModal = ref(false);
 
     let showThisElement = ref(true);
     let date = ref([]);
