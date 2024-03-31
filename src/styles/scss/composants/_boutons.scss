@@ -44,6 +44,14 @@
         }
     }
 
+    &--jaune {
+        background-color: variables.$gold;
+
+        &:hover {
+            background-color: darken(variables.$gold, 5%);
+        }
+    }
+
     &--rouge {
         background-color: variables.$bouton-action-red;
 
