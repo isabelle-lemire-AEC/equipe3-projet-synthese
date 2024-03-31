@@ -126,6 +126,9 @@
   } from "vue-router";
   import logoEntreprise from "../assets/mediavox-logo.jpg";
 
+  import BtnAnnuler from '../components/BtnAnnuler.vue';
+
+
   export default {
     name: "EntrepriseMiseAjour",
     props: ["id"], // Ajoutez cette ligne

@@ -10,7 +10,7 @@
     <form id="edition-offrestages" @submit.prevent="submitForm">
       <!-- Boutons annuler et mettre à jour -->
 			<div class="boutons">
-				<button class="bouton bouton--transparent" type="submit" @click="annulerAjout">Annuler</button>
+				<BtnAnnuler></BtnAnnuler>
 				<button class="bouton bouton--rougeOffre" type="submit">
 					<div class="icone-libelle">
 						<i class="fas fa-save"></i>
@@ -117,6 +117,9 @@
   import { ref, onMounted } from 'vue';
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
   import { useRoute } from 'vue-router';
+
+  import BtnAnnuler from '../components/BtnAnnuler.vue';
+
 
   // import { useEntreprise } from '../composables/offres_stage/stageEntreprise';
   // import { fetchProvinces, fetchStageTypes, fetchInternshipOffers } from '../composables/api';
