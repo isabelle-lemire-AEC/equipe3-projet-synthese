@@ -99,6 +99,17 @@
             </div>
           </div>
       </div>
+      <!-- Boutons annuler et mettre à jour -->
+			<div class="boutons">
+				<button class="bouton bouton--transparent" type="submit" @click="annulerAjout">Annuler</button>
+				<button class="bouton bouton--rougeOffre" type="submit">
+					<div class="icone-libelle">
+						<i class="fas fa-save"></i>
+						<span>Mettre à jour</span>
+					</div>
+				</button>
+			</div> 
+      
     </form>
 </template>
 

@@ -78,15 +78,15 @@
                   <div class="form-fiche__label-input-vertical">
                     <label for="ajout-offre-remuneration">Rémunération</label>
                     <div>
-                      <input type="radio" id="ajout-offre-discretion1" name="ajout-offre-remuneration1" value="discretion" v-model="remunerationType" checked="checked" />
+                      <input type="radio" id="ajout-offre-discretion" name="ajout-offre-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
                       <label for="ajout-offre-discretion" class="form-fiche__label-radio-input">À la discrétion de l'entreprise</label>
                     </div>
                     <div>
-                      <input type="radio" id="ajout-offre-remunere2" name="ajout-offre-remuneration2" value="remunere" v-model="remunerationType" />
+                      <input type="radio" id="ajout-offre-remunere" name="ajout-offre-remuneration" value="remunere" v-model="remunerationType" />
                       <label for="ajout-offre-remunere" class="form-fiche__label-radio-input">Rémunéré</label>
                     </div>
                     <div>
-                      <input type="radio" id="ajout-offre-non-renumere3" name="ajout-offre-remuneration3" value="non-remunere" v-model="remunerationType" />
+                      <input type="radio" id="ajout-offre-non-renumere" name="ajout-offre-remuneration" value="non-remunere" v-model="remunerationType" />
                       <label for="ajout-offre-non-renumere" class="form-fiche__label-radio-input" >Non-rémunéré</label>
                     </div>
                   </div>                   
@@ -94,16 +94,39 @@
                  
                 <!-- Colonne de droite -->
                 <div class="form-fiche__colonne-inputs">
-                  col droite
+                  <div class="form-fiche__label-input-vertical">
+                    <label for="ajout-demande-date-debut">Date de début</label>
+                    <input v-model="offerData.startDate" id="ajout-demande-date-debut" type="date"/>
+                  </div>
+                  <div class="form-fiche__label-input-vertical">
+                    <label for="ajout-demande-date-fin">Date de fin</label>
+                    <input v-model="offerData.endDate" id="ajout-demande-date-fin" type="date"/>
+                  </div>
                 </div>                             
               </div>
 
+              <!-- Section infos supplémentaires -->
+              <div class="form-fiche__wrapper-titre-groupe-inputs">
+                <h3>Informations supplémentaires</h3>
+                <div>
+                  <label for="edit-demande-infos-supp"></label>
+                  <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5"></textarea>
+                </div>
+              </div>
 
-            </div>            
+            </div> 
+          </div>  
 
-
-            </div>            
-            
+          <!-- Boutons annuler et mettre à jour -->
+          <div class="boutons">
+              <button class="bouton bouton--transparent" type="submit">Annuler</button>
+              <button class="bouton bouton--rougeOffre" type="submit">
+                  <div class="icone-libelle">
+                      <i class="fas fa-save"></i>
+                      <span>Sauvegarder</span>
+                  </div>
+              </button>
+          </div>            
 
       </form>
 
