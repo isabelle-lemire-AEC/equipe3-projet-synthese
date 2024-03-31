@@ -4,17 +4,17 @@
 			<h1>Ajouter une demande</h1>
 		</div>
 
+		<!-- Boutons annuler et mettre à jour -->
+		<div class="boutons">
+			<button class="bouton bouton--transparent" @click="retour()">Annuler</button>
+			<button class="bouton bouton--turquoise" @click="soumettreFormulaire()">
+				<div class="icone-libelle">
+					<i class="fas fa-save"></i>
+					<span>Sauvegarder</span>
+				</div>
+			</button>
+		</div>
 		<form id="ajout-demandestages">
-			<!-- Boutons annuler et mettre à jour -->
-			<div class="boutons">
-                <button class="bouton bouton--transparent" @click="retour()">Annuler</button>
-                <button class="bouton bouton--turquoise" @click="soumettreFormulaire()">
-                    <div class="icone-libelle">
-                        <i class="fas fa-save"></i>
-                        <span>Sauvegarder</span>
-                    </div>
-                </button>
-            </div>
 
 			<!-- Section titre -->
 			<div class="form-fiche__input-hors-encadre">
@@ -157,7 +157,7 @@
 						<div class="form-fiche__colonne-inputs">
 							<div class="form-fiche__label-input-vertical">
 								<label for="ajout-demande-date-debut">Date de début</label>
-								<input type="date" id="ajout-demande-date-fin" name="ajout-demande-date-fin" v-model.trim="demande.endDate" />
+								<input type="date" id="ajout-demande-date-fin" name="ajout-demande-date-fin" v-model.trim="demande.startDate" />
 								<!-- Vaidation -->
 								<p v-if="erreurs.endDate" class="validForm">Veuillez fournir une date de fin.</p>
 							</div>

@@ -5,17 +5,17 @@
 			<h1>{{ demande.title }}</h1>
 		</div>
 
+		<!-- Boutons annuler et mettre à jour -->
+		<div class="boutons">
+			<button class="bouton bouton--transparent" @click="retour()">Annuler</button>
+			<button class="bouton bouton--turquoise" @click="modifDemande()">
+				<div class="icone-libelle">
+					<i class="fas fa-save"></i>
+					<span>Mettre à jour</span>
+				</div>
+			</button>
+		</div>
 		<form id="edition-demandestages">
-			<!-- Boutons annuler et mettre à jour -->
-			<div class="boutons">
-				<button class="bouton bouton--transparent" @click="retour()">Annuler</button>
-				<button class="bouton bouton--turquoise" @click="modifDemande()">
-					<div class="icone-libelle">
-						<i class="fas fa-save"></i>
-						<span>Mettre à jour</span>
-					</div>
-				</button>
-			</div>
 
 			<!-- Section encadré encadré blanc -->
 			<div class="form-fiche__encadre">
@@ -194,12 +194,11 @@
 							</div>
 							<div class="form-fiche__label-input-vertical">
 								<label for="edit-demande-date-fin">Date de fin</label>
-								<input type="date" id="edit-demande-date-fin" name="edit-demande-date-fin"
-									   v-model.trim="dateFin" />
+								<input type="date" id="edit-demande-date-fin" name="edit-demande-date-fin" v-model.trim="dateFin" />
+								<p v-if="erreurs.endDate" class="validForm">
+									Veuillez fournir une date de fin.
+								</p>
 							</div>
-							<p v-if="erreurs.endDate" class="validForm">
-								Veuillez fournir une date de fin.
-							</p>
 						</div>
 					</div>
 				</div>
