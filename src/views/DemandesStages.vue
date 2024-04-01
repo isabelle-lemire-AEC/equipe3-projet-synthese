@@ -1,11 +1,11 @@
 <template>
-    <div class="">
+    <div class="pageContainer">
         <h1>Demandes de stage</h1>
         <RouterLink to="/demande-de-stage-ajout">
             <button class="bouton bouton--jaune">Ajouter une demande</button>
         </RouterLink>
         <div class="listeStages">
-            <div class="listeStagesHeader">
+            <div class="liste-header">
                 <span>Poste</span>
                 <span>Secteur d'activité</span>
                 <span>Région</span>
@@ -61,7 +61,7 @@ onMounted(async () => {
 
 <style scoped>
 
-html, body {
+/*html, body {
     background-color: rgb(222, 222, 222);
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -118,5 +118,5 @@ h1 {
 .poste {
     display: flex;
     flex-direction: column;
-}
+}*/
 </style>
