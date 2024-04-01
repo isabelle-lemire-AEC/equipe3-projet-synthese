@@ -88,7 +88,7 @@
         @include mixins.font(variables.$font-headings, 15px, variables.$regular);
 
         &:hover {
-            background-color: darken(variables.$light-green, 5%);
+            background-color: darken(variables.$light-green, 10%);
         }
     }
 
@@ -109,6 +109,7 @@
 
     button {
         border-width: 0;
+        background: none;
     }
 
     i {
