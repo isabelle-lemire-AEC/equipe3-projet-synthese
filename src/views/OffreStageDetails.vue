@@ -39,7 +39,7 @@
           </div>
           <div class="form-fiche__label-input-vertical">
             <h4>Exigences</h4>
-            <p>{{ offerData.requiredSkills }}</p>
+            <p>{{ exigences }}</p>
           </div>
           <!-- Section Information sur le stage -->
           <div class="form-fiche__wrapper-titre-groupe-inputs">
@@ -110,6 +110,7 @@
   const router = useRouter(); 
   const { getInternshipOfferById, response, loading, error, edditerOffre } = useInternshipOffers();
   const showConfirmationModal = ref(false);
+  const exigences = ref(null);
 
   onMounted(async () => {
 
@@ -128,6 +129,8 @@
       offerData.value.salary = offer.salary;
       offerData.value.province = offer.province;
       offerData.value.requiredSkills = offer.requiredSkills;
+      console.log("offerData.value.requiredSkills: ", offerData.value.requiredSkills);
+      // exigences = offerData.value.requiredSkills.join(', ');
       offerData.value.internshipType = offer.internshipType;
       offerData.value.paid = offer.paid;
       offerData.value.isActive = offer.isActive;
@@ -136,6 +139,9 @@
     } else {
       console.error("Aucune réponse ou réponse vide reçue lors de la récupération des détails de l'offre de stage.");
     }
+    console.log("offerData.value.requiredSkills: ", offerData.value.skills)
+    exigences.value = offerData.value.requiredSkills.join(', ');
+
   });
 
   const offerData = ref({

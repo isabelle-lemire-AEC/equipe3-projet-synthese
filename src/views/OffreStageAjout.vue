@@ -145,77 +145,83 @@
 
 <script setup>
 
-    import { ref, onMounted } from 'vue';
+  import { ref, onMounted } from 'vue';
 
-    // Probleme ligne 114 et ligne 
-    import { useEntreprise } from '../composables/offres_stage/stageEntreprise';
-    import { fetchProvinces } from '@/composables/api';
-    import { fetchStageTypes } from '@/composables/api';
-    import { useRouter } from 'vue-router';
-    import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
+  // Probleme ligne 114 et ligne 
+  import { useEntreprise } from '../composables/offres_stage/stageEntreprise';
+  import { fetchProvinces } from '@/composables/api';
+  import { fetchStageTypes } from '@/composables/api';
+  import { useRouter } from 'vue-router';
+  import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
 
-    import BtnAnnuler from '../components/BtnAnnuler.vue';
+  import BtnAnnuler from '../components/BtnAnnuler.vue';
 
-    const router = useRouter();
-    const { ajouterOffre } = useInternshipOffers();
-    const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError} = useEntreprise();
-    const remunerationType = ref(null);
+  const router = useRouter();
+  const { ajouterOffre } = useInternshipOffers();
+  const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError} = useEntreprise();
+  const remunerationType = ref(null);
+  const entreprises = ref([]);
+  const provinces = ref([]);
+  const internshipTypes = ref([]);
+  const exigences = ref('');
 
-    const entreprises = ref([]);
-    const provinces = ref([]);
-    const internshipTypes = ref([]);
+  // type RAPH***
 
-    // type RAPH***
+  onMounted(async () => {
+    const entreprisesData = await getAllEntreprises();
+    entreprises.value = entreprisesData.data;
 
-    onMounted(async () => {
-      const entreprisesData = await getAllEntreprises();
-      entreprises.value = entreprisesData.data;
+    if (entreprisesError.value) {
+      console.error("Erreur lors du chargement des entreprises:", entreprisesError.value);
+    }
+    
+    try {
+      const typesData = await fetchStageTypes();
+      internshipTypes.value = typesData;
+      console.log("Provinces chargées:", internshipTypes.value); 
+    } catch (error) {
+      console.error("Erreur lors du chargement des type", error);
+    }
 
-      if (entreprisesError.value) {
-        console.error("Erreur lors du chargement des entreprises:", entreprisesError.value);
-      }
-      
-      try {
-        const typesData = await fetchStageTypes();
-        internshipTypes.value = typesData;
-        console.log("Provinces chargées:", internshipTypes.value); 
-      } catch (error) {
-        console.error("Erreur lors du chargement des type", error);
-      }
+    try {
+      const provincesData = await fetchProvinces();
+      provinces.value = provincesData;
+      console.log("Provinces chargées:", provinces.value); 
+    } catch (error) {
+      console.error("Erreur lors du chargement des provinces", error);
+    }
+  });
 
-      try {
-        const provincesData = await fetchProvinces();
-        provinces.value = provincesData;
-        console.log("Provinces chargées:", provinces.value); 
-      } catch (error) {
-        console.error("Erreur lors du chargement des provinces", error);
-      }
-    });
+  const offerData = ref({
+    title: "",
+    description: "",
+    //est ce que l'entreprise à été transformeé en id ?
+    enterprise: { _id: "" }, 
+    startDate: "",
+    endDate: "",
+    weeklyWorkHours: 0,
+    salary: 0,
+    province: { _id: "" },
+    //attention ici verifier si je peux mettre plus d'un string dans le tableau de skills
+    requiredSkills: [],
+    internshipType: { _id: "" },
+    paid: "DISCRETIONARY",
+    isActive: false
+  });
 
-    const offerData = ref({
-      title: "",
-      description: "",
-      //est ce que l'entreprise à été transformeé en id ?
-      enterprise: { _id: "" }, 
-      startDate: "",
-      endDate: "",
-      weeklyWorkHours: 0,
-      salary: 0,
-      province: { _id: "" },
-      //attention ici verifier si je peux mettre plus d'un string dans le tableau de skills
-      requiredSkills: [],
-      internshipType: { _id: "" },
-      paid: "DISCRETIONARY",
-      isActive: false
-    });
+  const submitForm = async () => {
+    console.log(offerData.value)
+    listerExigences();
+    await ajouterOffre(offerData.value);
+    console.log("Offre ajoutée avec succès");
+    router.push({name: "OffresStages"});
+  };
 
-    const submitForm = async () => {
-      console.log(offerData.value)
-      await ajouterOffre(offerData.value);
-      console.log("Offre ajoutée avec succès");
-      router.push({name: "OffresStages"});
-
-    };
+  const listerExigences = () => {
+    exigences.value = offerData.value.requiredSkills.toString();
+    exigences.value = exigences.value.replace(/ /g,'');
+    offerData.value.requiredSkills = exigences.value.split(',');
+  }
 
 </script>
 
