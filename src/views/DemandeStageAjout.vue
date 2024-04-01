@@ -205,7 +205,6 @@
 	import {useInternshipTypes} from "@/composables/types_stage/types_stage.js";
 	import {useActivitySectors} from "../composables/secteurs_activites/secteurs_activites.js";
 	import {useRouter} from 'vue-router';
-
 	import BtnAnnuler from '../components/BtnAnnuler.vue';
 
 	const {addRequest, getAllRequests} = useInternshipRequests();

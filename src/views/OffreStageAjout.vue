@@ -6,17 +6,17 @@
         </div>
       </div>
 
+      <!-- Boutons annuler et mettre à jour -->
+      <div class="boutons">
+        <BtnAnnuler></BtnAnnuler>
+          <button class="bouton bouton--rougeOffre" @click="submitForm()">
+              <div class="icone-libelle">
+                  <i class="fas fa-save"></i>
+                  <span>Sauvegarder</span>
+              </div>
+          </button>
+      </div>  
       <form id="ajout-offrestages" @submit.prevent="soumettreFormulaire">
-            <!-- Boutons annuler et mettre à jour -->
-            <div class="boutons">
-              <BtnAnnuler></BtnAnnuler>
-                <button class="bouton bouton--rougeOffre" type="submit">
-                    <div class="icone-libelle">
-                        <i class="fas fa-save"></i>
-                        <span>Sauvegarder</span>
-                    </div>
-                </button>
-            </div>  
             
             <!-- Section titre -->
             <div class="form-fiche__input-hors-encadre">
@@ -51,7 +51,7 @@
             <!-- Section Programme et exigences -->
             <div class="form-fiche__label-input-vertical">
               <label for="">Programme de formation</label>
-              <input type="text" id="ajout-programme" v-model.trim="offerData.enterprise.activitySector">
+              <input type="text" id="ajout-programme">
             </div>
             <div class="form-fiche__label-input-vertical">
               <h4>Exigences</h4>
@@ -102,7 +102,15 @@
                     <label for="ajout-demande-date-fin">Date de fin</label>
                     <input v-model="offerData.endDate" id="ajout-demande-date-fin" type="date"/>
                   </div>
-                </div>                             
+                </div>    
+                <div class="form-fiche__label-input-vertical">
+         
+                <label for="offreProvince">Province</label>
+                <select v-model="offerData.province">
+                    <option disabled value="">Sélectionnez une province</option>
+                    <option v-for="province in provinces" :key="province._id" :value="province">{{ province.value }}</option>
+                </select>     
+                </div>           
               </div>
 
               <!-- Section infos supplémentaires -->
@@ -117,18 +125,18 @@
             </div> 
           </div>  
 
-          <!-- Boutons annuler et mettre à jour -->
-          <div class="boutons">
-              <button class="bouton bouton--transparent" type="submit">Annuler</button>
-              <button class="bouton bouton--rougeOffre" type="submit">
-                  <div class="icone-libelle">
-                      <i class="fas fa-save"></i>
-                      <span>Sauvegarder</span>
-                  </div>
-              </button>
-          </div>            
-
-      </form>
+          
+        </form>
+        <!-- Boutons annuler et mettre à jour -->
+        <div class="boutons">
+            <button class="bouton bouton--transparent">Annuler</button>
+            <button class="bouton bouton--rougeOffre" @click="submitForm()">
+                <div class="icone-libelle">
+                    <i class="fas fa-save"></i>
+                    <span>Sauvegarder</span>
+                </div>
+            </button>
+        </div>            
 
 
 
@@ -152,6 +160,7 @@
     const router = useRouter();
     const { ajouterOffre } = useInternshipOffers();
     const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError} = useEntreprise();
+    const remunerationType = ref(null);
 
     const entreprises = ref([]);
     const provinces = ref([]);
@@ -160,41 +169,28 @@
     // type RAPH***
 
 onMounted(async () => {
-////////////////////////
-const entreprisesData = await getAllEntreprises();
- entreprises.value = entreprisesData.data;
-if (entreprisesResponse.value && Array.isArray(entreprisesResponse.value)){
-  entreprises.value = entreprisesResponse.value;
-  console.log("Entreprises chargées:", entreprises.value); 
-} else {
-  console.error("La réponse n'est pas un tableau:", entreprisesResponse.value);
-}
+  const entreprisesData = await getAllEntreprises();
+  entreprises.value = entreprisesData.data;
 
-if (entreprisesError.value) {
-  console.error("Erreur lors du chargement des entreprises:", entreprisesError.value);
-}
-////////////////////////
+  if (entreprisesError.value) {
+    console.error("Erreur lors du chargement des entreprises:", entreprisesError.value);
+  }
+  
+  try {
+    const typesData = await fetchStageTypes();
+    internshipTypes.value = typesData;
+    console.log("Provinces chargées:", internshipTypes.value); 
+  } catch (error) {
+    console.error("Erreur lors du chargement des type", error);
+  }
 
-///////////////////////////
-try {
-  const typesData = await fetchStageTypes();
-  internshipTypes.value = typesData;
-  console.log("Provinces chargées:", internshipTypes.value); 
-} catch (error) {
-  console.error("Erreur lors du chargement des type", error);
-}
-/////////////////////////////
-
-//////////////////////////////////////
-try {
-  const provincesData = await fetchProvinces();
-  provinces.value = provincesData;
-  console.log("Provinces chargées:", provinces.value); 
-} catch (error) {
-  console.error("Erreur lors du chargement des provinces", error);
-}
-///////////////////////////////////////////////
-
+  try {
+    const provincesData = await fetchProvinces();
+    provinces.value = provincesData;
+    console.log("Provinces chargées:", provinces.value); 
+  } catch (error) {
+    console.error("Erreur lors du chargement des provinces", error);
+  }
 });
 
 const offerData = ref({
@@ -217,9 +213,11 @@ const offerData = ref({
 const submitForm = async () => {
   console.log(offerData.value)
   await ajouterOffre(offerData.value);
-   console.log("Offre ajoutée avec succès");
+  console.log("Offre ajoutée avec succès");
+  router.push({name: "OffresStages"});
 
 };
+
 </script>
 
 <style></style>
