@@ -202,16 +202,7 @@
       </div>
     </form>
   </div>
-  <div v-if="modalShow" class="modal">
-    <div class="modal-content">
-      <span class="close" @click="fermerModal">&times;</span>
-      <p>{{ modalMessage }}</p>
-      <div class="modal-footer">
-        <button class="btn non" @click="annulerEnregistrement">Non</button>
-        <button class="btn oui" @click="confirmerEnregistrement">Oui</button>
-      </div>
-    </div>
-  </div>
+  
 </template>
 
 <script setup>
@@ -292,22 +283,17 @@ const validerFormulaire = () => {
 
 const soumettreFormulaireEntreprise = async () => {
   if (validerFormulaire()) {
-    modalMessage.value =
-      "Vous ne pouvez pas sauvegarder car des champs obligatoires ne sont pas remplis.";
-    modalShow.value = true;
+    console.error("Vous ne pouvez pas sauvegarder car des champs obligatoires ne sont pas remplis.");
   } else {
     try {
       await ajouterEntreprise(entreprise.value);
-      modalMessage.value =
-        "Votre nouvelle entreprise est enregistrée. Voulez-vous continuer?";
-      modalShow.value = true;
+      router.push({ name: "Entreprises" });
     } catch (error) {
       console.error("Erreur lors de la soumission du formulaire :", error);
-      modalMessage.value = "Une erreur s'est produite lors de la sauvegarde.";
-      modalShow.value = true;
     }
   }
 };
+
 const validerChamp = (champ) => {
   switch (champ) {
     case "name":
@@ -368,53 +354,6 @@ const annulerEnregistrement = () => {
   color: red;
 }
 
-.modal-content {
-  width: 400px;
-  height: 200px;
-  background-color: #eee;
-  border: 1px solid cyan;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.close {
-  align-self: flex-end;
-  cursor: pointer;
-  font-size: 1rem;
-  color: fff;
-  background-color: black;
-  border-radius: 50%;
-  padding: 10px;
-}
-
-.modal-footer {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-}
-
-.btn {
-  font-weight: bold;
-  padding: 10px 20px;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 10px;
-  width: 30%;
-
-  &.non {
-    background-color: red;
-  }
-
-  &.oui {
-    background-color: green;
-  }
-}
 input::placeholder,
 textarea::placeholder {
   font-size: 14px;
