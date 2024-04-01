@@ -12,15 +12,11 @@
 
     <form id="edition-entreprise" @submit.prevent="mettreAJourEntreprise">
       <div class="form-fiche__wrapper-boutons-inputs">
-        <div class="boutons">
-          <BtnAnnuler></BtnAnnuler>
-          <button class="bouton bouton--bleu" type="submit">
-            <div class="icone-libelle">
-              <i class="fas fa-save"></i>
-              <span>Mettre à jour</span>
-            </div>
-          </button>
-        </div>
+
+        <BtnAnnulerModifierSauvegarder 
+          buttonText="Mettre à jour" 
+          buttonClass="bouton bouton--bleu">
+        </BtnAnnulerModifierSauvegarder>
 
         <div class="form-fiche__input-hors-encadre">
           <div class="form-fiche__label-input-horizontal">
@@ -98,15 +94,11 @@
           </div>
         </div>
 
-        <div class="boutons">
-          <BtnAnnuler></BtnAnnuler>
-          <button class="bouton bouton--bleu" type="submit">
-            <div class="icone-libelle">
-              <i class="fas fa-save"></i>
-              <span>Mettre à jour</span>
-            </div>
-          </button>
-        </div>
+        <BtnAnnulerModifierSauvegarder 
+          buttonText="Mettre à jour" 
+          buttonClass="bouton bouton--mauve">
+        </BtnAnnulerModifierSauvegarder>
+
       </div>
     </form>
   </div>
@@ -119,8 +111,7 @@
   import { ref } from 'vue';
 
   import logoEntreprise from "../assets/mediavox-logo.jpg";
-  import BtnAnnuler from '../components/BtnAnnuler.vue';
-
+  import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
   const id = useRoute().params.id;
   const router = useRouter();

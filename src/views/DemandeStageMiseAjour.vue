@@ -6,15 +6,12 @@
 		</div>
 
 		<!-- Boutons annuler et mettre à jour -->
-		<div class="boutons">
-			<BtnAnnuler @click="retour()"></BtnAnnuler>
-			<button class="bouton bouton--turquoise" @click="modifDemande()">
-				<div class="icone-libelle">
-					<i class="fas fa-save"></i>
-					<span>Mettre à jour</span>
-				</div>
-			</button>
-		</div>
+		<BtnAnnulerModifierSauvegarder 
+			buttonText="Mettre à jour" 
+			buttonClass="bouton bouton--turquoise"
+			:action="soumettreFormulaire">
+        </BtnAnnulerModifierSauvegarder>		
+
 		<form id="edition-demandestages">
 
 			<!-- Section encadré encadré blanc -->
@@ -226,18 +223,15 @@
 				</div>
 			</div>
 			<!-- fin encadré blanc -->
-
-			<!-- Boutons annuler et mettre à jour -->
 		</form>
-		<div class="boutons">
-			<button class="bouton bouton--transparent" @click="retour()">Annuler</button>
-			<button class="bouton bouton--turquoise" @click="modifDemande()">
-				<div class="icone-libelle">
-					<i class="fas fa-save"></i>
-					<span>Mettre à jour</span>
-				</div>
-			</button>
-		</div>
+
+		<!-- Boutons annuler et mettre à jour -->
+		<BtnAnnulerModifierSauvegarder 
+			buttonText="Mettre à jour" 
+			buttonClass="bouton bouton--turquoise"
+			:action="soumettreFormulaire">
+        </BtnAnnulerModifierSauvegarder>
+
 	</div>
 </template>
 
@@ -252,8 +246,9 @@
 	import {useActivitySectors} from "../composables/secteurs_activites/secteurs_activites";
 	import {useRoute} from "vue-router";
 	import {useRouter} from 'vue-router';
+	
 	import btnTelechargerCV from '../components/BtnTelechargerCV.vue'
-	import BtnAnnuler from '../components/BtnAnnuler.vue';
+	import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
 	const {getCandidatById, getAllCandidats} = useCandidat();
 	const {getAllProvinces, getProvinceById} = useProvinces();
