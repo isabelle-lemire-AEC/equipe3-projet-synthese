@@ -120,8 +120,6 @@
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
     import { useCandidat } from '../composables/candidats/candidat.js';
     import { useEntreprise } from '../composables/entreprises/entreprise.js';
-    import TBListeDemandeStageAttente from '../components/TBListeDemandeStageAttente.vue';
-    import TBListeOffreStageAttente from '../components/TBListeOffreStageAttente.vue';
     import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js'; 
 
     const { getAllNotActiveRequests, updateRequestStatus, getRequestsCount, activateRequest } = useInternshipRequests();
