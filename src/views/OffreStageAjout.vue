@@ -129,7 +129,7 @@
         </form>
         <!-- Boutons annuler et mettre à jour -->
         <div class="boutons">
-            <BtnAnnuler></BtnAnnuler>
+            <button class="bouton bouton--transparent">Annuler</button>
             <button class="bouton bouton--rougeOffre" @click="submitForm()">
                 <div class="icone-libelle">
                     <i class="fas fa-save"></i>
@@ -143,6 +143,7 @@
 
 </template>
 
+<!-- //raph/Joe & caro  -->
 <script setup>
 
   import { ref, onMounted } from 'vue';
@@ -226,3 +227,15 @@
 </script>
 
 <style></style>
+
+
+<!-- // onMounted(async () => {
+//     ////////////////////////
+//     const entreprisesData = await getAllEntreprises();
+//     entreprises.value = entreprisesData.data;
+//     if (entreprisesResponse.value && Array.isArray(entreprisesResponse.value)){
+//         entreprises.value = entreprisesResponse.value;
+//         console.log("Entreprises chargées:", entreprises.value); 
+//     } else {
+//         console.error("La réponse n'est pas un tableau:", entreprisesResponse.value);
+//     } -->
