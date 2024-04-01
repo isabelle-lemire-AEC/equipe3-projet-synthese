@@ -1,6 +1,6 @@
 <!-- TableauDeBord.vue / débuter par Caro, continuer par Isa -->
 <template>
-    <div class="container">
+    <div>
         <section class="infoRapide">
             <div class="infoRapide-demandes">
                 <div class="icone-infoRapide">
@@ -114,7 +114,7 @@
     </div>
 </template>
 <script setup>
-    import ElementListeStage from '../components/ElementListeStage.vue'
+    import ElementListeStage from '../components/elementListeStage.vue'
     import { ref, onMounted } from 'vue';
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
