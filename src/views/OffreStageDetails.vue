@@ -160,7 +160,7 @@
 
   const supprimer = async () => {
     await supprimerOffre(route.params.id);
-    route.push('/offres-de-stages');
+    router.push('/offres-de-stages');
   };
 
   const activate = async () => {
