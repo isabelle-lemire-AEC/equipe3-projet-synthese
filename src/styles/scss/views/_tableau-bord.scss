@@ -109,7 +109,7 @@
     margin-top: 40px;
     border-radius: 10px;
     padding: 60px;
-    span{
+    h2 span{
         color: variables.$gold;
     }
     h4{
@@ -124,7 +124,7 @@
     margin-top: 40px;
     border-radius: 10px;
     padding: 60px;
-    span{
+    h2 span{
         color: variables.$red;
     }
     h4{
@@ -139,14 +139,26 @@
     @include mixins.flex(row, space-between, center, null);
 }
 
-.grid-dernieresDemandes-Offre{
+/*.grid-dernieresDemandes-Offre{
     @include mixins.grid(4, 1rem);
-    color: variables.$charcoal;
+    color: variables.$gray;
     margin-top: 60px;
 
    p{
     @include mixins.font(variables.$font-body, null, bold);
+    padding-bottom: 0.5rem;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px; 
+        width: 100%;
+        height: 5px; 
+        background-color: variables.$gray; 
+    }
    }
 
-}
+}*/
 

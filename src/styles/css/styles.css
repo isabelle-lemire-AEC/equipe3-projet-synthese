@@ -174,6 +174,30 @@
   color: #707070;
 }
 
+.liste-header {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  color: #707070;
+  margin-top: 60px;
+}
+.liste-header span {
+  font-family: "Roboto";
+  font-weight: bold;
+  line-height: 1.1;
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+.liste-header span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 5px;
+  background-color: #707070;
+}
+
 .form-fiche__label-input-vertical h4, label, input:not([type=radio]),
 textarea,
 select {
@@ -760,6 +784,17 @@ label {
   color: #0C9DA4;
 }
 
+.listeStages {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 80px;
+  margin-top: 40px;
+}
+
+.pageContainer h1 {
+  padding: 3rem 0 3rem 0;
+}
+
 #ajout-offrestages,
 #edition-offrestages {
   display: flex;
@@ -780,6 +815,13 @@ label {
 .fiche-offrestages-details h2,
 .fiche-offrestages-details h3 {
   color: #BB2026;
+}
+
+.listeOffres {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 80px;
+  margin-top: 40px;
 }
 
 .app-container {
@@ -961,7 +1003,7 @@ form {
   border-radius: 10px;
   padding: 60px;
 }
-.dernieresDemandes span {
+.dernieresDemandes h2 span {
   color: #CB912B;
 }
 .dernieresDemandes h4 {
@@ -977,7 +1019,7 @@ form {
   border-radius: 10px;
   padding: 60px;
 }
-.dernieresOffres span {
+.dernieresOffres h2 span {
   color: #BB2026;
 }
 .dernieresOffres h4 {
@@ -993,19 +1035,28 @@ form {
   align-items: center;
 }
 
-.grid-dernieresDemandes-Offre {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  color: #5E5E5E;
-  margin-top: 60px;
-}
-.grid-dernieresDemandes-Offre p {
-  font-family: "Roboto";
-  font-weight: bold;
-  line-height: 1.1;
-}
+/*.grid-dernieresDemandes-Offre{
+    @include mixins.grid(4, 1rem);
+    color: variables.$gray;
+    margin-top: 60px;
 
+   p{
+    @include mixins.font(variables.$font-body, null, bold);
+    padding-bottom: 0.5rem;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px; 
+        width: 100%;
+        height: 5px; 
+        background-color: variables.$gray; 
+    }
+   }
+
+}*/
 .container {
   max-width: 1920px;
   margin: 0 auto;
