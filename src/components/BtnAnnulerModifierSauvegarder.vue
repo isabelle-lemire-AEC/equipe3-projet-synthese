@@ -3,7 +3,7 @@
         <button class="bouton bouton--transparent" type="button" @click="goBack">
             Annuler
         </button>
-        <button :class="buttonClass" type="submit">
+        <button :class="buttonClass" type="submit" @click="action">
             <div class="icone-libelle">
                 <i class="fas fa-save"></i>
                 <span>{{ buttonText }}</span>
@@ -58,6 +58,7 @@
     const props = defineProps({
         buttonText: String,
         buttonClass: String,
+        action: Function,
     });
 </script>
 
