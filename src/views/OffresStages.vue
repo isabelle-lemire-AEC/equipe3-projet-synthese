@@ -1,5 +1,5 @@
 <template>
-  <div class="pageContainer">
+  <div id="bgred">
         <h1>Offres de stage</h1>
         <RouterLink to="/offre-de-stage-ajout">
             <button class="bouton bouton--rouge">Ajouter une offre de stage</button>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-  import ElementListeStage from '../components/ElementListeStage.vue'
+  import ElementListeStage from '../components/elementListeStage.vue'
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
   import { useProvinces } from '../composables/provinces/provinces.js'
   import { useInternshipTypes } from '@/composables/types_stage/types_stage.js'
@@ -106,6 +106,7 @@
   testAPI();
 
 </script>
+
 
 
 

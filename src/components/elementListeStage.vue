@@ -1,9 +1,125 @@
 <template>
     <div class="elementStage" v-if="showThisElement">
-        <div>
+
+        <table>
+
+            <thead class="liste__head">
+                <tr class="liste__rangee">
+                    <th class="liste__head__titre-colonne liste__head__titre-colonne--1">Poste</th>
+                    <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Établissement</th>
+                    <th class="liste__head__titre-colonne liste__head__titre-colonne--3">Date</th>
+                    <th class="liste__head__titre-colonne liste__head__titre-colonne--4">Actions</th>
+                </tr>
+            </thead>
+
+
+            <!-- Responsive Table Body Section -->
+            <tbody class="liste__body">
+                <tr class="liste__rangee">
+                    <td class="liste__body__contenu-colonne liste__body__contenu-colonne--1">
+                        <div class="liste__wrapper-horizontal">
+                            <div v-if="isDemande">
+                                <div class="icone icone--demande">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                            </div>
+
+                            <div v-if="!isDemande">
+                                <div class="icone icone--offre">
+                                    <i class="fas fa-suitcase"></i>
+                                </div>
+                            </div>
+
+                            <div class="liste__wrapper-vertical">
+                                <span class="poste">{{ props.posteTitre }}</span>
+                                <span>{{ props.posteNom }}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="liste__body__contenu-colonne liste__body__contenu-colonne--2">
+                        <div class="region">
+                            <span>{{ props.region }}</span>
+                        </div>
+                    </td>
+                    <td class="liste__body__contenu-colonne liste__body__contenu-colonne--3">
+                        <div class="dateInscription">
+                            <span>{{ date }}</span>
+                        </div>
+                    </td>
+
+                    <td class="liste__body__contenu-colonne liste__body__contenu-colonne--4">
+                        <div class="liste__wrapper-boutons">
+                            
+                                <button v-if="props.isTableauDeBord" class="bouton bouton--activer" @click="activer()">Activer</button>
+                            
+
+                            <!-- Boutons Demande -->
+                            <div v-if="props.isDemande">
+                                <div class="boutons-action" v-if="props.isDemande">
+                                    <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.id}}">
+                                        <button class="boutons-action-liste boutons-action-liste__consulter">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                    </RouterLink>
+
+                                    <RouterLink :to="{name: 'DemandeStageMiseAjour', params: {id: props.id}}">
+                                        <button class="boutons-action-liste boutons-action-liste__modifier">
+                                            <i class="fas fa-pen-to-square"></i>
+                                        </button>
+                                    </RouterLink>
+
+                                    <button class="boutons-action-liste boutons-action-liste__supprimer" @click="afficherConfirmationModal()">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Boutons offre -->
+                            <div v-if="!props.isDemande">
+                                <div class="groupeBtns boutons-action" v-if="!props.isDemande">
+                                    <RouterLink :to="{name: 'OffreStageDetails', params: {id: props.id}}">
+                                        <button class="boutons-action-liste boutons-action-liste__consulter">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                    </RouterLink>
+
+                                    <RouterLink :to="{name: 'OffreStageMiseAjour', params: {id: props.id}}">
+                                        <button class="boutons-action-liste boutons-action-liste__modifier">
+                                            <i class="fas fa-pen-to-square"></i>
+                                        </button>
+                                    </RouterLink>
+
+                                    <button class="boutons-action-liste boutons-action-liste__supprimer" @click="afficherConfirmationModal()">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+        <!--  <div>
             <div class="poste">
-            <div class="iconTemp">
-            </div>
+                <div v-if="isDemande">
+                    <div class="iconTemp">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                </div>
+
+                <div v-if="!isDemande">
+                    <div class="iconTemp">
+                        <i class="fas fa-suitcase"></i>
+                    </div>
+                </div>
+
                 <div class="posteEtNom">
                     <span>{{ props.posteTitre }}</span>
                     <span>{{ props.posteNom }}</span>
@@ -21,10 +137,10 @@
         </div>
         <div class="boutonActiver" v-if="props.isTableauDeBord">
             <button @click="activer()">Activer</button>
-        </div>
+        </div> -->
 
         <!-- Boutons pour les DEMANDES de stage -->
-        <div class="groupeBtns boutons-action" v-if="props.isDemande">
+        <!-- <div class="groupeBtns boutons-action" v-if="props.isDemande">
             <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.id}}">
                 <button><i class="fa-solid fa-eye"></i></button>
             </RouterLink>
@@ -33,11 +149,12 @@
                 <button class="boutons-action__modifier"><i class="fas fa-pen-to-square"></i></button>
             </RouterLink>
 
-            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i class="fa-solid fa-trash-can"></i></button>
-        </div>
+            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i
+                   class="fa-solid fa-trash-can"></i></button>
+        </div> -->
 
         <!-- Boutons pour les OFFRES de stage -->
-        <div class="groupeBtns boutons-action" v-if="!props.isDemande">
+        <!-- <div class="groupeBtns boutons-action" v-if="!props.isDemande">
             <RouterLink :to="{name: 'OffreStageDetails', params: {id: props.id}}">
                 <button><i class="fa-solid fa-eye"></i></button>
             </RouterLink>
@@ -46,17 +163,18 @@
                 <button class="boutons-action__modifier"><i class="fas fa-pen-to-square"></i></button>
             </RouterLink>
 
-            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i class="fa-solid fa-trash-can"></i></button>
+            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i
+                   class="fa-solid fa-trash-can"></i></button>
         </div>
-
+ -->
         <!-- Modal de confirmation de suppression -->
         <div class="modal" v-if="showConfirmationModal">
             <div class="modal-content">
                 <p v-if="props.isDemande">Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
                 <p v-if="!props.isDemande">Êtes-vous sûr de vouloir supprimer cette offre de stage?</p>
                 <div class="modal-buttons">
-                <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
-                <button class="btn confirm" @click="deleteDemande()">Confirmer</button>
+                    <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
+                    <button class="btn confirm" @click="deleteDemande()">Confirmer</button>
                 </div>
             </div>
         </div>
@@ -84,7 +202,7 @@
     const lienDetails = ref(null);
     const lienMiseAJour = ref(null);
 
-    if(props.isTableauDeBord && props.isActive) {
+    if (props.isTableauDeBord && props.isActive) {
         showThisElement.value = false;
     }
 
@@ -99,12 +217,12 @@
 
     // Fonction pour afficher la modal de confirmation
     const afficherConfirmationModal = () => {
-    showConfirmationModal.value = true;
+        showConfirmationModal.value = true;
     };
 
     // Fonction pour annuler la suppression
     const annulerSuppression = () => {
-    showConfirmationModal.value = false;
+        showConfirmationModal.value = false;
     };
 
     if (props.isDemande) {
@@ -116,19 +234,17 @@
     }
 
     const activer = async () => {
-        if(props.isDemande) {
+        if (props.isDemande) {
             await activateRequest(props.id);
         } else {
             await activateOffer(props.id);
         }
         showThisElement.value = false;
     }
-
 </script>
 
 <style scoped>
-
-    .poste {
+/*     .poste {
         border-left: 0.3rem solid orange;
         padding-left: 0.6rem;
         display: flex;
@@ -147,13 +263,17 @@
         background-color: orange;
     }
 
-    
+
     .btn {
         cursor: pointer;
         border: none;
     }
 
-    /* Styles pour le modal */
+   
+
+
+
+   
     .modal {
         display: flex;
         justify-content: center;
@@ -165,7 +285,7 @@
         width: 100%;
         height: 100%;
         overflow: auto;
-        background-color: rgba(0,0,0,0.4);
+        background-color: rgba(0, 0, 0, 0.4);
     }
 
     .modal-content {
@@ -175,7 +295,7 @@
         border: 1px solid #888;
         width: 30%;
         border-radius: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     }
 
     .modal-buttons {
@@ -205,7 +325,8 @@
         opacity: 0.8;
     }
 
-    html, body {
+    html,
+    body {
         background-color: rgb(222, 222, 222);
         font-family: Arial, Helvetica, sans-serif;
     }
@@ -262,6 +383,5 @@
     .poste {
         display: flex;
         flex-direction: column;
-    }
-
+    } */
 </style>

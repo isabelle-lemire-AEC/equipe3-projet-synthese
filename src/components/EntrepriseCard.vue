@@ -6,6 +6,7 @@
         <div>
           <h2>{{ entreprise.name }}</h2>
           <p>{{ entreprise.address }}</p>
+          
         </div>
         <div>
           <p>Téléphone : {{ entreprise.phone }}</p>

@@ -1,6 +1,6 @@
-<!-- TableauDeBord.vue / débuter par Caro, continuer par Isa -->
+<!-- TableauDeBord.vue -->
 <template>
-    <div class="pageContainer">
+    <div>
         <section class="infoRapide">
             <div class="infoRapide-demandes">
                 <div class="icone-infoRapide">
@@ -77,8 +77,6 @@
             </div>
         </section>
 
-       <!-- <hr style="margin: 25px 0;">  à deleter, seulement pour faire section -->
-
         <!-- Offre de stage -->
         <section class="dernieresOffres">
             <div class="entete-dernieresDemandes-Offres">
@@ -114,14 +112,12 @@
     </div>
 </template>
 <script setup>
-    import ElementListeStage from '../components/ElementListeStage.vue'
+    import ElementListeStage from '../components/elementListeStage.vue'
     import { ref, onMounted } from 'vue';
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
     import { useCandidat } from '../composables/candidats/candidat.js';
     import { useEntreprise } from '../composables/entreprises/entreprise.js';
-    import TBListeDemandeStageAttente from '../components/TBListeDemandeStageAttente.vue';
-    import TBListeOffreStageAttente from '../components/TBListeOffreStageAttente.vue';
     import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js'; 
 
     const { getAllNotActiveRequests, updateRequestStatus, getRequestsCount, activateRequest } = useInternshipRequests();
@@ -184,20 +180,3 @@
     });
 
 </script>
-
-<!--<style scoped>
- .flex {
-    display: flex;
- }
-
- .infoRapide-demandes,
- .infoRapide-offres,
- .infoRapide-candidats,
- .infoRapide-entreprises {
-    background-color: beige;
-    padding: 25px;
-    margin-right: 25px;
-    border-radius: 25px;
- }
-
-</style>-->

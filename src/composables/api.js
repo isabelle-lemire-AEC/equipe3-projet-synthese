@@ -35,6 +35,7 @@ export async function fetchInternshipOffers() {
 export async function getAllEntreprises() {
     try {
         const response = await axios.get(`${API_BASE_URL}/enterprises`);
+        console.log("GET ALL - Entreprises - OK");
         return response.data;
     } catch (error) {
         console.error("Erreur lors de la récupération des enterprises :", error);
