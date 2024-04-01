@@ -1,5 +1,5 @@
 <template>
-  <div class="pageContainer" id="bgred">
+  <div id="bgred">
         <h1>Offres de stage</h1>
         <RouterLink to="/offre-de-stage-ajout">
             <button class="bouton bouton--rouge">Ajouter une offre de stage</button>

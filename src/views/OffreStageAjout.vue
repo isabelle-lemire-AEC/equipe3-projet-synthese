@@ -1,4 +1,4 @@
-<!-- Offre de stage AJOUT - RAPH et Caro -->
+<!-- Offre de stage AJOUT -->
 <template>
       <div class="form-fiche formulaire-ajout-offrestages">
         <div class="form-fiche__wrapper-titre">
@@ -129,7 +129,7 @@
         </form>
         <!-- Boutons annuler et mettre à jour -->
         <div class="boutons">
-            <button class="bouton bouton--transparent">Annuler</button>
+            <BtnAnnuler></BtnAnnuler>
             <button class="bouton bouton--rougeOffre" @click="submitForm()">
                 <div class="icone-libelle">
                     <i class="fas fa-save"></i>
@@ -143,7 +143,6 @@
 
 </template>
 
-<!-- //raph/Joe & caro  -->
 <script setup>
 
     import { ref, onMounted } from 'vue';
@@ -168,68 +167,56 @@
 
     // type RAPH***
 
-onMounted(async () => {
-  const entreprisesData = await getAllEntreprises();
-  entreprises.value = entreprisesData.data;
+    onMounted(async () => {
+      const entreprisesData = await getAllEntreprises();
+      entreprises.value = entreprisesData.data;
 
-  if (entreprisesError.value) {
-    console.error("Erreur lors du chargement des entreprises:", entreprisesError.value);
-  }
-  
-  try {
-    const typesData = await fetchStageTypes();
-    internshipTypes.value = typesData;
-    console.log("Provinces chargées:", internshipTypes.value); 
-  } catch (error) {
-    console.error("Erreur lors du chargement des type", error);
-  }
+      if (entreprisesError.value) {
+        console.error("Erreur lors du chargement des entreprises:", entreprisesError.value);
+      }
+      
+      try {
+        const typesData = await fetchStageTypes();
+        internshipTypes.value = typesData;
+        console.log("Provinces chargées:", internshipTypes.value); 
+      } catch (error) {
+        console.error("Erreur lors du chargement des type", error);
+      }
 
-  try {
-    const provincesData = await fetchProvinces();
-    provinces.value = provincesData;
-    console.log("Provinces chargées:", provinces.value); 
-  } catch (error) {
-    console.error("Erreur lors du chargement des provinces", error);
-  }
-});
+      try {
+        const provincesData = await fetchProvinces();
+        provinces.value = provincesData;
+        console.log("Provinces chargées:", provinces.value); 
+      } catch (error) {
+        console.error("Erreur lors du chargement des provinces", error);
+      }
+    });
 
-const offerData = ref({
-  title: "",
-  description: "",
-  //est ce que l'entreprise à été transformeé en id ?
-  enterprise: { _id: "" }, 
-  startDate: "",
-  endDate: "",
-  weeklyWorkHours: 0,
-  salary: 0,
-  province: { _id: "" },
-  //attention ici verifier si je peux mettre plus d'un string dans le tableau de skills
-  requiredSkills: [],
-  internshipType: { _id: "" },
-  paid: "DISCRETIONARY",
-  isActive: false
-});
+    const offerData = ref({
+      title: "",
+      description: "",
+      //est ce que l'entreprise à été transformeé en id ?
+      enterprise: { _id: "" }, 
+      startDate: "",
+      endDate: "",
+      weeklyWorkHours: 0,
+      salary: 0,
+      province: { _id: "" },
+      //attention ici verifier si je peux mettre plus d'un string dans le tableau de skills
+      requiredSkills: [],
+      internshipType: { _id: "" },
+      paid: "DISCRETIONARY",
+      isActive: false
+    });
 
-const submitForm = async () => {
-  console.log(offerData.value)
-  await ajouterOffre(offerData.value);
-  console.log("Offre ajoutée avec succès");
-  router.push({name: "OffresStages"});
+    const submitForm = async () => {
+      console.log(offerData.value)
+      await ajouterOffre(offerData.value);
+      console.log("Offre ajoutée avec succès");
+      router.push({name: "OffresStages"});
 
-};
+    };
 
 </script>
 
 <style></style>
-
-
-<!-- // onMounted(async () => {
-//     ////////////////////////
-//     const entreprisesData = await getAllEntreprises();
-//     entreprises.value = entreprisesData.data;
-//     if (entreprisesResponse.value && Array.isArray(entreprisesResponse.value)){
-//         entreprises.value = entreprisesResponse.value;
-//         console.log("Entreprises chargées:", entreprises.value); 
-//     } else {
-//         console.error("La réponse n'est pas un tableau:", entreprisesResponse.value);
-//     } -->

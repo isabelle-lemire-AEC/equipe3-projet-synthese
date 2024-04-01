@@ -4,7 +4,10 @@
   <div class="header" v-if="nomPrenom && courriel"> 
     <div class="header__items">
       <div class="header__icone-boutons-ajout">
-          <i class="fa-solid fa-bars" id="icone-menu" @click="toggleMenu"></i>
+          <div class="burger-menu"  @click="toggleSidebar">
+            <i class="fa-solid fa-bars " id="icone-menu"></i>
+          </div>
+          
           <div class="boutons-ajout">
             <button class="add-button add-offer" @click="ajouterOffre">
               <i class="fas fa-plus"></i> Ajouter une offre de stage
@@ -41,9 +44,10 @@
 </template>
 
 <script setup>
-  import { ref, defineEmits } from 'vue';
+  import { ref } from 'vue';
   import { useRouter } from "vue-router";
-
+  import {  defineProps } from 'vue'
+  
 
   // Récupérer les informations à partir du localStorage
   const nomPrenom = ref(localStorage.getItem('nomPrenom'));
@@ -75,106 +79,14 @@
     });
   };
 
+  
+
 
   /* Menu toggable */
-const emit = defineEmits(['menu-toggled']);
-const isMenuOpen = ref(false);
+  const props = defineProps(['toggleSidebar']);
 
-  const toggleMenu = () => {
-    isMenuOpen.value = !isMenuOpen.value;
-    emit('menu-toggled', isMenuOpen.value);
-  };
+
+
 </script>
 
 
-<!--<style scoped>
-  .navbar {
-    display: grid;
-    grid-template-columns: 20% 60% 20%;
-    /* Répartition en trois colonnes */
-    align-items: center;
-    /* Alignement vertical au centre */
-    /* Fond cyan */
-    padding: 20px;
-  }
-
-  .logo,
-  .add-buttons,
-  .user {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /* Centrage du contenu */
-  }
-
-  .add-buttons {
-    gap: 10px;
-    /* Espacement entre les boutons */
-  }
-
-  .add-button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    background: none;
-  }
-
-  /* Couleurs différentes pour chaque bouton */
-  .add-offer {
-    border: 1px solid #bc1f26;
-    color: #bc1f26;
-  }
-
-  .add-request {
-    border: 1px solid #d6a853;
-    color: #d6a853;
-  }
-
-  .add-company {
-    border: 1px solid #89a9e6;
-    color: #89a9e6;
-  }
-
-  .add-candidate {
-    border: 1px solid #7e2687;
-    color: #7e2687;
-  }
-
-  .add-button i {
-    margin-right: 5px;
-  }
-
-  .add-button:hover {
-    opacity: 0.8;
-  }
-
-  .utilisateur {
-    margin-left: 20px;
-  }
-
-  .utilisateur-detail p {
-    text-align: right;
-    margin: 0;
-    padding-right: 5px;
-  }
-
-  .utilisateur-nom {
-    font-size: 15px;
-    font-weight: bold;
-  }
-
-  .utilisateur-courriel {
-    font-size: 12px;
-  }
-
-  img.utilisateur-img {
-    width: 20%;
-  }
-
-  .flex {
-    align-items: center;
-  }
-</style>-->

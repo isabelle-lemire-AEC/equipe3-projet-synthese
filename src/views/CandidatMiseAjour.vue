@@ -9,15 +9,10 @@
 
         <form id="edition-candidat" @submit.prevent="soumettreFormulaire">
 
-            <div class="boutons">
-                <BtnAnnuler></BtnAnnuler>
-                <button class="bouton bouton--mauve" type="submit">
-                    <div class="icone-libelle">
-                        <i class="fas fa-save"></i>
-                        <span>Mettre à jour</span>
-                    </div>
-                </button>
-            </div>
+            <BtnAnnulerModifierSauvegarder 
+                buttonText="Mettre à jour" 
+                buttonClass="bouton bouton--mauve">
+            </BtnAnnulerModifierSauvegarder>
 
             <div class="form-fiche__encadre">
                 <div class="form-fiche__wrapper-titre-groupe-inputs">
@@ -75,15 +70,10 @@
                 </div>
             </div>
 
-            <div class="boutons">
-                <button class="bouton bouton--transparent" type="submit" @click="annulerModif">Annuler</button>
-                <button class="bouton bouton--mauve" type="submit">
-                    <div class="icone-libelle">
-                        <i class="fas fa-save"></i>
-                        <span>Mettre à jour</span>
-                    </div>
-                </button>
-            </div>
+            <BtnAnnulerModifierSauvegarder 
+                buttonText="Mettre à jour" 
+                buttonClass="bouton bouton--mauve">
+            </BtnAnnulerModifierSauvegarder>
         </form>
     </div>
 </template>
@@ -97,8 +87,7 @@
         fetchProvinces
     } from '@/composables/api';
 
-    import BtnAnnuler from '../components/BtnAnnuler.vue';
-
+    import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
     const {
         getCandidatById,
@@ -206,80 +195,5 @@
 </script>
 
 <style scoped>
-    /* .container {
-        padding:80px 200px 80px 200px;
-        background-color: #ececee;
-    }
 
-    .section {
-        background: white;
-        padding: 50px;
-        border-radius: 25px;
-        margin: 25px 0;
-    }
-
-    .section h2 {
-        font-size: 50px;
-        color: purple;
-    }
-
-    .border-left-titre {
-        border-left: 10px solid purple;
-        padding-left: 25px;
-    }
-
-    .border-left {
-        border-left: 10px solid gray;
-        padding-left: 10px;
-        margin-bottom: 25px;
-    }
-
-    input[type=text], input[type=email], textarea {
-        margin-bottom: 10px;
-        width: 100%;
-    }
-
-    input[type=text], input[type=email] {
-        min-height: 50px;
-    }
-
-    .label-flex {
-        width: 15%;
-    }
-
-    .col-gauche {
-        width: 50%;
-    }
-
-    .col-droite {
-        width: 50%
-    }
-
-    .padding-right-15 {
-        padding-right: 15px;
-    }
-
-    .mettre-a-jour {
-        background-color: purple;
-        color: #fff;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-bottom: 50px;
-        border:none;
-        cursor: pointer;
-    }
-
-    .mettre-a-jour:hover{
-        background-color: rgb(53, 5, 53);
-    }
-
-    .annuler {
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-bottom: 50px;
-    }
-
-    button {
-        margin-right: 15px;
-    } */
 </style>
