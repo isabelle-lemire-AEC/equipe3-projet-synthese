@@ -1,3 +1,4 @@
+<!-- OffreStageDetails.vue -->
 <template>
   <div v-if="loading">Chargement...</div>
   <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>

@@ -46,7 +46,7 @@
           <div class="form-fiche__wrapper-titre-groupe-inputs">
             <h2>Courte présentation</h2>
             <div>
-              <label for="presentation" class="form-fiche__label--cache">Présentation de l'entreprise</label>
+              <label for="presentation" hidden>Présentation de l'entreprise</label>
               <textarea name="presentation" id="presentation" cols="30" rows="10"
                         v-model="entreprise.description"></textarea>
             </div>
@@ -118,82 +118,80 @@
 </template>
 
 
-<script>
-  import axios from "axios";
-  import {
-    useRoute,
-    useRouter
-  } from "vue-router";
-  import logoEntreprise from "../assets/mediavox-logo.jpg";
+<script setup>
+import axios from "axios";
+import { useRoute, useRouter } from "vue-router";
+import { ref } from 'vue';
+import logoEntreprise from "../assets/mediavox-logo.jpg";
 
-  export default {
-    name: "EntrepriseMiseAjour",
-    props: ["id"], // Ajoutez cette ligne
-    data() {
-      return {
-        entreprise: {
-          name: "",
-          image: "",
-          description: "",
-          contactPerson: "",
-          address: "",
-          phone: "",
-          city: "",
-          email: "",
-          province: {
-            _id: "",
-            value: ""
-          },
-          postalCode: "",
-        },
-        provinces: [], // Ajoutez cette ligne
-        logoEntreprise,
-      };
-    },
-    methods: {
-      async mettreAJourEntreprise() {
-        try {
-          // Mise à jour de l'entreprise en utilisant une requête PATCH
-          const response = await axios.patch(
-            `https://api-3.fly.dev/enterprises/${this.$route.params.id}`,
-            this.entreprise
-          );
-          // Si la mise à jour est réussie, redirection vers la page des entreprises
-          if (response.status === 200) {
-            this.$router.push({
-              name: "Entreprises"
-            });
-          }
-        } catch (error) {
-          // Affichage d'une erreur en cas d'échec de la mise à jour
-          console.error("Erreur lors de la mise à jour de l'entreprise:", error);
-        }
-      },
-      async fetchProvinces() {
-        // Ajoutez cette fonction
-        try {
-          const response = await axios.get("https://api-3.fly.dev/provinces");
-          this.provinces = response.data;
-        } catch (error) {
-          console.error("Erreur lors de la récupération des provinces :", error);
-        }
-      },
-    },
-    async mounted() {
-      try {
-        // Récupération des détails de l'entreprise lors du montage du composant
-        const response = await axios.get(
-          `https://api-3.fly.dev/enterprises/${this.$route.params.id}`
-        );
-        this.entreprise = response.data;
-        this.fetchProvinces(); // Récupérez les provinces lors du montage du composant
-      } catch (error) {
-        // Affichage d'une erreur en cas d'échec de la récupération des détails de l'entreprise
-        console.error("Erreur lors de la récupération de l'entreprise:", error);
-      }
-    },
-  };
+import BtnAnnuler from '../components/BtnAnnuler.vue';
+
+
+const id = useRoute().params.id;
+const router = useRouter();
+
+const entreprise = ref({
+  name: "",
+  image: "",
+  description: "",
+  contactPerson: "",
+  address: "",
+  phone: "",
+  city: "",
+  email: "",
+  province: {
+    _id: "",
+    value: ""
+  },
+  postalCode: "",
+});
+
+const provinces = ref([]);
+
+// Fonction pour mettre à jour l'entreprise
+const mettreAJourEntreprise = async () => {
+  try {
+    const response = await axios.patch(
+      `https://api-3.fly.dev/enterprises/${id}`,
+      entreprise.value
+    );
+    // Redirection vers la page des entreprises si la mise à jour est réussie
+    if (response.status === 200) {
+      router.push({
+        name: "Entreprises"
+      });
+    }
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de l'entreprise:", error);
+  }
+};
+
+// Fonction pour récupérer les provinces depuis l'API
+const fetchProvinces = async () => {
+  try {
+    const response = await axios.get("https://api-3.fly.dev/provinces");
+    provinces.value = response.data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des provinces :", error);
+  }
+};
+
+// Fonction pour charger les détails de l'entreprise
+const chargerEntreprise = async () => {
+  try {
+    const response = await axios.get(`https://api-3.fly.dev/enterprises/${id}`);
+    entreprise.value = response.data;
+    // Récupérer les provinces lors du chargement de l'entreprise
+    await fetchProvinces();
+  } catch (error) {
+    console.error("Erreur lors de la récupération de l'entreprise:", error);
+  }
+};
+
+// Appeler la fonction chargerEntreprise au montage du composant
+chargerEntreprise();
 </script>
+
 
 <style scoped>
   /*.entete {

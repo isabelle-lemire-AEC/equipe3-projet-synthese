@@ -70,7 +70,7 @@ const getInternshipOfferById = async (id) => {
   try {
     const res = await axios.get(`https://api-3.fly.dev/internship-offers/${id}`);
     console.log("Success: Obtained internship offer by ID", res.data);
-    response.value = [res.data];
+    response.value = res.data;
   } catch (err) {
     console.error("Error: Failed to obtain internship offer by ID", err);
     error.value = err;

@@ -8,7 +8,7 @@
     <form id="ajout-entreprise" @submit.prevent="soumettreFormulaireEntreprise">
 
       <div class="boutons">
-        <button class="bouton bouton--transparent" type="button"  @click="$router.go(-1)">Annuler</button>
+        <BtnAnnuler></BtnAnnuler>
         <button class="bouton bouton--bleu" type="submit">
           <div class="icone-libelle">
             <i class="fas fa-save"></i>
@@ -39,7 +39,7 @@
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h2>Courte présentation</h2>
           <div>
-            <label for="presentation" class="form-fiche__label--cache">Présentation</label>
+            <label for="presentation" hidden>Présentation</label>
             <textarea name="presentation" id="presentation" cols="30" rows="10" v-model.trim="entreprise.description"></textarea>
             <p class="validForm" v-if="erreurs.description">Ce champ est obligatoire</p>
           </div>
@@ -136,6 +136,9 @@
   import { useRouter } from 'vue-router';
   import { useEntreprise } from '@/composables/entreprises/entreprise';
   import { fetchProvinces } from '@/composables/api';
+
+  import BtnAnnuler from '../components/BtnAnnuler.vue';
+
 
   const router = useRouter();
 

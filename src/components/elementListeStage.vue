@@ -2,7 +2,8 @@
     <div class="elementStage" v-if="showThisElement">
         <div>
             <div class="poste">
-            <div class="iconTemp"></div>
+            <div class="iconTemp">
+            </div>
                 <div class="posteEtNom">
                     <span>{{ props.posteTitre }}</span>
                     <span>{{ props.posteNom }}</span>
@@ -10,7 +11,7 @@
             </div>
         </div>
         <div class="secteurActivite">
-            <span>TODO</span>
+            <span>{{ props.info2 }}</span>
         </div>
         <div class="region">
             <span>{{ props.region }}</span>
@@ -61,21 +62,27 @@
         </div>
 
     </div>
+
+    <!--<i class="fa-solid fa-graduation-cap"></i>
+    <i class="fa-solid fa-suitcase"></i>-->
 </template>
 
 <script setup>
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
-    import { ref } from 'vue';
+    import { ref, onMounted } from 'vue';
     import { useRoute } from 'vue-router';
 
-    const route = useRoute();
     const { deleteRequest, activateRequest } = useInternshipRequests();
     const { supprimerOffre, activateOffer } = useInternshipOffers();
-    const props = defineProps(['posteTitre', 'posteNom', 'region', 'date', 'id', 'isDemande', 'isTableauDeBord', 'isActive']);
+
+    const props = defineProps(['posteTitre', 'posteNom', 'info2', 'region', 'date', 'id', 'isDemande', 'isTableauDeBord', 'isActive']);
     const showConfirmationModal = ref(false);
     const showThisElement = ref(true);
     const date = ref([]);
+    const route = useRoute();
+    const lienDetails = ref(null);
+    const lienMiseAJour = ref(null);
 
     if(props.isTableauDeBord && props.isActive) {
         showThisElement.value = false;
@@ -100,8 +107,6 @@
     showConfirmationModal.value = false;
     };
 
-    const lienDetails = ref(null);
-    const lienMiseAJour = ref(null);
     if (props.isDemande) {
         lienDetails.value = 'DemandeStageDetails';
         lienMiseAJour.value = 'DemandeStageMiseAjour';

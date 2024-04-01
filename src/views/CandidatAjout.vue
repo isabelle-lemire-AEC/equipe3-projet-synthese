@@ -9,7 +9,7 @@
         <form id="ajout-candidat" @submit.prevent="soumettreFormulaire">
 
             <div class="boutons">
-                <button class="bouton bouton--transparent" type="submit" @click="annulerAjout">Annuler</button>
+                <BtnAnnuler></BtnAnnuler>
                 <button class="bouton bouton--mauve" type="submit">
                     <div class="icone-libelle">
                         <i class="fas fa-save"></i>
@@ -48,7 +48,7 @@
                 <div class="form-fiche__wrapper-titre-groupe-inputs">
                     <h2>Courte présentation</h2>
                     <div>
-                        <label for="description" class="form-fiche__label--cache">Description</label>
+                        <label for="description" hidden>Description</label>
                         <textarea name="description" id="description" cols="30" rows="10"
                                   v-model.trim="candidat.description"></textarea>
                         <p class="validForm" v-if="erreurs.description">Veuillez remplir ce champ</p>
@@ -141,6 +141,8 @@
     import { useCandidat } from '@/composables/candidats/candidat';
     import { fetchProvinces } from '@/composables/api';
 
+    import BtnAnnuler from '../components/BtnAnnuler.vue';
+
     const router = useRouter();
     const {
         addCandidat
@@ -172,12 +174,14 @@
         }
     }
 
+    /*     
     const annulerAjout = () => {
         console.log("Annuler l'ajout du candidat");
         router.push({
             name: 'Candidats'
         });
     }
+    */
 
     initProvinces();
 

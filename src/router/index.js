@@ -30,7 +30,6 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', name: 'accueil', component: Accueil },
-    //{ path: '/', name: 'TableauDeBord', component: TableauDeBord },
     { path: '/tableau-de-bord', name: 'TableauDeBord', component: TableauDeBord },
 
     { path: '/offres-de-stages', name: 'OffresStages', component: OffresStages },
