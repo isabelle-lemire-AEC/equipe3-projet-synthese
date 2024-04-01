@@ -52,7 +52,7 @@ export function useInternshipOffers() {
   };
 
   const edditerOffre = async (id, offerData) => {
-    loading.value = true;
+    // loading.value = true;
     try {
         console.log("Edition avant", offerData);
         const url = `https://api-3.fly.dev/internship-offers/${id}`; 
@@ -62,7 +62,7 @@ export function useInternshipOffers() {
         error.value = err;
         console.error("Échec de l'édition", err);
     } finally {
-        loading.value = false;
+        // loading.value = false;
     }
 };
   

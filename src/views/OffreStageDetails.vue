@@ -6,6 +6,18 @@
     <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>
 
     <div v-else-if="offerData && offerData.title" class="form-fiche fiche-offrestages-details">
+      <div class="boutons-action">
+          <button :class="{ 'boutons-action__crochet': offerData.isActive }" @click="activate()">
+              <i class="fas fa-check"></i>
+          </button>
+          <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(offerData._id)">
+              <i class="fas fa-pen-to-square"></i>
+          </button>
+          <button class="boutons-action__supprimer" @click="afficherConfirmationModal()">
+              <i class="fas fa-square-xmark"></i>
+          </button>
+      </div>
+
       <div class="form-fiche__wrapper-titre">
         <p class="form-fiche__nom-section">Offre de stage</p>
         <h1>{{ offerData.title }}</h1>
@@ -62,22 +74,25 @@
             </div>
           </div>
 
-          <form class="" @submit.prevent="submitForm">
-            <div class="isActive">
-              <label for="actif">ACTIF ?</label>
-              <input class="cool" v-model="offerData.isActive" type="checkbox" @change="updateOfferStatus" placeholder="actif">
-            </div>
-            <router-link class="bouton_go-to-eddit" :to="`/offre-de-stage-mise-a-jour/${offerData._id}`">Editer' {{ offerData.title }}</router-link>
-          </form>
-          <button @click="supprimer">Supprimer l'offre</button>
-
           <div class="form-fiche__wrapper-titre-groupe-inputs">
             <h3>Informations suplémentaires</h3>
-            <!-- <p>Hard codé - info manquante</p> -->
+            <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5" v-model="offerData.additionalInformation"></textarea>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Modal de confirmation de suppression -->
+    <div class="modal" v-if="showConfirmationModal">
+        <div class="modal-content">
+            <p>Êtes-vous sûr de vouloir supprimer cette offre de stage?</p>
+            <div class="modal-buttons">
+                <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
+                <button class="btn confirm" @click="supprimer()">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Message d'erreur -->
     <div v-else>Aucune information disponible</div>
@@ -94,6 +109,7 @@
   const route = useRoute();
   const router = useRouter(); 
   const { getInternshipOfferById, response, loading, error, edditerOffre } = useInternshipOffers();
+  const showConfirmationModal = ref(false);
 
   onMounted(async () => {
 
@@ -147,4 +163,80 @@
     route.push('/offres-de-stages');
   };
 
+  const activate = async () => {
+      offerData.value.isActive = !offerData.value.isActive;
+      await edditerOffre(offerData.value._id, offerData.value);
+  }
+
+  const redirigerVersMiseAJour = (id) => {
+      router.push({ name: 'OffreStageMiseAjour', params: { id } });
+  };
+
+  const afficherConfirmationModal = () => {
+        showConfirmationModal.value = true;
+  };
+
+  const annulerSuppression = () => {
+        showConfirmationModal.value = false;
+  };
+
+
 </script>
+
+<style>
+
+
+    /* Styles pour le modal */
+    .modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+
+    .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn.confirm {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn.cancel {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+    }
+
+
+</style>
