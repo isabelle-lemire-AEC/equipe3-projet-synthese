@@ -1,2 +1,152 @@
 @use '../general/variables';
 @use '../general/mixins';
+
+.icone-infoRapide{
+    font-size: 60px;
+}
+.infoRapide{
+    @include mixins.grid(3, 1rem);
+    color: white;
+
+    .chiffre{
+        font-size: 50px;
+        font-weight: bold;
+    }
+    
+  
+    
+}
+.infoRapide-demandes{
+    @include mixins.flex(row, flex-start, center, 1rem);
+    background-color: variables.$gold;
+    border-radius: 10px;
+    padding: 25px;
+    position: relative;
+
+    &::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 10%;
+            border-radius: 0 10px 10px 0;
+            background-color: variables.$dark-gold;
+    }
+}
+
+.infoRapide-offres{
+    @include mixins.flex(row, flex-start, center, 1rem);
+    background-color: variables.$red;
+    border-radius: 10px;
+    padding: 25px;
+    position: relative;
+
+    &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 10%;
+        border-radius: 0 10px 10px 0;
+        background-color: variables.$dark-red;
+    }
+}
+.infoRapide-candidat-entreprise{
+    @include mixins.flex(row, flex-start, center, null);
+    .bulle-candidat{
+        padding-right: 1rem; 
+    }
+    .bulle-entreprise{
+        padding-left: 1rem;
+    }
+    
+
+    .infoRapide-candidats{
+        @include mixins.flex(row, flex-start, center, 1rem);
+        background-color: variables.$purple;
+        border-radius: 10px 0 0 10px;
+        padding: 25px;
+        position: relative;
+
+        &::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 10%;
+            background-color: variables.$dark-purple;
+        }
+    }
+    
+    .infoRapide-entreprises{
+        @include mixins.flex(row, space-between, center, 1rem);
+        background-color: variables.$blue;
+        border-radius: 0 10px 10px 0;
+        padding: 25px;
+        position: relative;
+
+        &::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 10%;
+            background-color: variables.$dark-blue;
+        }
+    }
+    
+}
+
+
+
+.dernieresDemandes{
+    background-color: variables.$white;
+    color: variables.$black;
+    margin-top: 40px;
+    border-radius: 10px;
+    padding: 60px;
+    span{
+        color: variables.$gold;
+    }
+    h4{
+        color: variables.$red;
+        @include mixins.font(variables.$font-body, null, null);
+    }
+}
+
+.dernieresOffres{
+    background-color: variables.$white;
+    color: variables.$black;
+    margin-top: 40px;
+    border-radius: 10px;
+    padding: 60px;
+    span{
+        color: variables.$red;
+    }
+    h4{
+        color: variables.$red;
+        @include mixins.font(variables.$font-body, null, null);
+    }
+}
+
+
+
+.entete-dernieresDemandes-Offres{
+    @include mixins.flex(row, space-between, center, null);
+}
+
+.grid-dernieresDemandes-Offre{
+    @include mixins.grid(4, 1rem);
+    color: variables.$charcoal;
+    margin-top: 60px;
+
+   p{
+    @include mixins.font(variables.$font-body, null, bold);
+   }
+
+}
+

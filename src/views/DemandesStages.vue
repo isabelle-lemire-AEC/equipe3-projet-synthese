@@ -2,7 +2,7 @@
     <div class="">
         <h1>Demandes de stage</h1>
         <RouterLink to="/demande-de-stage-ajout">
-            <button class="bouton bouton--mauve">Ajouter une demande</button>
+            <button class="bouton bouton--jaune">Ajouter une demande</button>
         </RouterLink>
         <div class="listeStages">
             <div class="listeStagesHeader">

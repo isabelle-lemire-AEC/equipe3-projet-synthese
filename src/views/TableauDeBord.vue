@@ -1,34 +1,43 @@
 <!-- TableauDeBord.vue / débuter par Caro, continuer par Isa -->
 <template>
     <div class="container">
-        <section class="infoRapide flex">
-            <div class="infoRapide-demandes flex">
-                <i class="fa-solid fa-file-lines"></i>
+        <section class="infoRapide">
+            <div class="infoRapide-demandes">
+                <div class="icone-infoRapide">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
                 <div>
                     <p>Demandes de stage</p>
-                    <p>{{ demandesCount }}</p>
+                    <p class="chiffre">{{ demandesCount }}</p>
                 </div>
+                
             </div>
-            <div class="infoRapide-offres flex">
-                <i class="fa-solid fa-paper-plane"></i>
+            <div class="infoRapide-offres">
+                <div class="icone-infoRapide">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
                 <div>
                     <p>Offres de stage</p>
-                    <p>{{ offresCount }}</p>
+                    <p class="chiffre">{{ offresCount }}</p>
                 </div>
             </div>
-            <div class="infoRapide-candidat-entreprise flex" >
+            <div class="infoRapide-candidat-entreprise" >
                 <div class="infoRapide-candidats">
-                    <i class="fa-solid fa-user"></i>
+                    <div class="icone-infoRapide">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
                     <div>
-                        <p>Candidats</p>
-                        <p>{{ candidatsCount }}</p>
+                        <p class="bulle-candidat">Candidats</p>
+                        <p class="chiffre">{{ candidatsCount }}</p>
                     </div>
                 </div>
-                <div class="infoRapide-entreprises flex">
-                    <i class="fa-solid fa-computer-mouse"></i>
+                <div class="infoRapide-entreprises">
+                    <div class="icone-infoRapide">
+                        <i class="fa-solid fa-computer-mouse bulle-entreprise"></i>
+                    </div>
                     <div>
                         <p>Entreprises</p>
-                        <p>{{ entreprisesCount }}</p>
+                        <p class="chiffre">{{ entreprisesCount }}</p>
                     </div>
                 </div>
             </div>
@@ -36,20 +45,21 @@
 
         <!-- Demande de stage -->
         <section class="dernieresDemandes">
-            <div class="flex">
+            <div class="entete-dernieresDemandes-Offres">
                 <div>
                     <h2>Dernières <span>demandes</span> de stage</h2>
                     <h4>En attente de validation</h4>
                 </div>
-                <button @click="validerToutesLesDemandes()">Valider toutes les demandes</button>
+                <button class="bouton bouton--turquoise" @click="validerToutesLesDemandes()">Valider toutes les demandes</button>
             </div>
             <div>
-                <div class="flex">
+                <div class="grid-dernieresDemandes-Offre">
                     <p>Poste</p>
-                    <p>Etablissement</p>
+                     <p>Etablissement</p>
                     <p>Date</p>
                     <p>Actions</p>
                 </div>
+                
 
                 <div v-if="demandes && afficherDemandes">
                     <ElementListeStage v-for="demande in demandes"
@@ -71,16 +81,16 @@
 
         <!-- Offre de stage -->
         <section class="dernieresOffres">
-            <div class="flex">
+            <div class="entete-dernieresDemandes-Offres">
                 <div>
                     <h2>Dernières <span>offres</span> de stage</h2>
                     <h4>En attente de validation</h4>
                 </div>
-                <button @click="validerToutesLesOffres()">Valider toutes les offres</button>
+                <button class="bouton bouton--turquoise" @click="validerToutesLesOffres()">Valider toutes les offres</button>
             </div>
 
             <div>
-                <div class="flex">
+                <div class="grid-dernieresDemandes-Offre">
                     <p>Poste</p>
                     <p>Ville</p>
                     <p>Date</p>

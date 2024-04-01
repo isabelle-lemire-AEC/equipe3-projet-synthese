@@ -11,7 +11,6 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -42,6 +41,12 @@
 }
 .bouton--rougeOffre:hover {
   background-color: #a51c22;
+}
+.bouton--jaune {
+  background-color: #CB912B;
+}
+.bouton--jaune:hover {
+  background-color: #b68227;
 }
 .bouton--rouge {
   background-color: #A20A07;
@@ -211,7 +216,6 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
-  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -838,6 +842,170 @@ form {
   width: 100%;
 }
 
+.icone-infoRapide {
+  font-size: 60px;
+}
+
+.infoRapide {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  color: white;
+}
+.infoRapide .chiffre {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.infoRapide-demandes {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  background-color: #CB912B;
+  border-radius: 10px;
+  padding: 25px;
+  position: relative;
+}
+.infoRapide-demandes::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 10%;
+  border-radius: 0 10px 10px 0;
+  background-color: #986D22;
+}
+
+.infoRapide-offres {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  background-color: #BB2026;
+  border-radius: 10px;
+  padding: 25px;
+  position: relative;
+}
+.infoRapide-offres::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 10%;
+  border-radius: 0 10px 10px 0;
+  background-color: #821519;
+}
+
+.infoRapide-candidat-entreprise {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.infoRapide-candidat-entreprise .bulle-candidat {
+  padding-right: 1rem;
+}
+.infoRapide-candidat-entreprise .bulle-entreprise {
+  padding-left: 1rem;
+}
+.infoRapide-candidat-entreprise .infoRapide-candidats {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  background-color: #7F2987;
+  border-radius: 10px 0 0 10px;
+  padding: 25px;
+  position: relative;
+}
+.infoRapide-candidat-entreprise .infoRapide-candidats::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 10%;
+  background-color: #4A1150;
+}
+.infoRapide-candidat-entreprise .infoRapide-entreprises {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background-color: #86A9E6;
+  border-radius: 0 10px 10px 0;
+  padding: 25px;
+  position: relative;
+}
+.infoRapide-candidat-entreprise .infoRapide-entreprises::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 10%;
+  background-color: #5E7EB5;
+}
+
+.dernieresDemandes {
+  background-color: #FFFFFF;
+  color: #111111;
+  margin-top: 40px;
+  border-radius: 10px;
+  padding: 60px;
+}
+.dernieresDemandes span {
+  color: #CB912B;
+}
+.dernieresDemandes h4 {
+  color: #BB2026;
+  font-family: "Roboto";
+  line-height: 1.1;
+}
+
+.dernieresOffres {
+  background-color: #FFFFFF;
+  color: #111111;
+  margin-top: 40px;
+  border-radius: 10px;
+  padding: 60px;
+}
+.dernieresOffres span {
+  color: #BB2026;
+}
+.dernieresOffres h4 {
+  color: #BB2026;
+  font-family: "Roboto";
+  line-height: 1.1;
+}
+
+.entete-dernieresDemandes-Offres {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-dernieresDemandes-Offre {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  color: #5E5E5E;
+  margin-top: 60px;
+}
+.grid-dernieresDemandes-Offre p {
+  font-family: "Roboto";
+  font-weight: bold;
+  line-height: 1.1;
+}
+
 .container {
   max-width: 1920px;
   margin: 0 auto;
@@ -910,4 +1078,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}
+}/*# sourceMappingURL=styles.css.map */
