@@ -43,12 +43,6 @@
 .bouton--rougeOffre:hover {
   background-color: #a51c22;
 }
-.bouton--jaune {
-  background-color: #CB912B;
-}
-.bouton--jaune:hover {
-  background-color: #b68227;
-}
 .bouton--rouge {
   background-color: #A20A07;
 }
@@ -69,19 +63,6 @@
 }
 .bouton--cv {
   font-size: clamp(1.125rem, 1.08rem + 0.225vi, 1.35rem);
-}
-.bouton--activer {
-  background-color: #CDECDA;
-  color: #06A04A;
-  padding: 0.5rem;
-  text-align: center;
-  font-family: "Lato";
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.1;
-}
-.bouton--activer:hover {
-  background-color: #bbe5cc;
 }
 
 .boutons {
@@ -127,27 +108,6 @@
 }
 .boutons-action__supprimer:hover {
   color: #8a0806;
-}
-.boutons-action-liste i {
-  font-size: 20px;
-}
-.boutons-action-liste__consulter {
-  color: #0C9DA4;
-}
-.boutons-action-liste__consulter:hover {
-  color: #0a868c;
-}
-.boutons-action-liste__modifier {
-  color: #F9A35E;
-}
-.boutons-action-liste__modifier:hover {
-  color: #f89545;
-}
-.boutons-action-liste__supprimer {
-  color: #F26689;
-}
-.boutons-action-liste__supprimer:hover {
-  color: #f04e77;
 }
 
 .carte-candidat {
@@ -207,101 +167,6 @@
 .carte-entreprise__texte p {
   font-family: "Roboto";
   color: #707070;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-family: "Roboto";
-}
-table th {
-  font-size: 15px;
-}
-table td {
-  font-size: 16px;
-  color: #111111;
-}
-
-.liste__rangee {
-  display: grid;
-  grid-template-columns: 2fr 1.5fr 1fr 2fr;
-  padding-block: 1rem;
-}
-.liste__head__titre-colonne {
-  text-align: left;
-}
-.liste__body__contenu-colonne {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.liste__body__contenu-colonne--4 .bouton--activer {
-  flex-basis: 50%;
-}
-.liste__body .liste__rangee:not(:last-child) {
-  border-bottom: 1px solid #5E5E5E;
-}
-.liste__body .icone {
-  padding: 0.5rem;
-  border-radius: 8px;
-}
-.liste__body .icone--demande {
-  background-color: #D6B477;
-  color: #70582F;
-}
-.liste__body .icone--offre {
-  background-color: #BB2026;
-  color: #FF9FA3;
-}
-.liste__body .icone i {
-  font-size: 20px;
-}
-.liste__body .poste {
-  font-weight: 700;
-}
-.liste__wrapper-horizontal {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-.liste__wrapper-vertical {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.liste__wrapper-boutons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 3rem;
-  width: 100%;
-}
-
-.liste-header {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  color: #707070;
-  margin-top: 60px;
-}
-.liste-header span {
-  font-family: "Roboto";
-  font-weight: bold;
-  line-height: 1.1;
-  padding-bottom: 0.5rem;
-  position: relative;
-}
-.liste-header span::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 100%;
-  height: 5px;
-  background-color: #707070;
 }
 
 .form-fiche__label-input-vertical h4, label, input:not([type=radio]),
@@ -617,7 +482,7 @@ label {
 }
 
 .logo {
-  max-width: 200px;
+  max-width: 150px;
   padding: 1rem;
 }
 
@@ -891,17 +756,6 @@ label {
   color: #0C9DA4;
 }
 
-.listeStages {
-  background-color: #FFFFFF;
-  border-radius: 10px;
-  padding: 80px;
-  margin-top: 40px;
-}
-
-.pageContainer h1 {
-  padding: 3rem 0 3rem 0;
-}
-
 #ajout-offrestages,
 #edition-offrestages {
   display: flex;
@@ -924,13 +778,6 @@ label {
   color: #BB2026;
 }
 
-.listeOffres {
-  background-color: #FFFFFF;
-  border-radius: 10px;
-  padding: 80px;
-  margin-top: 40px;
-}
-
 .app-container {
   min-height: 100vh;
 }
@@ -938,7 +785,7 @@ label {
 .logo-container {
   background-color: #FFFFFF;
   width: 100%;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .content-container {
@@ -959,6 +806,7 @@ label {
   align-items: flex-start;
   gap: 1rem;
   padding: 0 300px 0 3rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 .login-panel .entete-login-panel {
   width: 100%;
@@ -990,179 +838,6 @@ form {
   width: 100%;
 }
 
-.icone-infoRapide {
-  font-size: 60px;
-}
-
-.infoRapide {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  color: white;
-}
-.infoRapide .chiffre {
-  font-size: 50px;
-  font-weight: bold;
-}
-
-.infoRapide-demandes {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-  background-color: #CB912B;
-  border-radius: 10px;
-  padding: 25px;
-  position: relative;
-}
-.infoRapide-demandes::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 10%;
-  border-radius: 0 10px 10px 0;
-  background-color: #986D22;
-}
-
-.infoRapide-offres {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-  background-color: #BB2026;
-  border-radius: 10px;
-  padding: 25px;
-  position: relative;
-}
-.infoRapide-offres::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 10%;
-  border-radius: 0 10px 10px 0;
-  background-color: #821519;
-}
-
-.infoRapide-candidat-entreprise {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-.infoRapide-candidat-entreprise .bulle-candidat {
-  padding-right: 1rem;
-}
-.infoRapide-candidat-entreprise .bulle-entreprise {
-  padding-left: 1rem;
-}
-.infoRapide-candidat-entreprise .infoRapide-candidats {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-  background-color: #7F2987;
-  border-radius: 10px 0 0 10px;
-  padding: 25px;
-  position: relative;
-}
-.infoRapide-candidat-entreprise .infoRapide-candidats::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 10%;
-  background-color: #4A1150;
-}
-.infoRapide-candidat-entreprise .infoRapide-entreprises {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  background-color: #86A9E6;
-  border-radius: 0 10px 10px 0;
-  padding: 25px;
-  position: relative;
-}
-.infoRapide-candidat-entreprise .infoRapide-entreprises::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 10%;
-  background-color: #5E7EB5;
-}
-
-.dernieresDemandes {
-  background-color: #FFFFFF;
-  color: #111111;
-  margin-top: 40px;
-  border-radius: 10px;
-  padding: 60px;
-}
-.dernieresDemandes h2 span {
-  color: #CB912B;
-}
-.dernieresDemandes h4 {
-  color: #BB2026;
-  font-family: "Roboto";
-  line-height: 1.1;
-}
-
-.dernieresOffres {
-  background-color: #FFFFFF;
-  color: #111111;
-  margin-top: 40px;
-  border-radius: 10px;
-  padding: 60px;
-}
-.dernieresOffres h2 span {
-  color: #BB2026;
-}
-.dernieresOffres h4 {
-  color: #BB2026;
-  font-family: "Roboto";
-  line-height: 1.1;
-}
-
-.entete-dernieresDemandes-Offres {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/*.grid-dernieresDemandes-Offre{
-    @include mixins.grid(4, 1rem);
-    color: variables.$gray;
-    margin-top: 60px;
-
-   p{
-    @include mixins.font(variables.$font-body, null, bold);
-    padding-bottom: 0.5rem;
-    position: relative;
-
-    &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -2px; 
-        width: 100%;
-        height: 5px; 
-        background-color: variables.$gray; 
-    }
-   }
-
-}*/
 .container {
   max-width: 1920px;
   margin: 0 auto;

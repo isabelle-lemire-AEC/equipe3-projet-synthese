@@ -52,7 +52,7 @@ export function useInternshipOffers() {
   };
 
   const edditerOffre = async (id, offerData) => {
-    loading.value = true;
+    // loading.value = true;
     try {
         console.log("Edition avant", offerData);
         const url = `https://api-3.fly.dev/internship-offers/${id}`; 
@@ -62,18 +62,21 @@ export function useInternshipOffers() {
         error.value = err;
         console.error("Échec de l'édition", err);
     } finally {
-        loading.value = false;
+        // loading.value = false;
     }
 };
   
 const getInternshipOfferById = async (id) => {
+  loading.value = true;
   try {
     const res = await axios.get(`https://api-3.fly.dev/internship-offers/${id}`);
     console.log("Success: Obtained internship offer by ID", res.data);
-    response.value = [res.data];
+    response.value = res.data;
   } catch (err) {
     console.error("Error: Failed to obtain internship offer by ID", err);
     error.value = err;
+  } finally {
+    loading.value = false;
   }
 };
   

@@ -91,3 +91,26 @@ table {
         }
     }
 }
+
+.liste-header{
+    @include mixins.grid(4, 1rem);
+    color: variables.$gray;
+    margin-top: 60px;
+    
+
+   span{
+    @include mixins.font(variables.$font-body, null, bold);
+    padding-bottom: 0.5rem;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px; 
+        width: 100%;
+        height: 5px; 
+        background-color: variables.$gray; 
+    }
+   }
+}

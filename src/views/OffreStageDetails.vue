@@ -1,155 +1,242 @@
 <!-- OffreStageDetails.vue -->
 <template>
-    <!-- LOADING -->
+  <div>
+    
     <div v-if="loading">Chargement...</div>
     <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>
 
-    <div v-else-if="offerDetails && offerDetails.title" class="form-fiche fiche-offrestages-details">
+    <div v-else-if="offerData && offerData.title" class="form-fiche fiche-offrestages-details">
+      <div class="boutons-action">
+          <button :class="{ 'boutons-action__crochet': offerData.isActive }" @click="activate()">
+              <i class="fas fa-check"></i>
+          </button>
+          <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(offerData._id)">
+              <i class="fas fa-pen-to-square"></i>
+          </button>
+          <button class="boutons-action__supprimer" @click="afficherConfirmationModal()">
+              <i class="fas fa-square-xmark"></i>
+          </button>
+      </div>
+
       <div class="form-fiche__wrapper-titre">
         <p class="form-fiche__nom-section">Offre de stage</p>
-        <h1>{{ offerDetails.title }}</h1>
-        <p class="form-fiche__sous-titre">{{ offerDetails.enterprise?.name }}</p>
+        <h1>{{ offerData.title }}</h1>
+        <p class="form-fiche__sous-titre">{{ offerData.enterprise?.name }}</p>
       </div>
-        
+
       <div class="form-fiche__wrapper-boutons-encadre">
-
-          <!-- Bouton action -->
-          <div class="boutons-action">
-            <button class="boutons-action__crochet">
-              <i class="fas fa-check"></i>
-            </button>
-            <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(demande._id)">
-              <i class="fas fa-pen-to-square"></i>
-            </button>
-            <button class="boutons-action__supprimer" @click="supprimer">
-              <i class="fas fa-square-xmark"></i>
-            </button>
+        <!-- Section Encadré blanc  -->
+        <div class="form-fiche__encadre">
+          <!-- Section Description tâche -->
+          <div class="form-fiche__wrapper-titre-groupe-inputs">
+            <h2>Description de la tâche</h2>
+            <p>{{ offerData.description }}</p>
           </div>
-
-          <!-- Section Encadré blanc  -->
-          <div class="form-fiche__encadre">
-
-            <!-- Section Description tâche -->
-            <div class="form-fiche__wrapper-titre-groupe-inputs">
-              <h2>Description de la tâche</h2>
-              <p>{{ offerDetails.description }}</p>
-            </div>
-
-            <!-- Section Formation et exigences -->
-            <div class="form-fiche__label-input-vertical">
-              <h4>Formation demandées</h4>
-              <p>lorem</p>
-            </div>
-            <div class="form-fiche__label-input-vertical">
-              <h4>Exigences</h4>
-              <p>{{ offerDetails.requiredSkills }}</p>
-            </div>
-            
-            <!-- Section Information sur le stage -->
-            <div class="form-fiche__wrapper-titre-groupe-inputs">
-              <h3>Informations sur le stage</h3>
-              <div class="form-fiche__colonnes-inputs">
-                <!-- Colonne de gauche -->
-                <div class="form-fiche__colonne-inputs">
-                  <div class="form-fiche__label-input-vertical">
-                    <h4>Type de stage</h4>
-                    <p>{{ offerDetails.internshipType.value }}</p>
-                  </div>
-                  <div class="form-fiche__label-input-vertical">
-                    <h4>Nombre d'heures par semaine</h4>
-                    <p>Hard codé - info manquante</p>
-                  </div>
-                  <div class="form-fiche__label-input-vertical">
-                    <h4>Rénumération</h4>
-                    <p>{{ offerDetails.paid }}</p>
-                  </div>
+          <!-- Section Formation et exigences -->
+          <div class="form-fiche__label-input-vertical">
+            <h4>Formation demandées</h4>
+            <p>lorem</p>
+          </div>
+          <div class="form-fiche__label-input-vertical">
+            <h4>Exigences</h4>
+            <p>{{ offerData.requiredSkills }}</p>
+          </div>
+          <!-- Section Information sur le stage -->
+          <div class="form-fiche__wrapper-titre-groupe-inputs">
+            <h3>Informations sur le stage</h3>
+            <div class="form-fiche__colonnes-inputs">
+              <!-- Colonne de gauche -->
+              <div class="form-fiche__colonne-inputs">
+                <div class="form-fiche__label-input-vertical">
+                  <h4>Type de stage</h4>
+                  <p>{{ offerData.internshipType.value }}</p>
                 </div>
-                <!-- Colonne de droite -->
-                <div class="form-fiche__colonne-inputs">
-                  <div class="form-fiche__label-input-vertical">
-                    <h4>Date de début</h4>
-                    <p>{{ offerDetails.startDate }}</p>
-                  </div>
-                  <div class="form-fiche__label-input-vertical">
-                    <h4>Date de fin</h4>
-                    <p>{{ offerDetails.endDate }}</p>
-                  </div>
+                <div class="form-fiche__label-input-vertical">
+                  <h4>Nombre d'heures par semaine</h4>
+                  <p>Hard codé - info manquante</p>
+                </div>
+                <div class="form-fiche__label-input-vertical">
+                  <h4>Rénumération</h4>
+                  <p>{{ offerData.paid }}</p>
+                </div>
+              </div>
+              <!-- Colonne de droite -->
+              <div class="form-fiche__colonne-inputs">
+                <div class="form-fiche__label-input-vertical">
+                  <h4>Date de début</h4>
+                  <p>{{ offerData.startDate }}</p>
+                </div>
+                <div class="form-fiche__label-input-vertical">
+                  <h4>Date de fin</h4>
+                  <p>{{ offerData.endDate }}</p>
                 </div>
               </div>
             </div>
-
-            <div class="form-fiche__wrapper-titre-groupe-inputs">
-                    <h3>Informations suplémentaires</h3>
-                    <p>Hard codé - info manquante</p>
-            </div>
-
           </div>
 
+          <div class="form-fiche__wrapper-titre-groupe-inputs">
+            <h3>Informations suplémentaires</h3>
+            <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5" v-model="offerData.additionalInformation"></textarea>
+          </div>
+        </div>
       </div>
-
-      <!-- A deleter quand ce sera ok -->
-      <div>
-        <p>OK - TITTLE: *{{ offerDetails.title }}</p>
-        <p>OK - Entreprise: "non necessaire" ***{{ offerDetails.enterprise?.name }}</p>
-        <p>OK - Description: ***{{ offerDetails.description }}</p>
-        <p>Exigences name: ***{{ offerDetails.enterprise.name }}</p>
-        <p>OK - Exigences: ***{{ offerDetails.requiredSkills }}</p>
-        <p>enterprise.image: ***{{ offerDetails.enterprise.image }}</p>
-        <p>enterprise id: ***{{ offerDetails.enterprise._id }}</p>
-        <p>enterprise adresse: ***{{ offerDetails.enterprise.address }}</p>
-        <p>Exigences postalCode: ***{{ offerDetails.enterprise.postalCode }}</p>
-        <p>Exigences province: ***{{ offerDetails.enterprise.province }}</p>
-        <p>Exigences phone: ***{{ offerDetails.enterprise.phone }}</p>
-        <p>Exigences email: ***{{ offerDetails.enterprise.email }}</p>
-      
-        <p>description : ***{{ offerDetails.description }}</p>
-        <p>OK - startDate: ***{{ offerDetails.startDate }}</p>
-        <p>OK -endDate: ***{{ offerDetails.endDate }}</p>
-        <p>Exigences salary: ***{{ offerDetails.salary }}</p>
-        <p>Exigences province: ***{{ offerDetails.province }}</p>
-        <p>OK - Exigences value: ***{{ offerDetails.internshipType.value }}</p>
-        <p>OK - Exigences paid: ***{{ offerDetails.paid }}</p>
-      </div>
-
     </div>
+
+    <!-- Modal de confirmation de suppression -->
+    <div class="modal" v-if="showConfirmationModal">
+        <div class="modal-content">
+            <p>Êtes-vous sûr de vouloir supprimer cette offre de stage?</p>
+            <div class="modal-buttons">
+                <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
+                <button class="btn confirm" @click="supprimer()">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Message d'erreur -->
     <div v-else>Aucune information disponible</div>
-
-
+  </div>
 </template>
-  
 
 <script setup>
-    import { ref, onMounted } from 'vue';
-    import { useRouter } from 'vue-router';
-    import { useRoute } from 'vue-router';
-    import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
+  import { ref, onMounted } from 'vue';
+  import { useRouter } from 'vue-router';
+  import { useRoute } from 'vue-router';
+  import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
 
-    const { supprimerOffre } = useInternshipOffers();
-    
-    const redirigerVersMiseAJour = (id) => {
-        router.push({ name: 'offreStageMiseAjour', params: { id } });
-    };
+  const { supprimerOffre } = useInternshipOffers();
+  const route = useRoute();
+  const router = useRouter(); 
+  const { getInternshipOfferById, response, loading, error, edditerOffre } = useInternshipOffers();
+  const showConfirmationModal = ref(false);
 
-    const supprimer = async () => {
-      await supprimerOffre(route.params.id);
-      route.push('/chemin-vers-la-liste-des-offres');
-    };
+  onMounted(async () => {
 
-    const route = useRoute();
-    const router = useRouter(); 
-    const { getInternshipOfferById, response, loading, error } = useInternshipOffers();
-    const offerDetails = ref({});
+    await getInternshipOfferById(route.params.id);
+    if (response.value) {
+      const offer = response.value;
 
-    onMounted(async () => {
-      await getInternshipOfferById(route.params.id);
+      offerData.value._id=offer._id;
+      offerData.value.title = offer.title;
+      offerData.value.description = offer.description;
+      offerData.value.enterprise = offer.enterprise;
+      offerData.value.startDate = offer.startDate;
+      offerData.value.endDate = offer.endDate;
+      offerData.value.weeklyWorkHours = offer.weeklyWorkHours;
 
-      if (response.value && response.value.length > 0) {
-        offerDetails.value = response.value[0]; 
-      }
-    });
+      offerData.value.salary = offer.salary;
+      offerData.value.province = offer.province;
+      offerData.value.requiredSkills = offer.requiredSkills;
+      offerData.value.internshipType = offer.internshipType;
+      offerData.value.paid = offer.paid;
+      offerData.value.isActive = offer.isActive;
+
+      // Peuplez les autres champs de formulaire avec les données récupérées
+    } else {
+      console.error("Aucune réponse ou réponse vide reçue lors de la récupération des détails de l'offre de stage.");
+    }
+  });
+
+  const offerData = ref({
+    _id: "",
+    title: "",
+    description: "",
+    enterprise: { _id: "" },
+    startDate: "",
+    endDate: "",
+    weeklyWorkHours: 0,
+    salary: 0,
+    province: { _id: "" },
+    requiredSkills: [],
+    internshipType: { _id: "" },
+    paid: "DISCRETIONARY",
+    isActive: ""
+  });
+
+  const updateOfferStatus = async () => {
+    await edditerOffre(route.params.id, offerData.value);
+  };
+
+  const supprimer = async () => {
+    await supprimerOffre(route.params.id);
+    route.push('/offres-de-stages');
+  };
+
+  const activate = async () => {
+      offerData.value.isActive = !offerData.value.isActive;
+      await edditerOffre(offerData.value._id, offerData.value);
+  }
+
+  const redirigerVersMiseAJour = (id) => {
+      router.push({ name: 'OffreStageMiseAjour', params: { id } });
+  };
+
+  const afficherConfirmationModal = () => {
+        showConfirmationModal.value = true;
+  };
+
+  const annulerSuppression = () => {
+        showConfirmationModal.value = false;
+  };
+
+
 </script>
 
-  
-  
+<style>
+
+
+    /* Styles pour le modal */
+    .modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+
+    .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn.confirm {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn.cancel {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+    }
+
+
+</style>

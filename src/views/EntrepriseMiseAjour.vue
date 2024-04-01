@@ -11,11 +11,6 @@
     </div>
 
     <form id="edition-entreprise" @submit.prevent="mettreAJourEntreprise">
-
-      <!-- Logo de l'entreprise -->
-      <!-- <div class="logo-container">
-        <img class="entreprise-logo" :src="logoEntreprise" alt="Logo de l'entreprise" />
-      </div> -->
       <div class="form-fiche__wrapper-boutons-inputs">
         <div class="boutons">
           <button class="bouton bouton--transparent" @click="$router.go(-1)">Annuler</button>
@@ -118,214 +113,82 @@
 </template>
 
 
-<script>
-  import axios from "axios";
-  import {
-    useRoute,
-    useRouter
-  } from "vue-router";
-  import logoEntreprise from "../assets/mediavox-logo.jpg";
+<script setup>
+import axios from "axios";
+import { useRoute, useRouter } from "vue-router";
+import { ref } from 'vue';
+import logoEntreprise from "../assets/mediavox-logo.jpg";
 
-  export default {
-    name: "EntrepriseMiseAjour",
-    props: ["id"], // Ajoutez cette ligne
-    data() {
-      return {
-        entreprise: {
-          name: "",
-          image: "",
-          description: "",
-          contactPerson: "",
-          address: "",
-          phone: "",
-          city: "",
-          email: "",
-          province: {
-            _id: "",
-            value: ""
-          },
-          postalCode: "",
-        },
-        provinces: [], // Ajoutez cette ligne
-        logoEntreprise,
-      };
-    },
-    methods: {
-      async mettreAJourEntreprise() {
-        try {
-          // Mise à jour de l'entreprise en utilisant une requête PATCH
-          const response = await axios.patch(
-            `https://api-3.fly.dev/enterprises/${this.$route.params.id}`,
-            this.entreprise
-          );
-          // Si la mise à jour est réussie, redirection vers la page des entreprises
-          if (response.status === 200) {
-            this.$router.push({
-              name: "Entreprises"
-            });
-          }
-        } catch (error) {
-          // Affichage d'une erreur en cas d'échec de la mise à jour
-          console.error("Erreur lors de la mise à jour de l'entreprise:", error);
-        }
-      },
-      async fetchProvinces() {
-        // Ajoutez cette fonction
-        try {
-          const response = await axios.get("https://api-3.fly.dev/provinces");
-          this.provinces = response.data;
-        } catch (error) {
-          console.error("Erreur lors de la récupération des provinces :", error);
-        }
-      },
-    },
-    async mounted() {
-      try {
-        // Récupération des détails de l'entreprise lors du montage du composant
-        const response = await axios.get(
-          `https://api-3.fly.dev/enterprises/${this.$route.params.id}`
-        );
-        this.entreprise = response.data;
-        this.fetchProvinces(); // Récupérez les provinces lors du montage du composant
-      } catch (error) {
-        // Affichage d'une erreur en cas d'échec de la récupération des détails de l'entreprise
-        console.error("Erreur lors de la récupération de l'entreprise:", error);
-      }
-    },
-  };
+import BtnAnnuler from '../components/BtnAnnuler.vue';
+
+
+const id = useRoute().params.id;
+const router = useRouter();
+
+const entreprise = ref({
+  name: "",
+  image: "",
+  description: "",
+  contactPerson: "",
+  address: "",
+  phone: "",
+  city: "",
+  email: "",
+  province: {
+    _id: "",
+    value: ""
+  },
+  postalCode: "",
+});
+
+const provinces = ref([]);
+
+// Fonction pour mettre à jour l'entreprise
+const mettreAJourEntreprise = async () => {
+  try {
+    const response = await axios.patch(
+      `https://api-3.fly.dev/enterprises/${id}`,
+      entreprise.value
+    );
+    // Redirection vers la page des entreprises si la mise à jour est réussie
+    if (response.status === 200) {
+      router.push({
+        name: "Entreprises"
+      });
+    }
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de l'entreprise:", error);
+  }
+};
+
+// Fonction pour récupérer les provinces depuis l'API
+const fetchProvinces = async () => {
+  try {
+    const response = await axios.get("https://api-3.fly.dev/provinces");
+    provinces.value = response.data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des provinces :", error);
+  }
+};
+
+// Fonction pour charger les détails de l'entreprise
+const chargerEntreprise = async () => {
+  try {
+    const response = await axios.get(`https://api-3.fly.dev/enterprises/${id}`);
+    entreprise.value = response.data;
+    // Récupérer les provinces lors du chargement de l'entreprise
+    await fetchProvinces();
+  } catch (error) {
+    console.error("Erreur lors de la récupération de l'entreprise:", error);
+  }
+};
+
+// Appeler la fonction chargerEntreprise au montage du composant
+chargerEntreprise();
 </script>
 
+
 <style scoped>
-  /*.entete {
-  background-color: brown;
-}
-
-.ajouter-entreprise-container {
-  width: 90%;
-  margin: auto;
-  padding: 1rem;
-}
-
-.entreprise-header-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem;
-}
-
-.nom-container {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-left: 5px solid #89a9e6;
-  padding-left: 1rem;
-}
-
-.entreprise-info-card {
-  margin-bottom: 20px;
-  width: 80%;
-  padding: 1rem 0;
-}
-
-.entreprise-nom {
-  color: gray;
-  font-weight: bold;
-  font-size: 30px;
-  margin: 0;
-  margin-bottom: 2rem;
-}
-
-.entreprise-detail-wrapper {
-  position: relative;
-  padding: 1rem;
-}
-
-.entreprise-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.section-title span {
-  font-weight: bold;
-  color: #89a9e6;
-  font-size: 20px;
-}
-
-.section-title {
-  color: #89a9e6;
-}
-
-.info-item {
-  border-left: 8px solid grey;
-  padding-left: 10px;
-  width: 50%;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.form-group,
-.file-upload-group {
-  margin-bottom: 1rem;
-}
-
-.info-item label {
-  font-weight: bold;
-  color: gray;
-}
-
-input,
-textarea {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-top: 0.5rem;
-}
-
-.file-input {
-  border: none;
-}
-
-.form-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-right: 80px;
-  margin-bottom: 50px;
-}
-
-.cancel-button,
-.save-button {
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cancel-button {
-  background-color: white;
-  border: 1px solid gray;
-  color: gray;
-}
-
-.save-button {
-  background-color: #89a9e6;
-  color: white;
-}
-
-.save-button i.fas.fa-save {
-  margin-right: 8px;
-}*/
 
   .logo-container {
     flex: 0 1 20%;

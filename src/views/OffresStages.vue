@@ -1,21 +1,21 @@
 <template>
-  <div class="pageContainer">
+  <div id="bgred">
         <h1>Offres de stage</h1>
         <RouterLink to="/offre-de-stage-ajout">
-            <button>Ajouter une offre de stage</button>
+            <button class="bouton bouton--rouge">Ajouter une offre de stage</button>
         </RouterLink>
         <div class="listeOffres">
-            <div class="listeOffresHeader">
+            <div class="liste-header">
                 <span>Poste</span>
                 <span>Secteur d'activité</span>
                 <span>Région</span>
                 <span>Date d'inscription</span>
             </div>
-            <!-- <ElementListeOffreStage v-for="offre in toutesOffres" :key="offre._id" :offer="offre"></ElementListeOffreStage> COMPONENT À CARO -->
             <ElementListeStage v-for="offre in toutesOffres"
               :key="offre._id"
               :posteTitre="offre.title"
               :posteNom="offre.enterprise.name" 
+              :info2="offre.enterprise.city"
               :region="offre.province.value" 
               :date="offre.startDate" 
               :id="offre._id" 
@@ -26,18 +26,13 @@
     </div>
 </template>
 
-
-
-
 <script setup>
-  import ElementListeStage from '../components/ElementListeStage.vue'
-  import ElementListeOffreStage from '@/components/ElementListeOffreStage.vue';
+  import ElementListeStage from '../components/elementListeStage.vue'
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
   import { useProvinces } from '../composables/provinces/provinces.js'
   import { useInternshipTypes } from '@/composables/types_stage/types_stage.js'
   import { ref, onMounted } from 'vue';
   
-
   const { getAllOffers } = useInternshipOffers();
   const { getAllProvinces } = useProvinces();
   const { getAllInternshipTypes } = useInternshipTypes();
@@ -51,9 +46,7 @@
     } catch (error) {
         console.error("Error:", error.response ? error.response.data : error.message);
     }
-  });
-
-  
+  });  
 
   const offreStageListe = {
     title: "string",
@@ -107,14 +100,13 @@
 
     const allOffers = await getAllOffers();
 
-    
-
     await getAllOffers();
   }
 
   testAPI();
 
 </script>
+
 
 
 
@@ -169,7 +161,7 @@
   
 <style scoped>
 
-html, body {
+/*html, body {
     background-color: rgb(222, 222, 222);
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -226,6 +218,6 @@ h1 {
 .poste {
     display: flex;
     flex-direction: column;
-}
+}*/
 
 </style>
