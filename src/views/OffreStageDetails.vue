@@ -1,128 +1,152 @@
-
 <template>
-<!-- Raph ca marche mais j'ai une erreur dans la console mais ca delete pourtent  -->
-<button @click="supprimer">Supprimer l'offre</button>
+  <div v-if="loading">Chargement...</div>
+  <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>
 
-
-    <div v-if="loading">Chargement...</div>
-    <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>
-    
-    <div v-else-if="offerDetails && offerDetails.title">
-
-      <h1>TITTLE: *{{ offerDetails.title }}</h1>
-      <h2>Entreprise: "non necessaire" ***{{ offerDetails.enterprise?.name }}</h2>
-      <p>Description: ***{{ offerDetails.description }}</p>
-      <p>Exigences name: ***{{ offerDetails.enterprise.name }}</p>
-      <p>Exigences: ***{{ offerDetails.requiredSkills }}</p>
-      <p>enterprise.image: ***{{ offerDetails.enterprise.image }}</p>
-      <p>enterprise id: ***{{ offerDetails.enterprise._id }}</p>
-      <p>enterprise adresse: ***{{ offerDetails.enterprise.address }}</p>
-      <p>Exigences postalCode: ***{{ offerDetails.enterprise.postalCode }}</p>
-      <p>Exigences province: ***{{ offerDetails.enterprise.province }}</p>
-      <p>Exigences phone: ***{{ offerDetails.enterprise.phone }}</p>
-      <p>Exigences email: ***{{ offerDetails.enterprise.email }}</p>
-    
-      <p>description : ***{{ offerDetails.description }}</p>
-      <p>startDate: ***{{ offerDetails.startDate }}</p>
-      <p>endDate: ***{{ offerDetails.endDate }}</p>
-      <p>Exigences salary: ***{{ offerDetails.salary }}</p>
-      <p>Exigences province: ***{{ offerDetails.province }}</p>
-      <p>Exigences value: ***{{ offerDetails.internshipType.value }}</p>
-      <p>Exigences paid: ***{{ offerDetails.paid }}</p>
-
+  <div v-else-if="offerDetails && offerDetails.title" class="form-fiche fiche-offrestages-details">
+    <div class="form-fiche__wrapper-titre">
+      <p class="form-fiche__nom-section">Offre de stage</p>
+      <h1>{{ offerDetails.title }}</h1>
+      <p class="form-fiche__sous-titre">{{ offerDetails.enterprise?.name }}</p>
     </div>
-    <div v-else>Aucune information disponible</div>
-  </template>
-  
 
-  <script setup>
+    <div class="form-fiche__wrapper-boutons-encadre">
+      <!-- Section Encadré blanc  -->
+      <div class="form-fiche__encadre">
+        <!-- Section Description tâche -->
+        <div class="form-fiche__wrapper-titre-groupe-inputs">
+          <h2>Description de la tâche</h2>
+          <p>{{ offerDetails.description }}</p>
+        </div>
+        <!-- Section Formation et exigences -->
+        <div class="form-fiche__label-input-vertical">
+          <h4>Formation demandées</h4>
+          <p>lorem</p>
+        </div>
+        <div class="form-fiche__label-input-vertical">
+          <h4>Exigences</h4>
+          <p>{{ offerDetails.requiredSkills }}</p>
+        </div>
+        <!-- Section Information sur le stage -->
+        <div class="form-fiche__wrapper-titre-groupe-inputs">
+          <h3>Informations sur le stage</h3>
+          <div class="form-fiche__colonnes-inputs">
+            <!-- Colonne de gauche -->
+            <div class="form-fiche__colonne-inputs">
+              <div class="form-fiche__label-input-vertical">
+                <h4>Type de stage</h4>
+                <p>{{ offerDetails.internshipType.value }}</p>
+              </div>
+              <div class="form-fiche__label-input-vertical">
+                <h4>Nombre d'heures par semaine</h4>
+                <p>Hard codé - info manquante</p>
+              </div>
+              <div class="form-fiche__label-input-vertical">
+                <h4>Rénumération</h4>
+                <p>{{ offerDetails.paid }}</p>
+              </div>
+            </div>
+            <!-- Colonne de droite -->
+            <div class="form-fiche__colonne-inputs">
+              <div class="form-fiche__label-input-vertical">
+                <h4>Date de début</h4>
+                <p>{{ offerDetails.startDate }}</p>
+              </div>
+              <div class="form-fiche__label-input-vertical">
+                <h4>Date de fin</h4>
+                <p>{{ offerDetails.endDate }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="" @submit.prevent="submitForm">
+          <div class="isActive">
+            <label for="actif">ACTIF ?</label>
+            <input class="cool" v-model="offerData.isActive" type="checkbox" @change="updateOfferStatus" placeholder="actif">
+          </div>
+          <router-link class="bouton_go-to-eddit" :to="`/offre-de-stage-mise-a-jour/${offerDetails._id}`">Editer' {{ offerDetails.title }}</router-link>
+        </form>
+        <button @click="supprimer">Supprimer l'offre</button>
+
+        <div class="form-fiche__wrapper-titre-groupe-inputs">
+          <h3>Informations suplémentaires</h3>
+          <!-- <p>Hard codé - info manquante</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message d'erreur -->
+  <div v-else>Aucune information disponible</div>
+</template>
+
+<script setup>
   import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
   import { useRoute } from 'vue-router';
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
 
   const { supprimerOffre } = useInternshipOffers();
-
-  const supprimer = async () => {
-  await supprimerOffre(route.params.id);
-  route.push('/chemin-vers-la-liste-des-offres');
-};
-  
   const route = useRoute();
   const router = useRouter(); 
-  const { getInternshipOfferById, response, loading, error } = useInternshipOffers();
+  const { getInternshipOfferById, response, loading, error, edditerOffre } = useInternshipOffers();
   const offerDetails = ref({});
-  
+
   onMounted(async () => {
-  await getInternshipOfferById(route.params.id);
- 
-  if (response.value && response.value.length > 0) {
-    offerDetails.value = response.value[0]; 
-  }
-});
-  </script>
+    await getInternshipOfferById(route.params.id);
 
+    if (response.value && response.value.length > 0) {
+      offerDetails.value = response.value[0]; 
+    }
 
+    await getInternshipOfferById(route.params.id);
+    if (response.value && response.value.length > 0) {
+      const offer = response.value[0];
 
-<!-- <template>
-    <section class="entete">
-        <h3>Offre de stage</h3>
-        <h1>Intégrateur Web junior api titre</h1>
-        <h2>api entreprise.name</h2>
-    </section>
+      offerData.value._id=offer._id;
+      offerData.value.title = offer.title;
+      offerData.value.description = offer.description;
+      offerData.value.enterprise = offer.enterprise;
+      offerData.value.startDate = offer.startDate;
+      offerData.value.endDate = offer.endDate;
+      offerData.value.weeklyWorkHours = offer.weeklyWorkHours;
 
-    <section class="icone">
+      offerData.value.salary = offer.salary;
+      offerData.value.province = offer.province;
+      offerData.value.requiredSkills = offer.requiredSkills;
+      offerData.value.internshipType = offer.internshipType;
+      offerData.value.paid = offer.paid;
+      offerData.value.isActive = offer.isActive;
 
-    </section>
+      // Peuplez les autres champs de formulaire avec les données récupérées
+    } else {
+      console.error("Aucune réponse ou réponse vide reçue lors de la récupération des détails de l'offre de stage.");
+    }
+  });
 
-    <div class="page">
-        <h1>Description de la tâche</h1>
-        <p>api description</p>
+  const offerData = ref({
+    _id: "",
+    title: "",
+    description: "",
+    enterprise: { _id: "" },
+    startDate: "",
+    endDate: "",
+    weeklyWorkHours: 0,
+    salary: 0,
+    province: { _id: "" },
+    requiredSkills: [],
+    internshipType: { _id: "" },
+    paid: "DISCRETIONARY",
+    isActive: ""
+  });
 
-        <h3>Formation demandées</h3>
-        <p>lorem</p>
+  const updateOfferStatus = async () => {
+    await edditerOffre(route.params.id, offerData.value);
+  };
 
-        <h3>Exigences</h3>
-        <p>api requiredSkills</p>
-
-        <section class="info-stage">
-            <h3>Informations sur le stage</h3>
-
-            <div class="groupe-gauche">
-                <h3>Type de stage</h3>
-                <p>api internshipType</p>
-
-                <h3>Nombre d'heures par semaine</h3>
-                <p>api weeklyWorkHours</p>
-
-                <h3>Rénumération</h3>
-                <p>api salary</p>
-            </div>
-
-            <div class="groupe-droite">
-                <h3>Date de début</h3>
-                <p>api startDate</p>
-
-                <h3>Date de fin</h3>
-                <p>api endDate</p>
-            </div>
-        </section>
-
-        <section class="info-sup">
-            <h3>Informations suplémentaires</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe, nulla totam nemo, ea asperiores eveniet minus magni ex hic architecto dolores, commodi repudiandae animi inventore quam molestiae quisquam possimus sunt.</p>
-        </section>
-    </div>
-
-</template>
-
-<script setup>
+  const supprimer = async () => {
+    await supprimerOffre(route.params.id);
+    route.push('/offres-de-stages');
+  };
 
 </script>
-
-<style>
-
-</style> -->
-
-  
-  

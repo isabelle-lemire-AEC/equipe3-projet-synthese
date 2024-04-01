@@ -197,7 +197,7 @@
 	import {useActivitySectors} from "../composables/secteurs_activites/secteurs_activites.js";
 	import {useRouter} from 'vue-router';
 
-	const {addRequest, getAllRequests} = useInternshipRequests();
+	const {addRequest, } = useInternshipRequests();
 	const {getAllCandidats} = useCandidat();
 	const {getAllProvinces} = useProvinces();
 	const {getAllInternshipTypes} = useInternshipTypes();

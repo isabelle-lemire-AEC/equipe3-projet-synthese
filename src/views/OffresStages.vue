@@ -1,5 +1,5 @@
 <template>
-  <div class="pageContainer">
+  <div class="pageContainer" id="bgred">
         <h1>Offres de stage</h1>
         <RouterLink to="/offre-de-stage-ajout">
             <button>Ajouter une offre de stage</button>
@@ -115,6 +115,7 @@
   testAPI();
 
 </script>
+
 
 
 
