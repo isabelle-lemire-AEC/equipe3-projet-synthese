@@ -27,13 +27,13 @@
                 redirectPath = '/demandes-de-stages';
                 break;
             case 'CandidatMiseAjour':
-                redirectPath = `/candidat-mise-a-jour/${currentRoute.params.id}`;
+                redirectPath = `/candidat-details/${currentRoute.params.id}`;
                 break;
             case 'CandidatAjout':
                 redirectPath = '/candidats';
                 break;  
             case 'EntrpriseMiseAjour':
-                redirectPath = `/entreprise-mise-a-jour/${currentRoute.params.id}`;
+                redirectPath = `/entreprise-details/${currentRoute.params.id}`;
                 break;
             case 'EntrpriseAjout':
                 redirectPath = '/entreprises';

@@ -186,13 +186,7 @@
         </div>
       </div>
       <div class="boutons">
-        <button
-          class="bouton bouton--transparent"
-          type="button"
-          @click="$router.go(-1)"
-        >
-          Annuler
-        </button>
+        <BtnAnnuler></BtnAnnuler>
         <button class="bouton bouton--bleu" type="submit">
           <div class="icone-libelle">
             <i class="fas fa-save"></i>

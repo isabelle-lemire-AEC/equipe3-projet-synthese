@@ -193,6 +193,16 @@
 				</div>
 			</div>
 		</form>
+		<!-- Boutons annuler et mettre à jour -->
+		<div class="boutons">
+			<BtnAnnuler></BtnAnnuler>
+			<button class="bouton bouton--turquoise" @click="soumettreFormulaire()">
+				<div class="icone-libelle">
+					<i class="fas fa-save"></i>
+					<span>Sauvegarder</span>
+				</div>
+			</button>
+		</div>
 	</div>
 
 </template>
