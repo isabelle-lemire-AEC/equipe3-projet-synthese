@@ -167,9 +167,7 @@
             dateFin.value = demande.value.endDate.substring(0, demande.value.startDate.indexOf('T'));
 
             // Afin d'afficher les "skills" comme il faut (sans la dernière virgule)
-            console.log("demande.value.skills: ", demande.value.skills);
             competences.value = demande.value.skills.join(', ');
-            console.log("competences.value: ", competences.value);
         } catch (error) {
             console.error("Error:", error.response ? error.response.data : error.message);
         }

@@ -108,6 +108,7 @@
   import { useRoute } from 'vue-router';
   import BtnAnnuler from '../components/BtnAnnuler.vue';
   import { fetchStageTypes } from '@/composables/api';
+  import { useRouter } from 'vue-router';
 
   // import { useEntreprise } from '../composables/offres_stage/stageEntreprise';
   // import { fetchProvinces, fetchStageTypes, fetchInternshipOffers } from '../composables/api';
@@ -119,7 +120,9 @@
   const remunerationType = ref(null);
   const dateDebut = ref(null);
   const dateFin = ref(null);
-  
+  const exigences = ref(null);
+  const router = useRouter();
+
   const offerData = ref({
     _id: "",
     title: "",
@@ -177,8 +180,18 @@
 
   // Fonction de soumission du formulaire
   const submitForm = async () => {
+    listerExigences();
     offerData.value.startDate = dateDebut.value;
     offerData.value.endDate = dateFin.value;
     await edditerOffre(route.params.id, offerData.value);
+    router.push({name: "OffresStages"});
   };
+
+
+  const listerExigences = () => {
+    exigences.value = offerData.value.requiredSkills.toString();
+    exigences.value = exigences.value.replace(/ /g,'');
+    offerData.value.requiredSkills = exigences.value.split(',');
+  }
+
 </script> 
