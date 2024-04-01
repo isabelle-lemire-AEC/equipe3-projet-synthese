@@ -1,4 +1,4 @@
-<!-- TableauDeBord.vue / débuter par Caro, continuer par Isa -->
+<!-- TableauDeBord.vue -->
 <template>
     <div>
         <section class="infoRapide">
@@ -76,8 +76,6 @@
                 </div>
             </div>
         </section>
-
-       <!-- <hr style="margin: 25px 0;">  à deleter, seulement pour faire section -->
 
         <!-- Offre de stage -->
         <section class="dernieresOffres">
@@ -182,20 +180,3 @@
     });
 
 </script>
-
-<!--<style scoped>
- .flex {
-    display: flex;
- }
-
- .infoRapide-demandes,
- .infoRapide-offres,
- .infoRapide-candidats,
- .infoRapide-entreprises {
-    background-color: beige;
-    padding: 25px;
-    margin-right: 25px;
-    border-radius: 25px;
- }
-
-</style>-->
