@@ -1,6 +1,6 @@
 <!-- TableauDeBord.vue / débuter par Caro, continuer par Isa -->
 <template>
-    <div class="container">
+    <div class="pageContainer">
         <section class="infoRapide">
             <div class="infoRapide-demandes">
                 <div class="icone-infoRapide">
