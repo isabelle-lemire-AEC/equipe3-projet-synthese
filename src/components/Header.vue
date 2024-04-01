@@ -78,7 +78,7 @@
 
   /* Menu toggable */
 const emit = defineEmits(['menu-toggled']);
-    const isMenuOpen = ref(false);
+const isMenuOpen = ref(false);
 
   const toggleMenu = () => {
     isMenuOpen.value = !isMenuOpen.value;

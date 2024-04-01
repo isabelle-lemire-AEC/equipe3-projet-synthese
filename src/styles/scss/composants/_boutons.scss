@@ -35,6 +35,22 @@
             background-color: darken(variables.$blue, 5%);
         }
     }
+    
+    &--rougeOffre {
+        background-color: variables.$red;
+
+        &:hover {
+            background-color: darken(variables.$red, 5%);
+        }
+    }
+
+    &--jaune {
+        background-color: variables.$gold;
+
+        &:hover {
+            background-color: darken(variables.$gold, 5%);
+        }
+    }
 
     &--rouge {
         background-color: variables.$bouton-action-red;
@@ -60,7 +76,11 @@
         }
     }
 
-    
+    &--cv {
+        font-size: variables.$font-style-h5;
+    }
+
+
 }
 
 .boutons {

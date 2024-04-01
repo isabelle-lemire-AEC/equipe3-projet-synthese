@@ -4,7 +4,7 @@ import { ref } from 'vue';
 // REMPLIR ENTREPRIZE AVEC LES VALEUR DUNE ENTREPRISE CRÉÉ AU PRÉALABLE RAPH ATTENTION***
 
 const offerData = {
-  title: "developeur debutent",
+  title: "developeur debutent super cool",
   description: "Recherche un développeur debutent.",
   enterprise: {
     _id: "65f27c246b6b31ec79d74019",
@@ -68,4 +68,3 @@ export function ajouterUnOffre() {
 }
 ajouterUnOffre(offerData);
 
-console.log(offerData);

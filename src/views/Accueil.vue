@@ -17,12 +17,16 @@
 
         <!-- Début du formulaire d'identification -->
         <form @submit.prevent="submitForm">
-          <div class="form-group">
-            <input type="text" id="nomPrenom" v-model="nomPrenom" placeholder="Votre nom et prénom" required>
-            <input type="email" id="courriel" v-model="courriel" placeholder="Votre courriel" required>
+          <div class="form-group form-fiche__colonne-inputs" >
+            <label for="accueil-nomPrenom"></label>
+            <input type="text" id="accueil-nomPrenom" v-model="nomPrenom" placeholder="Votre nom et prénom" required>
+          </div>
+          <div class="form-group form-fiche__colonne-inputs" >  
+            <label for="accueil-courriel"></label>
+            <input type="email" id="accueil-courriel" v-model="courriel" placeholder="Votre courriel" required>
           </div>
 
-          <button class="bouton bouton--turquoise"type="submit">Accéder maintenant</button>
+          <button class="bouton bouton--turquoise bouton-acceuil"type="submit">Accéder maintenant</button>
         </form>
       </div>
 

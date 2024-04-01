@@ -1,4 +1,4 @@
-<!-- EntrepriseDetails -->
+<!-- EntrepriseDetails.vue -->
 <template>
   <div v-if="entreprise" class="form-fiche fiche-entreprise-details">
     <!-- Affichage du logo de l'entreprise -->
@@ -14,6 +14,7 @@
       </div>
     </div>
 
+    <!-- Boutons d'action pour modifier, valider ou supprimer l'entreprise -->
     <div class="form-fiche__wrapper-boutons-encadre">
       <div class="boutons-action">
         <button class="boutons-action__crochet">
@@ -22,7 +23,7 @@
         <button class="boutons-action__modifier" @click="mettreAjour">
           <i class="fa-solid fa-pen-to-square"></i>
         </button>
-        <button class="boutons-action__supprimer" @click="supprimerEntreprise">
+        <button class="boutons-action__supprimer" @click="afficherConfirmationModal">
           <i class="fas fa-square-xmark"></i>
         </button>
         <div v-if="modalShow" class="modal">
@@ -36,17 +37,20 @@
   </div>
       </div>
 
+      <!-- Informations sur l'entreprise -->
       <div class="form-fiche__encadre">
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h2>Courte présentation</h2>
           <p>{{ entreprise.description }}</p>
         </div>
 
+        <!-- Contact de l'entreprise -->
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h3>Personne contact</h3>
           <p class="nom-contact">Louise St-Cyr</p>
         </div>
 
+        <!-- Informations de contact -->
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h3 class="section-title">Information de contact</h3>
           <div class="form-fiche__colonnes-inputs">
@@ -84,75 +88,77 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal de confirmation de suppression -->
+    <div class="modal" v-if="showConfirmationModal">
+      <div class="modal-content">
+        <p>Êtes-vous sûr de vouloir supprimer cette entreprise ?</p>
+        <div class="modal-buttons">
+          <button class="btn cancel" @click="annulerSuppression">Annuler</button>
+          <button class="btn confirm" @click="supprimerEntreprise">Confirmer</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
-import axios from "axios";
-import { useRouter } from "vue-router";
-import logoEntreprise from "@/assets/logo-ent.jpg";
+<script setup>
+import { ref } from 'vue';
+import axios from 'axios';
+import { useRouter, useRoute } from 'vue-router';
+import logoEntreprise from '@/assets/mediavox-logo.jpg'; // Importez le logo de l'entreprise
 
-export default {
-  name: "EntrepriseDetails",
+const entreprise = ref(null);
 
-  data() {
-    return {
-      entreprise: null,
-      logoEntreprise, // Logo de l'entreprise
-      modalShow: false,
-      modalMessage: "Êtes-vous sûr de vouloir supprimer cette entreprise ?",
-    };
-  },
+// État du modal de confirmation de suppression
+const showConfirmationModal = ref(false);
 
-  methods: {
-    async chargerEntreprise() {
-      try {
-        const response = await axios.get(
-          `https://api-3.fly.dev/enterprises/${this.$route.params.id}`
-        );
-        this.entreprise = response.data;
-      } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des détails de l'entreprise:",
-          error
-        );
-      }
-    },
+// Router et route pour la navigation dans l'application
+const router = useRouter();
+const route = useRoute();
 
-    mettreAjour() {
-      this.$router.push({
-        name: "EntrepriseMiseAjour",
-        params: { id: this.entreprise._id },
-      });
-    },
-
-    supprimerEntreprise() {
-      this.modalShow = true;
-    },
-
-    toggleModal() {
-      this.modalShow = !this.modalShow;
-    },
-
-    async confirmSuppression() {
-      try {
-        await axios.delete(
-          `https://api-3.fly.dev/enterprises/${this.$route.params.id}`
-        );
-        this.$router.push({ name: "Entreprises" });
-        this.toggleModal();
-      } catch (error) {
-        console.error("Erreur lors de la suppression de l'entreprise:", error);
-        this.toggleModal();
-      }
-    },
-  },
-
-  mounted() {
-    this.chargerEntreprise();
-  },
+// Fonction pour charger les détails de l'entreprise depuis l'API
+const chargerEntreprise = async () => {
+  try {
+    const response = await axios.get(`https://api-3.fly.dev/enterprises/${route.params.id}`);
+    entreprise.value = response.data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des détails de l'entreprise:", error);
+  }
 };
+
+// Fonction pour rediriger vers la page de mise à jour de l'entreprise
+const mettreAjour = () => {
+  router.push({ name: 'EntrepriseMiseAjour', params: { id: entreprise.value._id } });
+};
+
+// Fonction pour afficher le modal de confirmation de suppression
+const afficherConfirmationModal = () => {
+  showConfirmationModal.value = true;
+};
+
+// Fonction pour annuler la suppression de l'entreprise
+const annulerSuppression = () => {
+  showConfirmationModal.value = false;
+};
+
+// Fonction pour supprimer l'entreprise
+const supprimerEntreprise = async () => {
+  if (confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?')) {
+    try {
+      await axios.delete(`https://api-3.fly.dev/enterprises/${route.params.id}`);
+      router.push({ name: 'Entreprises' });
+    } catch (error) {
+      console.error('Erreur lors de la suppression de l\'entreprise:', error);
+    }
+  }
+};
+
+// Chargement des détails de l'entreprise au montage du composant
+chargerEntreprise();
 </script>
+
+
 <style scoped>
 
 .modal-content {

@@ -1,38 +1,33 @@
-//  _demandes-stages.scss
+//  _offres-stages.scss
 @use '../general/variables';
 @use '../general/mixins';
 
-#ajout-demandestages,
-#edition-demandestages {
+#ajout-offrestages,
+#edition-offrestages {
     @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
 }
 
 
-.formulaire-ajout-demandestages,
-.formulaire-edition-demandestages,
-.fiche-demandestages-details {
+.formulaire-ajout-offrestages,
+.formulaire-edition-offrestages,
+.fiche-offrestages-details {
     .form-fiche {
         &__wrapper-titre {
-            border-color: variables.$gold;
+            border-color: variables.$red;
         }
     }
 
     h2,
     h3 {
-        color: variables.$turquoise;
+        color: variables.$red;
     }
 }
 
-.listeStages{
+.listeOffres{
     background-color: variables.$white ;
     border-radius: 10px;
     padding: 80px;
     margin-top: 40px;
-
 }
 
-.pageContainer{
-    h1{
-       padding: 3rem 0 3rem 0 ; 
-    }
-}
+
