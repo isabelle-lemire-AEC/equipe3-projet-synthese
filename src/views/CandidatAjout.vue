@@ -120,7 +120,7 @@
             </div>
 
             <div class="boutons">
-                <button class="bouton bouton--transparent" type="submit" @click="annulerAjout">Annuler</button>
+                <BtnAnnuler></BtnAnnuler>
                 <button class="bouton bouton--mauve" type="submit">
                     <div class="icone-libelle">
                         <i class="fas fa-save"></i>
