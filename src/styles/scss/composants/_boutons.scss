@@ -64,6 +64,18 @@
         font-size: variables.$font-style-h5;
     }
 
+    &--activer {
+        background-color: variables.$light-green;
+        color: variables.$green;
+        padding: variables.$spacing-xsmall;
+        text-align: center;
+        @include mixins.font(variables.$font-headings, 15px, variables.$regular);
+
+        &:hover {
+            background-color: darken(variables.$light-green, 5%);
+        }
+    }
+
 
 }
 
@@ -108,6 +120,37 @@
 
         &:hover {
             color: darken(variables.$bouton-action-red, 5%);
+        }
+    }
+
+    &-liste {
+
+        i {
+            font-size: 20px;
+        }
+
+        &__consulter {
+            color: variables.$turquoise;
+
+            &:hover {
+                color: darken(variables.$turquoise, 5%);
+            }
+        }
+
+        &__modifier {
+            color: variables.$orange;
+
+            &:hover {
+                color: darken(variables.$orange, 5%);
+            }
+        }
+
+        &__supprimer {
+            color: variables.$pink;
+
+            &:hover {
+                color: darken(variables.$pink, 5%);
+            }
         }
     }
 }

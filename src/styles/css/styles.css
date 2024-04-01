@@ -57,6 +57,19 @@
 .bouton--cv {
   font-size: clamp(1.125rem, 1.08rem + 0.225vi, 1.35rem);
 }
+.bouton--activer {
+  background-color: #CDECDA;
+  color: #06A04A;
+  padding: 0.5rem;
+  text-align: center;
+  font-family: "Lato";
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+.bouton--activer:hover {
+  background-color: #bbe5cc;
+}
 
 .boutons {
   display: flex;
@@ -101,6 +114,27 @@
 }
 .boutons-action__supprimer:hover {
   color: #8a0806;
+}
+.boutons-action-liste i {
+  font-size: 20px;
+}
+.boutons-action-liste__consulter {
+  color: #0C9DA4;
+}
+.boutons-action-liste__consulter:hover {
+  color: #0a868c;
+}
+.boutons-action-liste__modifier {
+  color: #F9A35E;
+}
+.boutons-action-liste__modifier:hover {
+  color: #f89545;
+}
+.boutons-action-liste__supprimer {
+  color: #F26689;
+}
+.boutons-action-liste__supprimer:hover {
+  color: #f04e77;
 }
 
 .carte-candidat {
@@ -160,6 +194,77 @@
 .carte-entreprise__texte p {
   font-family: "Roboto";
   color: #707070;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: "Roboto";
+}
+table th {
+  font-size: 15px;
+}
+table td {
+  font-size: 16px;
+  color: #111111;
+}
+
+.liste__rangee {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 2fr;
+  padding-block: 1rem;
+}
+.liste__head__titre-colonne {
+  text-align: left;
+}
+.liste__body__contenu-colonne {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.liste__body__contenu-colonne--4 .bouton--activer {
+  flex-basis: 50%;
+}
+.liste__body .liste__rangee:not(:last-child) {
+  border-bottom: 1px solid #5E5E5E;
+}
+.liste__body .icone {
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+.liste__body .icone--demande {
+  background-color: #D6B477;
+  color: #70582F;
+}
+.liste__body .icone--offre {
+  background-color: #BB2026;
+  color: #FF9FA3;
+}
+.liste__body .icone i {
+  font-size: 20px;
+}
+.liste__body .poste {
+  font-weight: 700;
+}
+.liste__wrapper-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.liste__wrapper-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.liste__wrapper-boutons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
 }
 
 .form-fiche__label-input-vertical h4, label, input:not([type=radio]),
@@ -726,6 +831,16 @@ label {
   flex-basis: 15%;
 }
 
+#ajout-demandestages,
+#edition-demandestages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+.formulaire-ajout-demandestages .form-fiche__wrapper-titre,
+.formulaire-edition-demandestages .form-fiche__wrapper-titre,
 .fiche-demandestages-details .form-fiche__wrapper-titre {
   border-color: #CB912B;
 }
