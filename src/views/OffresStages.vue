@@ -2,10 +2,10 @@
   <div class="pageContainer">
         <h1>Offres de stage</h1>
         <RouterLink to="/offre-de-stage-ajout">
-            <button>Ajouter une offre de stage</button>
+            <button class="bouton bouton--rouge">Ajouter une offre de stage</button>
         </RouterLink>
         <div class="listeOffres">
-            <div class="listeOffresHeader">
+            <div class="liste-header">
                 <span>Poste</span>
                 <span>Secteur d'activité</span>
                 <span>Région</span>
@@ -160,7 +160,7 @@
   
 <style scoped>
 
-html, body {
+/*html, body {
     background-color: rgb(222, 222, 222);
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -217,6 +217,6 @@ h1 {
 .poste {
     display: flex;
     flex-direction: column;
-}
+}*/
 
 </style>

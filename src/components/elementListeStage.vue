@@ -2,7 +2,8 @@
     <div class="elementStage" v-if="showThisElement">
         <div>
             <div class="poste">
-            <div class="iconTemp"></div>
+            <div class="iconTemp">
+            </div>
                 <div class="posteEtNom">
                     <span>{{ props.posteTitre }}</span>
                     <span>{{ props.posteNom }}</span>
@@ -61,6 +62,9 @@
         </div>
 
     </div>
+
+    <!--<i class="fa-solid fa-graduation-cap"></i>
+    <i class="fa-solid fa-suitcase"></i>-->
 </template>
 
 <script setup>

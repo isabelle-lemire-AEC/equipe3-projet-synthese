@@ -53,11 +53,11 @@
                 <button class="bouton bouton--turquoise" @click="validerToutesLesDemandes()">Valider toutes les demandes</button>
             </div>
             <div>
-                <div class="grid-dernieresDemandes-Offre">
-                    <p>Poste</p>
-                     <p>Etablissement</p>
-                    <p>Date</p>
-                    <p>Actions</p>
+                <div class="liste-header">
+                    <span>Poste</span>
+                    <span>Etablissement</span>
+                    <span>Date</span>
+                    <span>Actions</span>
                 </div>
                 
 
@@ -77,7 +77,7 @@
             </div>
         </section>
 
-        <hr style="margin: 25px 0;"> <!-- à deleter, seulement pour faire section -->
+       <!-- <hr style="margin: 25px 0;">  à deleter, seulement pour faire section -->
 
         <!-- Offre de stage -->
         <section class="dernieresOffres">
@@ -90,11 +90,11 @@
             </div>
 
             <div>
-                <div class="grid-dernieresDemandes-Offre">
-                    <p>Poste</p>
-                    <p>Ville</p>
-                    <p>Date</p>
-                    <p>Action</p>
+                <div class="liste-header">
+                    <span>Poste</span>
+                    <span>Ville</span>
+                    <span>Date</span>
+                    <span>Action</span>
                 </div>
                 <div v-if="offres && afficherOffres">
                     <ElementListeStage v-for="offre in offres"
