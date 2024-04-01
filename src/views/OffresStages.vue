@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-  import ElementListeStage from '../components/ElementListeStage.vue'
+  import ElementListeStage from '../components/elementListeStage.vue'
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
   import { useProvinces } from '../composables/provinces/provinces.js'
   import { useInternshipTypes } from '@/composables/types_stage/types_stage.js'

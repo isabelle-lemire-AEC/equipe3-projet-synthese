@@ -1,6 +1,6 @@
 <!-- TableauDeBord.vue / débuter par Caro, continuer par Isa -->
 <template>
-    <div class="pageContainer">
+    <div>
         <section class="infoRapide">
             <div class="infoRapide-demandes">
                 <div class="icone-infoRapide">
@@ -114,14 +114,12 @@
     </div>
 </template>
 <script setup>
-    import ElementListeStage from '../components/ElementListeStage.vue'
+    import ElementListeStage from '../components/elementListeStage.vue'
     import { ref, onMounted } from 'vue';
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
     import { useCandidat } from '../composables/candidats/candidat.js';
     import { useEntreprise } from '../composables/entreprises/entreprise.js';
-    import TBListeDemandeStageAttente from '../components/TBListeDemandeStageAttente.vue';
-    import TBListeOffreStageAttente from '../components/TBListeOffreStageAttente.vue';
     import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js'; 
 
     const { getAllNotActiveRequests, updateRequestStatus, getRequestsCount, activateRequest } = useInternshipRequests();

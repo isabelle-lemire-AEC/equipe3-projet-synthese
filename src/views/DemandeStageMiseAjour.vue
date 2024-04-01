@@ -7,7 +7,7 @@
 
 		<!-- Boutons annuler et mettre à jour -->
 		<div class="boutons">
-			<BtnAnnuler></BtnAnnuler>
+			<BtnAnnuler @click="retour()"></BtnAnnuler>
 			<button class="bouton bouton--turquoise" @click="modifDemande()">
 				<div class="icone-libelle">
 					<i class="fas fa-save"></i>
@@ -228,49 +228,30 @@
 			<!-- fin encadré blanc -->
 
 			<!-- Boutons annuler et mettre à jour -->
-			<div class="boutons">
-				<button class="bouton bouton--transparent" @click="retour()">Annuler</button>
-				<button class="bouton bouton--turquoise" @click="soumettreFormulaire()">
-					<div class="icone-libelle">
-						<i class="fas fa-save"></i>
-						<span>Mettre à jour</span>
-					</div>
-				</button>
-			</div>
 		</form>
+		<div class="boutons">
+			<button class="bouton bouton--transparent" @click="retour()">Annuler</button>
+			<button class="bouton bouton--turquoise" @click="modifDemande()">
+				<div class="icone-libelle">
+					<i class="fas fa-save"></i>
+					<span>Mettre à jour</span>
+				</div>
+			</button>
+		</div>
 	</div>
 </template>
 
 <!-- Il va rester à ajouter la validation pour les champs firstName et lastName (currently: fullName), Établissement scolaire, les champs select, checkbox et date.  -->
 
 <script setup>
-	import {
-		reactive,
-		ref,
-		onMounted
-	} from "vue";
-	import {
-		useCandidat
-	} from "../composables/candidats/candidat";
-	import {
-		useProvinces
-	} from "../composables/provinces/provinces";
-	import {
-		useInternshipRequests
-	} from "../composables/demandes_stages/demandeDeStage";
-	import {
-		useInternshipTypes
-	} from "../composables/types_stage/types_stage";
-	import {
-		useActivitySectors
-	} from "../composables/secteurs_activites/secteurs_activites";
-	import {
-		useRoute
-	} from "vue-router";
-	import {
-		useRouter
-	} from 'vue-router';
-
+	import {reactive,ref,onMounted} from "vue";
+	import {useCandidat} from "../composables/candidats/candidat";
+	import {useProvinces} from "../composables/provinces/provinces";
+	import {useInternshipRequests} from "../composables/demandes_stages/demandeDeStage";
+	import {useInternshipTypes} from "../composables/types_stage/types_stage";
+	import {useActivitySectors} from "../composables/secteurs_activites/secteurs_activites";
+	import {useRoute} from "vue-router";
+	import {useRouter} from 'vue-router';
 	import btnTelechargerCV from '../components/BtnTelechargerCV.vue'
 	import BtnAnnuler from '../components/BtnAnnuler.vue';
 
@@ -383,6 +364,8 @@
 			if (!formulaireValide.value) {
 				demande.value.candidate.firstName = nomDuCandidat.value.substring(0, nomDuCandidat.value.indexOf(' '));
 				demande.value.candidate.lastName = nomDuCandidat.value.substring(nomDuCandidat.value.indexOf(' ') + 1);
+				demande.value.startDate = dateDebut.value;
+				demande.value.endDate = dateFin.value;
 				listerCompetences();
 				// console.log("avant - demande.value.candidate.province: ", demande.value.candidate.province)
 				// demande.value.candidate.province = await getProvinceById(demande.value.candidate.province);
