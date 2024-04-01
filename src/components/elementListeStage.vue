@@ -1,104 +1,91 @@
 <template>
-    <div class="elementStage" v-if="showThisElement">
-
-        <table>
-
-            <thead class="liste__head">
-                <tr class="liste__rangee">
-                    <th class="liste__head__titre-colonne liste__head__titre-colonne--1">Poste</th>
-                    <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Établissement</th>
-                    <th class="liste__head__titre-colonne liste__head__titre-colonne--3">Date</th>
-                    <th class="liste__head__titre-colonne liste__head__titre-colonne--4">Actions</th>
-                </tr>
-            </thead>
-
-
-            <!-- Responsive Table Body Section -->
-            <tbody class="liste__body">
-                <tr class="liste__rangee">
-                    <td class="liste__body__contenu-colonne liste__body__contenu-colonne--1">
-                        <div class="liste__wrapper-horizontal">
-                            <div v-if="isDemande">
-                                <div class="icone icone--demande">
-                                    <i class="fas fa-graduation-cap"></i>
-                                </div>
-                            </div>
-
-                            <div v-if="!isDemande">
-                                <div class="icone icone--offre">
-                                    <i class="fas fa-suitcase"></i>
-                                </div>
-                            </div>
-
-                            <div class="liste__wrapper-vertical">
-                                <span class="poste">{{ props.posteTitre }}</span>
-                                <span>{{ props.posteNom }}</span>
+        <tbody class="liste__body">
+            <tr class="liste__rangee">
+                <td class="liste__body__contenu-colonne liste__body__contenu-colonne--1">
+                    <div class="liste__wrapper-horizontal">
+                        <div v-if="isDemande">
+                            <div class="icone icone--demande">
+                                <i class="fas fa-graduation-cap"></i>
                             </div>
                         </div>
-                    </td>
-                    <td class="liste__body__contenu-colonne liste__body__contenu-colonne--2">
-                        <div class="region">
-                            <span>{{ props.region }}</span>
+
+                        <div v-if="!isDemande">
+                            <div class="icone icone--offre">
+                                <i class="fas fa-suitcase"></i>
+                            </div>
                         </div>
-                    </td>
-                    <td class="liste__body__contenu-colonne liste__body__contenu-colonne--3">
-                        <div class="dateInscription">
-                            <span>{{ date }}</span>
+
+                        <div class="liste__wrapper-vertical">
+                            <span class="poste">{{ props.posteTitre }}</span>
+                            <span>{{ props.posteNom }}</span>
                         </div>
-                    </td>
+                    </div>
+                </td>
+                <td class="liste__body__contenu-colonne liste__body__contenu-colonne--2">
+                    <div class="region">
+                        <span>{{ props.region }}</span>
+                    </div>
+                </td>
+                <td class="liste__body__contenu-colonne liste__body__contenu-colonne--3">
+                    <div class="dateInscription">
+                        <span>{{ date }}</span>
+                    </div>
+                </td>
 
-                    <td class="liste__body__contenu-colonne liste__body__contenu-colonne--4">
-                        <div class="liste__wrapper-boutons">
-                            
-                                <button v-if="props.isTableauDeBord" class="bouton bouton--activer" @click="activer()">Activer</button>
-                            
+                <td class="liste__body__contenu-colonne liste__body__contenu-colonne--4">
+                    <div class="liste__wrapper-boutons">
 
-                            <!-- Boutons Demande -->
-                            <div v-if="props.isDemande">
-                                <div class="boutons-action" v-if="props.isDemande">
-                                    <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.id}}">
-                                        <button class="boutons-action-liste boutons-action-liste__consulter">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </button>
-                                    </RouterLink>
+                        <button v-if="props.isTableauDeBord" class="bouton bouton--activer"
+                                @click="activer()">Activer</button>
 
-                                    <RouterLink :to="{name: 'DemandeStageMiseAjour', params: {id: props.id}}">
-                                        <button class="boutons-action-liste boutons-action-liste__modifier">
-                                            <i class="fas fa-pen-to-square"></i>
-                                        </button>
-                                    </RouterLink>
 
-                                    <button class="boutons-action-liste boutons-action-liste__supprimer" @click="afficherConfirmationModal()">
-                                        <i class="fa-solid fa-trash-can"></i>
+                        <!-- Boutons Demande -->
+                        <div v-if="props.isDemande">
+                            <div class="boutons-action" v-if="props.isDemande">
+                                <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.id}}">
+                                    <button class="boutons-action-liste boutons-action-liste__consulter">
+                                        <i class="fa-solid fa-eye"></i>
                                     </button>
-                                </div>
-                            </div>
+                                </RouterLink>
 
-                            <!-- Boutons offre -->
-                            <div v-if="!props.isDemande">
-                                <div class="groupeBtns boutons-action" v-if="!props.isDemande">
-                                    <RouterLink :to="{name: 'OffreStageDetails', params: {id: props.id}}">
-                                        <button class="boutons-action-liste boutons-action-liste__consulter">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </button>
-                                    </RouterLink>
-
-                                    <RouterLink :to="{name: 'OffreStageMiseAjour', params: {id: props.id}}">
-                                        <button class="boutons-action-liste boutons-action-liste__modifier">
-                                            <i class="fas fa-pen-to-square"></i>
-                                        </button>
-                                    </RouterLink>
-
-                                    <button class="boutons-action-liste boutons-action-liste__supprimer" @click="afficherConfirmationModal()">
-                                        <i class="fa-solid fa-trash-can"></i>
+                                <RouterLink :to="{name: 'DemandeStageMiseAjour', params: {id: props.id}}">
+                                    <button class="boutons-action-liste boutons-action-liste__modifier">
+                                        <i class="fas fa-pen-to-square"></i>
                                     </button>
-                                </div>
+                                </RouterLink>
+
+                                <button class="boutons-action-liste boutons-action-liste__supprimer"
+                                        @click="afficherConfirmationModal()">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
                             </div>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
+                        <!-- Boutons offre -->
+                        <div v-if="!props.isDemande">
+                            <div class="groupeBtns boutons-action" v-if="!props.isDemande">
+                                <RouterLink :to="{name: 'OffreStageDetails', params: {id: props.id}}">
+                                    <button class="boutons-action-liste boutons-action-liste__consulter">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </RouterLink>
+
+                                <RouterLink :to="{name: 'OffreStageMiseAjour', params: {id: props.id}}">
+                                    <button class="boutons-action-liste boutons-action-liste__modifier">
+                                        <i class="fas fa-pen-to-square"></i>
+                                    </button>
+                                </RouterLink>
+
+                                <button class="boutons-action-liste boutons-action-liste__supprimer"
+                                        @click="afficherConfirmationModal()">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
 
 
 
@@ -179,22 +166,39 @@
             </div>
         </div>
 
-    </div>
+
 
     <!--<i class="fa-solid fa-graduation-cap"></i>
     <i class="fa-solid fa-suitcase"></i>-->
 </template>
 
 <script setup>
-    import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
-    import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
-    import { ref, onMounted } from 'vue';
-    import { useRoute } from 'vue-router';
+    import {
+        useInternshipRequests
+    } from '../composables/demandes_stages/demandeDeStage.js';
+    import {
+        useInternshipOffers
+    } from '../composables/offres_stage/offreDeStage.js';
+    import {
+        ref,
+        onMounted
+    } from 'vue';
+    import {
+        useRoute
+    } from 'vue-router';
 
-    const { deleteRequest, activateRequest } = useInternshipRequests();
-    const { supprimerOffre, activateOffer } = useInternshipOffers();
+    const {
+        deleteRequest,
+        activateRequest
+    } = useInternshipRequests();
+    const {
+        supprimerOffre,
+        activateOffer
+    } = useInternshipOffers();
 
-    const props = defineProps(['posteTitre', 'posteNom', 'info2', 'region', 'date', 'id', 'isDemande', 'isTableauDeBord', 'isActive']);
+    const props = defineProps(['posteTitre', 'posteNom', 'info2', 'region', 'date', 'id', 'isDemande',
+        'isTableauDeBord', 'isActive'
+    ]);
     const showConfirmationModal = ref(false);
     const showThisElement = ref(true);
     const date = ref([]);
@@ -244,7 +248,7 @@
 </script>
 
 <style scoped>
-/*     .poste {
+    /*     .poste {
         border-left: 0.3rem solid orange;
         padding-left: 0.6rem;
         display: flex;
