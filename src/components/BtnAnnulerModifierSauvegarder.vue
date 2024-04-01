@@ -1,7 +1,15 @@
 <template>
-    <button class="bouton bouton--transparent" type="button" @click="goBack">
-        Annuler
-    </button>
+    <div class="boutons">
+        <button class="bouton bouton--transparent" type="button" @click="goBack">
+            Annuler
+        </button>
+        <button :class="buttonClass" type="submit" @click="action">
+            <div class="icone-libelle">
+                <i class="fas fa-save"></i>
+                <span>{{ buttonText }}</span>
+            </div>
+        </button>
+    </div>
 </template>
 
 <script setup>
@@ -9,6 +17,7 @@
 
     const router = useRouter();
 
+    // Fonction pour la redirection du bouton annuler
     const goBack = () => {
         const currentRoute = router.currentRoute.value;
 
@@ -43,5 +52,16 @@
         }
 
         router.push({ path: redirectPath });
-    }
+    }    
+    
+    // Props pour le bouton mise à jour ou sauvegarder
+    const props = defineProps({
+        buttonText: String,
+        buttonClass: String,
+        action: Function,
+    });
 </script>
+
+<style>
+
+</style>

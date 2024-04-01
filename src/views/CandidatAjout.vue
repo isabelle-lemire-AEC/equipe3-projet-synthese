@@ -8,15 +8,10 @@
 
         <form id="ajout-candidat" @submit.prevent="soumettreFormulaire">
 
-            <div class="boutons">
-                <BtnAnnuler></BtnAnnuler>
-                <button class="bouton bouton--mauve" type="submit">
-                    <div class="icone-libelle">
-                        <i class="fas fa-save"></i>
-                        <span>Sauvegarder</span>
-                    </div>
-                </button>
-            </div>
+            <BtnAnnulerModifierSauvegarder 
+                buttonText="Sauvegarder" 
+                buttonClass="bouton bouton--mauve">
+            </BtnAnnulerModifierSauvegarder>
 
             <div class="form-fiche__input-hors-encadre">
                 <div class="form-fiche__label-input-horizontal">
@@ -25,7 +20,6 @@
                         <input type="text" id="firstName" v-model.trim="candidat.firstName">
                         <p class="validForm" v-if="erreurs.firstName">Veuillez remplir ce champ</p>
                     </div>
-
                 </div>
                 <div class="form-fiche__label-input-horizontal">
                     <label for="lastName">Nom :</label>
@@ -34,7 +28,6 @@
                         <p class="validForm" v-if="erreurs.lastName">Veuillez remplir ce champ</p>
                     </div>
                 </div>
-
                 <div class="form-fiche__label-input-horizontal">
                     <label for="poste">Poste :</label>
                     <div class="form-fiche__wrapper-input-msg-erreur">
@@ -44,6 +37,7 @@
                 </div>
             </div>
 
+            <!-- Section encadré blanc -->
             <div class="form-fiche__encadre">
                 <div class="form-fiche__wrapper-titre-groupe-inputs">
                     <h2>Courte présentation</h2>
@@ -119,16 +113,11 @@
                 </div>
             </div>
 
-            <div class="boutons">
-                <button class="bouton bouton--transparent" type="submit" @click="annulerAjout">Annuler</button>
-                <button class="bouton bouton--mauve" type="submit">
-                    <div class="icone-libelle">
-                        <i class="fas fa-save"></i>
-                        <span>Sauvegarder</span>
-                    </div>
-                </button>
-            </div>
-
+            <BtnAnnulerModifierSauvegarder 
+                buttonText="Sauvegarder" 
+                buttonClass="bouton bouton--mauve">
+            </BtnAnnulerModifierSauvegarder>
+            
         </form>
     </div>
 </template>
@@ -141,12 +130,10 @@
     import { useCandidat } from '@/composables/candidats/candidat';
     import { fetchProvinces } from '@/composables/api';
 
-    import BtnAnnuler from '../components/BtnAnnuler.vue';
+    import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
     const router = useRouter();
-    const {
-        addCandidat
-    } = useCandidat();
+    const { addCandidat} = useCandidat();
     const provinces = ref([]);
 
     const candidat = ref({
@@ -174,27 +161,9 @@
         }
     }
 
-    /*     
-    const annulerAjout = () => {
-        console.log("Annuler l'ajout du candidat");
-        router.push({
-            name: 'Candidats'
-        });
-    }
-    */
-
     initProvinces();
 
-    /*const soumettreFormulaire = async () => {
-        try {
-            
-            await ajouterCandidat();
-        } catch (error) {
-            console.error("Erreur lors de la soumission du formulaire :", error);
-        }
-    }*/
     const formulaireValide = ref(false);
-
 
     const soumettreFormulaire = async () => {
         try {
@@ -210,8 +179,6 @@
             console.error("Erreur lors de la soumission du formulaire :", error);
         }
     };
-
-
 
     const ajouterCandidat = async () => {
         try {
@@ -229,9 +196,8 @@
         }
     };
 
+
     //  validation formulaire
-
-
     const erreurs = ref({
         firstName: false,
         lastName: false,
@@ -257,80 +223,11 @@
         erreurs.value.province = candidat.value.province.value === '';
         erreurs.value.postalCode = candidat.value.postalCode === '';
 
-        // console.log('Erreurs après validation :', erreurs.value);
-
         return Object.values(erreurs.value).some(err => err);
     };
 </script>
 
 
+<style scoped>
 
-
-<style scoped lang="scss">
-    /* .container {
-        padding:80px 200px 80px 200px;
-        background-color: #ececee;
-    }
-
-    h1 {
-        border-left: 10px solid purple;
-        padding-left: 25px;
-    }
-
-    .section {
-        background: white;
-        padding: 50px;
-        border-radius: 25px;
-        margin: 25px 0;
-    }
-
-    input[type=text], input[type=email], textarea {
-        margin-bottom: 10px;
-        width: 100%;
-    }
-
-    input[type=text], input[type=email] {
-        min-height: 50px;
-    }
-
-    .border-left {
-        border-left: 10px solid gray;
-        padding-left: 10px;
-        margin-bottom: 25px;
-    }
-
-    .col-gauche {
-        width: 50%;
-    }
-
-    .col-droite {
-        width: 50%
-    }
-
-    .padding-right-15 {
-        padding-right: 15px;
-    }
-
-    .mettre-a-jour {
-        background-color: purple;
-        color: #fff;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-bottom: 50px;
-        border:none;
-    }
-
-    .mettre-a-jour:hover{
-        background-color: rgb(53, 5, 53);
-    }
-
-    .annuler {
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-bottom: 50px;
-    }
-
-    button {
-        margin-right: 15px;
-    } */
 </style>

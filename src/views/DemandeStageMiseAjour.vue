@@ -6,15 +6,12 @@
 		</div>
 
 		<!-- Boutons annuler et mettre à jour -->
-		<div class="boutons">
-			<BtnAnnuler @click="retour()"></BtnAnnuler>
-			<button class="bouton bouton--turquoise" @click="modifDemande()">
-				<div class="icone-libelle">
-					<i class="fas fa-save"></i>
-					<span>Mettre à jour</span>
-				</div>
-			</button>
-		</div>
+		<BtnAnnulerModifierSauvegarder 
+			buttonText="Mettre à jour" 
+			buttonClass="bouton bouton--turquoise"
+			:action="soumettreFormulaire">
+        </BtnAnnulerModifierSauvegarder>		
+
 		<form id="edition-demandestages">
 
 			<!-- Section encadré encadré blanc -->
@@ -226,22 +223,17 @@
 				</div>
 			</div>
 			<!-- fin encadré blanc -->
-
-			<!-- Boutons annuler et mettre à jour -->
 		</form>
-		<div class="boutons">
-			<button class="bouton bouton--transparent" @click="retour()">Annuler</button>
-			<button class="bouton bouton--turquoise" @click="modifDemande()">
-				<div class="icone-libelle">
-					<i class="fas fa-save"></i>
-					<span>Mettre à jour</span>
-				</div>
-			</button>
-		</div>
+
+		<!-- Boutons annuler et mettre à jour -->
+		<BtnAnnulerModifierSauvegarder 
+			buttonText="Mettre à jour" 
+			buttonClass="bouton bouton--turquoise"
+			:action="soumettreFormulaire">
+        </BtnAnnulerModifierSauvegarder>
+
 	</div>
 </template>
-
-<!-- Il va rester à ajouter la validation pour les champs firstName et lastName (currently: fullName), Établissement scolaire, les champs select, checkbox et date.  -->
 
 <script setup>
 	import {reactive,ref,onMounted} from "vue";
@@ -252,8 +244,9 @@
 	import {useActivitySectors} from "../composables/secteurs_activites/secteurs_activites";
 	import {useRoute} from "vue-router";
 	import {useRouter} from 'vue-router';
+	
 	import btnTelechargerCV from '../components/BtnTelechargerCV.vue'
-	import BtnAnnuler from '../components/BtnAnnuler.vue';
+	import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
 	const {getCandidatById, getAllCandidats} = useCandidat();
 	const {getAllProvinces, getProvinceById} = useProvinces();
@@ -367,9 +360,6 @@
 				demande.value.startDate = dateDebut.value;
 				demande.value.endDate = dateFin.value;
 				listerCompetences();
-				// console.log("avant - demande.value.candidate.province: ", demande.value.candidate.province)
-				// demande.value.candidate.province = await getProvinceById(demande.value.candidate.province);
-				// console.log("après - demande.value.candidate.province: ", demande.value.candidate.province)
 				await editRequest(id, demande.value);
 				console.log("Request edited successfully");
 				retour();
