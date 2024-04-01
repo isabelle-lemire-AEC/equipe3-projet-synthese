@@ -124,7 +124,6 @@
 
             </div> 
           </div>  
-
           
         </form>
         <!-- Boutons annuler et mettre à jour -->
@@ -138,23 +137,15 @@
             </button>
         </div>            
 
-
-
-
 </template>
 
-<!-- //raph/Joe & caro  -->
 <script setup>
-
   import { ref, onMounted } from 'vue';
-
-  // Probleme ligne 114 et ligne 
   import { useEntreprise } from '../composables/offres_stage/stageEntreprise';
   import { fetchProvinces } from '@/composables/api';
   import { fetchStageTypes } from '@/composables/api';
   import { useRouter } from 'vue-router';
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
-
   import BtnAnnuler from '../components/BtnAnnuler.vue';
 
   const router = useRouter();
@@ -165,8 +156,6 @@
   const provinces = ref([]);
   const internshipTypes = ref([]);
   const exigences = ref('');
-
-  // type RAPH***
 
   onMounted(async () => {
     const entreprisesData = await getAllEntreprises();
@@ -196,14 +185,12 @@
   const offerData = ref({
     title: "",
     description: "",
-    //est ce que l'entreprise à été transformeé en id ?
     enterprise: { _id: "" }, 
     startDate: "",
     endDate: "",
     weeklyWorkHours: 0,
     salary: 0,
     province: { _id: "" },
-    //attention ici verifier si je peux mettre plus d'un string dans le tableau de skills
     requiredSkills: [],
     internshipType: { _id: "" },
     paid: "DISCRETIONARY",
@@ -227,15 +214,3 @@
 </script>
 
 <style></style>
-
-
-<!-- // onMounted(async () => {
-//     ////////////////////////
-//     const entreprisesData = await getAllEntreprises();
-//     entreprises.value = entreprisesData.data;
-//     if (entreprisesResponse.value && Array.isArray(entreprisesResponse.value)){
-//         entreprises.value = entreprisesResponse.value;
-//         console.log("Entreprises chargées:", entreprises.value); 
-//     } else {
-//         console.error("La réponse n'est pas un tableau:", entreprisesResponse.value);
-//     } -->

@@ -235,8 +235,6 @@
 	</div>
 </template>
 
-<!-- Il va rester à ajouter la validation pour les champs firstName et lastName (currently: fullName), Établissement scolaire, les champs select, checkbox et date.  -->
-
 <script setup>
 	import {reactive,ref,onMounted} from "vue";
 	import {useCandidat} from "../composables/candidats/candidat";
@@ -362,9 +360,6 @@
 				demande.value.startDate = dateDebut.value;
 				demande.value.endDate = dateFin.value;
 				listerCompetences();
-				// console.log("avant - demande.value.candidate.province: ", demande.value.candidate.province)
-				// demande.value.candidate.province = await getProvinceById(demande.value.candidate.province);
-				// console.log("après - demande.value.candidate.province: ", demande.value.candidate.province)
 				await editRequest(id, demande.value);
 				console.log("Request edited successfully");
 				retour();
