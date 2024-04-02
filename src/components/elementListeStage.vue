@@ -21,23 +21,23 @@
                         </div>
                     </div>
                 </td>
-                <td v-if="!isTableauDeBord" class="liste__body__contenu-colonne liste__body__contenu-colonne--2">
-                    <div class="">
-                        <span>Secteur d'activité</span>
+                <td class="liste__body__contenu-colonne liste__body__contenu-colonne--2" v-if="!isTableauDeBord">
+                    <div class="region">
+                        <span>{{ props.info2 }}</span>
                     </div>
                 </td>
-                <td class="liste__body__contenu-colonne liste__body__contenu-colonne--2">
+                <td class="liste__body__contenu-colonne liste__body__contenu-colonne--3">
                     <div class="region">
                         <span>{{ props.region }}</span>
                     </div>
                 </td>
-                <td class="liste__body__contenu-colonne liste__body__contenu-colonne--3">
+                <td class="liste__body__contenu-colonne liste__body__contenu-colonne--4">
                     <div class="dateInscription">
                         <span>{{ date }}</span>
                     </div>
                 </td>
 
-                <td class="liste__body__contenu-colonne liste__body__contenu-colonne--4">
+                <td class="liste__body__contenu-colonne liste__body__contenu-colonne--5">
                     <div class="liste__wrapper-boutons">
 
                         <button v-if="props.isTableauDeBord" class="bouton bouton--activer"
