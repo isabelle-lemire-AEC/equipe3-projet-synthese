@@ -46,7 +46,7 @@ $font-style-h6: clamp(1rem, 0.975rem + 0.125vi, 1.125rem);
 $regular: 400;
 $bold: 700;
 
-
+$spacing-xxsmall: 0.25rem;
 $spacing-xsmall: 0.5rem;
 $spacing-small: 1rem;
 $spacing-medium: 2rem;
@@ -54,5 +54,5 @@ $spacing-large: 3rem;
 $spacing-xlarge: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
 
 /* https://utopia.fyi/clamp/calculator?a=320,1920,20%E2%80%94120|30%E2%80%9480*/
-$spacing-block-section: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+$spacing-block-section: clamp(1.25rem, 0rem + 6.25vi, 7.5rem);
 $spacing-inline-section: clamp(1.25rem, 0rem + 6.25vi, 7.5rem);

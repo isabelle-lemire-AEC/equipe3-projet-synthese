@@ -45,7 +45,7 @@
 
         <!-- Demande de stage -->
         <div class="tableau-bord__dernieres-demandes form-fiche__encadre">
-            <div class="tableau-bord__entete-dernieres-demandes-offres">
+            <div class="tableau-bord__entete-dernieres-demandes">
                 <div>
                     <h2>Dernières <span>demandes</span> de stage</h2>
                     <p>En attente de validation</p>
@@ -81,7 +81,7 @@
 
         <!-- Offre de stage -->
         <div class="tableau-bord__dernieres-demandes form-fiche__encadre">
-            <div class="tableau-bord__entete-dernieres-demandes-offres">
+            <div class="tableau-bord__entete-dernieres-offres">
                 <div>
                     <h2>Dernières <span>offres</span> de stage</h2>
                     <p>En attente de validation</p>

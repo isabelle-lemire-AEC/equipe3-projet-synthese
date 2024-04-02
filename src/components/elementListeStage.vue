@@ -245,6 +245,34 @@
         }
         showThisElement.value = false;
     }
+
+
+//Tableau responsive
+
+const setTitlesOnMounted = () => {
+  /* const titreColonne1 = document.querySelector(".liste__head__titre-colonne--1"); */
+  const titreColonne2 = document.querySelector(".liste__head__titre-colonne--2");
+  const titreColonne3 = document.querySelector(".liste__head__titre-colonne--3");
+  /* const titreColonne4 = document.querySelector(".liste__head__titre-colonne--4"); */
+
+  /* const contenuColonne1 = document.querySelectorAll(".liste__body__contenu-colonne--1"); */
+  const contenuColonne2 = document.querySelectorAll(".liste__body__contenu-colonne--2");
+  const contenuColonne3 = document.querySelectorAll(".liste__body__contenu-colonne--3");
+  /* const contenuColonne4 = document.querySelectorAll(".liste__body__contenu-colonne--4"); */
+
+  const totalTableBodyRow = document.querySelectorAll(".liste__body .liste__rangee");
+
+  for (let i = 0; i < totalTableBodyRow.length; i++) {
+    /* contenuColonne1[i].setAttribute("data-title", titreColonne1.innerText); */
+    contenuColonne2[i].setAttribute("data-title", titreColonne2.innerText);
+    contenuColonne3[i].setAttribute("data-title", titreColonne3.innerText);
+    /* contenuColonne4[i].setAttribute("data-title", titreColonne4.innerText); */
+  }
+};
+
+onMounted(() => {
+  setTitlesOnMounted();
+});
 </script>
 
 <style scoped>

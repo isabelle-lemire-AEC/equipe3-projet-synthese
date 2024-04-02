@@ -28,6 +28,19 @@ table {
         font-size: 16px;
         color: variables.$black;
     }
+
+     @include mixins.media-max(1000px) {
+         thead {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+         }
+     }
 }
 
 .liste {
@@ -35,10 +48,26 @@ table {
     &__rangee {
         display: grid;
         grid-template-columns: 2fr 1.5fr 1fr 2fr;
-        grid-gap: variables.$spacing-medium;
+        gap: variables.$spacing-medium;
         width: 100%;
+
         &:not(:has(th)) {
             @include mixins.padding(variables.$spacing-medium, null);
+        }
+
+        @include mixins.media-max(1000px) {
+            grid-template-columns: 2fr 1fr 2fr;
+            column-gap: variables.$spacing-medium;
+            row-gap: variables.$spacing-small;
+        }
+
+        @include mixins.media-max(800px) {
+            grid-template-columns: 2fr 1fr 1.5fr;
+        }
+
+        @include mixins.media-max(768px) {
+            grid-template-columns: 1fr;
+            gap: variables.$spacing-small;
         }
     }
 
@@ -56,6 +85,7 @@ table {
             flex-wrap: wrap;
             align-items: center;
 
+
             &--1 {
                 padding-left: variables.$spacing-small;
 
@@ -66,11 +96,71 @@ table {
                 &:has(.icone--offre) {
                     border-left: 5px solid variables.$red;
                 }
+
+                @include mixins.media-max(1000px) {
+                    grid-area: 1 / 1 / span 2 / span 1;
+                }
+
+                @include mixins.media-max(768px) {
+                    grid-column: 1 / -1;
+                    grid-row: auto;
+                    margin-bottom: variables.$spacing-small;
+                }
+            }
+
+            &--2 {
+                @include mixins.media-max(1000px) {
+                    grid-area: 1 / 2 / span 1 / span 1;
+                }
+
+                @include mixins.media-max(768px) {
+                    grid-column: 1 / -1;
+                    grid-row: auto;
+                }
+            }
+
+            &--3 {
+                @include mixins.media-max(1000px) {
+                    grid-area: 2 / 2 / span 1 / span 1;
+                }
+
+                @include mixins.media-max(768px) {
+                    grid-column: 1 / -1;
+                    grid-row: auto;
+                }
             }
 
             &--4 {
                 .bouton--activer {
                     flex-basis: 50%;
+                }
+
+                @include mixins.media-max(1000px) {
+                    grid-area: 1 / 3 / span 2 / span 1;
+
+                    .bouton--activer {
+                        flex-basis: unset;
+                        width: 70%;
+                    }
+                }
+
+                @include mixins.media-max(768px) {
+                    grid-column: 1 / -1;
+                    grid-row: auto;
+
+                    .bouton--activer {
+                        width: 40%;
+                    }
+                }
+            }
+
+            @include mixins.media-max(1000px) {
+
+                @include mixins.flex(column, center, flex-start, variables.$spacing-xxsmall);
+
+                &::before {
+                    content: attr(data-title);
+                    font-weight: variables.$bold;
                 }
             }
         }
@@ -115,29 +205,14 @@ table {
         &-boutons {
             @include mixins.flex(row, space-between, center, variables.$spacing-large);
             width: 100%;
+
+            @include mixins.media-max(1000px) {
+                @include mixins.flex(column, center, center, variables.$spacing-small);
+            }
+
+            @include mixins.media-max(768px) {
+                @include mixins.flex(row, flex-start, center, variables.$spacing-medium);
+            }
         }
     }
 }
-
-/* .liste-header{
-    @include mixins.grid(4, 1rem);
-    color: variables.$gray;
-    margin-top: 60px;
-    
-
-   span{
-    @include mixins.font(variables.$font-body, null, bold);
-    padding-bottom: 0.5rem;
-    position: relative;
-
-    &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -2px; 
-        width: 100%;
-        height: 5px; 
-        background-color: variables.$gray; 
-    }
-   }
-} */

@@ -63,6 +63,11 @@ $color-entreprises: variables.$blue;
             background-color: transparent; // Couleur de la ligne lorsque l'élément est actif (par défaut)
         }
 
+        &.active,
+        &:hover {
+            font-weight: variables.$bold;
+        }
+
         // Appliquer les couleurs spécifiques au survol pour chaque classe spécifique
         &.tableau-de-bord:hover::after,
         &.tableau-de-bord.active::after {
@@ -88,6 +93,7 @@ $color-entreprises: variables.$blue;
         &.entreprises.active::after {
             background-color: $color-entreprises;
         }
+
 
         // Conteneur pour positionner la ligne à droite
         &>.line-container {
