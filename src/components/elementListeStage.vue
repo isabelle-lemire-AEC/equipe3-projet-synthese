@@ -25,13 +25,13 @@
                 <span>{{ props.info2 }}</span>
             </div>
         </td>
-        <td class="liste__body__contenu-colonne liste__body__contenu-colonne--3">
+        <td v-if="!props.isTableauDeBord" class="liste__body__contenu-colonne liste__body__contenu-colonne--3">
             <div class="dateInscription">
                 <span>{{ props.region }}</span>
             </div>
         </td>
 
-         <td v-if="!props.isTableauDeBord" class="liste__body__contenu-colonne liste__body__contenu-colonne--5">
+         <td class="liste__body__contenu-colonne liste__body__contenu-colonne--5">
             <div class="dateInscription">
                 <span>{{ date }}</span>
             </div>
