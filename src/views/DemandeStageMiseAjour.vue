@@ -273,6 +273,24 @@
 	const etablissementInput = ref('Cégep de Trois-Rivières');
 	let ignoreFirstChange = true;
 
+
+    const candidate = ref({
+        _id: "",
+        description: "",
+        email: "",
+        firstName: "",
+        lastName: "",
+        address: "",
+        phone: "",
+        city: "",
+        skills: [""],
+        province: {
+            _id: "",
+            value: "",
+        },
+        postalCode: ""
+	});
+
 	const demande = ref({
 		title: "",
 		description: "",
@@ -398,9 +416,15 @@
 		const internshipTypesData = await getAllInternshipTypes();
 		internshipTypes.value = internshipTypesData.data;
 		const demandeData = await getRequestById(id);
+
 		console.log("demandeData: ", demandeData);
 		demande.value = demandeData.data;
-		demande.value.candidate = demandeData.data.candidate;
+
+		if(demande.value.candidate === null || demande.value.candidate === undefined) {
+                demande.value.candidate = candidate.value;
+		}
+
+		// demande.value.candidate = demandeData.data.candidate;
 		console.log("demande.value: ", demande.value);
 		console.log("demande.value.candidate: ", demande.value.candidate);
 		console.log("demande.value.province: ", demande.value.province);

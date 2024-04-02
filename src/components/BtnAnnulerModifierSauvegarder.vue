@@ -30,7 +30,7 @@
                 redirectPath = '/offres-de-stages';
                 break;
             case 'DemandeStageMiseAjour':
-                redirectPath = `/demande-stage-details/${currentRoute.params.id}`;
+                redirectPath = `/demande-de-stage-details/${currentRoute.params.id}`;
                 break;
             case 'DemandeStageAjout':
                 redirectPath = '/demandes-de-stages';
