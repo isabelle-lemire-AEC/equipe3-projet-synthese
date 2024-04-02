@@ -1,4 +1,3 @@
-<!-- EntrepriseDetails.vue -->
 <template>
   <div v-if="entreprise" class="form-fiche fiche-entreprise-details">
     <!-- Affichage du logo de l'entreprise -->
@@ -23,18 +22,12 @@
         <button class="boutons-action__modifier" @click="mettreAjour">
           <i class="fa-solid fa-pen-to-square"></i>
         </button>
-        <button class="boutons-action__supprimer" @click="afficherConfirmationModal">
+        <button
+          class="boutons-action__supprimer"
+          @click="afficherConfirmationModal"
+        >
           <i class="fas fa-square-xmark"></i>
         </button>
-        <div v-if="modalShow" class="modal">
-    <div class="modal-content">
-      <p>{{ modalMessage }}</p>
-      <div class="modal-footer">
-        <button class="btn non" @click="toggleModal">Non</button>
-        <button class="btn oui" @click="confirmSuppression">Oui</button>
-      </div>
-    </div>
-  </div>
       </div>
 
       <!-- Informations sur l'entreprise -->
@@ -47,7 +40,7 @@
         <!-- Contact de l'entreprise -->
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h3>Personne contact</h3>
-          <p class="nom-contact">Louise St-Cyr</p>
+          <p class="nom-contact">{{ entreprise.contactPerson }}</p>
         </div>
 
         <!-- Informations de contact -->
@@ -89,115 +82,71 @@
       </div>
     </div>
 
-    <!-- Modal de confirmation de suppression -->
-    <div class="modal" v-if="showConfirmationModal">
-      <div class="modal-content">
-        <p>Êtes-vous sûr de vouloir supprimer cette entreprise ?</p>
-        <div class="modal-buttons">
-          <button class="btn cancel" @click="annulerSuppression">Annuler</button>
-          <button class="btn confirm" @click="supprimerEntreprise">Confirmer</button>
-        </div>
+    <!-- Modal de confirmation de suppression avec le composant ModalSupprime -->
+    <ModalSupprime
+      :isVisible="showConfirmationModal"
+      @cancel="annulerSuppression"
+      @confirm="supprimerEntreprise"
+      typeElement="entreprise"
+    >
+      <div>
+        <p>Êtes-vous sûr de vouloir supprimer cette {{ typeElement }} ?</p>
       </div>
-    </div>
+    </ModalSupprime>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import axios from 'axios';
-import { useRouter, useRoute } from 'vue-router';
-import logoEntreprise from '@/assets/mediavox-logo.jpg'; // Importez le logo de l'entreprise
+import { ref } from "vue";
+import axios from "axios";
+import { useRouter, useRoute } from "vue-router";
+import logoEntreprise from "@/assets/mediavox-logo.jpg";
+import ModalSupprime from "@/composables/modalsupprimer/ModalSupprime.vue";
 
 const entreprise = ref(null);
-
-// État du modal de confirmation de suppression
 const showConfirmationModal = ref(false);
-
-// Router et route pour la navigation dans l'application
 const router = useRouter();
 const route = useRoute();
 
-// Fonction pour charger les détails de l'entreprise depuis l'API
 const chargerEntreprise = async () => {
   try {
-    const response = await axios.get(`https://api-3.fly.dev/enterprises/${route.params.id}`);
+    const response = await axios.get(
+      `https://api-3.fly.dev/enterprises/${route.params.id}`
+    );
     entreprise.value = response.data;
   } catch (error) {
-    console.error("Erreur lors de la récupération des détails de l'entreprise:", error);
+    console.error(
+      "Erreur lors de la récupération des détails de l'entreprise:",
+      error
+    );
   }
 };
 
-// Fonction pour rediriger vers la page de mise à jour de l'entreprise
 const mettreAjour = () => {
-  router.push({ name: 'EntrepriseMiseAjour', params: { id: entreprise.value._id } });
+  router.push({
+    name: "EntrepriseMiseAjour",
+    params: { id: entreprise.value._id },
+  });
 };
 
-// Fonction pour afficher le modal de confirmation de suppression
 const afficherConfirmationModal = () => {
   showConfirmationModal.value = true;
 };
 
-// Fonction pour annuler la suppression de l'entreprise
 const annulerSuppression = () => {
   showConfirmationModal.value = false;
 };
 
-// Fonction pour supprimer l'entreprise
 const supprimerEntreprise = async () => {
-  if (confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?')) {
-    try {
-      await axios.delete(`https://api-3.fly.dev/enterprises/${route.params.id}`);
-      router.push({ name: 'Entreprises' });
-    } catch (error) {
-      console.error('Erreur lors de la suppression de l\'entreprise:', error);
-    }
+  try {
+    await axios.delete(`https://api-3.fly.dev/enterprises/${route.params.id}`);
+    router.push({ name: "Entreprises" });
+  } catch (error) {
+    console.error("Erreur lors de la suppression de l'entreprise:", error);
   }
 };
 
-// Chargement des détails de l'entreprise au montage du composant
 chargerEntreprise();
 </script>
 
-
-<style scoped>
-
-.modal-content {
-  width: 400px;
-  height: 200px;
-  background-color: #eee;
-  border: 1px solid cyan;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-
-.modal-footer {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-}
-
-.btn {
-  font-weight: bold;
-  padding: 10px 20px;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 10px;
-  width: 30%;
-
-  &.non {
-    background-color: red;
-  }
-
-  &.oui {
-    background-color: green;
-  }
-}
-
-</style>
+<style scoped></style>
