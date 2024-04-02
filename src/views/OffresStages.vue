@@ -1,27 +1,35 @@
 <template>
-  <div id="bgred">
+    <div class="offrestages-list">
         <h1>Offres de stage</h1>
         <RouterLink to="/offre-de-stage-ajout">
-            <button class="bouton bouton--rouge">Ajouter une offre de stage</button>
+          <button class="bouton bouton--rougeOffre">Ajouter une offre de stage</button>
         </RouterLink>
-        <div class="listeOffres">
-            <div class="liste-header">
-                <span>Poste</span>
-                <span>Secteur d'activité</span>
-                <span>Région</span>
-                <span>Date d'inscription</span>
-            </div>
-            <ElementListeStage v-for="offre in toutesOffres"
-              :key="offre._id"
-              :posteTitre="offre.title"
-              :posteNom="offre.enterprise.name" 
-              :info2="offre.enterprise.city"
-              :region="offre.province.value" 
-              :date="offre.startDate" 
-              :id="offre._id" 
-              :isDemande="false"
-              :isTableauDeBord="false"
-              :isActive="offre.isActive"></ElementListeStage>
+
+        <div class="form-fiche__encadre">
+          <table class="liste-5-colonnes listeStages">
+            <thead class="liste__head">
+                <tr class="liste__rangee">
+                    <th class="liste__head__titre-colonne liste__head__titre-colonne--1">Poste</th>
+                    <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Secteur d'activité</th>
+                    <th class="liste__head__titre-colonne liste__head__titre-colonne--3">Région</th>
+                    <th class="liste__head__titre-colonne liste__head__titre-colonne--5">Date de publication</th>
+                </tr>
+            </thead>   
+            <tbody class="liste__body">
+              <ElementListeStage v-for="offre in toutesOffres"
+                :key="offre._id"
+                :posteTitre="offre.title"
+                :posteNom="offre.enterprise.name" 
+                :info2="offre.enterprise.city"
+                :region="offre.province.value" 
+                :date="offre.startDate" 
+                :id="offre._id" 
+                :isDemande="false"
+                :isTableauDeBord="false"
+                :isActive="offre.isActive">
+              </ElementListeStage>
+            </tbody>         
+          </table>
         </div>
     </div>
 </template>
@@ -106,118 +114,7 @@
   testAPI();
 
 </script>
-
-
-
-
-
-<!--<template>
-    <div>
-      <h3>Offres de stage disponibles</h3>
-      <div v-if="loading">Chargement...</div>
-      <div v-if="error">Erreur lors du chargement des offres</div>
-      <div v-else>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Titre</th>
-              <th scope="col">Entreprise</th> 
-        
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="offer in offers" :key="offer._id">
-              <td>{{ offer.title }}</td>
-            </tr>
-            
-            <tr v-for="offer in offers" :key="offer._id">
-                <td>
-                    <router-link :to="`/offre-de-stage-details/${offer._id}`">{{ offer.title }}</router-link>
-                </td>
-    
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </template>-->
-  <!-- raph caro -->
-  <!--<script setup>
-  import { ref, onMounted } from 'vue';
-  import { useInternshipOffers } from '../composables/offres_stage/offreDeStage'; 
-   import { useRouter } from 'vue-router';
-  
-  const { getAllOffers, response, error, loading } = useInternshipOffers();
-  const offers = ref([]);
-  
-  onMounted(async () => {
-    await getAllOffers();
-    offers.value = response.value; 
-  });
-  
-  
-  </script>-->
   
   
 <style scoped>
-
-/*html, body {
-    background-color: rgb(222, 222, 222);
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-h1 {
-    margin: 0 0 3rem 0;
-    padding: 0;
-}
-
-.pageContainer {
-    padding: 2rem;
-    margin: 2rem;
-}
-
-.listeStagesHeader {
-    display: none;
-}
-
-.listeStages {
-    background-color: white;
-    padding: 4rem 2rem 2rem 2rem;
-    border-radius: 1rem;
-}
-
-.ajouterDemande {
-    margin: 0 0 1rem 0;
-    padding: 0.8rem;
-    border-radius: 0.3rem;
-    border: 0px solid white;
-    background-color: orange;
-    color: white;
-}
-
-.iconTemp {
-    background-color: orange;
-    width: 40px;
-    height: 40px;
-    border-radius: 0.5rem;
-}
-
-.elementStage {
-    display: flex;
-    justify-content: space-between;
-    margin: 2rem 0 0 0;
-    padding: 0 0 1rem 0;
-    border-bottom: 0.1rem solid rgb(193, 193, 193);
-}
-
-.barreVerticale {
-    width: 0.3rem;
-    background-color: orange;
-}
-
-.poste {
-    display: flex;
-    flex-direction: column;
-}*/
-
 </style>
