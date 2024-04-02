@@ -65,17 +65,19 @@
                     </tr>
                 </thead>
 
-                <ElementListeStage v-for="demande in demandes"
-                :key="demande._id"
-                :posteTitre="demande.title"
-                :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName"
-                :info2="secteurActivite.value"
-                :region="demande.province.value"
-                :date="demande.startDate"
-                :id="demande._id"
-                :isDemande="true"
-                :isTableauDeBord="true"
-                :isActive="demande.isActive"></ElementListeStage>
+                <tbody class="liste__body">
+                    <ElementListeStage v-for="demande in demandes"
+                    :key="demande._id"
+                    :posteTitre="demande.title"
+                    :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName"
+                    :info2="secteurActivite.value"
+                    :region="demande.province.value"
+                    :date="demande.startDate"
+                    :id="demande._id"
+                    :isDemande="true"
+                    :isTableauDeBord="true"
+                    :isActive="demande.isActive"></ElementListeStage>
+                </tbody>
             </table>
         </div>
 
