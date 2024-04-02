@@ -10,19 +10,15 @@
 </template>
 
 <script setup>
-  import CandidatCard from '@/components/CandidatCard.vue';
   import { useCandidat } from '@/composables/candidats/candidat';
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, watch } from 'vue';
   import { useRouter } from 'vue-router';
+  import CandidatCard from '@/components/CandidatCard.vue';
 
   const candidates = ref([]);
-
-  // Importation de la fonction getAllCandidats depuis le fichier candidat.js
   const { getAllCandidats } = useCandidat();
-
   const router = useRouter();
 
-  // Fonction pour naviguer vers la page d'ajout de candidat
   const goToCandidatAjout = () => {
     router.push({
       name: 'CandidatAjout'
@@ -31,50 +27,22 @@
 
   // Fonction pour récupérer tous les candidats
   onMounted(async () => {
-    try {
-      const response = await getAllCandidats();
-      candidates.value = response.data;
-    } catch (error) {
-      console.error("Error:", error.response ? error.response.data : error.message);
-    }
-  });
+  await chargerCandidats();
+});
+
+const chargerCandidats = async () => {
+  try {
+    const response = await getAllCandidats();
+    candidates.value = response.data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des candidats:", error);
+  }
+};
+
+// Utiliser `watch` pour détecter les changements de route et recharger les candidats si nécessaire
+
 </script>
 
 <style scoped>
-  /* .container {
-    max-width: 100%;
-    height: 900px;
-    
-  }
-
-  .candidatsList {
-    font-family: Arial, sans-serif;
-    color: #100f0f;
-    background-color: #ececee;
-    padding:40px 40px 40px 40px;
-  }
-
-  .candidatsList h1 {
-    color: #0a0a0a;
-    padding-bottom: 20px;
-  }
-
-  .post-candidat {
-    background-color: purple;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin-bottom: 50px;
-    border:none;
-  }
-
-  .post-candidat:hover{
-    background-color: rgb(53, 5, 53);
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 20px;
-  } */
+  
 </style>
