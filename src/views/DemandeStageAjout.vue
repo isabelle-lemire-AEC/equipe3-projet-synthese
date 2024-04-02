@@ -287,17 +287,18 @@
 		erreurs.value.candidat = demande.value.candidate.firstName === '',
 		erreurs.value.description = demande.value.candidate.description === '',
 		erreurs.value.formation = formationInput.value === '',
-		erreurs.value.activitySector = activitySectorInput.value === '',
+		erreurs.value.activitySector = (activitySectorInput.value === '' || activitySectorInput.value === undefined),
 		erreurs.value.city = demande.value.candidate.city === '',
-		erreurs.value.province = demande.value.candidate.province.value === '',
+		erreurs.value.province = (demande.value.province.value === '' || demande.value.province.value === undefined),
 		erreurs.value.etablissement = etablissementInput.value === '',
 		erreurs.value.startDate = demande.value.startDate === '',
 		erreurs.value.endDate = demande.value.endDate === '',
-		erreurs.value.skills = demande.value.candidate.skills === '',
+		console.log('demande.value.skills: ', demande.value.skills)
+		erreurs.value.skills = ((demande.value.skills === undefined) || (demande.value.skills === '' || demande.value.skills[0] === '')),
 		erreurs.value.internshipType = demande.value.internshipType.value === '',
 		erreurs.value.weeklyWorkHours = demande.value.weeklyWorkHours === 0,
 		erreurs.value.additionalInformation = demande.value.additionalInformation === ''
-		
+
 		return Object.values(erreurs.value).some(err => err);
 	};
 

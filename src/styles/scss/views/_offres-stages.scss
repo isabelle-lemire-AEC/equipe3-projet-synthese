@@ -30,4 +30,19 @@
     margin-top: 40px;
 }
 
+/* style pour la page de offre de stage (la liste de toutes les offres) */
+
+.offrestages-list {
+    h1 {
+        margin-bottom: variables.$spacing-xlarge;
+    }
+
+    .bouton {
+        &--rougeOffre {
+            margin-bottom: variables.$spacing-xlarge;
+        }
+    }
+
+}
+
 

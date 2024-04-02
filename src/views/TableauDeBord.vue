@@ -45,7 +45,7 @@
 
         <!-- Demande de stage -->
         <div class="tableau-bord__dernieres-demandes form-fiche__encadre">
-            <div class="tableau-bord__entete-dernieres-demandes-offres">
+            <div class="tableau-bord__entete-dernieres-demandes">
                 <div>
                     <h2>Dernières <span>demandes</span> de stage</h2>
                     <p>En attente de validation</p>
@@ -65,23 +65,25 @@
                     </tr>
                 </thead>
 
-                <ElementListeStage v-for="demande in demandes"
-                :key="demande._id"
-                :posteTitre="demande.title"
-                :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName"
-                :info2="secteurActivite.value"
-                :region="demande.province.value"
-                :date="demande.startDate"
-                :id="demande._id"
-                :isDemande="true"
-                :isTableauDeBord="true"
-                :isActive="demande.isActive"></ElementListeStage>
+                <tbody class="liste__body">
+                    <ElementListeStage v-for="demande in demandes"
+                    :key="demande._id"
+                    :posteTitre="demande.title"
+                    :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName"
+                    :info2="secteurActivite.value"
+                    :region="demande.province.value"
+                    :date="demande.startDate"
+                    :id="demande._id"
+                    :isDemande="true"
+                    :isTableauDeBord="true"
+                    :isActive="demande.isActive"></ElementListeStage>
+                </tbody>
             </table>
         </div>
 
         <!-- Offre de stage -->
         <div class="tableau-bord__dernieres-demandes form-fiche__encadre">
-            <div class="tableau-bord__entete-dernieres-demandes-offres">
+            <div class="tableau-bord__entete-dernieres-offres">
                 <div>
                     <h2>Dernières <span>offres</span> de stage</h2>
                     <p>En attente de validation</p>
@@ -94,56 +96,44 @@
                 <thead class="liste__head">
                     <tr class="liste__rangee">
                         <th class="liste__head__titre-colonne liste__head__titre-colonne--1">Poste</th>
-                        <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Établissement</th>
+                        <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Ville</th>
                         <th class="liste__head__titre-colonne liste__head__titre-colonne--3">Date</th>
                         <th class="liste__head__titre-colonne liste__head__titre-colonne--4">Actions</th>
                     </tr>
                 </thead>
 
-                <ElementListeStage v-for="offre in offres"
-                :key="offre._id"
-                :posteTitre="offre.title"
-                :posteNom="offre.enterprise.name"
-                :info2="offre.enterprise.city"
-                :region="offre.province.value"
-                :date="offre.startDate"
-                :id="offre._id"
-                :isDemande="false"
-                :isTableauDeBord="true"
-                :isActive="offre.isActive"></ElementListeStage>
+                <tbody class="liste__body">
+                    <ElementListeStage v-for="offre in offres"
+                        :key="offre._id"
+                        :posteTitre="offre.title"
+                        :posteNom="offre.enterprise.name"
+                        :info2="offre.enterprise.city"
+                        :region="offre.province.value"
+                        :date="offre.startDate"
+                        :id="offre._id"
+                        :isDemande="false"
+                        :isTableauDeBord="true"
+                        :isActive="offre.isActive"></ElementListeStage>
+                </tbody>
             </table>     
         </div>
     </div>
 </template>
 <script setup>
-    import ElementListeStage from '../components/ElementListeStage.vue'
+    import ElementListeStage from '../components/elementListeStage.vue'
     import { ref, onMounted } from 'vue';
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
     import { useCandidat } from '../composables/candidats/candidat.js';
     import { useEntreprise } from '../composables/entreprises/entreprise.js';
     import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js'; 
+    //import { couldStartTrivia } from 'typescript';
 
-    const {
-        getAllNotActiveRequests,
-        updateRequestStatus,
-        getRequestsCount,
-        activateRequest
-    } = useInternshipRequests();
-    const {
-        getAllOffers,
-        getInternshipOfferCount,
-        activateOffer
-    } = useInternshipOffers();
-    const {
-        getCandidatsCount
-    } = useCandidat();
-    const {
-        getEntreprisesCount
-    } = useEntreprise();
-    const {
-        getAllActivitySectors
-    } = useActivitySectors();
+    const {getAllNotActiveRequests,updateRequestStatus,getRequestsCount,activateRequest} = useInternshipRequests();
+    const {getAllOffers,getInternshipOfferCount,activateOffer, getAllNotActiveOffers} = useInternshipOffers();
+    const {getCandidatsCount} = useCandidat();
+    const {getEntreprisesCount} = useEntreprise();
+    const {getAllActivitySectors} = useActivitySectors();
 
     const demandes = ref([]);
     const offres = ref([]);
@@ -174,25 +164,44 @@
     };
 
     const validerToutesLesDemandes = async () => {
-        demandes.value.forEach(demande => {
-            activateRequest(demande._id);
+        demandes.value.forEach(async (demande) => {
+            await activateRequest(demande._id);
         });
         afficherDemandes.value = !afficherDemandes.value;
     };
 
     const validerToutesLesOffres = async () => {
-        offres.value.forEach(offre => {
-            activateOffer(offre._id);
+        offres.value.forEach(async (offre) => {
+            await activateOffer(offre._id);
         });
         afficherOffres.value = !afficherOffres.value;
     };
 
     onMounted(async () => {
         secteursActivites.value = await getAllActivitySectors();
-        secteurActivite.value = secteursActivites.value[Math.floor(Math.random() * secteursActivites.value
-            .length)];
+        secteurActivite.value = secteursActivites.value[Math.floor(Math.random() * secteursActivites.value.length)];
         demandes.value = await getAllNotActiveRequests();
-        offres.value = await getAllOffers();
+
+        demandes.value.forEach(demande => {
+            if(demande.candidate === undefined || demande.candidate === null) {
+                demande.candidate = {
+                    firstName: "",
+                    lastName: ""
+                }
+            }
+        });
+
+        offres.value = await getAllNotActiveOffers();
+
+        offres.value.forEach(offre => {
+            if(offre.enterprise === undefined || offre.enterprise === null) {
+                offre.enterprise = {
+                    city: "",
+                    name: ""
+                }
+            }
+        });
+
         demandesCount.value = await getRequestsCount();
         offresCount.value = await getInternshipOfferCount();
         candidatsCount.value = await getCandidatsCount();

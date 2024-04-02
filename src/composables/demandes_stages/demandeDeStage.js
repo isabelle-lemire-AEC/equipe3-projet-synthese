@@ -73,7 +73,6 @@ export function useInternshipRequests() {
   const editRequest = async (id, requestData) => {
     loading.value = true;
     try {
-      console.log(`AVANT PATCH - Demande de stage avec le id ${id} - OK`, response.value.data);
       response.value = await axios.patch(`${API_BASE_URL}/internship-requests/${id}`, requestData);
       console.log(`PATCH - Demande de stage avec le id ${id} - OK`, response.value.data);
       return response.value.data;

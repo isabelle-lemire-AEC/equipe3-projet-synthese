@@ -4,8 +4,8 @@
 
 .header {
     background-color: variables.$white;
-    padding: 1rem 0 ;
-    margin-left: 0.5rem;
+    padding: variables.$spacing-small 0;
+    margin-left: 5px;
 
     &__items {
         @include mixins.flex(row, space-between, center, 1rem);
@@ -13,92 +13,103 @@
 
     &__icone-boutons-ajout {
         @include mixins.flex(row, space-between, center, 1rem);
-       #icone-menu{
-        padding: 0 3rem 0 1rem;
-       }
+
+        #icone-menu {
+            padding: 0 variables.$spacing-large 0 variables.$spacing-small;
+            cursor: pointer;
+        }
     }
-    
-    
+
+
 }
 
 .nav-items,
 .boutons-ajout {
-    
-    @include mixins.flex(row, flex-start, null, 1rem);
-    
-      
 
-    .fa-plus{
-        padding-right: 0.5rem;
+    @include mixins.flex(row, flex-start, null, 1rem);
+
+
+
+    .fa-plus {
+        padding-right: variables.$spacing-xsmall;
     }
-   
-        .add-offer{
-            @include mixins.padding(0.5rem, 0.5rem);
-            @include mixins.border(null, variables.$dark-red, 0.5rem);
-            @include mixins.font(variables.$font-body, null, null);
-            background-color: variables.$white;
-            color: variables.$red;
-            transition: background-color 0.3s ease;
-            &:hover{
-                background-color: variables.$dark-red;
-                color: variables.$white;
-            }
+
+    .add-offer {
+        @include mixins.border(null, variables.$dark-red, variables.$spacing-xsmall);
+        @include mixins.font(variables.$font-body, null, null);
+        padding: variables.$spacing-xsmall;
+        background-color: variables.$white;
+        color: variables.$red;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: variables.$dark-red;
+            color: variables.$white;
         }
-        .add-request{
-            padding: 0.5rem;
-            background-color: variables.$white;
-            color: variables.$gold;
-            @include mixins.border(null, variables.$dark-gold, 0.5rem);
-            @include mixins.font(variables.$font-body, null, null);
-            transition: background-color 0.3s ease;
-            &:hover{
-                background-color: variables.$dark-gold;
-                color: variables.$white;
-            }    
+    }
+
+    .add-request {
+        padding: variables.$spacing-xsmall;
+        background-color: variables.$white;
+        color: variables.$gold;
+        @include mixins.border(null, variables.$dark-gold, variables.$spacing-xsmall);
+        @include mixins.font(variables.$font-body, null, null);
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: variables.$dark-gold;
+            color: variables.$white;
         }
-        .add-company{
-            padding: 0.5rem;
-            background-color: variables.$white;
-            color: variables.$dark-blue;
-            @include mixins.border(null, variables.$blue, 0.5rem);
-            @include mixins.font(variables.$font-body, null, null);
-            transition: background-color 0.3s ease;
-            &:hover{
-                background-color: variables.$dark-blue;
-                color: variables.$white;
-            }    
+    }
+
+    .add-company {
+        padding: variables.$spacing-xsmall;
+        background-color: variables.$white;
+        color: variables.$dark-blue;
+        @include mixins.border(null, variables.$blue, variables.$spacing-xsmall);
+        @include mixins.font(variables.$font-body, null, null);
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: variables.$dark-blue;
+            color: variables.$white;
         }
-        .add-candidate{
-            padding: 0.5rem;
-            background-color: variables.$white;
-            color: variables.$purple;
-            @include mixins.border(null, variables.$dark-purple, 0.5rem);
-            @include mixins.font(variables.$font-body, null, null);
-            transition: background-color 0.3s ease;
-            &:hover{
-                background-color: variables.$dark-purple;
-                color: variables.$white;
-            }    
+    }
+
+    .add-candidate {
+        padding: 0.5rem;
+        background-color: variables.$white;
+        color: variables.$purple;
+        @include mixins.border(null, variables.$dark-purple, variables.$spacing-xsmall);
+        @include mixins.font(variables.$font-body, null, null);
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: variables.$dark-purple;
+            color: variables.$white;
         }
-    
-    
+    }
+
+
 }
 
 
 .utilisateur {
-    padding: 0 1rem 0 0;
-    @include mixins.flex(row, flex-end, center, 1rem);
-    .utilisateur__details{
+    padding: 0 variables.$spacing-small 0 0;
+    @include mixins.flex(row, flex-end, center, variables.$spacing-small);
+
+    .utilisateur__details {
         text-align: right;
         @include mixins.font(variables.$font-body, null, null);
     }
-    .utilisateur__nom{
+
+    .utilisateur__nom {
         color: variables.$black;
-        
+
     }
-    .utilisateur__courriel{
+
+    .utilisateur__courriel {
         color: #CCD4E0;
     }
 
 }
-

@@ -130,6 +130,23 @@
     const dateFin = ref(null);
     const competences = ref(null);
 
+    const candidate = ref({
+        _id: "",
+        description: "",
+        email: "",
+        firstName: "",
+        lastName: "",
+        address: "",
+        phone: "",
+        city: "",
+        skills: [""],
+        province: {
+            _id: "",
+            value: "",
+        },
+        postalCode: ""
+	});
+
     const getActivitySectors = async () => {
         const actSectors = await getAllActivitySectors();
         randomActivitySector.value = actSectors[Math.floor(Math.random()*actSectors.length)];
@@ -156,10 +173,17 @@
     };
 
     onMounted(async () => {
+
         try {
             getActivitySectors();
             const response = await getRequestById(route.params.id);
             demande.value = response.data;
+            console.log('demande.candidate: ', demande.candidate);
+
+            if(demande.value.candidate === null || demande.value.candidate === undefined) {
+                demande.value.candidate = candidate.value;
+            }
+
             console.log("demande.value: ", demande.value);
 
             // Afin d'afficher les dates dans le bon format
