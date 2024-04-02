@@ -62,6 +62,17 @@ onMounted(async () => {
         try {
             const response = await getAllRequests();
             toutesDemandes.value = response.data;
+
+
+            toutesDemandes.value.forEach(demande => {
+            if(demande.candidate === undefined || demande.candidate === null) {
+                demande.candidate = {
+                    firstName: "",
+                    lastName: ""
+                }
+            }
+        });
+
         } catch (error) {
             console.error("Error:", error.response ? error.response.data : error.message);
         }
