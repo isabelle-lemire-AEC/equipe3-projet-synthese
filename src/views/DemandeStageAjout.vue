@@ -5,15 +5,12 @@
 		</div>
 
 		<!-- Boutons annuler et mettre à jour -->
-		<div class="boutons">
-			<BtnAnnuler></BtnAnnuler>
-			<button class="bouton bouton--turquoise" @click="soumettreFormulaire()">
-				<div class="icone-libelle">
-					<i class="fas fa-save"></i>
-					<span>Sauvegarder</span>
-				</div>
-			</button>
-		</div>
+		<BtnAnnulerModifierSauvegarder 
+			buttonText="Sauvegarder" 
+			buttonClass="bouton bouton--turquoise"
+			:action="soumettreFormulaire">
+        </BtnAnnulerModifierSauvegarder>
+
 		<form id="ajout-demandestages">
 
 			<!-- Section titre -->
@@ -193,16 +190,13 @@
 				</div>
 			</div>
 		</form>
+
 		<!-- Boutons annuler et mettre à jour -->
-		<div class="boutons">
-			<BtnAnnuler></BtnAnnuler>
-			<button class="bouton bouton--turquoise" @click="soumettreFormulaire()">
-				<div class="icone-libelle">
-					<i class="fas fa-save"></i>
-					<span>Sauvegarder</span>
-				</div>
-			</button>
-		</div>
+		<BtnAnnulerModifierSauvegarder 
+			buttonText="Sauvegarder" 
+			buttonClass="bouton bouton--turquoise"
+			:action="soumettreFormulaire">
+        </BtnAnnulerModifierSauvegarder>
 	</div>
 
 </template>
@@ -215,7 +209,8 @@
 	import {useInternshipTypes} from "@/composables/types_stage/types_stage.js";
 	import {useActivitySectors} from "../composables/secteurs_activites/secteurs_activites.js";
 	import {useRouter} from 'vue-router';
-	import BtnAnnuler from '../components/BtnAnnuler.vue';
+
+	import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
 	const {addRequest, getAllRequests} = useInternshipRequests();
 	const {getAllCandidats} = useCandidat();
