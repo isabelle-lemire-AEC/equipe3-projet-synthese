@@ -9,7 +9,7 @@
 		<BtnAnnulerModifierSauvegarder 
 			buttonText="Mettre à jour" 
 			buttonClass="bouton bouton--turquoise"
-			:action="soumettreFormulaire">
+			:action="modifDemande">
         </BtnAnnulerModifierSauvegarder>		
 
 		<form id="edition-demandestages">
@@ -229,7 +229,7 @@
 		<BtnAnnulerModifierSauvegarder 
 			buttonText="Mettre à jour" 
 			buttonClass="bouton bouton--turquoise"
-			:action="soumettreFormulaire">
+			:action="modifDemande">
         </BtnAnnulerModifierSauvegarder>
 
 	</div>
@@ -334,9 +334,10 @@
 		erreurs.value.etablissement = etablissementInput.value === '',
 		erreurs.value.startDate = demande.value.startDate === '',
 		erreurs.value.endDate = demande.value.endDate === '',
+		console.log('demande.value.skills: ', demande.value.skills)
 		erreurs.value.skills = ((demande.value.skills === undefined) || (demande.value.skills === '')),
 		erreurs.value.internshipType = ((demande.value.internshipType === undefined) || (demande.value.internshipType === '')),
-		erreurs.value.weeklyWorkHours = demande.value.weeklyWorkHours === 0,
+		erreurs.value.weeklyWorkHours = (demande.value.weeklyWorkHours === 0 || demande.value.weeklyWorkHours === undefined || demande.value.weeklyWorkHours === ''),
 		erreurs.value.additionalInformation = demande.value.additionalInformation === ''
 		
 		return Object.values(erreurs.value).some(err => err);
@@ -352,13 +353,14 @@
 
 	const modifDemande = async () => {
 		try {
+			demande.value.startDate = dateDebut.value;
+			demande.value.endDate = dateFin.value;
+
 			formulaireValide.value = validerFormulaire();
 			
 			if (!formulaireValide.value) {
 				demande.value.candidate.firstName = nomDuCandidat.value.substring(0, nomDuCandidat.value.indexOf(' '));
 				demande.value.candidate.lastName = nomDuCandidat.value.substring(nomDuCandidat.value.indexOf(' ') + 1);
-				demande.value.startDate = dateDebut.value;
-				demande.value.endDate = dateFin.value;
 				listerCompetences();
 				await editRequest(id, demande.value);
 				console.log("Request edited successfully");

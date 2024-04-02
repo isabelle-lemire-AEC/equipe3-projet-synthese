@@ -23,6 +23,7 @@
               <div class="form-fiche__label-input-horizontal">
                 <label for="titreOffre">Titre :</label>
                 <input v-model.trim="offerData.title" id="titreOffre" type="text"/>
+                <p v-if="erreurs.titre" class="validForm">Veuillez fournir le titre du stage.</p>
               </div>
             </div>  
             <!-- Section Entreprise -->
@@ -30,11 +31,12 @@
               <div class="form-fiche__label-input-horizontal">
                 <label for="titreOffre">Entreprise :</label>
                 <select v-model="offerData.enterprise" id="nomEntrepriseOffre" >
-                    <option disabled value="">Sélectionnez une entreprise</option>
+                    <option value="">Sélectionnez une entreprise</option>
                     <option v-for="entreprise in entreprises" :key="entreprise._id" :value="entreprise">
                         {{ entreprise.name }} 
                     </option>
                 </select>
+                <p v-if="erreurs.entreprise" class="validForm">Veuillez fournir l'entreprise du stage.</p>
               </div>
             </div>
             
@@ -45,17 +47,20 @@
                 <div>
                   <label for="descriptionOffre"></label>
                   <textarea v-model.trim="offerData.description" id="descriptionOffre" rows="5"></textarea>
+                  <p v-if="erreurs.description" class="validForm">Veuillez fournir la description du stage.</p>
                 </div>
               </div>              
 
             <!-- Section Programme et exigences -->
             <div class="form-fiche__label-input-vertical">
               <label for="">Programme de formation</label>
-              <input type="text" id="ajout-programme">
+              <input type="text" id="ajout-programme" v-model="progForm">
+              <p v-if="erreurs.progForm" class="validForm">Veuillez fournir un programme de formation.</p>
             </div>
             <div class="form-fiche__label-input-vertical">
               <h4>Exigences</h4>
               <textarea v-model.trim="offerData.requiredSkills" id="exigence" type="text" rows="5"></textarea>
+              <p v-if="erreurs.exigences" class="validForm">Veuillez fournir les exigences du stage.</p>
             </div>  
             
             <!-- Section Information sur le stage -->
@@ -70,10 +75,12 @@
                         <option disable value="">Veuillez effectuer un choix</option>
                         <option v-for="internshipType in  internshipTypes" :key="internshipType._id" :value="internshipType._id">{{ internshipType.value }}</option>
                     </select>
+                    <p v-if="erreurs.typeDeStage" class="validForm">Veuillez fournir le type de stage.</p>
                   </div>
                   <div class="form-fiche__label-input-vertical">
                     <label for="">Nombre d'heure par semaine</label>
                     <input v-model.number="offerData.weeklyWorkHours" type="number"/>
+                    <p v-if="erreurs.heuresSemaine" class="validForm">Veuillez fournir le nombre d'heures par semaine pour le stage.</p>
                   </div> 
                   <div class="form-fiche__label-input-vertical">
                     <label for="ajout-offre-remuneration">Rémunération</label>
@@ -97,10 +104,12 @@
                   <div class="form-fiche__label-input-vertical">
                     <label for="ajout-demande-date-debut">Date de début</label>
                     <input v-model="offerData.startDate" id="ajout-demande-date-debut" type="date"/>
+                    <p v-if="erreurs.dateDebut" class="validForm">Veuillez fournir une date pour le début du stage.</p>
                   </div>
                   <div class="form-fiche__label-input-vertical">
                     <label for="ajout-demande-date-fin">Date de fin</label>
                     <input v-model="offerData.endDate" id="ajout-demande-date-fin" type="date"/>
+                    <p v-if="erreurs.dateFin" class="validForm">Veuillez fournir une date pour la fin du stage.</p>
                   </div>
                 </div>    
                 <div class="form-fiche__label-input-vertical">
@@ -110,6 +119,7 @@
                     <option disabled value="">Sélectionnez une province</option>
                     <option v-for="province in provinces" :key="province._id" :value="province">{{ province.value }}</option>
                 </select>     
+                <p v-if="erreurs.province" class="validForm">Veuillez fournir une province pour le stage.</p>
                 </div>           
               </div>
 
@@ -118,10 +128,10 @@
                 <h3>Informations supplémentaires</h3>
                 <div>
                   <label for="edit-demande-infos-supp"></label>
-                  <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5"></textarea>
+                  <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5" v-model="infoSupp"></textarea>
+                  <p v-if="erreurs.infoSupp" class="validForm">Veuillez fournir des l'informations supplémentaires.</p>
                 </div>
               </div>
-
             </div> 
           </div>  
           
@@ -156,6 +166,9 @@
   const provinces = ref([]);
   const internshipTypes = ref([]);
   const exigences = ref('');
+  const progForm = ref('');
+  const infoSupp = ref('');
+	const formulaireValide = ref(false);
 
   onMounted(async () => {
     const entreprisesData = await getAllEntreprises();
@@ -197,12 +210,53 @@
     isActive: false
   });
 
+  const erreurs = ref({
+    titre: false,
+    entreprise: false,
+    description: false,
+    progForm: false,
+    exigences: false,
+    typeDeStage: false,
+    heuresSemaine: false,
+    dateDebut: false,
+    dateFin: false,
+    province: false,
+    infoSupp: false
+  });
+
+  const validerFormulaire = () => {
+    erreurs.value.titre = offerData.value.title === '',
+    erreurs.value.entreprise = (offerData.value.enterprise._id === '' || offerData.value.enterprise._id === undefined),
+    erreurs.value.description = offerData.value.description === '',
+    erreurs.value.progForm = progForm.value === '',
+    erreurs.value.exigences = (offerData.value.requiredSkills === '' || offerData.value.requiredSkills === undefined || offerData.value.requiredSkills[0] === ''),
+    erreurs.value.typeDeStage = (offerData.value.internshipType._id === '' || offerData.value.internshipType._id === undefined),
+    erreurs.value.heuresSemaine = (offerData.value.weeklyWorkHours === 0 || offerData.value.weeklyWorkHours === undefined),
+    erreurs.value.dateDebut = offerData.value.startDate === '',
+    erreurs.value.dateFin = offerData.value.endDate === '',
+    erreurs.value.province = offerData.value.province._id === '',
+    erreurs.value.infoSupp = infoSupp.value === ''
+
+    return Object.values(erreurs.value).some(err => err);
+  };
+
   const submitForm = async () => {
-    console.log(offerData.value)
+
     listerExigences();
-    await ajouterOffre(offerData.value);
-    console.log("Offre ajoutée avec succès");
-    router.push({name: "OffresStages"});
+
+    try {
+      formulaireValide.value = validerFormulaire();
+      if (!formulaireValide.value) {
+        await ajouterOffre(offerData.value);
+        console.log("Offre ajoutée avec succès");
+        router.push({name: "OffresStages"});
+      } else {
+				throw new Error("Veuillez remplir tous les champs obligatoires.");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la soumission du formulaire :", error);
+    }
+
   };
 
   const listerExigences = () => {
