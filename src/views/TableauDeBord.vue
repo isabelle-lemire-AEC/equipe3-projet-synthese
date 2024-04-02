@@ -96,7 +96,7 @@
                 <thead class="liste__head">
                     <tr class="liste__rangee">
                         <th class="liste__head__titre-colonne liste__head__titre-colonne--1">Poste</th>
-                        <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Établissement</th>
+                        <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Ville</th>
                         <th class="liste__head__titre-colonne liste__head__titre-colonne--3">Date</th>
                         <th class="liste__head__titre-colonne liste__head__titre-colonne--4">Actions</th>
                     </tr>
