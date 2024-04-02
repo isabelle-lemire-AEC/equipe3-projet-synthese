@@ -50,8 +50,8 @@
                     <h2>Dernières <span>demandes</span> de stage</h2>
                     <p>En attente de validation</p>
                 </div>
-                <button class="bouton bouton--turquoise" @click="validerToutesLesDemandes()">Valider toutes les
-                    demandes</button>
+                <!-- <button class="bouton bouton--turquoise" @click="validerToutesLesDemandes()">Valider toutes les
+                    demandes</button> -->
             </div>
 
 
@@ -185,7 +185,7 @@
         demandes.value.forEach(demande => {
             if(demande.candidate === undefined || demande.candidate === null) {
                 demande.candidate = {
-                    firstName: "",
+                    firstName: "(Candidat effacé)",
                     lastName: ""
                 }
             }
@@ -196,7 +196,7 @@
         offres.value.forEach(offre => {
             if(offre.enterprise === undefined || offre.enterprise === null) {
                 offre.enterprise = {
-                    city: "",
+                    city: "(Entreprise effacé)",
                     name: ""
                 }
             }

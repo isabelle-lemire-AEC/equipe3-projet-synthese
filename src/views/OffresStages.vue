@@ -10,7 +10,7 @@
             <thead class="liste__head">
                 <tr class="liste__rangee">
                     <th class="liste__head__titre-colonne liste__head__titre-colonne--1">Poste</th>
-                    <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Secteur d'activité</th>
+                    <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Ville</th>
                     <th class="liste__head__titre-colonne liste__head__titre-colonne--3">Région</th>
                     <th class="liste__head__titre-colonne liste__head__titre-colonne--5">Date de publication</th>
                 </tr>
@@ -50,7 +50,17 @@
   onMounted(async () => {
     try {
       toutesOffres.value = await getAllOffers();
-        console.log("toutesDemandes: ", toutesOffres);
+
+      toutesOffres.value.forEach(offre => {
+        if(offre.enterprise === undefined || offre.enterprise === null) {
+            offre.enterprise = {
+                city: "(Entreprise effacé)",
+                name: ""
+            }
+        }
+      });
+
+      console.log("toutesDemandes: ", toutesOffres);
     } catch (error) {
         console.error("Error:", error.response ? error.response.data : error.message);
     }
