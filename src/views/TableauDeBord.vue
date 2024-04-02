@@ -102,17 +102,19 @@
                     </tr>
                 </thead>
 
-                <ElementListeStage v-for="offre in offres"
-                    :key="offre._id"
-                    :posteTitre="offre.title"
-                    :posteNom="offre.enterprise.name"
-                    :info2="offre.enterprise.city"
-                    :region="offre.province.value"
-                    :date="offre.startDate"
-                    :id="offre._id"
-                    :isDemande="false"
-                    :isTableauDeBord="true"
-                    :isActive="offre.isActive"></ElementListeStage>
+                <tbody class="liste__body">
+                    <ElementListeStage v-for="offre in offres"
+                        :key="offre._id"
+                        :posteTitre="offre.title"
+                        :posteNom="offre.enterprise.name"
+                        :info2="offre.enterprise.city"
+                        :region="offre.province.value"
+                        :date="offre.startDate"
+                        :id="offre._id"
+                        :isDemande="false"
+                        :isTableauDeBord="true"
+                        :isActive="offre.isActive"></ElementListeStage>
+                </tbody>
             </table>     
         </div>
     </div>
@@ -179,7 +181,27 @@
         secteursActivites.value = await getAllActivitySectors();
         secteurActivite.value = secteursActivites.value[Math.floor(Math.random() * secteursActivites.value.length)];
         demandes.value = await getAllNotActiveRequests();
+
+        demandes.value.forEach(demande => {
+            if(demande.candidate === undefined || demande.candidate === null) {
+                demande.candidate = {
+                    firstName: "",
+                    lastName: ""
+                }
+            }
+        });
+
         offres.value = await getAllNotActiveOffers();
+
+        offres.value.forEach(offre => {
+            if(offre.enterprise === undefined || offre.enterprise === null) {
+                offre.enterprise = {
+                    city: "",
+                    name: ""
+                }
+            }
+        });
+
         demandesCount.value = await getRequestsCount();
         offresCount.value = await getInternshipOfferCount();
         candidatsCount.value = await getCandidatsCount();
