@@ -933,13 +933,8 @@ label {
 .demandestages-list h1 {
   margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
 }
-.demandestages-list .bouton--gold {
+.demandestages-list .bouton--jaune {
   margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
-}
-.demandestages-list__liste {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
 }
 
 #ajout-offrestages,

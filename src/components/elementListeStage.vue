@@ -21,6 +21,11 @@
                         </div>
                     </div>
                 </td>
+                <td v-if="!isTableauDeBord" class="liste__body__contenu-colonne liste__body__contenu-colonne--2">
+                    <div class="">
+                        <span>Secteur d'activité</span>
+                    </div>
+                </td>
                 <td class="liste__body__contenu-colonne liste__body__contenu-colonne--2">
                     <div class="region">
                         <span>{{ props.region }}</span>

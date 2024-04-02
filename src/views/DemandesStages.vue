@@ -3,29 +3,33 @@
         <h1>Demandes de stage</h1>
         <button class="bouton bouton--jaune" @click="goToDemandesAjout">Ajouter une demande</button>
 
-        <div class="candidats__liste">
-            <div class="form-fiche__encadre"> 
-                <div>
-                    <div >
-                        <span>Poste</span>
-                        <span>Secteur d'activité</span>
-                        <span>Région</span>
-                        <span>Date d'inscription</span>
-                    </div>
-                    <ElementListeStage v-for="demande in toutesDemandes" 
-                        :key="demande._id" 
-                        :posteTitre="demande.title" 
-                        :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName" 
-                        :info2="secteurActivite.value"
-                        :region="demande.province.value" 
-                        :date="demande.startDate" 
-                        :id="demande._id" 
-                        :isDemande="true"
-                        :isTableauDeBord="false"
-                        :isActive="demande.isActive"></ElementListeStage>
-                </div>
-            </div>            
-        </div>
+        <div class="form-fiche__encadre"> 
+
+            <table>
+                <thead class="liste__head">
+                    <tr class="liste__rangee">
+                        <th class="liste__head__titre-colonne liste__head__titre-colonne--1">Poste</th>
+                        <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Secteur d'activité</th>
+                        <th class="liste__head__titre-colonne liste__head__titre-colonne--3">Région</th>
+                        <th class="liste__head__titre-colonne liste__head__titre-colonne--4">Date d'inscritpion</th>
+                        <th class="liste__head__titre-colonne liste__head__titre-colonne--5"></th>
+                    </tr>
+                </thead>
+
+                <ElementListeStage v-for="demande in toutesDemandes" 
+                    :key="demande._id" 
+                    :posteTitre="demande.title" 
+                    :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName" 
+                    :info2="secteurActivite.value"
+                    :region="demande.province.value" 
+                    :date="demande.startDate" 
+                    :id="demande._id" 
+                    :isDemande="true"
+                    :isTableauDeBord="false"
+                    :isActive="demande.isActive">
+                </ElementListeStage>                
+            </table>
+        </div>            
 
 
     </div>

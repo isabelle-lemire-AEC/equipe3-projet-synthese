@@ -123,7 +123,7 @@
     import { useCandidat } from '../composables/candidats/candidat.js';
     import { useEntreprise } from '../composables/entreprises/entreprise.js';
     import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js'; 
-import { couldStartTrivia } from 'typescript';
+    //import { couldStartTrivia } from 'typescript';
 
     const {getAllNotActiveRequests,updateRequestStatus,getRequestsCount,activateRequest} = useInternshipRequests();
     const {getAllOffers,getInternshipOfferCount,activateOffer, getAllNotActiveOffers} = useInternshipOffers();
