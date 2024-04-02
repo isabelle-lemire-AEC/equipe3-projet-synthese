@@ -21,13 +21,13 @@
             </div>
         </td>
         <td class="liste__body__contenu-colonne liste__body__contenu-colonne--2">
-            <div class="secteurActivite">
-                <span>{{ props.info2 }}</span>
+            <div class="region">
+                <span>{{ props.region }}</span>
             </div>
         </td>
         <td class="liste__body__contenu-colonne liste__body__contenu-colonne--3">
-            <div class="regionn">
-                <span>{{ props.region }}</span>
+            <div class="dateInscription">
+                <span>{{ date }}</span>
             </div>
         </td>
 
