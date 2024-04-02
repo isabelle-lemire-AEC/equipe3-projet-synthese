@@ -1,4 +1,4 @@
-<!-- Offre de stage AJOUT - RAPH et Caro -->
+<!-- Offre de stage AJOUT -->
 <template>
       <div class="form-fiche formulaire-ajout-offrestages">
         <div class="form-fiche__wrapper-titre">
@@ -124,7 +124,6 @@
 
             </div> 
           </div>  
-
           
         </form>
         <!-- Boutons annuler et mettre à jour -->
@@ -138,98 +137,80 @@
             </button>
         </div>            
 
-
-
-
 </template>
 
-<!-- //raph/Joe & caro  -->
 <script setup>
+  import { ref, onMounted } from 'vue';
+  import { useEntreprise } from '../composables/offres_stage/stageEntreprise';
+  import { fetchProvinces } from '@/composables/api';
+  import { fetchStageTypes } from '@/composables/api';
+  import { useRouter } from 'vue-router';
+  import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
+  import BtnAnnuler from '../components/BtnAnnuler.vue';
 
-    import { ref, onMounted } from 'vue';
+  const router = useRouter();
+  const { ajouterOffre } = useInternshipOffers();
+  const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError} = useEntreprise();
+  const remunerationType = ref(null);
+  const entreprises = ref([]);
+  const provinces = ref([]);
+  const internshipTypes = ref([]);
+  const exigences = ref('');
 
-    // Probleme ligne 114 et ligne 
-    import { useEntreprise } from '../composables/offres_stage/stageEntreprise';
-    import { fetchProvinces } from '@/composables/api';
-    import { fetchStageTypes } from '@/composables/api';
-    import { useRouter } from 'vue-router';
-    import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
+  onMounted(async () => {
+    const entreprisesData = await getAllEntreprises();
+    entreprises.value = entreprisesData.data;
 
-    import BtnAnnuler from '../components/BtnAnnuler.vue';
+    if (entreprisesError.value) {
+      console.error("Erreur lors du chargement des entreprises:", entreprisesError.value);
+    }
+    
+    try {
+      const typesData = await fetchStageTypes();
+      internshipTypes.value = typesData;
+      console.log("Provinces chargées:", internshipTypes.value); 
+    } catch (error) {
+      console.error("Erreur lors du chargement des type", error);
+    }
 
-    const router = useRouter();
-    const { ajouterOffre } = useInternshipOffers();
-    const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError} = useEntreprise();
-    const remunerationType = ref(null);
+    try {
+      const provincesData = await fetchProvinces();
+      provinces.value = provincesData;
+      console.log("Provinces chargées:", provinces.value); 
+    } catch (error) {
+      console.error("Erreur lors du chargement des provinces", error);
+    }
+  });
 
-    const entreprises = ref([]);
-    const provinces = ref([]);
-    const internshipTypes = ref([]);
+  const offerData = ref({
+    title: "",
+    description: "",
+    enterprise: { _id: "" }, 
+    startDate: "",
+    endDate: "",
+    weeklyWorkHours: 0,
+    salary: 0,
+    province: { _id: "" },
+    requiredSkills: [],
+    internshipType: { _id: "" },
+    paid: "DISCRETIONARY",
+    isActive: false
+  });
 
-    // type RAPH***
+  const submitForm = async () => {
+    console.log(offerData.value)
+    listerExigences();
+    await ajouterOffre(offerData.value);
+    console.log("Offre ajoutée avec succès");
+    router.push({name: "OffresStages"});
+  };
 
-onMounted(async () => {
-  const entreprisesData = await getAllEntreprises();
-  entreprises.value = entreprisesData.data;
-
-  if (entreprisesError.value) {
-    console.error("Erreur lors du chargement des entreprises:", entreprisesError.value);
+  const listerExigences = () => {
+    exigences.value = offerData.value.requiredSkills.toString();
+    exigences.value = exigences.value.replace(/ /g,'');
+    offerData.value.requiredSkills = exigences.value.split(',');
   }
-  
-  try {
-    const typesData = await fetchStageTypes();
-    internshipTypes.value = typesData;
-    console.log("Provinces chargées:", internshipTypes.value); 
-  } catch (error) {
-    console.error("Erreur lors du chargement des type", error);
-  }
-
-  try {
-    const provincesData = await fetchProvinces();
-    provinces.value = provincesData;
-    console.log("Provinces chargées:", provinces.value); 
-  } catch (error) {
-    console.error("Erreur lors du chargement des provinces", error);
-  }
-});
-
-const offerData = ref({
-  title: "",
-  description: "",
-  //est ce que l'entreprise à été transformeé en id ?
-  enterprise: { _id: "" }, 
-  startDate: "",
-  endDate: "",
-  weeklyWorkHours: 0,
-  salary: 0,
-  province: { _id: "" },
-  //attention ici verifier si je peux mettre plus d'un string dans le tableau de skills
-  requiredSkills: [],
-  internshipType: { _id: "" },
-  paid: "DISCRETIONARY",
-  isActive: false
-});
-
-const submitForm = async () => {
-  console.log(offerData.value)
-  await ajouterOffre(offerData.value);
-  console.log("Offre ajoutée avec succès");
-  router.push({name: "OffresStages"});
-
-};
 
 </script>
 
 <style></style>
-
-
-<!-- // onMounted(async () => {
-//     ////////////////////////
-//     const entreprisesData = await getAllEntreprises();
-//     entreprises.value = entreprisesData.data;
-//     if (entreprisesResponse.value && Array.isArray(entreprisesResponse.value)){
-//         entreprises.value = entreprisesResponse.value;
-//         console.log("Entreprises chargées:", entreprises.value); 
-//     } else {
-//         console.error("La réponse n'est pas un tableau:", entreprisesResponse.value);
-//     } -->

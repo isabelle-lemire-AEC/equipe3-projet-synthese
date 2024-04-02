@@ -108,18 +108,17 @@
   import { useRoute } from 'vue-router';
   import BtnAnnuler from '../components/BtnAnnuler.vue';
   import { fetchStageTypes } from '@/composables/api';
-
-  // import { useEntreprise } from '../composables/offres_stage/stageEntreprise';
-  // import { fetchProvinces, fetchStageTypes, fetchInternshipOffers } from '../composables/api';
+  import { useRouter } from 'vue-router';
 
   const route = useRoute();
   const { getInternshipOfferById, response, loading, error, edditerOffre } = useInternshipOffers();
-  // const { getInternshipOfferById, response, loading, error, edditerOffre } = useInternshipOffers();
   const internshipTypes = ref([]);
   const remunerationType = ref(null);
   const dateDebut = ref(null);
   const dateFin = ref(null);
-  
+  const exigences = ref(null);
+  const router = useRouter();
+
   const offerData = ref({
     _id: "",
     title: "",
@@ -136,7 +135,6 @@
     isActive: ""
   });
 
-  // Récupération des détails de l'offre de stage et peuplement des champs du formulaire
   onMounted(async () => {
     await getInternshipOfferById(route.params.id);
     console.log("response: ", response);
@@ -159,26 +157,26 @@
       offerData.value.internshipType = offer.internshipType;
       offerData.value.paid = offer.paid;
       offerData.value.isActive = offer.isActive;
-
-      // Peuplez les autres champs de formulaire avec les données récupérées
     } else {
       console.error("Aucune réponse ou réponse vide reçue lors de la récupération des détails de l'offre de stage.");
     }
-
     dateDebut.value = offerData.value.startDate.substring(0, offerData.value.startDate.indexOf('T'));
 		dateFin.value = offerData.value.endDate.substring(0, offerData.value.startDate.indexOf('T'));
-
-    // offerData.value.skills = offerData.value.skills.toString();
-		// offerData.value.skills = offerData.value.skills.replace(/ /g,'');
-		// offerData.value.skills = offerData.value.skills.split(',');
-
-
     });
 
-  // Fonction de soumission du formulaire
   const submitForm = async () => {
+    listerExigences();
     offerData.value.startDate = dateDebut.value;
     offerData.value.endDate = dateFin.value;
     await edditerOffre(route.params.id, offerData.value);
+    router.push({name: "OffresStages"});
   };
+
+
+  const listerExigences = () => {
+    exigences.value = offerData.value.requiredSkills.toString();
+    exigences.value = exigences.value.replace(/ /g,'');
+    offerData.value.requiredSkills = exigences.value.split(',');
+  }
+
 </script> 

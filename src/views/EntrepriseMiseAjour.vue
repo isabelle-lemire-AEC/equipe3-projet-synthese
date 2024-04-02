@@ -12,15 +12,11 @@
 
     <form id="edition-entreprise" @submit.prevent="mettreAJourEntreprise">
       <div class="form-fiche__wrapper-boutons-inputs">
-        <div class="boutons">
-          <button class="bouton bouton--transparent" @click="$router.go(-1)">Annuler</button>
-          <button class="bouton bouton--bleu" type="submit">
-            <div class="icone-libelle">
-              <i class="fas fa-save"></i>
-              <span>Mettre à jour</span>
-            </div>
-          </button>
-        </div>
+
+        <BtnAnnulerModifierSauvegarder 
+          buttonText="Mettre à jour" 
+          buttonClass="bouton bouton--bleu">
+        </BtnAnnulerModifierSauvegarder>
 
         <div class="form-fiche__input-hors-encadre">
           <div class="form-fiche__label-input-horizontal">
@@ -98,15 +94,11 @@
           </div>
         </div>
 
-        <div class="boutons">
-          <button class="bouton bouton--transparent" type="button" @click="$router.go(-1)">Annuler</button>
-          <button class="bouton bouton--bleu" type="submit">
-            <div class="icone-libelle">
-              <i class="fas fa-save"></i>
-              <span>Mettre à jour</span>
-            </div>
-          </button>
-        </div>
+        <BtnAnnulerModifierSauvegarder 
+          buttonText="Mettre à jour" 
+          buttonClass="bouton bouton--mauve">
+        </BtnAnnulerModifierSauvegarder>
+
       </div>
     </form>
   </div>
@@ -114,77 +106,76 @@
 
 
 <script setup>
-import axios from "axios";
-import { useRoute, useRouter } from "vue-router";
-import { ref } from 'vue';
-import logoEntreprise from "../assets/mediavox-logo.jpg";
+  import axios from "axios";
+  import { useRoute, useRouter } from "vue-router";
+  import { ref } from 'vue';
 
-import BtnAnnuler from '../components/BtnAnnuler.vue';
+  import logoEntreprise from "../assets/mediavox-logo.jpg";
+  import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
+  const id = useRoute().params.id;
+  const router = useRouter();
 
-const id = useRoute().params.id;
-const router = useRouter();
+  const entreprise = ref({
+    name: "",
+    image: "",
+    description: "",
+    contactPerson: "",
+    address: "",
+    phone: "",
+    city: "",
+    email: "",
+    province: {
+      _id: "",
+      value: ""
+    },
+    postalCode: "",
+  });
 
-const entreprise = ref({
-  name: "",
-  image: "",
-  description: "",
-  contactPerson: "",
-  address: "",
-  phone: "",
-  city: "",
-  email: "",
-  province: {
-    _id: "",
-    value: ""
-  },
-  postalCode: "",
-});
+  const provinces = ref([]);
 
-const provinces = ref([]);
-
-// Fonction pour mettre à jour l'entreprise
-const mettreAJourEntreprise = async () => {
-  try {
-    const response = await axios.patch(
-      `https://api-3.fly.dev/enterprises/${id}`,
-      entreprise.value
-    );
-    // Redirection vers la page des entreprises si la mise à jour est réussie
-    if (response.status === 200) {
-      router.push({
-        name: "Entreprises"
-      });
+  // Fonction pour mettre à jour l'entreprise
+  const mettreAJourEntreprise = async () => {
+    try {
+      const response = await axios.patch(
+        `https://api-3.fly.dev/enterprises/${id}`,
+        entreprise.value
+      );
+      // Redirection vers la page des entreprises si la mise à jour est réussie
+      if (response.status === 200) {
+        router.push({
+          name: "Entreprises"
+        });
+      }
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de l'entreprise:", error);
     }
-  } catch (error) {
-    console.error("Erreur lors de la mise à jour de l'entreprise:", error);
-  }
-};
+  };
 
-// Fonction pour récupérer les provinces depuis l'API
-const fetchProvinces = async () => {
-  try {
-    const response = await axios.get("https://api-3.fly.dev/provinces");
-    provinces.value = response.data;
-  } catch (error) {
-    console.error("Erreur lors de la récupération des provinces :", error);
-  }
-};
+  // Fonction pour récupérer les provinces depuis l'API
+  const fetchProvinces = async () => {
+    try {
+      const response = await axios.get("https://api-3.fly.dev/provinces");
+      provinces.value = response.data;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des provinces :", error);
+    }
+  };
 
-// Fonction pour charger les détails de l'entreprise
-const chargerEntreprise = async () => {
-  try {
-    const response = await axios.get(`https://api-3.fly.dev/enterprises/${id}`);
-    entreprise.value = response.data;
-    // Récupérer les provinces lors du chargement de l'entreprise
-    await fetchProvinces();
-  } catch (error) {
-    console.error("Erreur lors de la récupération de l'entreprise:", error);
-  }
-};
+  // Fonction pour charger les détails de l'entreprise
+  const chargerEntreprise = async () => {
+    try {
+      const response = await axios.get(`https://api-3.fly.dev/enterprises/${id}`);
+      entreprise.value = response.data;
+      // Récupérer les provinces lors du chargement de l'entreprise
+      await fetchProvinces();
+    } catch (error) {
+      console.error("Erreur lors de la récupération de l'entreprise:", error);
+    }
+  };
 
-// Appeler la fonction chargerEntreprise au montage du composant
-chargerEntreprise();
+  // Appeler la fonction chargerEntreprise au montage du composant
+  chargerEntreprise();
 </script>
 
 

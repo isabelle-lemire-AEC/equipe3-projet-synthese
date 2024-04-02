@@ -5,15 +5,12 @@
       <h1>Ajouter une entreprise</h1>
     </div>
     <form id="ajout-entreprise" @submit.prevent="soumettreFormulaireEntreprise">
-      <div class="boutons">
-        <BtnAnnuler></BtnAnnuler>
-        <button class="bouton bouton--bleu" type="submit">
-          <div class="icone-libelle">
-            <i class="fas fa-save"></i>
-            <span>Sauvegarder</span>
-          </div>
-        </button>
-      </div>
+
+        <BtnAnnulerModifierSauvegarder 
+          buttonText="Sauvegarder" 
+          buttonClass="bouton bouton--bleu">
+        </BtnAnnulerModifierSauvegarder>
+
       <div class="form-fiche__input-hors-encadre">
         <div class="form-fiche__label-input-horizontal">
           <label for="nom">Entreprise :</label>
@@ -185,35 +182,24 @@
           </div>
         </div>
       </div>
-      <div class="boutons">
-        <button
-          class="bouton bouton--transparent"
-          type="button"
-          @click="$router.go(-1)"
-        >
-          Annuler
-        </button>
-        <button class="bouton bouton--bleu" type="submit">
-          <div class="icone-libelle">
-            <i class="fas fa-save"></i>
-            <span>Sauvegarder</span>
-          </div>
-        </button>
-      </div>
+
+      <BtnAnnulerModifierSauvegarder 
+        buttonText="Sauvegarder" 
+        buttonClass="bouton bouton--bleu">
+      </BtnAnnulerModifierSauvegarder>
+
     </form>
   </div>
-  
 </template>
 
 <script setup>
-  // Ajout entreprise - Dona
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   import { useEntreprise } from '@/composables/entreprises/entreprise';
   import { fetchProvinces } from '@/composables/api';
 
   import BtnAnnuler from '../components/BtnAnnuler.vue';
-
+  import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
 const router = useRouter();
 const { ajouterEntreprise } = useEntreprise();

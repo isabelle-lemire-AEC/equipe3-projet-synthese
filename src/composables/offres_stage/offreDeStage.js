@@ -104,9 +104,24 @@ const activateOffer = async (id) => {
   } finally {
     loading.value = false;
   }
+
 };
 
-  return {ajouterOffre, getAllOffers, getInternshipOfferById, edditerOffre, supprimerOffre, getInternshipOfferCount, activateOffer, response, error, loading };
+const getAllNotActiveOffers = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/internship-offers`);
+    console.log("GET ALL - Offres de stage non active - OK", response.data);
+    const nonActiveOffers = response.data.filter(offer => offer.isActive === false);
+    return nonActiveOffers;
+  } catch (err) {
+    error.value = err;
+    console.log("GET ALL - Demandes de stage non active - ERREUR", err);
+  } finally {
+    loading.value = false;
+  }
+};
+
+  return {ajouterOffre, getAllOffers, getInternshipOfferById, edditerOffre, supprimerOffre, getInternshipOfferCount, activateOffer, getAllNotActiveOffers, response, error, loading };
 }
 
 // Ex d'importation les amis   IMPORT
