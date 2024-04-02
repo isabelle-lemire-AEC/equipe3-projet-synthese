@@ -1,5 +1,5 @@
 <template>
-        <tbody class="liste__body">
+        <tbody class="liste__body" v-if="showThisElement">
             <tr class="liste__rangee">
                 <td class="liste__body__contenu-colonne liste__body__contenu-colonne--1">
                     <div class="liste__wrapper-horizontal">
@@ -86,74 +86,6 @@
                 </td>
             </tr>
         </tbody>
-
-
-
-
-
-
-
-        <!--  <div>
-            <div class="poste">
-                <div v-if="isDemande">
-                    <div class="iconTemp">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                </div>
-
-                <div v-if="!isDemande">
-                    <div class="iconTemp">
-                        <i class="fas fa-suitcase"></i>
-                    </div>
-                </div>
-
-                <div class="posteEtNom">
-                    <span>{{ props.posteTitre }}</span>
-                    <span>{{ props.posteNom }}</span>
-                </div>
-            </div>
-        </div>
-        <div class="secteurActivite">
-            <span>{{ props.info2 }}</span>
-        </div>
-        <div class="region">
-            <span>{{ props.region }}</span>
-        </div>
-        <div class="dateInscription">
-            <span>{{ date }}</span>
-        </div>
-        <div class="boutonActiver" v-if="props.isTableauDeBord">
-            <button @click="activer()">Activer</button>
-        </div> -->
-
-        <!-- Boutons pour les DEMANDES de stage -->
-        <!-- <div class="groupeBtns boutons-action" v-if="props.isDemande">
-            <RouterLink :to="{name: 'DemandeStageDetails', params: {id: props.id}}">
-                <button><i class="fa-solid fa-eye"></i></button>
-            </RouterLink>
-
-            <RouterLink :to="{name: 'DemandeStageMiseAjour', params: {id: props.id}}">
-                <button class="boutons-action__modifier"><i class="fas fa-pen-to-square"></i></button>
-            </RouterLink>
-
-            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i
-                   class="fa-solid fa-trash-can"></i></button>
-        </div> -->
-
-        <!-- Boutons pour les OFFRES de stage -->
-        <!-- <div class="groupeBtns boutons-action" v-if="!props.isDemande">
-            <RouterLink :to="{name: 'OffreStageDetails', params: {id: props.id}}">
-                <button><i class="fa-solid fa-eye"></i></button>
-            </RouterLink>
-
-            <RouterLink :to="{name: 'OffreStageMiseAjour', params: {id: props.id}}">
-                <button class="boutons-action__modifier"><i class="fas fa-pen-to-square"></i></button>
-            </RouterLink>
-
-            <button class="boutons-action__supprimer" @click="afficherConfirmationModal()"><i
-                   class="fa-solid fa-trash-can"></i></button>
-        </div>
- -->
         <!-- Modal de confirmation de suppression -->
         <div class="modal" v-if="showConfirmationModal">
             <div class="modal-content">
@@ -165,11 +97,6 @@
                 </div>
             </div>
         </div>
-
-
-
-    <!--<i class="fa-solid fa-graduation-cap"></i>
-    <i class="fa-solid fa-suitcase"></i>-->
 </template>
 
 <script setup>
