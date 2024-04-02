@@ -116,14 +116,14 @@
     </div>
 </template>
 <script setup>
-    import ElementListeStage from '../components/ElementListeStage.vue'
+    import ElementListeStage from '../components/elementListeStage.vue'
     import { ref, onMounted } from 'vue';
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
     import { useCandidat } from '../composables/candidats/candidat.js';
     import { useEntreprise } from '../composables/entreprises/entreprise.js';
     import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js'; 
-import { couldStartTrivia } from 'typescript';
+    //import { couldStartTrivia } from 'typescript';
 
     const {getAllNotActiveRequests,updateRequestStatus,getRequestsCount,activateRequest} = useInternshipRequests();
     const {getAllOffers,getInternshipOfferCount,activateOffer, getAllNotActiveOffers} = useInternshipOffers();
