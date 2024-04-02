@@ -12,6 +12,7 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -574,6 +575,7 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -1132,6 +1134,14 @@ label {
   padding: 3rem 0 3rem 0;
 }
 
+/* style pour la page de demande de stage (la liste de toutes les demandes) */
+.demandestages-list h1 {
+  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+}
+.demandestages-list .bouton--jaune {
+  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+}
+
 #ajout-offrestages,
 #edition-offrestages {
   display: flex;
@@ -1393,4 +1403,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}/*# sourceMappingURL=styles.css.map */
+}

@@ -92,6 +92,10 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Message d'erreur -->
+    <div v-else>Aucune information disponible</div>
   </div>
 </template>
 
@@ -125,14 +129,16 @@
       offerData.value.salary = offer.salary;
       offerData.value.province = offer.province;
       offerData.value.requiredSkills = offer.requiredSkills;
-      console.log("offerData.value.requiredSkills: ", offerData.value.requiredSkills);
       offerData.value.internshipType = offer.internshipType;
       offerData.value.paid = offer.paid;
       offerData.value.isActive = offer.isActive;
+
+      // Peuplez les autres champs de formulaire avec les données récupérées
     } else {
       console.error("Aucune réponse ou réponse vide reçue lors de la récupération des détails de l'offre de stage.");
     }
     exigences.value = offerData.value.requiredSkills.join(', ');
+
   });
 
   const offerData = ref({
@@ -177,9 +183,12 @@
         showConfirmationModal.value = false;
   };
 
+
 </script>
 
 <style>
+
+
     /* Styles pour le modal */
     .modal {
         display: flex;

@@ -103,49 +103,35 @@
                 </thead>
 
                 <ElementListeStage v-for="offre in offres"
-                :key="offre._id"
-                :posteTitre="offre.title"
-                :posteNom="offre.enterprise.name"
-                :info2="offre.enterprise.city"
-                :region="offre.province.value"
-                :date="offre.startDate"
-                :id="offre._id"
-                :isDemande="false"
-                :isTableauDeBord="true"
-                :isActive="offre.isActive"></ElementListeStage>
+                    :key="offre._id"
+                    :posteTitre="offre.title"
+                    :posteNom="offre.enterprise.name"
+                    :info2="offre.enterprise.city"
+                    :region="offre.province.value"
+                    :date="offre.startDate"
+                    :id="offre._id"
+                    :isDemande="false"
+                    :isTableauDeBord="true"
+                    :isActive="offre.isActive"></ElementListeStage>
             </table>     
         </div>
     </div>
 </template>
 <script setup>
-    import ElementListeStage from '../components/ElementListeStage.vue'
+    import ElementListeStage from '../components/elementListeStage.vue'
     import { ref, onMounted } from 'vue';
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
     import { useCandidat } from '../composables/candidats/candidat.js';
     import { useEntreprise } from '../composables/entreprises/entreprise.js';
     import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js'; 
+    //import { couldStartTrivia } from 'typescript';
 
-    const {
-        getAllNotActiveRequests,
-        updateRequestStatus,
-        getRequestsCount,
-        activateRequest
-    } = useInternshipRequests();
-    const {
-        getAllOffers,
-        getInternshipOfferCount,
-        activateOffer
-    } = useInternshipOffers();
-    const {
-        getCandidatsCount
-    } = useCandidat();
-    const {
-        getEntreprisesCount
-    } = useEntreprise();
-    const {
-        getAllActivitySectors
-    } = useActivitySectors();
+    const {getAllNotActiveRequests,updateRequestStatus,getRequestsCount,activateRequest} = useInternshipRequests();
+    const {getAllOffers,getInternshipOfferCount,activateOffer, getAllNotActiveOffers} = useInternshipOffers();
+    const {getCandidatsCount} = useCandidat();
+    const {getEntreprisesCount} = useEntreprise();
+    const {getAllActivitySectors} = useActivitySectors();
 
     const demandes = ref([]);
     const offres = ref([]);
@@ -176,25 +162,24 @@
     };
 
     const validerToutesLesDemandes = async () => {
-        demandes.value.forEach(demande => {
-            activateRequest(demande._id);
+        demandes.value.forEach(async (demande) => {
+            await activateRequest(demande._id);
         });
         afficherDemandes.value = !afficherDemandes.value;
     };
 
     const validerToutesLesOffres = async () => {
-        offres.value.forEach(offre => {
-            activateOffer(offre._id);
+        offres.value.forEach(async (offre) => {
+            await activateOffer(offre._id);
         });
         afficherOffres.value = !afficherOffres.value;
     };
 
     onMounted(async () => {
         secteursActivites.value = await getAllActivitySectors();
-        secteurActivite.value = secteursActivites.value[Math.floor(Math.random() * secteursActivites.value
-            .length)];
+        secteurActivite.value = secteursActivites.value[Math.floor(Math.random() * secteursActivites.value.length)];
         demandes.value = await getAllNotActiveRequests();
-        offres.value = await getAllOffers();
+        offres.value = await getAllNotActiveOffers();
         demandesCount.value = await getRequestsCount();
         offresCount.value = await getInternshipOfferCount();
         candidatsCount.value = await getCandidatsCount();

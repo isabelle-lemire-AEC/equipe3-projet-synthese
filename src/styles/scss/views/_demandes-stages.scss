@@ -7,7 +7,6 @@
     @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
 }
 
-
 .formulaire-ajout-demandestages,
 .formulaire-edition-demandestages,
 .fiche-demandestages-details {
@@ -35,4 +34,19 @@
     h1{
        padding: 3rem 0 3rem 0 ; 
     }
+}
+
+/* style pour la page de demande de stage (la liste de toutes les demandes) */
+
+.demandestages-list {
+    h1 {
+        margin-bottom: variables.$spacing-xlarge;
+    }
+
+    .bouton {
+        &--jaune {
+            margin-bottom: variables.$spacing-xlarge;
+        }
+    }
+
 }

@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="demandestages-list">
         <h1>Demandes de stage</h1>
         <RouterLink to="/demande-de-stage-ajout">
-            <button class="bouton bouton--jaune">Ajouter une demande</button>
+            <button class="bouton bouton--jaune" @click="goToDemandesAjout">Ajouter une demande</button>
         </RouterLink>
 
         <div class="form-fiche__encadre">
@@ -34,52 +34,37 @@
 </template>
 
 <script setup>
-    import ElementListeStage from '../components/ElementListeStage.vue'
-    import {
-        useInternshipRequests
-    } from '../composables/demandes_stages/demandeDeStage.js'
-    import {
-        useCandidat
-    } from '../composables/candidats/candidat.js'
-    import {
-        useProvinces
-    } from '../composables/provinces/provinces.js'
-    import {
-        useInternshipTypes
-    } from '@/composables/types_stage/types_stage.js'
-    import {
-        ref,
-        onMounted
-    } from 'vue';
-    import {
-        useActivitySectors
-    } from '../composables/secteurs_activites/secteurs_activites.js';
+import ElementListeStage from '../components/ElementListeStage.vue'
+import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js'
+import { useCandidat } from '../composables/candidats/candidat.js'
+import { useProvinces } from '../composables/provinces/provinces.js'
+import { useInternshipTypes } from '@/composables/types_stage/types_stage.js'
+import { ref, onMounted } from 'vue';
+import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js'; 
+import { useRouter } from 'vue-router';
 
-    const {
-        getAllRequests,
-        editRequest
-    } = useInternshipRequests();
-    const {
-        getAllCandidats
-    } = useCandidat();
-    const {
-        getAllProvinces
-    } = useProvinces();
-    const {
-        getAllInternshipTypes
-    } = useInternshipTypes();
-    const {
-        getAllActivitySectors
-    } = useActivitySectors();
+const router = useRouter();
 
-    const toutesDemandes = ref([]);
-    const secteursActivites = ref([]);
-    const secteurActivite = ref(null);
+const { getAllRequests, editRequest } = useInternshipRequests();
+const { getAllCandidats } = useCandidat();
+const { getAllProvinces } = useProvinces();
+const { getAllInternshipTypes } = useInternshipTypes();
+const { getAllActivitySectors } = useActivitySectors();
 
-    onMounted(async () => {
-        secteursActivites.value = await getAllActivitySectors();
-        secteurActivite.value = secteursActivites.value[Math.floor(Math.random() * secteursActivites.value
-            .length)];
+const toutesDemandes = ref([]);
+const secteursActivites = ref([]);
+const secteurActivite = ref(null);
+
+// Fonction pour naviguer vers la page d'ajout de demandes de stage
+    const goToDemandesAjout = () => {
+        router.push({
+        name: 'DemandeStageAjout'
+        });
+    };
+
+onMounted(async () => {
+    secteursActivites.value = await getAllActivitySectors();
+    secteurActivite.value = secteursActivites.value[Math.floor(Math.random() * secteursActivites.value.length)];
 
         try {
             const response = await getAllRequests();
