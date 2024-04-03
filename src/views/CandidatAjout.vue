@@ -15,7 +15,9 @@
 
       <div class="form-fiche__input-hors-encadre">
         <div class="form-fiche__label-input-horizontal">
-          <label for="firstName">Prénom:</label>
+          <label for="fullName">Nom et prénom :</label>
+          <input type="text" id="fullName" v-model.trim="fullName" @input="splitFullName">
+          <!-- 
           <div class="form-fiche__wrapper-input-msg-erreur">
             <input
               type="text"
@@ -27,6 +29,7 @@
               Le prénom est obligatoire
             </p>
           </div>
+          
         </div>
         <div class="form-fiche__label-input-horizontal">
           <label for="lastName">Nom :</label>
@@ -40,7 +43,7 @@
             <p class="error-message" v-if="erreurs.lastName">
               Le nom est obligatoire
             </p>
-          </div>
+          </div>-->
         </div>
         <div class="form-fiche__label-input-horizontal">
           <label for="poste">Poste :</label>
@@ -255,6 +258,15 @@ const initProvinces = async () => {
 
 initProvinces();
 
+// fonction pour joindre nom et prénom
+const fullName = ref('');
+
+const splitFullName = () => {
+  const names = fullName.value.split(' ');
+  candidat.value.firstName = names[0] || '';
+  candidat.value.lastName = names.slice(1).join(' ') || '';
+};
+
 const validerChamp = (champ) => {
   switch (champ) {
     case "firstName":
@@ -309,6 +321,7 @@ const soumettreFormulaire = async () => {
   } else {
     // Si le formulaire est valide, essayez d'ajouter le candidat.
     try {
+      splitFullName();
       await addCandidat(candidat.value);
       console.log("Nouveau candidat ajouté");
       router.push({ name: "Candidats" });
