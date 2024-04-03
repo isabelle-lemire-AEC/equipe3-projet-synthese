@@ -10,7 +10,7 @@
       <div class="form-fiche__wrapper-titre">
         <p class="form-fiche__nom-section">Entreprise</p>
         <h1 class="entreprise-nom">{{ entreprise.name }}</h1>
-      </div>
+      </div> 
     </div>
 
     <!-- Boutons d'action pour modifier, valider ou supprimer l'entreprise -->
@@ -82,17 +82,13 @@
       </div>
     </div>
 
-    <!-- Modal de confirmation de suppression avec le composant ModalSupprime -->
-    <ModalSupprime
-      :isVisible="showConfirmationModal"
-      @cancel="annulerSuppression"
-      @confirm="supprimerEntreprise"
-      typeElement="entreprise"
-    >
-      <div>
-        <p>Êtes-vous sûr de vouloir supprimer cette {{ typeElement }} ?</p>
-      </div>
-    </ModalSupprime>
+    <!-- Utilisation du composant ModalSuppression -->
+    <ModalSuppression
+      :message="'Êtes-vous sûr de vouloir supprimer cette entreprise?'"
+      :show="showConfirmationModal"
+      @onConfirm="supprimerEntreprise"
+      @onCancel="annulerSuppression"
+    />
   </div>
 </template>
 
@@ -101,13 +97,14 @@ import { ref } from "vue";
 import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
 import logoEntreprise from "@/assets/mediavox-logo.jpg";
-import ModalSupprime from "@/composables/modalsupprimer/ModalSupprime.vue";
+import ModalSuppression from "@/components/ModalSuppression.vue";
 
 const entreprise = ref(null);
-const showConfirmationModal = ref(false);
 const router = useRouter();
 const route = useRoute();
+const showConfirmationModal = ref(false);
 
+// Fonction pour charger les détails de l'entreprise
 const chargerEntreprise = async () => {
   try {
     const response = await axios.get(
@@ -122,6 +119,7 @@ const chargerEntreprise = async () => {
   }
 };
 
+// Fonction pour mettre à jour l'entreprise
 const mettreAjour = () => {
   router.push({
     name: "EntrepriseMiseAjour",
@@ -129,14 +127,7 @@ const mettreAjour = () => {
   });
 };
 
-const afficherConfirmationModal = () => {
-  showConfirmationModal.value = true;
-};
-
-const annulerSuppression = () => {
-  showConfirmationModal.value = false;
-};
-
+// Fonction pour supprimer l'entreprise
 const supprimerEntreprise = async () => {
   try {
     await axios.delete(`https://api-3.fly.dev/enterprises/${route.params.id}`);
@@ -146,6 +137,17 @@ const supprimerEntreprise = async () => {
   }
 };
 
+// Fonction pour afficher la modal de confirmation
+const afficherConfirmationModal = () => {
+  showConfirmationModal.value = true;
+};
+
+// Fonction pour annuler la suppression
+const annulerSuppression = () => {
+  showConfirmationModal.value = false;
+};
+
+// Appel de la fonction pour charger les détails de l'entreprise au montage du composant
 chargerEntreprise();
 </script>
 
