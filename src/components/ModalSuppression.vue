@@ -1,4 +1,4 @@
-  <!-- Modal de confirmation de suppression -->
+<!-- ModalSuppression.vue -->
 <template>
   <div class="modal" v-if="showConfirmationModal">
     <div class="modal__contenu">
@@ -12,23 +12,20 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue';
+import { defineProps, ref, defineEmits } from 'vue';
 
 const props = defineProps({
+  showConfirmationModal: Boolean,
   message: String,
-  onConfirm: Function,
-  onCancel: Function
 });
 
-const showConfirmationModal = ref(false);
+const emit = defineEmits(['annulerSuppression', 'confirmerSuppression']);
 
 const annulerSuppression = () => {
-  showConfirmationModal.value = false;
-  if (props.onCancel) props.onCancel();
+  emit('annulerSuppression');
 };
 
 const confirmerSuppression = () => {
-  showConfirmationModal.value = false;
-  if (props.onConfirm) props.onConfirm();
+  emit('confirmerSuppression');
 };
 </script>
