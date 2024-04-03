@@ -10,15 +10,23 @@ $color-entreprises: variables.$blue;
 
 .container-menu {
     background-color: variables.$white;
-    min-width: 250px;
+    min-width: 280px;
     height: 100%;
 
+    @include mixins.media-max(800px) {
+        min-width: 100px; 
+        img {
+            width: 100%;
+        }
+    }
 }
-
 
 .logo {
     max-width: 200px;
     padding: 1rem;
+
+    @include mixins.media-max(800px) {
+        padding: 10px 5px 0 5px;    }
 }
 
 .navbar {
@@ -54,10 +62,6 @@ $color-entreprises: variables.$blue;
             background-color: transparent;
             transition: background-color 0.3s ease;
         }
-
-
-
-
 
         &.active::after {
             background-color: transparent; // Couleur de la ligne lorsque l'élément est actif (par défaut)
@@ -118,8 +122,6 @@ $color-entreprises: variables.$blue;
 
         }
 
-
-
         &.demandes-stage {
 
             i,
@@ -178,11 +180,14 @@ $color-entreprises: variables.$blue;
         }
     }
 
+}
 
+@include mixins.media-max(800px) {
+    span.nav-mobile  {
+        display:none;
+    }
 
-
-
-
-
-
+    .logo {
+        max-width: 100px;
+    }
 }

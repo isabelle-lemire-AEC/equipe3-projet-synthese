@@ -5,7 +5,8 @@
     background-color: variables.$white;
     @include mixins.padding(variables.$spacing-small * 1.25, variables.$spacing-small * 1.25);
     @include mixins.flex(row, null, center, variables.$spacing-small);
-
+    cursor: pointer;
+   
     &__img {
         background-color: variables.$purple;
         max-width: 100px;

@@ -4,22 +4,22 @@
   <div class="header" v-if="nomPrenom && courriel"> 
     <div class="header__items">
       <div class="header__icone-boutons-ajout">
-          <div class="burger-menu"  @click="toggleSidebar">
+          <div class="burger-menu"> <!--   @click="toggleSidebar" -->
             <i class="fa-solid fa-bars " id="icone-menu"></i>
           </div>
           
-          <div class="boutons-ajout">
+          <div class="boutons-ajout btn-ajout-mobile">
             <button class="add-button add-offer" @click="ajouterOffre">
-              <i class="fas fa-plus"></i> Ajouter une offre de stage
+              <i class="fas fa-plus"></i> <span>Ajouter une offre de stage</span>
             </button>
             <button class="add-button add-request" @click="ajouterDemande">
-              <i class="fas fa-plus"></i> Ajouter une demande de stage
+              <i class="fas fa-plus"></i> <span>Ajouter une demande de stage</span>
             </button>
             <button class="add-button add-company" @click="ajouterEntreprise">
-              <i class="fas fa-plus"></i> Ajouter une entreprise
+              <i class="fas fa-plus"></i> <span>Ajouter une entreprise</span>
             </button>
             <button class="add-button add-candidate" @click="ajouterCandidat">
-              <i class="fas fa-plus"></i> Ajouter un candidat
+              <i class="fas fa-plus"></i> <span>Ajouter un candidat</span>
             </button>
           </div>
         </div>  
@@ -46,7 +46,7 @@
 <script setup>
   import { ref } from 'vue';
   import { useRouter } from "vue-router";
-  import {  defineProps } from 'vue'
+  //import {  defineProps } from 'vue'
   
 
   // Récupérer les informations à partir du localStorage
@@ -83,7 +83,7 @@
 
 
   /* Menu toggable */
-  const props = defineProps(['toggleSidebar']);
+  //const props = defineProps(['toggleSidebar']);
 
 
 
