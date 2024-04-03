@@ -17,14 +17,14 @@
           <label for="nom">Entreprise :</label>
           <div class="form-fiche__wrapper-input-msg-erreur">
             <input type="text" id="nom" v-model.trim="entreprise.name" @input="validerChamp('name')"/>
-            <p v-if="erreurs.name">Ce champ est obligatoire</p>
+            <p class="error-message" v-if="erreurs.name">Ce champ est obligatoire</p>
           </div>
         </div>
         <div class="form-fiche__label-input-horizontal">
           <label for="logo">Logo (URL) :</label>
           <div class="form-fiche__wrapper-input-msg-erreur">
             <input type="text" id="logo" v-model.trim="entreprise.image" @input="validerChamp('image')"/>
-            <p v-if="erreurs.image">L'URL du logo est obligatoire</p>
+            <p class="error-message" v-if="erreurs.image">L'URL du logo est obligatoire</p>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
           <div>
             <label for="presentation" class="form-fiche__label--cache">Présentation</label>
             <textarea id="presentation" cols="30" rows="10" v-model.trim="entreprise.description" @input="validerChamp('description')"></textarea>
-            <p v-if="erreurs.description">Ce champ est obligatoire</p>
+            <p class="error-message" v-if="erreurs.description">Ce champ est obligatoire</p>
           </div>
         </div>
         <div
@@ -44,12 +44,12 @@
             <input
               type="text"
               id="contactPerson"
-              v-model.trim="contactPerson"
+              v-model.trim="entreprise.contactPerson"
               @input="validerChamp('contactPerson')"
-              
+              placeholder="Nom de la personne à contacter"
               class="largeur-100"
             />
-            <p v-if="erreurs.contactPerson">
+            <p class="error-message" v-if="erreurs.contactPerson">
               Ce champ est obligatoire
             </p>
           </div>
@@ -66,9 +66,9 @@
                     id="adresse"
                     v-model.trim="entreprise.address"
                     @input="validerChamp('address')"
-                    
+                    placeholder="123 Rue Principale"
                   />
-                  <p v-if="erreurs.address">
+                  <p class="error-message" v-if="erreurs.address">
                     Ce champ est obligatoire
                   </p>
                 </div>
@@ -81,9 +81,9 @@
                     id="telephone"
                     v-model.trim="entreprise.phone"
                     @input="validerChamp('phone')"
-                   
+                    placeholder="1234567890"
                   />
-                  <p v-if="erreurs.phone">
+                  <p class="error-message" v-if="erreurs.phone">
                     Ce champ est obligatoire
                   </p>
                 </div>
@@ -96,9 +96,10 @@
                     id="ville"
                     v-model.trim="entreprise.city"
                     @input="validerChamp('city')"
-                
+                    placeholder="Toronto"
                   />
-                  <p  v-if="erreurs.city">
+                  <p class="error-message" v-if="erreurs.city">
+                    Ce champ est obligatoire
                   </p>
                 </div>
               </div>
@@ -112,9 +113,9 @@
                     id="courriel"
                     v-model.trim="entreprise.email"
                     @input="validerChamp('email')"
-                    
+                    placeholder="exemple@domaine.com"
                   />
-                  <p v-if="erreurs.email">
+                  <p class="error-message" v-if="erreurs.email">
                     Ce champ est obligatoire
                   </p>
                 </div>
@@ -122,16 +123,16 @@
               <div class="form-fiche__label-input-vertical">
                 <label for="province">Province :</label>
                 <div>
-                  <select id="province" v-model="entreprise.province">
+                  <select id="province" v-model="entreprise.province._id">
                     <option
                       v-for="province in provinces"
                       :key="province._id"
-                      :value="province"
+                      :value="province._id"
                     >
                       {{ province.value }}
                     </option>
                   </select>
-                  <p  v-if="erreurs.province">
+                  <p class="error-message" v-if="erreurs.province">
                     Ce champ est obligatoire
                   </p>
                 </div>
@@ -144,9 +145,9 @@
                     id="cp"
                     v-model.trim="entreprise.postalCode"
                     @input="validerChamp('postalCode')"
-                   
+                    placeholder="M5V 3J5"
                   />
-                  <p v-if="erreurs.postalCode">
+                  <p class="error-message" v-if="erreurs.postalCode">
                     Ce champ est obligatoire
                   </p>
                 </div>
@@ -176,13 +177,14 @@
 const router = useRouter();
 const { ajouterEntreprise } = useEntreprise();
 const modalShow = ref(false);
-const contactPerson = ref('');
+const modalMessage = ref("");
 
 const provinces = ref([]);
 const entreprise = ref({
   name: "",
   image:
     "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8HwQACgAB/1TD9R8AAAAASUVORK5CYII=",
+  contactPerson: "",
   description: "",
   address: "",
   phone: "",
@@ -228,7 +230,7 @@ const validerFormulaire = () => {
 
   erreurs.value.name = entreprise.value.name.trim() === "" ? true : false;
   erreurs.value.email = !regexEmail.test(entreprise.value.email.trim());
-  // erreurs.value.phone = regexPhone.test(entreprise.value.phone.trim()) ? "" : "Le numéro de téléphone doit être un numéro canadien valide.";
+  erreurs.value.phone = regexPhone.test(entreprise.value.phone.trim()) ? "" : "Le numéro de téléphone doit être un numéro canadien valide.";
   erreurs.value.postalCode = !regexPostalCode.test(
     entreprise.value.postalCode.trim()
   );
@@ -262,7 +264,7 @@ const validerChamp = (champ) => {
       );
       break;
     case "phone":
-      // erreurs.value.phone = !/^\d{10}$/.test(entreprise.value.phone.trim());
+      erreurs.value.phone = !/^\d{10}$/.test(entreprise.value.phone.trim());
       break;
     case "address":
       erreurs.value.address = entreprise.value.address.trim() === "";
@@ -283,7 +285,7 @@ const validerChamp = (champ) => {
       break;
     case "contactPerson":
       erreurs.value.contactPerson =
-      contactPerson.value.trim() === "";
+        entreprise.value.contactPerson.trim() === "";
       break;
     case "province":
       erreurs.value.province = entreprise.value.province._id.trim() === "";
@@ -291,7 +293,9 @@ const validerChamp = (champ) => {
   }
 };
 
-
+const fermerModal = () => {
+  modalShow.value = false;
+};
 
 const confirmerEnregistrement = async () => {
   modalShow.value = false;
@@ -305,8 +309,24 @@ const annulerEnregistrement = () => {
 </script>
 
 <style scoped>
+.error {
+  color: red;
+}
 
+input::placeholder,
+textarea::placeholder {
+  font-size: 14px;
+  color: #cccccc;
+  opacity: 1;
+}
 
-
-
+select::placeholder {
+  color: #cccccc;
+  opacity: 1;
+}
+.error-message {
+  color: rgb(230, 93, 93);
+  font-size: 0.75em;
+  margin-top: 0.25em;
+}
 </style>
