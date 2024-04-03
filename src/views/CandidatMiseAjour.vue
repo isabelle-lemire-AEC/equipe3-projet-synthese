@@ -8,7 +8,8 @@
         </div>
 
         <form id="edition-candidat" @submit.prevent="soumettreFormulaire">
-
+            
+            <!-- Boutons annuler et mettre à jour -->
             <BtnAnnulerModifierSauvegarder 
                 buttonText="Mettre à jour" 
                 buttonClass="bouton bouton--mauve">
@@ -151,13 +152,6 @@
         } catch (error) {
             console.error("Erreur lors de la modification du candidat :", error);
         }
-    }
-
-    const annulerModif = () => {
-        console.log("Annuler la modification du candidat");
-        route.push({
-            name: 'Candidats'
-        });
     }
 
     const soumettreFormulaire = async () => {

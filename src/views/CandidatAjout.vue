@@ -6,10 +6,11 @@
     </div>
 
     <form id="ajout-candidat" @submit.prevent="soumettreFormulaire">
+      
+      <!-- Boutons annuler et sauvegarder -->
       <BtnAnnulerModifierSauvegarder
         buttonText="Sauvegarder"
-        buttonClass="bouton bouton--mauve"
-      >
+        buttonClass="bouton bouton--mauve">
       </BtnAnnulerModifierSauvegarder>
 
       <div class="form-fiche__input-hors-encadre">
