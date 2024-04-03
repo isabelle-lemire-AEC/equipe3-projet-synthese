@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/* Font-size responsive: https://utopia.fyi/type/calculator/?c=500,16,1.125,1920,18,1.2,5,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12  */
+/* Font-size responsive: https://utopia.fyi/type/calculator/?c=500,16,1.125,1920,18,1.2,7,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12  */
 /* Espacements responsives: https://utopia.fyi/clamp/calculator/?a=500,1920,20%E2%80%94120|50%E2%80%94120 */
 /* Media queries */
 .bouton {
@@ -103,14 +103,14 @@
 .boutons-action {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 .boutons-action button {
   border-width: 0;
   background: none;
 }
 .boutons-action i {
-  font-size: 1.3rem;
+  font-size: clamp(1.6018rem, 1.3444rem + 0.8237vi, 2.3328rem);
 }
 .boutons-action__crochet {
   color: #06A14C;
@@ -154,8 +154,8 @@
 
 .carte-candidat {
   background-color: #FFFFFF;
-  padding-block: 2rem;
-  padding-inline: 2rem;
+  padding-block: 1.25rem;
+  padding-inline: 1.25rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -164,6 +164,7 @@
 }
 .carte-candidat__img {
   background-color: #7F2987;
+  max-width: 100px;
   padding-block: 1rem;
   padding-inline: 1rem;
 }
@@ -174,11 +175,14 @@
   gap: 1rem;
 }
 .carte-candidat__texte h2 {
-  font-size: clamp(1.2656rem, 1.1408rem + 0.3993vi, 1.62rem);
+  font-size: clamp(1.125rem, 1.0458rem + 0.2535vi, 1.35rem);
   color: #111111;
 }
 .carte-candidat__texte p {
   font-family: "Lato";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.1;
 }
 
 .carte-entreprise {
@@ -572,7 +576,7 @@ label {
   padding-left: 1rem;
 }
 .form-fiche__wrapper-titre h1 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
 }
 .form-fiche__nom-section {
   font-weight: 700;
@@ -620,7 +624,7 @@ label {
 @media (max-width: 800px) {
   .form-fiche__encadre {
     padding-block: 2rem;
-    padding-inline: 1rem;
+    padding-inline: 1.5rem;
   }
 }
 .form-fiche__wrapper-titre-groupe-inputs {
@@ -698,10 +702,32 @@ label {
   align-items: center;
   gap: 3rem;
 }
+@media (max-width: 1380px) {
+  .form-fiche__wrapper-parcourir-bouton {
+    gap: 2rem;
+  }
+}
+@media (max-width: 1000px) {
+  .form-fiche__wrapper-parcourir-bouton {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
 .form-fiche__input-parcourir {
   position: relative;
   width: 100%;
-  flex-basis: 70%;
+  flex-basis: 60%;
+}
+@media (max-width: 1380px) {
+  .form-fiche__input-parcourir {
+    flex-basis: 60%;
+  }
+}
+@media (max-width: 1000px) {
+  .form-fiche__input-parcourir {
+    flex-basis: unset;
+  }
 }
 .form-fiche__input-parcourir button:disabled {
   position: absolute;
@@ -718,6 +744,11 @@ label {
   cursor: default;
 }
 
+/* .error-message {
+    color: rgb(230, 93, 93);
+    font-size: 0.75em;
+    margin-top: 0.25em;
+} */
 .modal {
   display: flex;
   justify-content: center;
@@ -1044,10 +1075,42 @@ label {
   grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
 }
+@media (max-width: 1680px) {
+  .candidats__liste {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+@media (max-width: 1200px) {
+  .candidats__liste {
+    gap: 2rem;
+  }
+}
+@media (max-width: 1200px) {
+  .candidats__liste {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* Spécifique pour la view CandidatAjout */
 .formulaire-ajout-candidat .form-fiche__wrapper-titre {
   margin-bottom: 12rem;
+}
+@media (max-width: 1380px) {
+  .formulaire-ajout-candidat .form-fiche__wrapper-titre {
+    margin-bottom: 3rem;
+  }
+}
+@media (max-width: 1380px) {
+  .formulaire-ajout-candidat .form-fiche__label-input-horizontal label {
+    flex-basis: 10%;
+  }
+}
+@media (max-width: 800px) {
+  .formulaire-ajout-candidat .form-fiche__label-input-horizontal label {
+    flex-basis: unset;
+  }
 }
 .formulaire-ajout-candidat h2,
 .formulaire-ajout-candidat h3 {
@@ -1055,14 +1118,17 @@ label {
 }
 
 /* Spécifique pour la view CandidatDetails */
-/* .fiche-candidat-details {
-    .form-fiche {
-        &__wrapper-boutons-encadre {
-            @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
-        }
-    }
-} */
+@media (max-width: 800px) {
+  .fiche-candidat-details .form-fiche__wrapper-titre {
+    margin-bottom: 3rem;
+  }
+}
+
 /* Spécifique pour la view CandidatDetails et CandidatMiseAJour */
+.fiche-candidat-details h1,
+.formulaire-edition-candidat h1 {
+  margin-bottom: 1rem;
+}
 .fiche-candidat-details h2,
 .fiche-candidat-details h3,
 .formulaire-edition-candidat h2,
@@ -1212,19 +1278,18 @@ label {
 }
 
 /* Spécifique pour la page d'ajout de demandes */
-.formulaire-ajout-demandestages .form-fiche__wrapper-titre {
-  margin-bottom: clamp(3.125rem, 1.5845rem + 4.9296vi, 7.5rem);
-}
-.formulaire-ajout-demandestages .boutons {
-  justify-content: flex-end;
-  margin-bottom: 2rem;
-}
+/* .formulaire-ajout-demandestages {
+    .form-fiche__wrapper-titre {
+        margin-bottom: variables.$spacing-block-section;
+    }
 
+    .boutons {
+        justify-content: flex-end;
+        margin-bottom: variables.$spacing-medium;
+    }
+} */
 #ajout-demandestages .form-fiche__input-parcourir {
   width: 50%;
-}
-#ajout-demandestages .form-fiche__label-input-horizontal label {
-  flex-basis: 5%;
 }
 @media (max-width: 1380px) {
   #ajout-demandestages .form-fiche__label-input-horizontal label {
