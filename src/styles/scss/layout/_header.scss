@@ -29,7 +29,7 @@
     @include mixins.flex(row, flex-start, null, 1rem);
 
     span {
-        @include mixins.font(variables.$font-body, 12px, null);
+        @include mixins.font(variables.$font-body, 13px, null);
     }
 
     .fa-plus {
@@ -40,6 +40,11 @@
         padding: variables.$spacing-xsmall;
         background-color: variables.$white;
         transition: background-color 0.3s ease;
+        @include mixins.flex(null, null, center, null);
+
+        &:hover {
+            color: variables.$white;
+        }
     }
 
     .add-offer {
@@ -48,7 +53,6 @@
 
         &:hover {
             background-color: variables.$dark-red;
-            color: variables.$white;
         }
     }
 
@@ -58,7 +62,6 @@
 
         &:hover {
             background-color: variables.$dark-gold;
-            color: variables.$white;
         }
     }
 
@@ -68,7 +71,6 @@
 
         &:hover {
             background-color: variables.$dark-blue;
-            color: variables.$white;
         }
     }
 
@@ -79,7 +81,6 @@
 
         &:hover {
             background-color: variables.$dark-purple;
-            color: variables.$white;
         }
     }
 
@@ -97,7 +98,6 @@
 
     .utilisateur__nom {
         color: variables.$black;
-
     }
 
     .utilisateur__courriel {

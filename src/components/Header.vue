@@ -4,7 +4,7 @@
   <div class="header" v-if="nomPrenom && courriel"> 
     <div class="header__items">
       <div class="header__icone-boutons-ajout">
-          <div class="burger-menu"  @click="toggleSidebar">
+          <div class="burger-menu"> <!--   @click="toggleSidebar" -->
             <i class="fa-solid fa-bars " id="icone-menu"></i>
           </div>
           
@@ -46,7 +46,7 @@
 <script setup>
   import { ref } from 'vue';
   import { useRouter } from "vue-router";
-  import {  defineProps } from 'vue'
+  //import {  defineProps } from 'vue'
   
 
   // Récupérer les informations à partir du localStorage
@@ -83,7 +83,7 @@
 
 
   /* Menu toggable */
-  const props = defineProps(['toggleSidebar']);
+  //const props = defineProps(['toggleSidebar']);
 
 
 

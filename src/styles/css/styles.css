@@ -782,7 +782,7 @@ label {
 .nav-items span,
 .boutons-ajout span {
   font-family: "Roboto";
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.1;
 }
 .nav-items .fa-plus,
@@ -794,6 +794,12 @@ label {
   padding: 0.5rem;
   background-color: #FFFFFF;
   transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+.nav-items .add-button:hover,
+.boutons-ajout .add-button:hover {
+  color: #FFFFFF;
 }
 .nav-items .add-offer,
 .boutons-ajout .add-offer {
@@ -805,7 +811,6 @@ label {
 .nav-items .add-offer:hover,
 .boutons-ajout .add-offer:hover {
   background-color: #821519;
-  color: #FFFFFF;
 }
 .nav-items .add-request,
 .boutons-ajout .add-request {
@@ -817,7 +822,6 @@ label {
 .nav-items .add-request:hover,
 .boutons-ajout .add-request:hover {
   background-color: #986D22;
-  color: #FFFFFF;
 }
 .nav-items .add-company,
 .boutons-ajout .add-company {
@@ -829,7 +833,6 @@ label {
 .nav-items .add-company:hover,
 .boutons-ajout .add-company:hover {
   background-color: #5E7EB5;
-  color: #FFFFFF;
 }
 .nav-items .add-candidate,
 .boutons-ajout .add-candidate {
@@ -842,7 +845,6 @@ label {
 .nav-items .add-candidate:hover,
 .boutons-ajout .add-candidate:hover {
   background-color: #4A1150;
-  color: #FFFFFF;
 }
 
 .utilisateur {
@@ -867,7 +869,7 @@ label {
 
 .container-menu {
   background-color: #FFFFFF;
-  min-width: 250px;
+  min-width: 265px;
   height: 100%;
 }
 @media (max-width: 800px) {

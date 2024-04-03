@@ -10,7 +10,7 @@
       </nav>
       <div class="wrapper-main-content">
         <header class="layout-header">
-          <Header :toggleSidebar="toggleSidebar"></Header>
+          <Header></Header> <!--  :toggleSidebar="toggleSidebar" -->
         </header>
         <main>
           <section class="container">
@@ -38,7 +38,7 @@
   
 
   // Fonction pour fermer la sidebar en réponse à l'événement du Header
-  const showSidebar = ref(false);
+  const showSidebar = ref(true);
   const toggleSidebar = () => {
     showSidebar.value = !showSidebar.value;
   };
