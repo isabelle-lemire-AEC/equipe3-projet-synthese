@@ -263,8 +263,7 @@ table td {
 @media (max-width: 1000px) {
   .liste__rangee {
     grid-template-columns: 2fr 1fr 2fr;
-    -moz-column-gap: 2rem;
-         column-gap: 2rem;
+    column-gap: 2rem;
     row-gap: 1rem;
   }
   .liste__rangee:first-child {
@@ -1262,26 +1261,45 @@ label {
   margin-bottom: clamp(1.875rem, 0.7746rem + 3.5211vi, 5rem);
 }
 
-.app-container {
-  min-height: 100vh;
-}
-
-.logo-container {
+.accueil__logo {
   background-color: #FFFFFF;
   width: 100%;
   padding: 20px;
 }
+.accueil__contenu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (max-width: 900px) {
+  .accueil__contenu {
+    grid-template-columns: 1fr;
+  }
+}
+.accueil__image {
+  background-image: url("../../assets/accueil.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+@media (min-width: 901px) {
+  .accueil__image {
+    min-height: calc(100vh - 130px);
+  }
+}
+@media (max-width: 900px) {
+  .accueil__image {
+    min-height: 40vh;
+  }
+}
 
-.content-container {
-  display: flex;
+.login-panel {
   width: 100%;
 }
 
 .half-page-image {
   width: 50%;
   height: auto;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .login-panel {
@@ -1293,18 +1311,18 @@ label {
   gap: 1rem;
   padding: 0 300px 0 3rem;
 }
-.login-panel .entete-login-panel {
+.login-panel__entete {
   width: 100%;
   color: #111111;
-  margin-bottom: 100px;
+  margin-bottom: clamp(3.125rem, 1.5845rem + 4.9296vi, 7.5rem);
 }
-.login-panel .entete-login-panel h1 {
+.login-panel__entete h1 {
   font-family: "Lora", serif;
-  font-size: 70px;
+  font-size: clamp(2.2807rem, 1.6644rem + 1.9723vi, 4.0311rem);
   font-weight: 400;
   line-height: 1.1;
 }
-.login-panel .entete-login-panel p {
+.login-panel__entete p {
   font-family: "Lato";
   line-height: 1.1;
   padding: 1rem 0;
@@ -1312,19 +1330,14 @@ label {
   color: #5E5E5E;
   max-width: 50ch;
 }
+.login-panel form {
+  width: 100%;
+}
 
-.form-group input {
+.form-identification input {
   border-width: 2px;
   border-style: solid;
   border-color: #0C9DA4;
-}
-
-.bouton-acceuil {
-  margin-top: 40px;
-}
-
-form {
-  width: 100%;
 }
 
 .tableau-bord__info-rapide-entreprises, .tableau-bord__info-rapide-candidats, .tableau-bord__info-rapide-offres, .tableau-bord__info-rapide-demandes {
