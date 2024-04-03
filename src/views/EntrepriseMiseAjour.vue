@@ -97,7 +97,7 @@
 
         <BtnAnnulerModifierSauvegarder 
           buttonText="Mettre à jour" 
-          buttonClass="bouton bouton--mauve">
+          buttonClass="bouton bouton--bleu">
         </BtnAnnulerModifierSauvegarder>
 
       </div>

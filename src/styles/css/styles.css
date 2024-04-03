@@ -857,19 +857,37 @@ label {
 }
 .utilisateur .utilisateur__details {
   text-align: right;
-  font-family: "Roboto";
-  line-height: 1.1;
 }
 .utilisateur .utilisateur__nom {
   color: #111111;
+  font-family: "Roboto";
+  font-size: 14px;
+  line-height: 1.1;
 }
 .utilisateur .utilisateur__courriel {
-  color: #CCD4E0;
+  color: #b0b3b8;
+  font-family: "Roboto";
+  font-size: 13px;
+  line-height: 1.1;
 }
 
+@media (max-width: 1200px) {
+  .btn-ajout-mobile {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 1094px) {
+  .btn-ajout-mobile {
+    display: block;
+  }
+  .add-button {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
 .container-menu {
   background-color: #FFFFFF;
-  min-width: 265px;
+  min-width: 280px;
   height: 100%;
 }
 @media (max-width: 800px) {

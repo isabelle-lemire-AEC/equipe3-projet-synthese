@@ -84,22 +84,39 @@
 
 }
 
-
 .utilisateur {
     padding: 0 variables.$spacing-small 0 0;
     @include mixins.flex(row, flex-end, center, variables.$spacing-small);
 
     .utilisateur__details {
         text-align: right;
-        @include mixins.font(variables.$font-body, null, null);
     }
 
     .utilisateur__nom {
         color: variables.$black;
+        @include mixins.font(variables.$font-body, 14px, null);
     }
 
     .utilisateur__courriel {
-        color: #CCD4E0;
+        color: #b0b3b8;
+        @include mixins.font(variables.$font-body, 13px, null);
     }
 
+}
+
+@include mixins.media-max(1200px) {
+    .btn-ajout-mobile  {
+        flex-wrap: wrap;
+    }
+}
+
+@include mixins.media-max(1094px) {
+    .btn-ajout-mobile {
+        display: block;
+    }
+
+    .add-button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
 }

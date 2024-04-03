@@ -8,7 +8,7 @@
             <i class="fa-solid fa-bars " id="icone-menu"></i>
           </div>
           
-          <div class="boutons-ajout">
+          <div class="boutons-ajout btn-ajout-mobile">
             <button class="add-button add-offer" @click="ajouterOffre">
               <i class="fas fa-plus"></i> <span>Ajouter une offre de stage</span>
             </button>
