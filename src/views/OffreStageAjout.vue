@@ -224,7 +224,7 @@
     erreurs.value.progForm = progForm.value === '',
     erreurs.value.exigences = (offerData.value.requiredSkills === '' || offerData.value.requiredSkills === undefined || offerData.value.requiredSkills[0] === ''),
     erreurs.value.typeDeStage = (offerData.value.internshipType._id === '' || offerData.value.internshipType._id === undefined),
-    erreurs.value.heuresSemaine = (offerData.value.weeklyWorkHours === 0 || offerData.value.weeklyWorkHours === undefined),
+    erreurs.value.heuresSemaine = (offerData.value.weeklyWorkHours === 0 || offerData.value.weeklyWorkHours === undefined || offerData.value.weeklyWorkHours === ''),
     erreurs.value.dateDebut = offerData.value.startDate === '',
     erreurs.value.dateFin = offerData.value.endDate === '',
     erreurs.value.province = offerData.value.province._id === '',
