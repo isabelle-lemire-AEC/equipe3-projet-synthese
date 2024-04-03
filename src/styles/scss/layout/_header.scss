@@ -28,19 +28,23 @@
 
     @include mixins.flex(row, flex-start, null, 1rem);
 
-
+    span {
+        @include mixins.font(variables.$font-body, 12px, null);
+    }
 
     .fa-plus {
         padding-right: variables.$spacing-xsmall;
     }
 
-    .add-offer {
-        @include mixins.border(null, variables.$dark-red, variables.$spacing-xsmall);
-        @include mixins.font(variables.$font-body, null, null);
+    .add-button {
         padding: variables.$spacing-xsmall;
         background-color: variables.$white;
-        color: variables.$red;
         transition: background-color 0.3s ease;
+    }
+
+    .add-offer {
+        @include mixins.border(null, variables.$dark-red, variables.$spacing-xsmall);
+        color: variables.$red;
 
         &:hover {
             background-color: variables.$dark-red;
@@ -49,12 +53,8 @@
     }
 
     .add-request {
-        padding: variables.$spacing-xsmall;
-        background-color: variables.$white;
         color: variables.$gold;
         @include mixins.border(null, variables.$dark-gold, variables.$spacing-xsmall);
-        @include mixins.font(variables.$font-body, null, null);
-        transition: background-color 0.3s ease;
 
         &:hover {
             background-color: variables.$dark-gold;
@@ -63,12 +63,8 @@
     }
 
     .add-company {
-        padding: variables.$spacing-xsmall;
-        background-color: variables.$white;
         color: variables.$dark-blue;
         @include mixins.border(null, variables.$blue, variables.$spacing-xsmall);
-        @include mixins.font(variables.$font-body, null, null);
-        transition: background-color 0.3s ease;
 
         &:hover {
             background-color: variables.$dark-blue;
@@ -78,11 +74,8 @@
 
     .add-candidate {
         padding: 0.5rem;
-        background-color: variables.$white;
         color: variables.$purple;
         @include mixins.border(null, variables.$dark-purple, variables.$spacing-xsmall);
-        @include mixins.font(variables.$font-body, null, null);
-        transition: background-color 0.3s ease;
 
         &:hover {
             background-color: variables.$dark-purple;

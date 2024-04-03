@@ -12,6 +12,7 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -574,6 +575,7 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -776,21 +778,28 @@ label {
   justify-content: flex-start;
   gap: 1rem;
 }
+.nav-items span,
+.boutons-ajout span {
+  font-family: "Roboto";
+  font-size: 12px;
+  line-height: 1.1;
+}
 .nav-items .fa-plus,
 .boutons-ajout .fa-plus {
   padding-right: 0.5rem;
+}
+.nav-items .add-button,
+.boutons-ajout .add-button {
+  padding: 0.5rem;
+  background-color: #FFFFFF;
+  transition: background-color 0.3s ease;
 }
 .nav-items .add-offer,
 .boutons-ajout .add-offer {
   border-style: solid;
   border-color: #821519;
   border-radius: 0.5rem;
-  font-family: "Roboto";
-  line-height: 1.1;
-  padding: 0.5rem;
-  background-color: #FFFFFF;
   color: #BB2026;
-  transition: background-color 0.3s ease;
 }
 .nav-items .add-offer:hover,
 .boutons-ajout .add-offer:hover {
@@ -799,15 +808,10 @@ label {
 }
 .nav-items .add-request,
 .boutons-ajout .add-request {
-  padding: 0.5rem;
-  background-color: #FFFFFF;
   color: #CB912B;
   border-style: solid;
   border-color: #986D22;
   border-radius: 0.5rem;
-  font-family: "Roboto";
-  line-height: 1.1;
-  transition: background-color 0.3s ease;
 }
 .nav-items .add-request:hover,
 .boutons-ajout .add-request:hover {
@@ -816,15 +820,10 @@ label {
 }
 .nav-items .add-company,
 .boutons-ajout .add-company {
-  padding: 0.5rem;
-  background-color: #FFFFFF;
   color: #5E7EB5;
   border-style: solid;
   border-color: #86A9E6;
   border-radius: 0.5rem;
-  font-family: "Roboto";
-  line-height: 1.1;
-  transition: background-color 0.3s ease;
 }
 .nav-items .add-company:hover,
 .boutons-ajout .add-company:hover {
@@ -834,14 +833,10 @@ label {
 .nav-items .add-candidate,
 .boutons-ajout .add-candidate {
   padding: 0.5rem;
-  background-color: #FFFFFF;
   color: #7F2987;
   border-style: solid;
   border-color: #4A1150;
   border-radius: 0.5rem;
-  font-family: "Roboto";
-  line-height: 1.1;
-  transition: background-color 0.3s ease;
 }
 .nav-items .add-candidate:hover,
 .boutons-ajout .add-candidate:hover {
@@ -874,10 +869,23 @@ label {
   min-width: 250px;
   height: 100%;
 }
+@media (max-width: 800px) {
+  .container-menu {
+    min-width: 100px;
+  }
+  .container-menu img {
+    width: 100%;
+  }
+}
 
 .logo {
   max-width: 200px;
   padding: 1rem;
+}
+@media (max-width: 800px) {
+  .logo {
+    padding: 10px 5px 0 5px;
+  }
 }
 
 .navbar__menu {
@@ -978,6 +986,14 @@ label {
   color: #719ae2;
 }
 
+@media (max-width: 800px) {
+  span.nav-mobile {
+    display: none;
+  }
+  .logo {
+    max-width: 100px;
+  }
+}
 /* Général à plusieurs views de candidats */
 #ajout-candidat,
 #edition-candidat {
@@ -1278,19 +1294,22 @@ label {
 
 .login-panel {
   width: 100%;
-  padding-block: clamp(3.125rem, 1.5845rem + 4.9296vi, 7.5rem);
-  padding-left: 4.5rem;
-  padding-right: 15rem;
 }
-@media (max-width: 1280px) {
-  .login-panel {
-    padding-inline: 3rem !important;
-  }
+
+.half-page-image {
+  width: 50%;
+  height: auto;
+  object-fit: cover;
 }
-@media (max-width: 900px) {
-  .login-panel {
-    padding-inline: clamp(1.25rem, -0.9507rem + 7.0423vi, 7.5rem) !important;
-  }
+
+.login-panel {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0 300px 0 3rem;
 }
 .login-panel__entete {
   width: 100%;
@@ -1495,4 +1514,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}/*# sourceMappingURL=styles.css.map */
+}
