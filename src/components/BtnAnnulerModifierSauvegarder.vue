@@ -41,10 +41,10 @@
             case 'CandidatAjout':
                 redirectPath = '/candidats';
                 break;  
-            case 'EntrpriseMiseAjour':
+            case 'EntrepriseMiseAjour':
                 redirectPath = `/entreprise-details/${currentRoute.params.id}`;
                 break;
-            case 'EntrpriseAjout':
+            case 'EntrepriseAjout':
                 redirectPath = '/entreprises';
                 break;                                                 
             default:
