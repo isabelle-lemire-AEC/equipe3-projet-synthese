@@ -33,6 +33,7 @@ body {
 p {
     @include mixins.font(variables.$font-body, 1rem, variables.$regular);
     @extend .no-margin;
+    line-height: 1.5;
 }
 
 h1 {

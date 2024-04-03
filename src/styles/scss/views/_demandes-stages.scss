@@ -22,17 +22,17 @@
     }
 }
 
-.listeStages{
-    background-color: variables.$white ;
+.listeStages {
+    background-color: variables.$white;
     border-radius: 10px;
     padding: 80px;
     /* margin-top: 40px; */
 
 }
 
-.pageContainer{
-    h1{
-       padding: 3rem 0 3rem 0 ; 
+.pageContainer {
+    h1 {
+        padding: 3rem 0 3rem 0;
     }
 }
 
@@ -46,6 +46,52 @@
     .bouton {
         &--jaune {
             margin-bottom: variables.$spacing-xlarge;
+        }
+    }
+
+}
+
+/* Spécifique pour la page d'ajout de demandes */
+
+.formulaire-ajout-demandestages {
+    .form-fiche__wrapper-titre {
+        margin-bottom: variables.$spacing-block-section;
+    }
+
+    .boutons {
+        justify-content: flex-end;
+        margin-bottom: variables.$spacing-medium;
+    }
+}
+
+#ajout-demandestages {
+    .form-fiche {
+        &__input-parcourir {
+            width: 50%;
+        }
+
+        &__label-input-horizontal {
+            label {
+                flex-basis: 5%;
+
+                @include mixins.media-max(1380px) {
+                    flex-basis: 10%;
+                }
+
+                @include mixins.media-max(800px) {
+                    flex-basis: unset;
+                }
+            }
+        }
+
+        &__input-parcourir {
+            @include mixins.media-max(1380px) {
+                width: 60%;
+            }
+
+            @include mixins.media-max(800px) {
+                width: 100%;
+            }
         }
     }
 
