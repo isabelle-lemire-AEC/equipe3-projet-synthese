@@ -36,7 +36,7 @@
                 redirectPath = '/demandes-de-stages';
                 break;
             case 'CandidatMiseAjour':
-                redirectPath = `/candidat-details/${currentRoute.params.id}`;
+                redirectPath = `/candidat/${currentRoute.params.id}`;
                 break;
             case 'CandidatAjout':
                 redirectPath = '/candidats';
