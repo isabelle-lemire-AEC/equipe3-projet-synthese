@@ -8,6 +8,7 @@
     height: 100%;
     @include mixins.grid(2, variables.$spacing-medium);
     @include mixins.padding(variables.$spacing-large, variables.$spacing-medium);
+    cursor: pointer;
 
    /*  &__img {
         min-width: 150px;
