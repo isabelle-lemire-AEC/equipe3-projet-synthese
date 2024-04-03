@@ -7,22 +7,12 @@
         <p class="form-fiche__sous-titre">{{ offerData.enterprise.name }}</p>
       </div>
     </div>
-
-    <!-- <div class="boutons">
-      <BtnAnnuler></BtnAnnuler>
-      <button class="bouton bouton--rougeOffre" @click="submitForm()">
-        <div class="icone-libelle">
-          <i class="fas fa-save"></i>
-          <span>Mettre à jour</span>
-        </div>
-      </button>
-    </div> -->
+    
     <form @submit.prevent="submitForm">
       <BtnAnnulerModifierSauvegarder 
 				buttonText="Mettre à jour" 
 				buttonClass="bouton bouton--turquoise">
 			</BtnAnnulerModifierSauvegarder>		
-
 
 			<div class="form-fiche__encadre">
           <div class="form-fiche__wrapper-titre-groupe-inputs">
@@ -99,15 +89,7 @@
 				buttonClass="bouton bouton--turquoise">
 			</BtnAnnulerModifierSauvegarder>
     </form>
-    <!-- <div class="boutons">
-      <button class="bouton bouton--transparent" @click="annulerAjout">Annuler</button>
-      <button class="bouton bouton--rougeOffre" @click="submitForm()">
-        <div class="icone-libelle">
-          <i class="fas fa-save"></i>
-          <span>Mettre à jour</span>
-        </div>
-      </button>
-    </div>  -->
+    
   </div>
 </template>
 
@@ -133,7 +115,23 @@
     _id: "",
     title: "",
     description: "",
-    enterprise: { _id: "" },
+    enterprise: {
+      _id: "",
+      name: "",
+      image: "",
+      description: "",
+      address: "",
+      phone: "",
+      city: "",
+      email: "",
+      province: { _id: "", value: "" },
+      postalCode: "",
+      activitySector: {
+        _id: "",
+        value: "",
+      },
+      website: ""
+    },
     startDate: "",
     endDate: "",
     weeklyWorkHours: 0,
@@ -147,7 +145,26 @@
 
   onMounted(async () => {
     await getInternshipOfferById(route.params.id);
-    console.log("response: ", response);
+
+    if (response.value.enterprise === null || response.value.enterprise === undefined) {
+      response.value.enterprise = {
+        _id: "",
+        name: "",
+        image: "",
+        description: "",
+        address: "",
+        phone: "",
+        city: "",
+        email: "",
+        province: { _id: "", value: "" },
+        postalCode: "",
+        activitySector: {
+          _id: "",
+          value: "",
+        },
+        website: ""
+      }
+    }
     internshipTypes.value = await fetchStageTypes();
 
     if (response.value) {

@@ -6,16 +6,6 @@
         </div>
       </div>
 
-      <!-- Boutons annuler et mettre à jour -->
-      <!-- <div class="boutons">
-        <BtnAnnuler></BtnAnnuler>
-          <button class="bouton bouton--rougeOffre" @click="submitForm()">
-              <div class="icone-libelle">
-                  <i class="fas fa-save"></i>
-                  <span>Sauvegarder</span>
-              </div>
-          </button>
-      </div>   -->
       <form id="ajout-offrestages" @submit.prevent="submitForm">
             
         		<!-- Boutons annuler et mettre à jour -->
@@ -147,16 +137,6 @@
             buttonClass="bouton bouton--turquoise">
           </BtnAnnulerModifierSauvegarder>
         </form>
-        <!-- Boutons annuler et mettre à jour -->
-        <!-- <div class="boutons">
-            <button class="bouton bouton--transparent">Annuler</button>
-            <button class="bouton bouton--rougeOffre" @click="submitForm()">
-                <div class="icone-libelle">
-                    <i class="fas fa-save"></i>
-                    <span>Sauvegarder</span>
-                </div>
-            </button>
-        </div>             -->
 
 </template>
 

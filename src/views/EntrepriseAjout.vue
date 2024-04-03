@@ -44,7 +44,7 @@
             <input
               type="text"
               id="contactPerson"
-              v-model.trim="entreprise.contactPerson"
+              v-model.trim="contactPerson"
               @input="validerChamp('contactPerson')"
               placeholder="Nom de la personne à contacter"
               class="largeur-100"
@@ -123,11 +123,11 @@
               <div class="form-fiche__label-input-vertical">
                 <label for="province">Province :</label>
                 <div>
-                  <select id="province" v-model="entreprise.province._id">
+                  <select id="province" v-model="entreprise.province">
                     <option
                       v-for="province in provinces"
                       :key="province._id"
-                      :value="province._id"
+                      :value="province"
                     >
                       {{ province.value }}
                     </option>
@@ -178,13 +178,13 @@ const router = useRouter();
 const { ajouterEntreprise } = useEntreprise();
 const modalShow = ref(false);
 const modalMessage = ref("");
+const contactPerson = ref('');
 
 const provinces = ref([]);
 const entreprise = ref({
   name: "",
   image:
     "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8HwQACgAB/1TD9R8AAAAASUVORK5CYII=",
-  contactPerson: "",
   description: "",
   address: "",
   phone: "",
@@ -230,7 +230,7 @@ const validerFormulaire = () => {
 
   erreurs.value.name = entreprise.value.name.trim() === "" ? true : false;
   erreurs.value.email = !regexEmail.test(entreprise.value.email.trim());
-  erreurs.value.phone = regexPhone.test(entreprise.value.phone.trim()) ? "" : "Le numéro de téléphone doit être un numéro canadien valide.";
+  // erreurs.value.phone = regexPhone.test(entreprise.value.phone.trim()) ? "" : "Le numéro de téléphone doit être un numéro canadien valide.";
   erreurs.value.postalCode = !regexPostalCode.test(
     entreprise.value.postalCode.trim()
   );
@@ -264,7 +264,7 @@ const validerChamp = (champ) => {
       );
       break;
     case "phone":
-      erreurs.value.phone = !/^\d{10}$/.test(entreprise.value.phone.trim());
+      // erreurs.value.phone = !/^\d{10}$/.test(entreprise.value.phone.trim());
       break;
     case "address":
       erreurs.value.address = entreprise.value.address.trim() === "";
@@ -285,7 +285,7 @@ const validerChamp = (champ) => {
       break;
     case "contactPerson":
       erreurs.value.contactPerson =
-        entreprise.value.contactPerson.trim() === "";
+      contactPerson.value.trim() === "";
       break;
     case "province":
       erreurs.value.province = entreprise.value.province._id.trim() === "";
