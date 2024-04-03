@@ -25,13 +25,13 @@
                 <span>{{ props.info2 }}</span>
             </div>
         </td>
-        <td class="liste__body__contenu-colonne liste__body__contenu-colonne--3">
+        <td v-if="!props.isTableauDeBord" class="liste__body__contenu-colonne liste__body__contenu-colonne--3">
             <div class="dateInscription">
                 <span>{{ props.region }}</span>
             </div>
         </td>
 
-         <td v-if="!props.isTableauDeBord" class="liste__body__contenu-colonne liste__body__contenu-colonne--5">
+         <td class="liste__body__contenu-colonne liste__body__contenu-colonne--5">
             <div class="dateInscription">
                 <span>{{ date }}</span>
             </div>
@@ -191,9 +191,15 @@
 
         const totalTableBodyRow = document.querySelectorAll(".liste__body .liste__rangee");
 
+
+        console.log("contenuColonne2: ", contenuColonne2);
+        console.log("contenuColonne3: ", contenuColonne3);
+        console.log("totalTableBodyRow: ", totalTableBodyRow);
+
         for (let i = 0; i < totalTableBodyRow.length; i++) {
             contenuColonne2[i].setAttribute("data-title", titreColonne2.innerText);
-            contenuColonne3[i].setAttribute("data-title", titreColonne3.innerText);
+
+            if(contenuColonne3[i]) contenuColonne3[i].setAttribute("data-title", titreColonne3.innerText);
         }
     };
 

@@ -50,8 +50,8 @@
                     <h2>Dernières <span>demandes</span> de stage</h2>
                     <p>En attente de validation</p>
                 </div>
-                <button class="bouton bouton--turquoise" @click="validerToutesLesDemandes()">Valider toutes les
-                    demandes</button>
+                <!-- <button class="bouton bouton--turquoise" @click="validerToutesLesDemandes()">Valider toutes les
+                    demandes</button> -->
             </div>
 
 
@@ -70,7 +70,7 @@
                     :key="demande._id"
                     :posteTitre="demande.title"
                     :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName"
-                    :info2="secteurActivite.value"
+                    :info2="'Cégep de Trois-Rivières'"
                     :region="demande.province.value"
                     :date="demande.startDate"
                     :id="demande._id"
@@ -96,7 +96,7 @@
                 <thead class="liste__head">
                     <tr class="liste__rangee">
                         <th class="liste__head__titre-colonne liste__head__titre-colonne--1">Poste</th>
-                        <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Établissement</th>
+                        <th class="liste__head__titre-colonne liste__head__titre-colonne--2">Ville</th>
                         <th class="liste__head__titre-colonne liste__head__titre-colonne--3">Date</th>
                         <th class="liste__head__titre-colonne liste__head__titre-colonne--4">Actions</th>
                     </tr>
@@ -185,7 +185,7 @@
         demandes.value.forEach(demande => {
             if(demande.candidate === undefined || demande.candidate === null) {
                 demande.candidate = {
-                    firstName: "",
+                    firstName: "(Candidat effacé)",
                     lastName: ""
                 }
             }
@@ -196,7 +196,7 @@
         offres.value.forEach(offre => {
             if(offre.enterprise === undefined || offre.enterprise === null) {
                 offre.enterprise = {
-                    city: "",
+                    city: "(Entreprise effacé)",
                     name: ""
                 }
             }

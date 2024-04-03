@@ -5,14 +5,13 @@
 			<h1>{{ demande.title }}</h1>
 		</div>
 
-		<!-- Boutons annuler et mettre à jour -->
-		<BtnAnnulerModifierSauvegarder 
-			buttonText="Mettre à jour" 
-			buttonClass="bouton bouton--turquoise"
-			:action="modifDemande">
-        </BtnAnnulerModifierSauvegarder>		
-
-		<form id="edition-demandestages">
+		
+		<form id="edition-demandestages" @submit.prevent="modifDemande">
+			<!-- Boutons annuler et mettre à jour -->
+			<BtnAnnulerModifierSauvegarder 
+				buttonText="Mettre à jour" 
+				buttonClass="bouton bouton--turquoise">
+			</BtnAnnulerModifierSauvegarder>		
 
 			<!-- Section encadré encadré blanc -->
 			<div class="form-fiche__encadre">
@@ -228,8 +227,7 @@
 		<!-- Boutons annuler et mettre à jour -->
 		<BtnAnnulerModifierSauvegarder 
 			buttonText="Mettre à jour" 
-			buttonClass="bouton bouton--turquoise"
-			:action="modifDemande">
+			buttonClass="bouton bouton--turquoise">
         </BtnAnnulerModifierSauvegarder>
 
 	</div>

@@ -262,7 +262,8 @@ table td {
 @media (max-width: 1000px) {
   .liste__rangee {
     grid-template-columns: 2fr 1fr 2fr;
-    column-gap: 2rem;
+    -moz-column-gap: 2rem;
+         column-gap: 2rem;
     row-gap: 1rem;
   }
   .liste__rangee:first-child {
@@ -1235,6 +1236,14 @@ label {
   border-radius: 10px;
   padding: 80px;
   margin-top: 40px;
+}
+
+/* style pour la page de offre de stage (la liste de toutes les offres) */
+.offrestages-list h1 {
+  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+}
+.offrestages-list .bouton--rougeOffre {
+  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
 }
 
 .app-container {

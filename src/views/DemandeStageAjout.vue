@@ -4,15 +4,14 @@
 			<h1>Ajouter une demande</h1>
 		</div>
 
-		<!-- Boutons annuler et mettre à jour -->
-		<BtnAnnulerModifierSauvegarder
-			class="form-fiche__boutons-haut"
-			buttonText="Sauvegarder"
-			buttonClass="bouton bouton--turquoise"
-			:action="soumettreFormulaire">
-	</BtnAnnulerModifierSauvegarder>
+		<form id="ajout-demandestages" @submit.prevent="soumettreFormulaire">
 
-		<form id="ajout-demandestages">
+		<!-- Boutons annuler et mettre à jour -->
+		<BtnAnnulerModifierSauvegarder 
+			class="form-fiche__boutons-haut"	
+			buttonText="Sauvegarder" 
+			buttonClass="bouton bouton--turquoise">
+		</BtnAnnulerModifierSauvegarder>
 
 			<!-- Section titre -->
 			<div class="form-fiche__input-hors-encadre">
@@ -222,11 +221,10 @@
 		</form>
 
 		<!-- Boutons annuler et mettre à jour -->
-		<BtnAnnulerModifierSauvegarder
-									   buttonText="Sauvegarder"
-									   buttonClass="bouton bouton--turquoise"
-									   :action="soumettreFormulaire">
-		</BtnAnnulerModifierSauvegarder>
+		<BtnAnnulerModifierSauvegarder 
+			buttonText="Sauvegarder" 
+			buttonClass="bouton bouton--turquoise">
+        </BtnAnnulerModifierSauvegarder>
 	</div>
 
 </template>
