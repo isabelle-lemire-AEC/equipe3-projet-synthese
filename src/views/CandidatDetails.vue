@@ -1,4 +1,4 @@
-<!-- CandidatDetails.vue - Donaria  -->
+<!-- CandidatDetails.vue -->
 <template>
   <div class="form-fiche fiche-candidat-details" v-if="candidat">
     <div class="form-fiche__wrapper-titre">
@@ -72,7 +72,7 @@
   <!-- Modal de confirmation de suppression -->
   <div class="modal" v-if="showConfirmationModal">
     <div class="modal__contenu">
-      <p>Êtes-vous sûr de vouloir supprimer ce candidat ?</p>
+      <p>Êtes-vous sûr de vouloir supprimer ce formulaire?</p>
       <div class="modal__boutons">
         <button class="bouton bouton--rouge" @click="annulerSuppression">Annuler</button>
         <button class="bouton bouton--vert" @click="confirmerSuppression">Confirmer</button>
