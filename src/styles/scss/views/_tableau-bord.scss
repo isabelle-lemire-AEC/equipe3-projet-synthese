@@ -101,20 +101,30 @@
         font-size: variables.$font-style-h1;
     }
 
-    &__entete-dernieres-demandes-offres {
+
+    &__entete-dernieres-demandes,
+    &__entete-dernieres-offres {
         @include mixins.flex(row, space-between, center, null);
 
         h2 {
             margin-bottom: variables.$spacing-xsmall;
-
-            span {
-                color: variables.$gold;
-            }
         }
 
         p {
             color: variables.$red;
             @include mixins.font(variables.$font-body, null, null);
+        }
+    }
+
+    &__entete-dernieres-demandes {
+        span {
+            color: variables.$gold;
+        }
+    }
+
+    &__entete-dernieres-offres {
+        span {
+            color: variables.$red;
         }
     }
 }

@@ -1,104 +1,73 @@
-<!-- Sidebar.vue - Nacer -->
+<!-- Sidebar.vue -->
 <template>
-  <!-- Logo -->
-
-  
-    <div class="container-menu">
-      <div class="logo">
-        <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
-      </div>
-
-      
-        <ul class="navbar__menu" >
-          <li class="navbar__menu-item tableau-de-bord" :class="{ 'active': currentPage === 'TableauDeBord' }">
-            <router-link to="/tableau-de-bord" @click.native="updateCurrentPage('TableauDeBord')">
-              <i class="fa-solid fa-gauge"></i>
-              <span>Tableau de bord</span>
-            </router-link>
-          </li>
-          <li class="navbar__menu-item demandes-stage" :class="{ 'active': currentPage === 'DemandesStages'|| currentPage === 'DemandeStageDetails' || currentPage === 'DemandeStageMiseAjour' || currentPage === 'DemandeStageAjout'}">
-            <router-link to="/demandes-de-stages" @click="updateCurrentPage('DemandesStages')">
-              <i class="fa-solid fa-file-lines"></i>
-              <span>Demandes de stage</span>
-            </router-link>
-          </li>
-          <li class="navbar__menu-item offres-stage" :class="{ 'active': currentPage === 'OffresStages' || currentPage === 'OffreStageDetails' || currentPage === 'OffreStageMiseAjour' || currentPage === 'OffreStageAjout' }">
-            <router-link to="/offres-de-stages" @click="updateCurrentPage('OffresStages')">
-              <i class="fa-solid fa-paper-plane"></i>
-              <span>Offres de stage</span>
-            </router-link>
-          </li>
-          <li class="navbar__menu-item candidats" :class="{ 'active': currentPage === 'Candidats' || currentPage === 'CandidatDetails' || currentPage === 'CandidatMiseAjour' || currentPage === 'CandidatAjout' }">
-            <router-link to="/candidats" @click="updateCurrentPage('Candidats')">
-              <i class="fa-solid fa-user"></i>
-              <span>Candidats</span>
-            </router-link>
-          </li>
-          <li class="navbar__menu-item entreprises" :class="{ 'active': currentPage === 'Entreprises' || currentPage === 'EntrepriseDetails' || currentPage === 'EntrepriseMiseAjour' || currentPage === 'EntrepriseAjout' }">
-            <router-link to="/entreprises" @click="updateCurrentPage('Entreprises')">
-              <i class="fa-solid fa-computer-mouse"></i>
-              <span>Entreprises</span>
-            </router-link>
-          </li>
-        </ul>
-      </div>
-   
-
-
-
-   <!--CODE DONA
-  <div class="sidebar">
-    <div class="menu-item" :class="{ active: currentPage === 'dashboard' }">
-      <span>Tableau de bord</span>
+  <div class="container-menu">
+    
+    <!-- Logo -->
+    <div class="logo">
+      <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
     </div>
-    <div class="menu-item" :class="{ active: currentPage === 'requests' }">
-      <span>Demandes de stages</span>
-    </div>
-    <div class="menu-item" :class="{ active: currentPage === 'offers' }">
-      <span>Offres de stage</span>
-    </div>
-    <div class="menu-item" :class="{ active: currentPage === 'candidates' }">
-      <span>Candidats</span>
-    </div>
-    <div class="menu-item" :class="{ active: currentPage === 'companies' }">
-      <span>Entreprises</span>
-    </div>
-  </div>-->
+
+    <ul class="navbar__menu" >
+      <li class="navbar__menu-item tableau-de-bord" :class="{ 'active': currentPage === 'TableauDeBord' }">
+        <router-link to="/tableau-de-bord" @click.native="updateCurrentPage('TableauDeBord')">
+          <i class="fa-solid fa-gauge"></i>
+          <span class="nav-mobile">Tableau de bord</span>
+        </router-link>
+      </li>
+      <li class="navbar__menu-item demandes-stage" :class="{ 'active': currentPage === 'DemandesStages'|| currentPage === 'DemandeStageDetails' || currentPage === 'DemandeStageMiseAjour' || currentPage === 'DemandeStageAjout'}">
+        <router-link to="/demandes-de-stages" @click="updateCurrentPage('DemandesStages')">
+          <i class="fa-solid fa-file-lines"></i>
+          <span class="nav-mobile">Demandes de stage</span>
+        </router-link>
+      </li>
+      <li class="navbar__menu-item offres-stage" :class="{ 'active': currentPage === 'OffresStages' || currentPage === 'OffreStageDetails' || currentPage === 'OffreStageMiseAjour' || currentPage === 'OffreStageAjout' }">
+        <router-link to="/offres-de-stages" @click="updateCurrentPage('OffresStages')">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span class="nav-mobile">Offres de stage</span>
+        </router-link>
+      </li>
+      <li class="navbar__menu-item candidats" :class="{ 'active': currentPage === 'Candidats' || currentPage === 'CandidatDetails' || currentPage === 'CandidatMiseAjour' || currentPage === 'CandidatAjout' }">
+        <router-link to="/candidats" @click="updateCurrentPage('Candidats')">
+          <i class="fa-solid fa-user"></i>
+          <span class="nav-mobile">Candidats</span>
+        </router-link>
+      </li>
+      <li class="navbar__menu-item entreprises" :class="{ 'active': currentPage === 'Entreprises' || currentPage === 'EntrepriseDetails' || currentPage === 'EntrepriseMiseAjour' || currentPage === 'EntrepriseAjout' }">
+        <router-link to="/entreprises" @click="updateCurrentPage('Entreprises')">
+          <i class="fa-solid fa-computer-mouse"></i>
+          <span class="nav-mobile">Entreprises</span>
+        </router-link>
+      </li>
+    </ul>
+  </div>
  
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useRoute } from 'vue-router';
-//import { defineProps } from 'vue';
-import { watch } from 'vue';
+  import { ref } from 'vue';
+  import { useRoute } from 'vue-router';
+  import { watch } from 'vue';
 
+  // Initialise currentPage avec la page actuelle
+  const currentPage = ref(null);
 
-// Initialise currentPage avec la page actuelle
-const currentPage = ref(null);
+  // Récupère la route actuelle
+  const route = useRoute();
 
-// Récupère la route actuelle
-const route = useRoute();
+  // Met à jour la page active lorsqu'un lien est cliqué
+  const updateCurrentPage = (pageName) => {
+    if (currentPage.value !== pageName) {
+      currentPage.value = pageName;
+    }
+  };
 
-// Met à jour la page active lorsqu'un lien est cliqué
-const updateCurrentPage = (pageName) => {
-  if (currentPage.value !== pageName) {
-    currentPage.value = pageName;
-  }
-};
-
-// Surveille le changement de route pour mettre à jour la page active
-watch(route, (to) => {
-  // Vérifie si la route a un nom et met à jour la page active
-  if (to.name && currentPage.value !== to.name) {
-    currentPage.value = to.name;
-  }
-});
-
-
-
-
-
+  // Surveille le changement de route pour mettre à jour la page active
+  watch(route, (to) => {
+    // Vérifie si la route a un nom et met à jour la page active
+    if (to.name && currentPage.value !== to.name) {
+      currentPage.value = to.name;
+    }
+  });
 
 </script>
 

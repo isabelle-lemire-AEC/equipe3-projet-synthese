@@ -1,4 +1,3 @@
-<!-- EntrepriseDetails.vue -->
 <template>
   <div v-if="entreprise" class="form-fiche fiche-entreprise-details">
     <!-- Affichage du logo de l'entreprise -->
@@ -23,18 +22,12 @@
         <button class="boutons-action__modifier" @click="mettreAjour">
           <i class="fa-solid fa-pen-to-square"></i>
         </button>
-        <button class="boutons-action__supprimer" @click="afficherConfirmationModal">
+        <button
+          class="boutons-action__supprimer"
+          @click="afficherConfirmationModal"
+        >
           <i class="fas fa-square-xmark"></i>
         </button>
-        <div v-if="modalShow" class="modal">
-    <div class="modal-content">
-      <p>{{ modalMessage }}</p>
-      <div class="modal-footer">
-        <button class="btn non" @click="toggleModal">Non</button>
-        <button class="btn oui" @click="confirmSuppression">Oui</button>
-      </div>
-    </div>
-  </div>
       </div>
 
       <!-- Informations sur l'entreprise -->
@@ -47,7 +40,7 @@
         <!-- Contact de l'entreprise -->
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h3>Personne contact</h3>
-          <p class="nom-contact">Louise St-Cyr</p>
+          <p class="nom-contact">{{ entreprise.contactPerson }}</p>
         </div>
 
         <!-- Informations de contact -->
@@ -89,115 +82,83 @@
       </div>
     </div>
 
-    <!-- Modal de confirmation de suppression -->
-    <div class="modal" v-if="showConfirmationModal">
-      <div class="modal-content">
-        <p>Êtes-vous sûr de vouloir supprimer cette entreprise ?</p>
-        <div class="modal-buttons">
-          <button class="btn cancel" @click="annulerSuppression">Annuler</button>
-          <button class="btn confirm" @click="supprimerEntreprise">Confirmer</button>
-        </div>
-      </div>
+    <!-- Utilisation du composant ModalSuppression -->
+  </div>
+  <div class="modal" v-if="showConfirmationModal">
+  <div class="modal__contenu">
+    <p>Êtes-vous sûr de vouloir supprimer ce formulaire?</p>
+    <div class="modal__boutons">
+      <button class="bouton bouton--rouge" @click="annulerSuppression">
+        Annuler
+      </button>
+      <button class="bouton bouton--vert" @click="supprimerEntreprise">  <!-- Changement ici -->
+        Confirmer
+      </button>
     </div>
   </div>
+</div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import axios from 'axios';
-import { useRouter, useRoute } from 'vue-router';
-import logoEntreprise from '@/assets/mediavox-logo.jpg'; // Importez le logo de l'entreprise
+import { ref } from "vue";
+import axios from "axios";
+import { useRouter, useRoute } from "vue-router";
+import logoEntreprise from "@/assets/mediavox-logo.jpg";
 
 const entreprise = ref(null);
-
-// État du modal de confirmation de suppression
-const showConfirmationModal = ref(false);
-
-// Router et route pour la navigation dans l'application
 const router = useRouter();
 const route = useRoute();
+const showConfirmationModal = ref(false);
 
-// Fonction pour charger les détails de l'entreprise depuis l'API
+
+// Fonction pour charger les détails de l'entreprise
 const chargerEntreprise = async () => {
   try {
-    const response = await axios.get(`https://api-3.fly.dev/enterprises/${route.params.id}`);
+    const response = await axios.get(
+      `https://api-3.fly.dev/enterprises/${route.params.id}`
+    );
     entreprise.value = response.data;
   } catch (error) {
-    console.error("Erreur lors de la récupération des détails de l'entreprise:", error);
+    console.error(
+      "Erreur lors de la récupération des détails de l'entreprise:",
+      error
+    );
   }
 };
 
-// Fonction pour rediriger vers la page de mise à jour de l'entreprise
+// Fonction pour mettre à jour l'entreprise
 const mettreAjour = () => {
-  router.push({ name: 'EntrepriseMiseAjour', params: { id: entreprise.value._id } });
-};
-
-// Fonction pour afficher le modal de confirmation de suppression
-const afficherConfirmationModal = () => {
-  showConfirmationModal.value = true;
-};
-
-// Fonction pour annuler la suppression de l'entreprise
-const annulerSuppression = () => {
-  showConfirmationModal.value = false;
+  router.push({
+    name: "EntrepriseMiseAjour",
+    params: { id: entreprise.value._id },
+  });
 };
 
 // Fonction pour supprimer l'entreprise
 const supprimerEntreprise = async () => {
-  if (confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?')) {
-    try {
-      await axios.delete(`https://api-3.fly.dev/enterprises/${route.params.id}`);
-      router.push({ name: 'Entreprises' });
-    } catch (error) {
-      console.error('Erreur lors de la suppression de l\'entreprise:', error);
-    }
+  try {
+    await axios.delete(
+      `https://api-3.fly.dev/enterprises/${entreprise.value._id}`
+    );
+    router.push({ name: "Entreprises" });
+    showConfirmationModal.value = false; // Fermez la modal après la suppression
+  } catch (error) {
+    console.error("Erreur lors de la suppression de l'entreprise:", error);
+    showConfirmationModal.value = false; // Fermez la modal en cas d'erreur
   }
 };
 
-// Chargement des détails de l'entreprise au montage du composant
+// Fonction pour afficher la modal de confirmation
+const afficherConfirmationModal = () => {
+  showConfirmationModal.value = true;
+};
+// Fonction pour annuler la suppression
+const annulerSuppression = () => {
+  showConfirmationModal.value = false;
+};
+
+// Appel de la fonction pour charger les détails de l'entreprise au montage du composant
 chargerEntreprise();
 </script>
 
-
-<style scoped>
-
-.modal-content {
-  width: 400px;
-  height: 200px;
-  background-color: #eee;
-  border: 1px solid cyan;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-
-.modal-footer {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-}
-
-.btn {
-  font-weight: bold;
-  padding: 10px 20px;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 10px;
-  width: 30%;
-
-  &.non {
-    background-color: red;
-  }
-
-  &.oui {
-    background-color: green;
-  }
-}
-
-</style>
+<style scoped></style>

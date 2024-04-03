@@ -39,3 +39,23 @@
     grid-template-columns: repeat($columns, 1fr);
     gap: $gap;
 }
+
+/* Media queries */
+
+@mixin media-min($breakpoint) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin media-max($breakpoint) {
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin media-min-max($breakpoint-min, $breakpoint-max) {
+    @media (min-width: $breakpoint-min) and (max-width: $breakpoint-max) {
+        @content;
+    }
+}

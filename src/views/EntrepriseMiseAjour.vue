@@ -13,6 +13,7 @@
     <form id="edition-entreprise" @submit.prevent="mettreAJourEntreprise">
       <div class="form-fiche__wrapper-boutons-inputs">
 
+        <!-- Boutons annuler et mettre à jour -->
         <BtnAnnulerModifierSauvegarder 
           buttonText="Mettre à jour" 
           buttonClass="bouton bouton--bleu">
@@ -96,7 +97,7 @@
 
         <BtnAnnulerModifierSauvegarder 
           buttonText="Mettre à jour" 
-          buttonClass="bouton bouton--mauve">
+          buttonClass="bouton bouton--bleu">
         </BtnAnnulerModifierSauvegarder>
 
       </div>
@@ -176,6 +177,7 @@
 
   // Appeler la fonction chargerEntreprise au montage du composant
   chargerEntreprise();
+  
 </script>
 
 
