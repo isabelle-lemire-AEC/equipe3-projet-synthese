@@ -8,7 +8,8 @@
         </div>
 
         <form id="edition-candidat" @submit.prevent="soumettreFormulaire">
-
+            
+            <!-- Boutons annuler et mettre à jour -->
             <BtnAnnulerModifierSauvegarder 
                 buttonText="Mettre à jour" 
                 buttonClass="bouton bouton--mauve">
@@ -80,30 +81,16 @@
 
 
 <script setup>
-    import {
-        useCandidat
-    } from '@/composables/candidats/candidat';
-    import {
-        fetchProvinces
-    } from '@/composables/api';
+    import { useCandidat } from '@/composables/candidats/candidat';
+    import { fetchProvinces } from '@/composables/api';
 
     import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
-    const {
-        getCandidatById,
-        editCandidat
-    } = useCandidat();
+    const { getCandidatById, editCandidat } = useCandidat();
 
-    import {
-        ref,
-        onMounted
-    } from 'vue';
-    import {
-        useRoute
-    } from 'vue-router';
-    import {
-        useRouter
-    } from 'vue-router';
+    import { ref, onMounted } from 'vue';
+    import { useRoute } from 'vue-router';
+    import {  useRouter } from 'vue-router';
 
     const route = useRoute();
     const router = useRouter();
@@ -142,22 +129,12 @@
             }
             console.log("Tentative de modification du candidat :", candidat.value);
             console.log("URL de la requête PATCH :", `https://api-3.fly.dev/candidates/${candidat.value._id}`);
-            await editCandidat(candidat.value._id, candidat
-                .value); // Passez candidat.value._id en premier argument
+            await editCandidat(candidat.value._id, candidat.value); // Passez candidat.value._id en premier argument
             console.log("Candidat modifié");
-            router.push({
-                name: 'Candidats'
-            });
+            router.push(`/candidat/${candidat.value._id}`);
         } catch (error) {
             console.error("Erreur lors de la modification du candidat :", error);
         }
-    }
-
-    const annulerModif = () => {
-        console.log("Annuler la modification du candidat");
-        route.push({
-            name: 'Candidats'
-        });
     }
 
     const soumettreFormulaire = async () => {

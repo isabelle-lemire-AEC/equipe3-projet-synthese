@@ -19,8 +19,6 @@
             cursor: pointer;
         }
     }
-
-
 }
 
 .nav-items,
@@ -28,71 +26,63 @@
 
     @include mixins.flex(row, flex-start, null, 1rem);
 
-
+    span {
+        @include mixins.font(variables.$font-body, 13px, null);
+    }
 
     .fa-plus {
         padding-right: variables.$spacing-xsmall;
     }
 
-    .add-offer {
-        @include mixins.border(null, variables.$dark-red, variables.$spacing-xsmall);
-        @include mixins.font(variables.$font-body, null, null);
+    .add-button {
         padding: variables.$spacing-xsmall;
         background-color: variables.$white;
-        color: variables.$red;
         transition: background-color 0.3s ease;
+        @include mixins.flex(null, null, center, null);
+
+        &:hover {
+            color: variables.$white;
+        }
+    }
+
+    .add-offer {
+        @include mixins.border(null, variables.$dark-red, variables.$spacing-xsmall);
+        color: variables.$red;
 
         &:hover {
             background-color: variables.$dark-red;
-            color: variables.$white;
         }
     }
 
     .add-request {
-        padding: variables.$spacing-xsmall;
-        background-color: variables.$white;
         color: variables.$gold;
         @include mixins.border(null, variables.$dark-gold, variables.$spacing-xsmall);
-        @include mixins.font(variables.$font-body, null, null);
-        transition: background-color 0.3s ease;
 
         &:hover {
             background-color: variables.$dark-gold;
-            color: variables.$white;
         }
     }
 
     .add-company {
-        padding: variables.$spacing-xsmall;
-        background-color: variables.$white;
         color: variables.$dark-blue;
         @include mixins.border(null, variables.$blue, variables.$spacing-xsmall);
-        @include mixins.font(variables.$font-body, null, null);
-        transition: background-color 0.3s ease;
 
         &:hover {
             background-color: variables.$dark-blue;
-            color: variables.$white;
         }
     }
 
     .add-candidate {
         padding: 0.5rem;
-        background-color: variables.$white;
         color: variables.$purple;
         @include mixins.border(null, variables.$dark-purple, variables.$spacing-xsmall);
-        @include mixins.font(variables.$font-body, null, null);
-        transition: background-color 0.3s ease;
 
         &:hover {
             background-color: variables.$dark-purple;
-            color: variables.$white;
         }
     }
 
-
 }
-
 
 .utilisateur {
     padding: 0 variables.$spacing-small 0 0;
@@ -100,16 +90,34 @@
 
     .utilisateur__details {
         text-align: right;
-        @include mixins.font(variables.$font-body, null, null);
     }
 
     .utilisateur__nom {
         color: variables.$black;
-
+        @include mixins.font(variables.$font-body, 14px, null);
     }
 
     .utilisateur__courriel {
-        color: #CCD4E0;
+        color: #b0b3b8;
+        @include mixins.font(variables.$font-body, 13px, null);
     }
 
+}
+
+@include mixins.media-max(1200px) {
+    .btn-ajout-mobile  {
+        flex-wrap: wrap;
+    }
+}
+
+@include mixins.media-max(1094px) {
+    .btn-ajout-mobile {
+        display: block;
+    }
+    
+
+    .add-button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
 }

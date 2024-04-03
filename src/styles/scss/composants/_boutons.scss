@@ -105,7 +105,7 @@
 
 .boutons-action {
 
-    @include mixins.flex(null, null, center, variables.$spacing-small);
+    @include mixins.flex(null, null, center, variables.$spacing-small * 1.5);
 
     button {
         border-width: 0;
@@ -113,7 +113,7 @@
     }
 
     i {
-        font-size: 1.3rem;
+        font-size: variables.$font-style-h2;
     }
 
     &__crochet {

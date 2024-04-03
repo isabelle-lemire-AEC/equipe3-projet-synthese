@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/* Font-size responsive: https://utopia.fyi/type/calculator/?c=500,16,1.125,1920,18,1.2,5,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12  */
+/* Font-size responsive: https://utopia.fyi/type/calculator/?c=500,16,1.125,1920,18,1.2,7,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12  */
 /* Espacements responsives: https://utopia.fyi/clamp/calculator/?a=500,1920,20%E2%80%94120|50%E2%80%94120 */
 /* Media queries */
 .bouton {
@@ -12,6 +12,7 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -102,14 +103,14 @@
 .boutons-action {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 .boutons-action button {
   border-width: 0;
   background: none;
 }
 .boutons-action i {
-  font-size: 1.3rem;
+  font-size: clamp(1.6018rem, 1.3444rem + 0.8237vi, 2.3328rem);
 }
 .boutons-action__crochet {
   color: #06A14C;
@@ -153,8 +154,8 @@
 
 .carte-candidat {
   background-color: #FFFFFF;
-  padding-block: 2rem;
-  padding-inline: 2rem;
+  padding-block: 1.25rem;
+  padding-inline: 1.25rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -163,6 +164,7 @@
 }
 .carte-candidat__img {
   background-color: #7F2987;
+  max-width: 100px;
   padding-block: 1rem;
   padding-inline: 1rem;
 }
@@ -173,11 +175,14 @@
   gap: 1rem;
 }
 .carte-candidat__texte h2 {
-  font-size: clamp(1.2656rem, 1.1408rem + 0.3993vi, 1.62rem);
+  font-size: clamp(1.125rem, 1.0458rem + 0.2535vi, 1.35rem);
   color: #111111;
 }
 .carte-candidat__texte p {
   font-family: "Lato";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.1;
 }
 
 .carte-entreprise {
@@ -264,7 +269,8 @@ table td {
 @media (max-width: 1000px) {
   .liste__rangee {
     grid-template-columns: 2fr 1fr 2fr;
-    column-gap: 2rem;
+    -moz-column-gap: 2rem;
+         column-gap: 2rem;
     row-gap: 1rem;
   }
   .liste__rangee:first-child {
@@ -570,12 +576,13 @@ label {
   padding-left: 1rem;
 }
 .form-fiche__wrapper-titre h1 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
 }
 .form-fiche__nom-section {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -617,7 +624,7 @@ label {
 @media (max-width: 800px) {
   .form-fiche__encadre {
     padding-block: 2rem;
-    padding-inline: 1rem;
+    padding-inline: 1.5rem;
   }
 }
 .form-fiche__wrapper-titre-groupe-inputs {
@@ -695,10 +702,32 @@ label {
   align-items: center;
   gap: 3rem;
 }
+@media (max-width: 1380px) {
+  .form-fiche__wrapper-parcourir-bouton {
+    gap: 2rem;
+  }
+}
+@media (max-width: 1000px) {
+  .form-fiche__wrapper-parcourir-bouton {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
 .form-fiche__input-parcourir {
   position: relative;
   width: 100%;
-  flex-basis: 70%;
+  flex-basis: 60%;
+}
+@media (max-width: 1380px) {
+  .form-fiche__input-parcourir {
+    flex-basis: 60%;
+  }
+}
+@media (max-width: 1000px) {
+  .form-fiche__input-parcourir {
+    flex-basis: unset;
+  }
 }
 .form-fiche__input-parcourir button:disabled {
   position: absolute;
@@ -715,6 +744,11 @@ label {
   cursor: default;
 }
 
+/* .error-message {
+    color: rgb(230, 93, 93);
+    font-size: 0.75em;
+    margin-top: 0.25em;
+} */
 .modal {
   display: flex;
   justify-content: center;
@@ -778,77 +812,72 @@ label {
   justify-content: flex-start;
   gap: 1rem;
 }
+.nav-items span,
+.boutons-ajout span {
+  font-family: "Roboto";
+  font-size: 13px;
+  line-height: 1.1;
+}
 .nav-items .fa-plus,
 .boutons-ajout .fa-plus {
   padding-right: 0.5rem;
+}
+.nav-items .add-button,
+.boutons-ajout .add-button {
+  padding: 0.5rem;
+  background-color: #FFFFFF;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+.nav-items .add-button:hover,
+.boutons-ajout .add-button:hover {
+  color: #FFFFFF;
 }
 .nav-items .add-offer,
 .boutons-ajout .add-offer {
   border-style: solid;
   border-color: #821519;
   border-radius: 0.5rem;
-  font-family: "Roboto";
-  line-height: 1.1;
-  padding: 0.5rem;
-  background-color: #FFFFFF;
   color: #BB2026;
-  transition: background-color 0.3s ease;
 }
 .nav-items .add-offer:hover,
 .boutons-ajout .add-offer:hover {
   background-color: #821519;
-  color: #FFFFFF;
 }
 .nav-items .add-request,
 .boutons-ajout .add-request {
-  padding: 0.5rem;
-  background-color: #FFFFFF;
   color: #CB912B;
   border-style: solid;
   border-color: #986D22;
   border-radius: 0.5rem;
-  font-family: "Roboto";
-  line-height: 1.1;
-  transition: background-color 0.3s ease;
 }
 .nav-items .add-request:hover,
 .boutons-ajout .add-request:hover {
   background-color: #986D22;
-  color: #FFFFFF;
 }
 .nav-items .add-company,
 .boutons-ajout .add-company {
-  padding: 0.5rem;
-  background-color: #FFFFFF;
   color: #5E7EB5;
   border-style: solid;
   border-color: #86A9E6;
   border-radius: 0.5rem;
-  font-family: "Roboto";
-  line-height: 1.1;
-  transition: background-color 0.3s ease;
 }
 .nav-items .add-company:hover,
 .boutons-ajout .add-company:hover {
   background-color: #5E7EB5;
-  color: #FFFFFF;
 }
 .nav-items .add-candidate,
 .boutons-ajout .add-candidate {
   padding: 0.5rem;
-  background-color: #FFFFFF;
   color: #7F2987;
   border-style: solid;
   border-color: #4A1150;
   border-radius: 0.5rem;
-  font-family: "Roboto";
-  line-height: 1.1;
-  transition: background-color 0.3s ease;
 }
 .nav-items .add-candidate:hover,
 .boutons-ajout .add-candidate:hover {
   background-color: #4A1150;
-  color: #FFFFFF;
 }
 
 .utilisateur {
@@ -861,25 +890,56 @@ label {
 }
 .utilisateur .utilisateur__details {
   text-align: right;
-  font-family: "Roboto";
-  line-height: 1.1;
 }
 .utilisateur .utilisateur__nom {
   color: #111111;
+  font-family: "Roboto";
+  font-size: 14px;
+  line-height: 1.1;
 }
 .utilisateur .utilisateur__courriel {
-  color: #CCD4E0;
+  color: #b0b3b8;
+  font-family: "Roboto";
+  font-size: 13px;
+  line-height: 1.1;
 }
 
+@media (max-width: 1200px) {
+  .btn-ajout-mobile {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 1094px) {
+  .btn-ajout-mobile {
+    display: block;
+  }
+  .add-button {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
 .container-menu {
   background-color: #FFFFFF;
-  min-width: 250px;
+  min-width: 280px;
   height: 100%;
+}
+@media (max-width: 800px) {
+  .container-menu {
+    min-width: 100px;
+  }
+  .container-menu img {
+    width: 100%;
+  }
 }
 
 .logo {
   max-width: 200px;
   padding: 1rem;
+}
+@media (max-width: 800px) {
+  .logo {
+    padding: 10px 5px 0 5px;
+  }
 }
 
 .navbar__menu {
@@ -980,6 +1040,14 @@ label {
   color: #719ae2;
 }
 
+@media (max-width: 800px) {
+  span.nav-mobile {
+    display: none;
+  }
+  .logo {
+    max-width: 100px;
+  }
+}
 /* Général à plusieurs views de candidats */
 #ajout-candidat,
 #edition-candidat {
@@ -1007,10 +1075,42 @@ label {
   grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
 }
+@media (max-width: 1680px) {
+  .candidats__liste {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+@media (max-width: 1200px) {
+  .candidats__liste {
+    gap: 2rem;
+  }
+}
+@media (max-width: 1200px) {
+  .candidats__liste {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* Spécifique pour la view CandidatAjout */
 .formulaire-ajout-candidat .form-fiche__wrapper-titre {
   margin-bottom: 12rem;
+}
+@media (max-width: 1380px) {
+  .formulaire-ajout-candidat .form-fiche__wrapper-titre {
+    margin-bottom: 3rem;
+  }
+}
+@media (max-width: 1380px) {
+  .formulaire-ajout-candidat .form-fiche__label-input-horizontal label {
+    flex-basis: 10%;
+  }
+}
+@media (max-width: 800px) {
+  .formulaire-ajout-candidat .form-fiche__label-input-horizontal label {
+    flex-basis: unset;
+  }
 }
 .formulaire-ajout-candidat h2,
 .formulaire-ajout-candidat h3 {
@@ -1018,14 +1118,17 @@ label {
 }
 
 /* Spécifique pour la view CandidatDetails */
-/* .fiche-candidat-details {
-    .form-fiche {
-        &__wrapper-boutons-encadre {
-            @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
-        }
-    }
-} */
+@media (max-width: 800px) {
+  .fiche-candidat-details .form-fiche__wrapper-titre {
+    margin-bottom: 3rem;
+  }
+}
+
 /* Spécifique pour la view CandidatDetails et CandidatMiseAJour */
+.fiche-candidat-details h1,
+.formulaire-edition-candidat h1 {
+  margin-bottom: 1rem;
+}
 .fiche-candidat-details h2,
 .fiche-candidat-details h3,
 .formulaire-edition-candidat h2,
@@ -1175,19 +1278,18 @@ label {
 }
 
 /* Spécifique pour la page d'ajout de demandes */
-.formulaire-ajout-demandestages .form-fiche__wrapper-titre {
-  margin-bottom: clamp(3.125rem, 1.5845rem + 4.9296vi, 7.5rem);
-}
-.formulaire-ajout-demandestages .boutons {
-  justify-content: flex-end;
-  margin-bottom: 2rem;
-}
+/* .formulaire-ajout-demandestages {
+    .form-fiche__wrapper-titre {
+        margin-bottom: variables.$spacing-block-section;
+    }
 
+    .boutons {
+        justify-content: flex-end;
+        margin-bottom: variables.$spacing-medium;
+    }
+} */
 #ajout-demandestages .form-fiche__input-parcourir {
   width: 50%;
-}
-#ajout-demandestages .form-fiche__label-input-horizontal label {
-  flex-basis: 5%;
 }
 @media (max-width: 1380px) {
   #ajout-demandestages .form-fiche__label-input-horizontal label {
@@ -1247,48 +1349,65 @@ label {
   margin-bottom: clamp(1.875rem, 0.7746rem + 3.5211vi, 5rem);
 }
 
-.app-container {
-  min-height: 100vh;
-}
-
-.logo-container {
+.accueil__logo {
   background-color: #FFFFFF;
   width: 100%;
   padding: 20px;
 }
-
-.content-container {
-  display: flex;
-  width: 100%;
+.accueil__contenu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
-
-.half-page-image {
-  width: 50%;
-  height: auto;
-  object-fit: cover;
+@media (max-width: 900px) {
+  .accueil__contenu {
+    grid-template-columns: 1fr;
+  }
+}
+.accueil__image {
+  background-image: url("../../assets/accueil.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+@media (min-width: 901px) {
+  .accueil__image {
+    min-height: calc(100vh - 130px);
+  }
+}
+@media (max-width: 900px) {
+  .accueil__image {
+    min-height: 40vh;
+  }
 }
 
 .login-panel {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 0 300px 0 3rem;
+  width: 100%;
+  padding-block: clamp(3.125rem, 1.5845rem + 4.9296vi, 7.5rem);
+  padding-left: 4.5rem;
+  padding-right: 15rem;
 }
-.login-panel .entete-login-panel {
+@media (max-width: 1280px) {
+  .login-panel {
+    padding-inline: 3rem !important;
+  }
+}
+@media (max-width: 900px) {
+  .login-panel {
+    padding-inline: clamp(1.25rem, -0.9507rem + 7.0423vi, 7.5rem) !important;
+  }
+}
+.login-panel__entete {
   width: 100%;
   color: #111111;
-  margin-bottom: 100px;
+  margin-bottom: clamp(3.125rem, 1.5845rem + 4.9296vi, 7.5rem);
 }
-.login-panel .entete-login-panel h1 {
+.login-panel__entete h1 {
   font-family: "Lora", serif;
-  font-size: 70px;
+  font-size: clamp(2.2807rem, 1.6644rem + 1.9723vi, 4.0311rem);
   font-weight: 400;
   line-height: 1.1;
 }
-.login-panel .entete-login-panel p {
+.login-panel__entete p {
   font-family: "Lato";
   line-height: 1.1;
   padding: 1rem 0;
@@ -1296,19 +1415,14 @@ label {
   color: #5E5E5E;
   max-width: 50ch;
 }
+.login-panel form {
+  width: 100%;
+}
 
-.form-group input {
+.form-identification input {
   border-width: 2px;
   border-style: solid;
   border-color: #0C9DA4;
-}
-
-.bouton-acceuil {
-  margin-top: 40px;
-}
-
-form {
-  width: 100%;
 }
 
 .tableau-bord__info-rapide-entreprises, .tableau-bord__info-rapide-candidats, .tableau-bord__info-rapide-offres, .tableau-bord__info-rapide-demandes {

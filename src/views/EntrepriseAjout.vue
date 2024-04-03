@@ -5,7 +5,8 @@
       <h1>Ajouter une entreprise</h1>
     </div>
     <form id="ajout-entreprise" @submit.prevent="soumettreFormulaireEntreprise">
-
+		
+        <!-- Boutons annuler et sauvegarder -->
         <BtnAnnulerModifierSauvegarder 
           buttonText="Sauvegarder" 
           buttonClass="bouton bouton--bleu">
@@ -15,30 +16,15 @@
         <div class="form-fiche__label-input-horizontal">
           <label for="nom">Entreprise :</label>
           <div class="form-fiche__wrapper-input-msg-erreur">
-            <input
-              type="text"
-              id="nom"
-              v-model.trim="entreprise.name"
-              @input="validerChamp('name')"
-              placeholder="Inscrivez la dénomination de l'entreprise"
-            />
-            <p class="error-message" v-if="erreurs.name">
-              Ce champ est obligatoire
-            </p>
+            <input type="text" id="nom" v-model.trim="entreprise.name" @input="validerChamp('name')"/>
+            <p class="error-message" v-if="erreurs.name">Ce champ est obligatoire</p>
           </div>
         </div>
         <div class="form-fiche__label-input-horizontal">
           <label for="logo">Logo (URL) :</label>
           <div class="form-fiche__wrapper-input-msg-erreur">
-            <input
-              type="text"
-              id="logo"
-              v-model.trim="entreprise.image"
-              @input="validerChamp('image')"
-            />
-            <p class="error-message" v-if="erreurs.image">
-              L'URL du logo est obligatoire
-            </p>
+            <input type="text" id="logo" v-model.trim="entreprise.image" @input="validerChamp('image')"/>
+            <p class="error-message" v-if="erreurs.image">L'URL du logo est obligatoire</p>
           </div>
         </div>
       </div>
@@ -46,25 +32,13 @@
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h2>Courte présentation</h2>
           <div>
-            <label for="presentation" class="form-fiche__label--cache"
-              >Présentation</label
-            >
-            <textarea
-              id="presentation"
-              cols="30"
-              rows="10"
-              v-model.trim="entreprise.description"
-              @input="validerChamp('description')"
-              placeholder="Donner une courte description de l'entreprise..."
-            ></textarea>
-            <p class="error-message" v-if="erreurs.description">
-              Ce champ est obligatoire
-            </p>
+            <label for="presentation" class="form-fiche__label--cache">Présentation</label>
+            <textarea id="presentation" cols="30" rows="10" v-model.trim="entreprise.description" @input="validerChamp('description')"></textarea>
+            <p class="error-message" v-if="erreurs.description">Ce champ est obligatoire</p>
           </div>
         </div>
         <div
-          class="form-fiche__label-input-vertical form-fiche__colonne-inputs"
-        >
+          class="form-fiche__label-input-vertical form-fiche__colonne-inputs">
           <label for="contactPerson">Personne contact :</label>
           <div>
             <input
@@ -198,7 +172,6 @@
   import { useEntreprise } from '@/composables/entreprises/entreprise';
   import { fetchProvinces } from '@/composables/api';
 
-  import BtnAnnuler from '../components/BtnAnnuler.vue';
   import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
 const router = useRouter();

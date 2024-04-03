@@ -34,7 +34,7 @@ $font-headings: 'Lato';
 $font-headings-accueil: 'Lora',
 serif;
 
-/* Font-size responsive: https://utopia.fyi/type/calculator/?c=500,16,1.125,1920,18,1.2,5,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12  */
+/* Font-size responsive: https://utopia.fyi/type/calculator/?c=500,16,1.125,1920,18,1.2,7,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12  */
 
 $font-style-p: 1rem;
 $font-style-h1: clamp(1.802rem, 1.4509rem + 1.1237vi, 2.7994rem);
@@ -43,6 +43,7 @@ $font-style-h3: clamp(1.4238rem, 1.2407rem + 0.5861vi, 1.944rem);
 $font-style-h4: clamp(1.2656rem, 1.1408rem + 0.3993vi, 1.62rem);
 $font-style-h5: clamp(1.125rem, 1.0458rem + 0.2535vi, 1.35rem);
 $font-style-h6: clamp(1rem, 0.956rem + 0.1408vi, 1.125rem);
+$font-style-h1-accueil: clamp(2.2807rem, 1.6644rem + 1.9723vi, 4.0311rem);
 
 $regular: 400;
 $bold: 700;
