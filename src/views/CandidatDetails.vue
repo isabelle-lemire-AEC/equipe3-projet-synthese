@@ -1,14 +1,8 @@
 <!-- CandidatDetails.vue -->
 <template>
   <div class="form-fiche fiche-candidat-details" v-if="candidat">
-    <div class="form-fiche__wrapper-titre">
-      <p class="form-fiche__nom-section">Candidat</p>
-      <h1>{{ candidat.firstName }} {{ candidat.lastName }}</h1>
-      <p class="form-fiche__sous-titre">UX Designer</p>
-    </div>
-
+    <!-- Boutons d'action -->
     <div class="form-fiche__wrapper-boutons-encadre">
-
       <div class="boutons-action">
         <button class="boutons-action__crochet" @click="activate()">
           <i class="fas fa-check"></i>
@@ -20,56 +14,55 @@
         <button class="boutons-action__supprimer" @click="afficherConfirmationModal">
           <i class="fas fa-square-xmark"></i>
         </button>
-        
-        <div class="form-fiche__encadre">
-
-          <!-- Section de description du candidat -->
-          <div class="form-fiche__wrapper-titre-groupe-inputs">
-            <h2>Courte présentation</h2>
-            <p>{{ candidat.description }}</p>
+      </div>
+    </div>
+    <!-- Informations sur le candidat -->
+    <div class="form-fiche__wrapper-titre">
+      <p class="form-fiche__nom-section">Candidat</p>
+      <h1>{{ candidat.firstName }} {{ candidat.lastName }}</h1>
+      <p class="form-fiche__sous-titre">UX Designer</p>
+    </div>
+    <div class="form-fiche__encadre">
+      <!-- Section de description du candidat -->
+      <div class="form-fiche__wrapper-titre-groupe-inputs">
+        <h2>Courte présentation</h2>
+        <p>{{ candidat.description }}</p>
+      </div>
+      <!-- Section d'informations personnelles du candidat -->
+      <div class="form-fiche__wrapper-titre-groupe-inputs">
+        <h3>Informations personnelles</h3>
+        <div class="form-fiche__colonnes-inputs">
+          <div class="form-fiche__colonne-inputs">
+            <div class="form-fiche__label-input-vertical">
+              <h4>Adresse</h4>
+              <p>{{ candidat.address }}</p>
+            </div>
+            <div class="form-fiche__label-input-vertical">
+              <h4>Ville</h4>
+              <p>{{ candidat.city }}</p>
+            </div>
+            <div class="form-fiche__label-input-vertical">
+              <h4>Province</h4>
+              <p>{{ candidat.province.value }}</p>
+            </div>
+            <div class="form-fiche__label-input-vertical">
+              <h4>Code postal</h4>
+              <p>{{ candidat.postalCode }}</p>
+            </div>
           </div>
-          <!-- Section d'informations personnelles du candidat -->
-          <div class="form-fiche__wrapper-titre-groupe-inputs">
-            <h3>Informations personnelles</h3>
-            <div class="form-fiche__colonnes-inputs">
-              <div class="form-fiche__colonne-inputs">
-                <div class="form-fiche__label-input-vertical">
-                  <h4>Adresse</h4>
-                  <p>{{ candidat.address }}</p>
-                </div>
-
-                <div class="form-fiche__label-input-vertical">
-                  <h4>Ville</h4>
-                  <p>{{ candidat.city }}</p>
-                </div>
-
-                <div class="form-fiche__label-input-vertical">
-                  <h4>Province</h4>
-                  <p>{{ candidat.province.value }}</p>
-                </div>
-
-                <div class="form-fiche__label-input-vertical">
-                  <h4>Code postal</h4>
-                  <p>{{ candidat.postalCode }}</p>
-                </div>
-              </div>
-              <div class="form-fiche__colonne-inputs">
-                <div class="form-fiche__label-input-vertical">
-                  <h4>Téléphone</h4>
-                  <p>{{ candidat.phone }}</p>
-                </div>
-
-                <div class="form-fiche__label-input-vertical">
-                  <h4>Courriel</h4>
-                  <p>{{ candidat.email }}</p>
-                </div>
-              </div>
+          <div class="form-fiche__colonne-inputs">
+            <div class="form-fiche__label-input-vertical">
+              <h4>Téléphone</h4>
+              <p>{{ candidat.phone }}</p>
+            </div>
+            <div class="form-fiche__label-input-vertical">
+              <h4>Courriel</h4>
+              <p>{{ candidat.email }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-
 
     <!-- Utilisation du composant ModalSuppression -->
     <ModalSuppression :showConfirmationModal="showConfirmationModal"
