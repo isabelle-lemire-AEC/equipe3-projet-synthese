@@ -10,7 +10,7 @@
       <div class="form-fiche__wrapper-titre">
         <p class="form-fiche__nom-section">Entreprise</p>
         <h1 class="entreprise-nom">{{ entreprise.name }}</h1>
-      </div> 
+      </div>
     </div>
 
     <!-- Boutons d'action pour modifier, valider ou supprimer l'entreprise -->
@@ -83,13 +83,20 @@
     </div>
 
     <!-- Utilisation du composant ModalSuppression -->
-    <ModalSuppression
-      :message="'Êtes-vous sûr de vouloir supprimer cette entreprise?'"
-      :show="showConfirmationModal"
-      @onConfirm="supprimerEntreprise"
-      @onCancel="annulerSuppression"
-    />
   </div>
+  <div class="modal" v-if="showConfirmationModal">
+  <div class="modal__contenu">
+    <p>Êtes-vous sûr de vouloir supprimer ce formulaire?</p>
+    <div class="modal__boutons">
+      <button class="bouton bouton--rouge" @click="annulerSuppression">
+        Annuler
+      </button>
+      <button class="bouton bouton--vert" @click="supprimerEntreprise">  <!-- Changement ici -->
+        Confirmer
+      </button>
+    </div>
+  </div>
+</div>
 </template>
 
 <script setup>
@@ -97,12 +104,12 @@ import { ref } from "vue";
 import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
 import logoEntreprise from "@/assets/mediavox-logo.jpg";
-import ModalSuppression from "@/components/ModalSuppression.vue";
 
 const entreprise = ref(null);
 const router = useRouter();
 const route = useRoute();
 const showConfirmationModal = ref(false);
+
 
 // Fonction pour charger les détails de l'entreprise
 const chargerEntreprise = async () => {
@@ -130,10 +137,14 @@ const mettreAjour = () => {
 // Fonction pour supprimer l'entreprise
 const supprimerEntreprise = async () => {
   try {
-    await axios.delete(`https://api-3.fly.dev/enterprises/${route.params.id}`);
+    await axios.delete(
+      `https://api-3.fly.dev/enterprises/${entreprise.value._id}`
+    );
     router.push({ name: "Entreprises" });
+    showConfirmationModal.value = false; // Fermez la modal après la suppression
   } catch (error) {
     console.error("Erreur lors de la suppression de l'entreprise:", error);
+    showConfirmationModal.value = false; // Fermez la modal en cas d'erreur
   }
 };
 
@@ -141,7 +152,6 @@ const supprimerEntreprise = async () => {
 const afficherConfirmationModal = () => {
   showConfirmationModal.value = true;
 };
-
 // Fonction pour annuler la suppression
 const annulerSuppression = () => {
   showConfirmationModal.value = false;
