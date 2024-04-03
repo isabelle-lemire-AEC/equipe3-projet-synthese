@@ -159,6 +159,7 @@
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+  cursor: pointer;
 }
 .carte-candidat__img {
   background-color: #7F2987;
@@ -188,6 +189,7 @@
   gap: 2rem;
   padding-block: 3rem;
   padding-inline: 2rem;
+  cursor: pointer;
   /*  &__img {
        min-width: 150px;
        max-width: 70%;
@@ -262,8 +264,7 @@ table td {
 @media (max-width: 1000px) {
   .liste__rangee {
     grid-template-columns: 2fr 1fr 2fr;
-    -moz-column-gap: 2rem;
-         column-gap: 2rem;
+    column-gap: 2rem;
     row-gap: 1rem;
   }
   .liste__rangee:first-child {
@@ -1240,10 +1241,10 @@ label {
 
 /* style pour la page de offre de stage (la liste de toutes les offres) */
 .offrestages-list h1 {
-  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+  margin-bottom: clamp(1.875rem, 0.7746rem + 3.5211vi, 5rem);
 }
 .offrestages-list .bouton--rougeOffre {
-  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+  margin-bottom: clamp(1.875rem, 0.7746rem + 3.5211vi, 5rem);
 }
 
 .app-container {
@@ -1484,4 +1485,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}/*# sourceMappingURL=styles.css.map */
+}
