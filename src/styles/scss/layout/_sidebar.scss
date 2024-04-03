@@ -10,7 +10,7 @@ $color-entreprises: variables.$blue;
 
 .container-menu {
     background-color: variables.$white;
-    min-width: 250px;
+    min-width: 280px;
     height: 100%;
 
     @include mixins.media-max(800px) {

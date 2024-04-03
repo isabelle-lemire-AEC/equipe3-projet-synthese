@@ -46,7 +46,6 @@
 <script setup>
   import { ref } from 'vue';
   import { useRoute } from 'vue-router';
-  //import { defineProps } from 'vue';
   import { watch } from 'vue';
 
   // Initialise currentPage avec la page actuelle
