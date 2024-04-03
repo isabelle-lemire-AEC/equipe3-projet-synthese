@@ -263,7 +263,8 @@ table td {
 @media (max-width: 1000px) {
   .liste__rangee {
     grid-template-columns: 2fr 1fr 2fr;
-    column-gap: 2rem;
+    -moz-column-gap: 2rem;
+         column-gap: 2rem;
     row-gap: 1rem;
   }
   .liste__rangee:first-child {
@@ -1294,22 +1295,19 @@ label {
 
 .login-panel {
   width: 100%;
+  padding-block: clamp(3.125rem, 1.5845rem + 4.9296vi, 7.5rem);
+  padding-left: 4.5rem;
+  padding-right: 15rem;
 }
-
-.half-page-image {
-  width: 50%;
-  height: auto;
-  object-fit: cover;
+@media (max-width: 1280px) {
+  .login-panel {
+    padding-inline: 3rem !important;
+  }
 }
-
-.login-panel {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 0 300px 0 3rem;
+@media (max-width: 900px) {
+  .login-panel {
+    padding-inline: clamp(1.25rem, -0.9507rem + 7.0423vi, 7.5rem) !important;
+  }
 }
 .login-panel__entete {
   width: 100%;
