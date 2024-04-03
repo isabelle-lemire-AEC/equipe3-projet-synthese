@@ -1,7 +1,7 @@
 <!-- CandidatCard.vue --->
 <template>
   <div class="carte-candidat" @click="redirectToDetails">
-    <img class="carte-candidat__img " src="../assets/icons8-account-96.png" alt="Candidate Icon">
+    <img class="carte-candidat__img " src="../assets/icons8-account-96.png" alt="Icône de candidat">
     <div class="carte-candidat__texte">
       <div>
         <h2>{{ candidate.firstName }} {{ candidate.lastName }}</h2>

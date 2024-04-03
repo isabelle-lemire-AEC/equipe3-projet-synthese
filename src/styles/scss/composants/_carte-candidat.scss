@@ -3,11 +3,12 @@
 
 .carte-candidat {
     background-color: variables.$white;
-    @include mixins.padding(variables.$spacing-medium, variables.$spacing-medium);
+    @include mixins.padding(variables.$spacing-small * 1.25, variables.$spacing-small * 1.25);
     @include mixins.flex(row, null, center, variables.$spacing-small);
 
     &__img {
         background-color: variables.$purple;
+        max-width: 100px;
         @include mixins.padding(variables.$spacing-small, variables.$spacing-small);
 
     }
@@ -16,12 +17,12 @@
         @include mixins.flex(column, null, flex-start, variables.$spacing-small);
 
         h2 {
-            font-size: variables.$font-style-h4;
+            font-size: variables.$font-style-h5;
             color: variables.$black;
         }
 
         p {
-            font-family: variables.$font-headings;
+            @include mixins.font(variables.$font-headings, 16px, variables.$regular);
         }
     }
 }
