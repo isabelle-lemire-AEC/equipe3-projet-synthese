@@ -12,7 +12,7 @@
       <div class="login-panel">
         <div class="entete-login-panel">
           <h1>Identification</h1>
-          <p>Lorem ipsum magna aliqua ut enim ad minim veniam, quis <br> nostrud exercitation ullamco laboris nisi consequat</p>
+          <p>Lorem ipsum magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi consequat</p>
         </div>
 
         <!-- Début du formulaire d'identification -->
