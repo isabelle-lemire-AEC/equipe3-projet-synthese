@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div class="boutons">
+    <!-- <div class="boutons">
       <BtnAnnuler></BtnAnnuler>
       <button class="bouton bouton--rougeOffre" @click="submitForm()">
         <div class="icone-libelle">
@@ -16,8 +16,13 @@
           <span>Mettre à jour</span>
         </div>
       </button>
-    </div>
-    <form>
+    </div> -->
+    <form @submit.prevent="submitForm">
+      <BtnAnnulerModifierSauvegarder 
+				buttonText="Mettre à jour" 
+				buttonClass="bouton bouton--turquoise">
+			</BtnAnnulerModifierSauvegarder>		
+
 
 			<div class="form-fiche__encadre">
           <div class="form-fiche__wrapper-titre-groupe-inputs">
@@ -89,8 +94,12 @@
           </div>
       </div>
       
+      <BtnAnnulerModifierSauvegarder 
+				buttonText="Mettre à jour" 
+				buttonClass="bouton bouton--turquoise">
+			</BtnAnnulerModifierSauvegarder>
     </form>
-    <div class="boutons">
+    <!-- <div class="boutons">
       <button class="bouton bouton--transparent" @click="annulerAjout">Annuler</button>
       <button class="bouton bouton--rougeOffre" @click="submitForm()">
         <div class="icone-libelle">
@@ -98,7 +107,7 @@
           <span>Mettre à jour</span>
         </div>
       </button>
-    </div> 
+    </div>  -->
   </div>
 </template>
 
@@ -109,6 +118,7 @@
   import BtnAnnuler from '../components/BtnAnnuler.vue';
   import { fetchStageTypes } from '@/composables/api';
   import { useRouter } from 'vue-router';
+	import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
   const route = useRoute();
   const { getInternshipOfferById, response, loading, error, edditerOffre } = useInternshipOffers();

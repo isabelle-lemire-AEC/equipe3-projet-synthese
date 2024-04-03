@@ -67,7 +67,7 @@ onMounted(async () => {
             toutesDemandes.value.forEach(demande => {
             if(demande.candidate === undefined || demande.candidate === null) {
                 demande.candidate = {
-                    firstName: "",
+                    firstName: "(Candidat effacé)",
                     lastName: ""
                 }
             }

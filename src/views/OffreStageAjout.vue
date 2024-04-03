@@ -7,7 +7,7 @@
       </div>
 
       <!-- Boutons annuler et mettre à jour -->
-      <div class="boutons">
+      <!-- <div class="boutons">
         <BtnAnnuler></BtnAnnuler>
           <button class="bouton bouton--rougeOffre" @click="submitForm()">
               <div class="icone-libelle">
@@ -15,9 +15,15 @@
                   <span>Sauvegarder</span>
               </div>
           </button>
-      </div>  
-      <form id="ajout-offrestages" @submit.prevent="soumettreFormulaire">
+      </div>   -->
+      <form id="ajout-offrestages" @submit.prevent="submitForm">
             
+        		<!-- Boutons annuler et mettre à jour -->
+            <BtnAnnulerModifierSauvegarder 
+              buttonText="Sauvegarder" 
+              buttonClass="bouton bouton--turquoise">
+            </BtnAnnulerModifierSauvegarder>
+
             <!-- Section titre -->
             <div class="form-fiche__input-hors-encadre">
               <div class="form-fiche__label-input-horizontal">
@@ -135,9 +141,14 @@
             </div> 
           </div>  
           
+          <!-- Boutons annuler et mettre à jour -->
+          <BtnAnnulerModifierSauvegarder 
+            buttonText="Sauvegarder" 
+            buttonClass="bouton bouton--turquoise">
+          </BtnAnnulerModifierSauvegarder>
         </form>
         <!-- Boutons annuler et mettre à jour -->
-        <div class="boutons">
+        <!-- <div class="boutons">
             <button class="bouton bouton--transparent">Annuler</button>
             <button class="bouton bouton--rougeOffre" @click="submitForm()">
                 <div class="icone-libelle">
@@ -145,7 +156,7 @@
                     <span>Sauvegarder</span>
                 </div>
             </button>
-        </div>            
+        </div>             -->
 
 </template>
 
@@ -157,6 +168,7 @@
   import { useRouter } from 'vue-router';
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
   import BtnAnnuler from '../components/BtnAnnuler.vue';
+	import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
   const router = useRouter();
   const { ajouterOffre } = useInternshipOffers();
@@ -169,6 +181,7 @@
   const progForm = ref('');
   const infoSupp = ref('');
 	const formulaireValide = ref(false);
+  
 
   onMounted(async () => {
     const entreprisesData = await getAllEntreprises();
