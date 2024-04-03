@@ -1,6 +1,6 @@
 @charset "UTF-8";
-/* https://utopia.fyi/type/calculator?c=320,16,1.125,1920,18,1.2,5,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12  */
-/* https://utopia.fyi/clamp/calculator?a=320,1920,20%E2%80%94120|30%E2%80%9480*/
+/* Font-size responsive: https://utopia.fyi/type/calculator/?c=500,16,1.125,1920,18,1.2,5,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12  */
+/* Espacements responsives: https://utopia.fyi/clamp/calculator/?a=500,1920,20%E2%80%94120|50%E2%80%94120 */
 /* Media queries */
 .bouton {
   color: #FFFFFF;
@@ -12,7 +12,6 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -69,7 +68,7 @@
   background-color: #0a868c;
 }
 .bouton--cv {
-  font-size: clamp(1.125rem, 1.08rem + 0.225vi, 1.35rem);
+  font-size: clamp(1.125rem, 1.0458rem + 0.2535vi, 1.35rem);
 }
 .bouton--activer {
   background-color: #CDECDA;
@@ -173,7 +172,7 @@
   gap: 1rem;
 }
 .carte-candidat__texte h2 {
-  font-size: clamp(1.2656rem, 1.1948rem + 0.3544vi, 1.62rem);
+  font-size: clamp(1.2656rem, 1.1408rem + 0.3993vi, 1.62rem);
   color: #111111;
 }
 .carte-candidat__texte p {
@@ -202,7 +201,7 @@
   gap: 1rem;
 }
 .carte-entreprise__texte h2 {
-  font-size: clamp(1.2656rem, 1.1948rem + 0.3544vi, 1.62rem);
+  font-size: clamp(1.2656rem, 1.1408rem + 0.3993vi, 1.62rem);
   color: #111111;
   margin-bottom: 0.5rem;
 }
@@ -540,7 +539,7 @@ select {
 }
 
 .form-fiche__label-input-vertical h4, .form-fiche__wrapper-titre-groupe-inputs h3 {
-  font-size: clamp(1rem, 0.975rem + 0.125vi, 1.125rem);
+  font-size: clamp(1rem, 0.956rem + 0.1408vi, 1.125rem);
 }
 
 input:not([type=radio]),
@@ -575,12 +574,11 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
-  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
   font-family: "Lato";
-  font-size: clamp(1.125rem, 1.08rem + 0.225vi, 1.35rem);
+  font-size: clamp(1.125rem, 1.0458rem + 0.2535vi, 1.35rem);
   font-weight: 700;
   line-height: 1.1;
 }
@@ -597,6 +595,11 @@ label {
   gap: 2rem;
   width: 100%;
 }
+@media (max-width: 800px) {
+  .form-fiche__boutons-haut {
+    display: none;
+  }
+}
 .form-fiche__encadre {
   width: 100%;
   background-color: #FFFFFF;
@@ -606,18 +609,38 @@ label {
   border-width: 0;
   border-style: solid;
   border-radius: 10px;
-  padding-block: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+  padding-block: clamp(1.875rem, 0.7746rem + 3.5211vi, 5rem);
   padding-inline: 3rem;
+}
+@media (max-width: 800px) {
+  .form-fiche__encadre {
+    padding-block: 2rem;
+    padding-inline: 1rem;
+  }
 }
 .form-fiche__wrapper-titre-groupe-inputs {
   display: flex;
   flex-direction: column;
   gap: 3rem;
 }
+@media (max-width: 800px) {
+  .form-fiche__wrapper-titre-groupe-inputs {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
+}
 .form-fiche__colonnes-inputs {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+}
+@media (max-width: 800px) {
+  .form-fiche__colonnes-inputs {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
 }
 .form-fiche__colonne-inputs {
   display: flex;
@@ -629,6 +652,13 @@ label {
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+}
+@media (max-width: 800px) {
+  .form-fiche__label-input-horizontal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 .form-fiche__label-input-horizontal label {
   flex-basis: 5%;
@@ -965,10 +995,10 @@ label {
 
 /* Spécifique pour la view Candidats */
 .candidats h1 {
-  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+  margin-bottom: clamp(1.875rem, 0.7746rem + 3.5211vi, 5rem);
 }
 .candidats .bouton--mauve {
-  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+  margin-bottom: clamp(1.875rem, 0.7746rem + 3.5211vi, 5rem);
 }
 .candidats__liste {
   display: grid;
@@ -1038,7 +1068,7 @@ label {
 
 /* Spécifique pour la view Entreprises */
 .entreprises h1 {
-  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+  margin-bottom: clamp(1.875rem, 0.7746rem + 3.5211vi, 5rem);
   color: #707070;
 }
 .entreprises__liste {
@@ -1091,7 +1121,7 @@ label {
 
 /* Spécifique pour la view EntrepriseDetail */
 .nom-contact {
-  font-size: clamp(1.2656rem, 1.1948rem + 0.3544vi, 1.62rem);
+  font-size: clamp(1.2656rem, 1.1408rem + 0.3993vi, 1.62rem);
   font-weight: 700;
   line-height: 1.1;
 }
@@ -1136,10 +1166,46 @@ label {
 
 /* style pour la page de demande de stage (la liste de toutes les demandes) */
 .demandestages-list h1 {
-  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+  margin-bottom: clamp(1.875rem, 0.7746rem + 3.5211vi, 5rem);
 }
 .demandestages-list .bouton--jaune {
-  margin-bottom: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+  margin-bottom: clamp(1.875rem, 0.7746rem + 3.5211vi, 5rem);
+}
+
+/* Spécifique pour la page d'ajout de demandes */
+.formulaire-ajout-demandestages .form-fiche__wrapper-titre {
+  margin-bottom: clamp(3.125rem, 1.5845rem + 4.9296vi, 7.5rem);
+}
+.formulaire-ajout-demandestages .boutons {
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+#ajout-demandestages .form-fiche__input-parcourir {
+  width: 50%;
+}
+#ajout-demandestages .form-fiche__label-input-horizontal label {
+  flex-basis: 5%;
+}
+@media (max-width: 1380px) {
+  #ajout-demandestages .form-fiche__label-input-horizontal label {
+    flex-basis: 10%;
+  }
+}
+@media (max-width: 800px) {
+  #ajout-demandestages .form-fiche__label-input-horizontal label {
+    flex-basis: unset;
+  }
+}
+@media (max-width: 1380px) {
+  #ajout-demandestages .form-fiche__input-parcourir {
+    width: 60%;
+  }
+}
+@media (max-width: 800px) {
+  #ajout-demandestages .form-fiche__input-parcourir {
+    width: 100%;
+  }
 }
 
 #ajout-offrestages,
@@ -1189,6 +1255,7 @@ label {
 .half-page-image {
   width: 50%;
   height: auto;
+  object-fit: cover;
 }
 
 .login-panel {
@@ -1215,9 +1282,13 @@ label {
   font-family: "Lato";
   line-height: 1.1;
   padding: 1rem 0;
+  line-height: 1.5;
+  color: #5E5E5E;
+  max-width: 50ch;
 }
 
 .form-group input {
+  border-width: 2px;
   border-style: solid;
   border-color: #0C9DA4;
 }
@@ -1254,7 +1325,7 @@ form {
 .tableau-bord {
   display: flex;
   flex-direction: column;
-  gap: clamp(1.875rem, 1.25rem + 3.125vi, 5rem);
+  gap: clamp(1.875rem, 0.7746rem + 3.5211vi, 5rem);
 }
 .tableau-bord__info-rapide {
   display: grid;
@@ -1263,7 +1334,7 @@ form {
   color: #FFFFFF;
 }
 .tableau-bord__info-rapide .chiffre {
-  font-size: clamp(1.802rem, 1.6026rem + 0.9973vi, 2.7994rem);
+  font-size: clamp(1.802rem, 1.4509rem + 1.1237vi, 2.7994rem);
   font-weight: 700;
   line-height: 1.1;
   margin-top: 0.5rem;
@@ -1308,7 +1379,7 @@ form {
   border-radius: 0;
 }
 .tableau-bord__icone-info-rapide {
-  font-size: clamp(1.802rem, 1.6026rem + 0.9973vi, 2.7994rem);
+  font-size: clamp(1.802rem, 1.4509rem + 1.1237vi, 2.7994rem);
 }
 .tableau-bord__entete-dernieres-demandes, .tableau-bord__entete-dernieres-offres {
   display: flex;
@@ -1334,8 +1405,8 @@ form {
 .container {
   max-width: 1920px;
   margin: 0 auto;
-  padding-block: clamp(1.25rem, 0rem + 6.25vi, 7.5rem);
-  padding-inline: clamp(1.25rem, 0rem + 6.25vi, 7.5rem);
+  padding-block: clamp(3.125rem, 1.5845rem + 4.9296vi, 7.5rem);
+  padding-inline: clamp(1.25rem, -0.9507rem + 7.0423vi, 7.5rem);
 }
 
 .wrapper-sidebar-main-content {
@@ -1386,21 +1457,22 @@ p {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.1;
+  line-height: 1.5;
 }
 
 h1 {
-  font-size: clamp(1.802rem, 1.6026rem + 0.9973vi, 2.7994rem);
+  font-size: clamp(1.802rem, 1.4509rem + 1.1237vi, 2.7994rem);
 }
 
 h2 {
-  font-size: clamp(1.6018rem, 1.4556rem + 0.731vi, 2.3328rem);
+  font-size: clamp(1.6018rem, 1.3444rem + 0.8237vi, 2.3328rem);
 }
 
 h3 {
-  font-size: clamp(1.4238rem, 1.3198rem + 0.5202vi, 1.944rem);
+  font-size: clamp(1.4238rem, 1.2407rem + 0.5861vi, 1.944rem);
 }
 
 a,
 button {
   cursor: pointer;
-}
+}/*# sourceMappingURL=styles.css.map */
