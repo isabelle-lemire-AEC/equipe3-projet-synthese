@@ -35,7 +35,19 @@
     }
 
     &__liste {
-        @include mixins.grid(3, variables.$spacing-large);
+        @include mixins.grid(3, variables.$spacing-medium * 1.5);
+
+        @include mixins.media-max(1680px) {
+            @include mixins.grid(2, variables.$spacing-medium);
+        }
+
+        @include mixins.media-max(1200px) {
+            gap: variables.$spacing-medium;
+        }
+
+        @include mixins.media-max(1200px) {
+            grid-template-columns: 1fr;
+        }
     }
 
 }
@@ -44,9 +56,28 @@
 
 .formulaire-ajout-candidat {
 
-    .form-fiche__wrapper-titre {
-        margin-bottom: variables.$spacing-large * 4;
+    .form-fiche {
+        &__wrapper-titre {
+            margin-bottom: variables.$spacing-large * 4;
+
+            @include mixins.media-max(1380px) {
+                margin-bottom: variables.$spacing-large;
+            }
+        }
+
+        &__label-input-horizontal {
+            label {
+                @include mixins.media-max(1380px) {
+                    flex-basis: 10%;
+                }
+
+                @include mixins.media-max(800px) {
+                    flex-basis: unset;
+                }
+            }
+        }
     }
+
 
     h2,
     h3 {
@@ -56,18 +87,26 @@
 
 /* Spécifique pour la view CandidatDetails */
 
-/* .fiche-candidat-details {
+.fiche-candidat-details {
     .form-fiche {
-        &__wrapper-boutons-encadre {
-            @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
+        &__wrapper-titre {
+
+            @include mixins.media-max(800px) {
+                margin-bottom: variables.$spacing-large;
+            }
+
         }
     }
-} */
+}
 
 /* Spécifique pour la view CandidatDetails et CandidatMiseAJour */
 
 .fiche-candidat-details,
 .formulaire-edition-candidat {
+
+    h1 {
+        margin-bottom: variables.$spacing-small;
+    }
 
     h2,
     h3 {

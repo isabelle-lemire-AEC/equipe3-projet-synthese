@@ -6,21 +6,23 @@
 
 		<form id="ajout-demandestages" @submit.prevent="soumettreFormulaire">
 
-		<!-- Boutons annuler et mettre à jour -->
-		<BtnAnnulerModifierSauvegarder 
-			class="form-fiche__boutons-haut"	
-			buttonText="Sauvegarder" 
-			buttonClass="bouton bouton--turquoise">
-		</BtnAnnulerModifierSauvegarder>
+			<!-- Boutons annuler et mettre à jour -->
+			<BtnAnnulerModifierSauvegarder
+				class="form-fiche__boutons-haut"
+				buttonText="Sauvegarder"
+				buttonClass="bouton bouton--turquoise">
+			</BtnAnnulerModifierSauvegarder>
 
 			<!-- Section titre -->
 			<div class="form-fiche__input-hors-encadre">
 				<div class="form-fiche__label-input-horizontal">
 					<label for="ajout-demande-titre">Titre :</label>
-					<input type="text" id="ajout-demande-titre" name="ajout-demande-titre"
-						v-model.trim="demande.title" />
-					<!-- Validation -->
-					<p v-if="erreurs.title" class="validForm">Veuillez fournir le titre du stage.</p>
+					<div class="form-fiche__wrapper-input-msg-erreur">
+						<input type="text" id="ajout-demande-titre" name="ajout-demande-titre"
+							v-model.trim="demande.title" />
+						<!-- Validation -->
+						<p v-if="erreurs.title" class="validForm">Veuillez fournir le titre du stage.</p>
+					</div>
 				</div>
 			</div>
 
@@ -43,8 +45,8 @@
 					<!-- Section présentation -->
 					<div class="form-fiche__label-input-vertical form-fiche__label-input-vertical--sans-bordure">
 						<label for="ajout-demande-presentation">Présentation</label>
-						<textarea id="ajout-demande-presentation" name="ajout-demande-presentation" rows="10"
-								v-model.trim="demande.description"></textarea>
+						<textarea id="ajout-demande-presentation" name="ajout-demande-presentation" rows="6"
+								  v-model.trim="demande.description"></textarea>
 						<!-- Validation -->
 						<p v-if="erreurs.description" class="validForm"> Veuillez fournir une présentation.</p>
 					</div>
@@ -109,7 +111,7 @@
 					<!-- Section compétences -->
 					<div class="form-fiche__label-input-vertical">
 						<label for="ajout-demande-competences">Compétences</label>
-						<textarea id="ajout-demande-competences" name="ajout-demande-competences" rows="10"
+						<textarea id="ajout-demande-competences" name="ajout-demande-competences" rows="6"
 								  v-model="demande.skills"></textarea>
 						<!-- Validation -->
 						<p v-if="erreurs.skills" class="validForm">Veuillez fournir des compétences.</p>
@@ -142,10 +144,10 @@
 							<div class="form-fiche__label-input-vertical">
 								<label for="ajout-demande-heures">Nombre d'heures par semaine</label>
 								<input
-									   type="number"
-									   id="ajout-demande-heures"
-									   name="ajout-demande-heures"
-									   v-model.trim="demande.weeklyWorkHours" />
+									type="number"
+									id="ajout-demande-heures"
+									name="ajout-demande-heures"
+									v-model.trim="demande.weeklyWorkHours" />
 								<p v-if="erreurs.weeklyWorkHours" class="validForm">
 									Veuillez inscrire le nombre d'heures par semaine.
 								</p>
@@ -198,7 +200,7 @@
 					<h3>Informations supplémentaires</h3>
 					<div>
 						<label for="ajout-demande-infos-supp"></label>
-						<textarea id="ajout-demande-infos-supp" name="ajout-demande-infos-supp" rows="10"
+						<textarea id="ajout-demande-infos-supp" name="ajout-demande-infos-supp" rows="6"
 								  v-model="demande.additionalInformation"></textarea>
 						<!-- Validation -->
 						<p v-if="erreurs.additionalInformation" class="error-message">Veuillez fournir des informations
@@ -218,42 +220,24 @@
 					</div>
 				</div>
 			</div>
+			<!-- Boutons annuler et mettre à jour -->
+			<BtnAnnulerModifierSauvegarder
+				buttonText="Sauvegarder"
+				buttonClass="bouton bouton--turquoise">
+			</BtnAnnulerModifierSauvegarder>
 		</form>
-
-		<!-- Boutons annuler et mettre à jour -->
-		<BtnAnnulerModifierSauvegarder 
-			buttonText="Sauvegarder" 
-			buttonClass="bouton bouton--turquoise">
-        </BtnAnnulerModifierSauvegarder>
 	</div>
 
 </template>
 
 <script setup>
-	import {
-		reactive,
-		onMounted,
-		ref
-	} from "vue";
-	import {
-		useInternshipRequests
-	} from "../composables/demandes_stages/demandeDeStage.js";
-	import {
-		useCandidat
-	} from "../composables/candidats/candidat.js";
-	import {
-		useProvinces
-	} from "../composables/provinces/provinces.js";
-	import {
-		useInternshipTypes
-	} from "@/composables/types_stage/types_stage.js";
-	import {
-		useActivitySectors
-	} from "../composables/secteurs_activites/secteurs_activites.js";
-	import {
-		useRouter
-	} from 'vue-router';
-
+	import { reactive, onMounted, ref } from "vue";
+	import { useInternshipRequests } from "../composables/demandes_stages/demandeDeStage.js";
+	import { useCandidat } from "../composables/candidats/candidat.js";
+	import { useProvinces } from "../composables/provinces/provinces.js";
+	import { useInternshipTypes } from "@/composables/types_stage/types_stage.js";
+	import { useActivitySectors } from "../composables/secteurs_activites/secteurs_activites.js";
+	import { useRouter } from 'vue-router';
 	import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
 	const {

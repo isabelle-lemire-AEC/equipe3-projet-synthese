@@ -15,19 +15,21 @@
 
       <div class="form-fiche__input-hors-encadre">
         <div class="form-fiche__label-input-horizontal">
-          <label for="firstName">Prénom:</label>
+          <label for="fullName">Nom et prénom :</label>
+          <input type="text" id="fullName" v-model.trim="fullName" @input="splitFullName">
+          <!-- 
           <div class="form-fiche__wrapper-input-msg-erreur">
             <input
               type="text"
               id="firstName"
               v-model.trim="candidat.firstName"
               @input="validerChamp('firstName')"
-              placeholder="Prénom du candidat"
             />
             <p class="error-message" v-if="erreurs.firstName">
               Le prénom est obligatoire
             </p>
           </div>
+          
         </div>
         <div class="form-fiche__label-input-horizontal">
           <label for="lastName">Nom :</label>
@@ -37,12 +39,11 @@
               id="lastName"
               v-model.trim="candidat.lastName"
               @input="validerChamp('lastName')"
-              placeholder="Nom du candidat"
             />
             <p class="error-message" v-if="erreurs.lastName">
               Le nom est obligatoire
             </p>
-          </div>
+          </div>-->
         </div>
         <div class="form-fiche__label-input-horizontal">
           <label for="poste">Poste :</label>
@@ -52,7 +53,6 @@
               id="poste"
               v-model.trim="candidat.poste"
               @input="validerChamp('poste')"
-              placeholder="Poste souhaité"
             />
             <p class="error-message" v-if="erreurs.poste">
               L'inscription du poste est requise
@@ -70,12 +70,10 @@
             <textarea
               name="description"
               id="description"
-              cols="30"
-              rows="10"
+              rows="6"
               v-model.trim="candidat.description"
-              @input="validerChamp('description')"
-              placeholder="Donnez une description de ce poste... "
-            ></textarea>
+              @input="validerChamp('description')">
+            </textarea>
             <p class="error-message" v-if="erreurs.description">
               La description est requise.
             </p>
@@ -95,7 +93,6 @@
                     id="address"
                     v-model.trim="candidat.address"
                     @input="validerChamp('address')"
-                    placeholder="123, rue des Champs "
                   />
                   <p class="error-message" v-if="erreurs.address">
                     L'adresse du candidat est requise
@@ -111,7 +108,6 @@
                     id="city"
                     v-model.trim="candidat.city"
                     @input="validerChamp('city')"
-                    placeholder="Trois-Rivières "
                   />
                   <p class="error-message" v-if="erreurs.city">
                     Le nom de la vielle requis
@@ -147,7 +143,6 @@
                     id="postalCode"
                     v-model.trim="candidat.postalCode"
                     @input="validerChamp('postalCode')"
-                    placeholder="G0X 1A0"
                   />
                   <p class="error-message" v-if="erreurs.postalCode">
                     Le code postal est requis.
@@ -165,7 +160,6 @@
                     id="phone"
                     v-model.trim="candidat.phone"
                     @input="validerChamp('phone')"
-                    placeholder="XXX000XXXX"
                   />
                   <p class="error-message" v-if="erreurs.phone">
                     Le numero de telephone est requis.
@@ -181,7 +175,6 @@
                     id="email"
                     v-model.trim="candidat.email"
                     @input="validerChamp('email')"
-                    placeholder="email@e-stage.com"
                   />
                   <p class="error-message" v-if="erreurs.email">
                     L'email est requis.
@@ -265,6 +258,15 @@ const initProvinces = async () => {
 
 initProvinces();
 
+// fonction pour joindre nom et prénom
+const fullName = ref('');
+
+const splitFullName = () => {
+  const names = fullName.value.split(' ');
+  candidat.value.firstName = names[0] || '';
+  candidat.value.lastName = names.slice(1).join(' ') || '';
+};
+
 const validerChamp = (champ) => {
   switch (champ) {
     case "firstName":
@@ -319,6 +321,7 @@ const soumettreFormulaire = async () => {
   } else {
     // Si le formulaire est valide, essayez d'ajouter le candidat.
     try {
+      splitFullName();
       await addCandidat(candidat.value);
       console.log("Nouveau candidat ajouté");
       router.push({ name: "Candidats" });
@@ -334,20 +337,5 @@ const soumettreFormulaire = async () => {
 </script>
 
 <style scoped>
-input::placeholder,
-textarea::placeholder {
-  font-size: 14px;
-  color: #cccccc;
-  opacity: 1;
-}
 
-select::placeholder {
-  color: #cccccc;
-  opacity: 1;
-}
-.error-message {
-  color: rgb(230, 93, 93);
-  font-size: 0.75em;
-  margin-top: 0.25em;
-}
 </style>

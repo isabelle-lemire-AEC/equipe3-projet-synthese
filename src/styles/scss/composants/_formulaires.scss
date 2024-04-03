@@ -36,8 +36,9 @@ label {
         @include mixins.border-left(null);
 
         h1 {
-            margin-bottom: variables.$spacing-small * 1.5;
+            margin-bottom: variables.$spacing-large;
         }
+
     }
 
     &__nom-section {
@@ -77,7 +78,7 @@ label {
         @include mixins.padding(variables.$spacing-xlarge, variables.$spacing-large);
 
         @include mixins.media-max(800px) {
-            @include mixins.padding(variables.$spacing-medium, variables.$spacing-small);
+            @include mixins.padding(variables.$spacing-medium, variables.$spacing-small*1.5);
         }
     }
 
@@ -149,12 +150,28 @@ label {
 
     &__wrapper-parcourir-bouton {
         @include mixins.flex(row, space-between, center, variables.$spacing-large);
+
+        @include mixins.media-max(1380px) {
+            gap: variables.$spacing-medium;
+        }
+
+        @include mixins.media-max(1000px) {
+            @include mixins.flex(column, null, flex-end, null);
+        }
     }
 
     &__input-parcourir {
         position: relative;
         width: 100%;
-        flex-basis: 70%;
+        flex-basis: 60%;
+
+        @include mixins.media-max(1380px) {
+            flex-basis: 60%;
+        }
+
+        @include mixins.media-max(1000px) {
+            flex-basis: unset;
+        }
 
         button:disabled {
             position: absolute;
@@ -169,3 +186,9 @@ label {
         }
     }
 }
+
+/* .error-message {
+    color: rgb(230, 93, 93);
+    font-size: 0.75em;
+    margin-top: 0.25em;
+} */
