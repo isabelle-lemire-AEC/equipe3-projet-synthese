@@ -10,16 +10,16 @@
           
           <div class="boutons-ajout">
             <button class="add-button add-offer" @click="ajouterOffre">
-              <i class="fas fa-plus"></i> Ajouter une offre de stage
+              <i class="fas fa-plus"></i> <span>Ajouter une offre de stage</span>
             </button>
             <button class="add-button add-request" @click="ajouterDemande">
-              <i class="fas fa-plus"></i> Ajouter une demande de stage
+              <i class="fas fa-plus"></i> <span>Ajouter une demande de stage</span>
             </button>
             <button class="add-button add-company" @click="ajouterEntreprise">
-              <i class="fas fa-plus"></i> Ajouter une entreprise
+              <i class="fas fa-plus"></i> <span>Ajouter une entreprise</span>
             </button>
             <button class="add-button add-candidate" @click="ajouterCandidat">
-              <i class="fas fa-plus"></i> Ajouter un candidat
+              <i class="fas fa-plus"></i> <span>Ajouter un candidat</span>
             </button>
           </div>
         </div>  

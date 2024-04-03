@@ -1,37 +1,37 @@
 <!-- Accueil.vue -->
 <template>
-  <div class="app-container">
+  <div class="accueil__container">
 
-    <div class="logo-container">
+    <div class="accueil__logo">
       <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
     </div>
 
-    <div class="content-container">
-      <img src="../assets/accueil.png" alt="Image" class="half-page-image">
+    <div class="accueil__contenu">
+      <div class="accueil__image"></div>
 
       <div class="login-panel">
-        <div class="entete-login-panel">
+        <div class="login-panel__entete">
           <h1>Identification</h1>
-          <p>Lorem ipsum magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi consequat</p>
+          <p>Lorem ipsum magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi consequat
+          </p>
         </div>
 
         <!-- Début du formulaire d'identification -->
         <form @submit.prevent="submitForm">
-          <div class="form-group form-fiche__colonne-inputs" >
-            <label for="accueil-nomPrenom"></label>
-            <input type="text" id="accueil-nomPrenom" v-model="nomPrenom" placeholder="Votre nom et prénom" required>
+          <div class="form-identification form-fiche__colonne-inputs">
+            <div>
+              <label for="accueil-nomPrenom" hidden>Nom et prénom</label>
+              <input type="text" id="accueil-nomPrenom" v-model="nomPrenom" placeholder="Votre nom et prénom" required>
+            </div>
+            <div>
+              <label for="accueil-courriel" hidden>Courriel</label>
+              <input type="email" id="accueil-courriel" v-model="courriel" placeholder="Votre courriel" required>
+            </div>
+            <button class="bouton bouton--turquoise" type="submit">Accéder maintenant</button>
           </div>
-          <div class="form-group form-fiche__colonne-inputs" >  
-            <label for="accueil-courriel"></label>
-            <input type="email" id="accueil-courriel" v-model="courriel" placeholder="Votre courriel" required>
-          </div>
-
-          <button class="bouton bouton--turquoise bouton-acceuil"type="submit">Accéder maintenant</button>
         </form>
       </div>
-
     </div>
-
   </div>
 </template>
 
@@ -51,6 +51,8 @@
     localStorage.setItem('nomPrenom', nomPrenomValue);
     localStorage.setItem('courriel', courrielValue);
 
-    router.push({ name: 'TableauDeBord' });
+    router.push({
+      name: 'TableauDeBord'
+    });
   };
 </script>

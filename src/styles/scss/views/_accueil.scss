@@ -1,65 +1,76 @@
 @use '../general/variables';
 @use '../general/mixins';
 
-.app-container {
-    min-height: 100vh;
-}
+.accueil {
+    &__logo {
+        background-color: variables.$white;
+        width: 100%;
+        padding: 20px;
+    }
 
-.logo-container {
-    background-color: variables.$white;
-    width: 100%;
-    padding: 20px;
-}
+    &__contenu {
+        @include mixins.grid(2, null);
 
-.content-container {
-    display: flex;
-    width: 100%;
-}
+        @include mixins.media-max(900px) {
+            grid-template-columns: 1fr;
+        }
+    }
 
-.half-page-image {
-    width: 50%;
-    height: auto;
-    object-fit: cover;
+    &__image {
+        background-image: url("../../assets/accueil.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+        @include mixins.media-min(901px) {
+            min-height: calc(100vh - 130px);
+        }
+
+        @include mixins.media-max(900px) {
+            min-height: 40vh;
+        }
+    }
 }
 
 .login-panel {
-    width: 50%;
-    @include mixins.flex(column, center, flex-start, 1rem);
-    padding: 0 300px 0 3rem;
+    width: 100%;
+    padding-block: variables.$spacing-block-section;
+    padding-left: variables.$spacing-large * 1.5;
+    padding-right: variables.$spacing-large * 5;
 
-    .entete-login-panel {
+    @include mixins.media-max(1280px) {
+        padding-inline: variables.$spacing-large !important;
+    }
+
+    @include mixins.media-max(900px) {
+        padding-inline: variables.$spacing-inline-section !important;
+    }
+
+    &__entete {
         width: 100%;
         color: variables.$black;
-        margin-bottom: 100px;
+        margin-bottom: variables.$spacing-block-section;
 
         h1 {
-            @include mixins.font(variables.$font-headings-accueil, 70px, 400);
-
+            @include mixins.font(variables.$font-headings-accueil, variables.$font-style-h1-accueil, 400);
         }
 
         p {
             @include mixins.font(variables.$font-headings, null, null);
-            padding: 1rem 0;
+            padding: variables.$spacing-small 0;
             line-height: 1.5;
             color: variables.$charcoal;
             max-width: 50ch;
-
         }
+    }
 
+    form {
+        width: 100%;
     }
 }
 
-.form-group {
-
+.form-identification {
     input {
         @include mixins.border(2px, variables.$turquoise, null);
     }
-}
-
-.bouton-acceuil {
-    margin-top: 40px;
-}
-
-form {
-    width: 100%;
 }
