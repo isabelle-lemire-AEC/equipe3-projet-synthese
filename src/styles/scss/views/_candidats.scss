@@ -45,7 +45,7 @@
             gap: variables.$spacing-medium;
         }
 
-        @include mixins.media-max(1200px) {
+        @include mixins.media-max(1000px) {
             grid-template-columns: 1fr;
         }
     }
@@ -81,7 +81,7 @@
                     flex-basis: 25%;
                 }
 
-                @include mixins.media-max(800px) {
+                @include mixins.media-max(900px) {
                     flex-basis: unset;
                 }
             }
@@ -101,7 +101,7 @@
     .form-fiche {
         &__wrapper-titre {
 
-            @include mixins.media-max(800px) {
+            @include mixins.media-max(900px) {
                 margin-bottom: variables.$spacing-large;
             }
 

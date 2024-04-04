@@ -6,6 +6,22 @@
     background-color: variables.$white;
     padding: variables.$spacing-small 0;
     margin-left: 5px;
+    position: relative;
+
+    &__logo {
+
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        img {
+            max-width: 150px;
+        }
+
+        @include mixins.media-min(1200px) {
+            display: none;
+        }
+    }
 
     &__items {
         @include mixins.flex(row, space-between, center, 1rem);
@@ -25,6 +41,10 @@
 .boutons-ajout {
 
     @include mixins.flex(row, flex-start, null, 1rem);
+
+    @include mixins.media-max(1480px) {
+        display: none;
+    }
 
     span {
         @include mixins.font(variables.$font-body, 13px, null);
@@ -95,29 +115,18 @@
     .utilisateur__nom {
         color: variables.$black;
         @include mixins.font(variables.$font-body, 14px, null);
+
+        @include mixins.media-max(900px) {
+            display: none;
+        }
     }
 
     .utilisateur__courriel {
         color: #b0b3b8;
         @include mixins.font(variables.$font-body, 13px, null);
-    }
 
-}
-
-@include mixins.media-max(1200px) {
-    .btn-ajout-mobile  {
-        flex-wrap: wrap;
-    }
-}
-
-@include mixins.media-max(1094px) {
-    .btn-ajout-mobile {
-        display: block;
-    }
-    
-
-    .add-button {
-        width: 100%;
-        margin-bottom: 5px;
+        @include mixins.media-max(900px) {
+            display: none;
+        }
     }
 }

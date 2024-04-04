@@ -1,7 +1,7 @@
 <!-- Footer -->
 <template>
   <div class="footer">
-    <p class="footer-content">Projet Synthèse - Équipe 3 - 7 mars 2024</p>
+    <p class="footer-content">Projet Synthèse - Équipe 3 - 4 avril 2024</p>
   </div>
 </template>
 

@@ -42,7 +42,7 @@
           <h2>Courte présentation</h2>
           <div>
             <label for="presentation" class="form-fiche__label--cache" hidden>Présentation</label>
-            <textarea id="presentation" cols="30" rows="10" v-model.trim="entreprise.description"
+            <textarea id="presentation" rows="6" v-model.trim="entreprise.description"
                       @input="validerChamp('description')"></textarea>
             <p class="error-message" v-if="erreurs.description">Veuillez remplir ce champs.</p>
           </div>
@@ -86,6 +86,9 @@
                 <label for="province">Province :</label>
                 <div>
                   <select id="province" v-model="entreprise.province._id">
+                    <option value="" disabled selected>
+                      Choisissez votre province
+                    </option>
                     <option v-for="province in provinces" :key="province._id" :value="province._id" >
                       {{ province.value }}
                     </option>
@@ -196,6 +199,9 @@
     const regexCity = /^[a-zA-Z\s.-]{2,}$/;
 
     erreurs.value.name = entreprise.value.name.trim() === "" ? true : false;
+    erreurs.value.description = entreprise.value.description.trim() === "" ? true : false;
+    erreurs.value.contactPerson = entreprise.value.contactPerson.trim() === "" ? true : false;
+    erreurs.value.province = entreprise.value.province._id.trim() === "" ? true : false;
     erreurs.value.email = !regexEmail.test(entreprise.value.email.trim());
     erreurs.value.phone = regexPhone.test(entreprise.value.phone.trim()) ? "" : "Le numéro de téléphone doit être un numéro canadien valide.";
     erreurs.value.postalCode = !regexPostalCode.test(

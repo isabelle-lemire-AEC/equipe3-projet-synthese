@@ -4,7 +4,7 @@
             <div class="liste__wrapper-horizontal">
                 <div v-if="props.isDemande">
                     <div class="icone icone--demande">
-                        <i class="fas fa-graduation-cap"></i>
+                        <i class="fas fa-graduation-cap" :class="{ 'icone-noir': !props.isActive}"></i>
                     </div>
                 </div>
 
@@ -225,3 +225,8 @@
 </script>
 
 
+<style>
+    .icone-noir {
+        color: black;
+    }    
+</style>
