@@ -54,15 +54,15 @@
                   <div class="form-fiche__label-input-vertical">
                     <label for="edit-offre-remuneration">Rémunération</label>
                     <div>
-                      <input type="radio" id="edit-offre-discretion" name="edit-offre-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
+                      <input type="radio" id="edit-offre-discretion" name="edit-offre-remuneration" value="DISCRETIONARY" v-model="offerData.paid" :checked="offerData.paid == 'DISCRETIONARY'" />
                       <label for="edit-offre-discretion" class="form-fiche__label-radio-input">À la discrétion de l'entreprise</label>
                     </div>
                     <div>
-                      <input type="radio" id="edit-offre-remunere" name="edit-offre-remuneration" value="remunere" v-model="remunerationType" />
+                      <input type="radio" id="edit-offre-remunere" name="edit-offre-remuneration" value="PAID" v-model="offerData.paid" :checked="offerData.paid == 'PAID'" />
                       <label for="edit-offre-remunere" class="form-fiche__label-radio-input">Rémunéré</label>
                     </div>
                     <div>
-                      <input type="radio" id="edit-offre-non-renumere" name="edit-offre-remuneration" value="non-remunere" v-model="remunerationType" />
+                      <input type="radio" id="edit-offre-non-renumere" name="edit-offre-remuneration" value="UNPAID" v-model="offerData.paid" :checked="offerData.paid == 'UNPAID'" />
                       <label for="edit-offre-non-renumere" class="form-fiche__label-radio-input" >Non-rémunéré</label>
                     </div>
                   </div>                                   
