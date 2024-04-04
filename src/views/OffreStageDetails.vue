@@ -36,7 +36,7 @@
           <!-- Section Formation et exigences -->
           <div class="form-fiche__label-input-vertical">
             <h4>Formation demandées</h4>
-            <p>lorem</p>
+            <p>Diplôme d'études collégiales ou équivalent</p>
           </div>
           <div class="form-fiche__label-input-vertical">
             <h4>Exigences</h4>
@@ -65,11 +65,11 @@
               <div class="form-fiche__colonne-inputs">
                 <div class="form-fiche__label-input-vertical">
                   <h4>Date de début</h4>
-                  <p>{{ offerData.startDate }}</p>
+                  <p>{{ dateDebut }}</p>
                 </div>
                 <div class="form-fiche__label-input-vertical">
                   <h4>Date de fin</h4>
-                  <p>{{ offerData.endDate }}</p>
+                  <p>{{ dateFin }}</p>
                 </div>
               </div>
             </div>
@@ -77,8 +77,10 @@
 
           <div class="form-fiche__wrapper-titre-groupe-inputs">
             <h3>Informations suplémentaires</h3>
-            <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5"
-              v-model="offerData.additionalInformation"></textarea>
+            <p id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet quam justo. Aliquam interdum facilisis eros, ut
+dapibus quam hendrerit nec. Vestibulum vel blandit lorem. Praesent laoreet quis tortor quis pharetra. Nulla dictum erat id
+nisl pulvinar, ac aliquam lectus laoreet. Aliquam commodo pulvinar odio vitae interdum. Phasellus ut ante efficitur,
+venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</p>
           </div>
         </div>
       </div>
@@ -108,6 +110,8 @@
   const { getInternshipOfferById, response, loading, error, edditerOffre } = useInternshipOffers();
   const showConfirmationModal = ref(false); // Variable pour contrôler l'affichage du modal
   const exigences = ref(null);
+  const dateDebut = ref(null);
+  const dateFin = ref(null);
 
   onMounted(async () => {
 
@@ -129,6 +133,11 @@
       offerData.value.internshipType = offer.internshipType;
       offerData.value.paid = offer.paid;
       offerData.value.isActive = offer.isActive;
+
+      // Afin d'afficher les dates dans le bon format
+      dateDebut.value = offerData.value.startDate.substring(0, offerData.value.startDate.indexOf('T'));
+      dateFin.value = offerData.value.endDate.substring(0, offerData.value.startDate.indexOf('T'));
+
 
       // Peuplez les autres champs de formulaire avec les données récupérées
     } else {

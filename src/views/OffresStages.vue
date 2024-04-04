@@ -54,8 +54,8 @@
       toutesOffres.value.forEach(offre => {
         if(offre.enterprise === undefined || offre.enterprise === null) {
             offre.enterprise = {
-                city: "(Entreprise effacé)",
-                name: ""
+                city: "",
+                name: "(Entreprise effacé)"
             }
         }
       });
