@@ -84,7 +84,7 @@
               <h3>Informations supplémentaires</h3>
               <div>
                 <label for="edit-demande-infos-supp"></label>
-                <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5" v-model="infoSupp"></textarea>
+                <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5" v-model="infoSupp" value="Informations supplémentaires"></textarea>
                 <p v-if="erreurs.infoSupp" class="validForm">Veuillez fournir des l'informations supplémentaires.</p>
               </div>
             </div>
@@ -117,7 +117,7 @@
   const exigences = ref(null);
   const router = useRouter();
 	const formulaireValide = ref(false);
-  const infoSupp = ref('');
+  const infoSupp = ref('Informations supplémentaires');
 
   const offerData = ref({
     _id: "",
