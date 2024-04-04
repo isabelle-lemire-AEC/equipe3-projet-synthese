@@ -1,10 +1,10 @@
 <!-- Sidebar.vue -->
 <template>
-  <div class="container-menu">
+  <div class="menu__container">
     
     <!-- Logo -->
-    <div class="logo">
-      <img src="../assets/eStage-logo.png" alt="Logo" class="logo">
+    <div class="menu__logo-sidebar">
+      <img src="../assets/eStage-logo.png" alt="Logo">
     </div>
 
     <ul class="navbar__menu" >

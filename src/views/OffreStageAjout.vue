@@ -11,7 +11,7 @@
         		<!-- Boutons annuler et mettre à jour -->
             <BtnAnnulerModifierSauvegarder 
               buttonText="Sauvegarder" 
-              buttonClass="bouton bouton--turquoise">
+              buttonClass="bouton bouton--rougeOffre">
             </BtnAnnulerModifierSauvegarder>
 
             <!-- Section titre -->
@@ -19,7 +19,7 @@
               <div class="form-fiche__label-input-horizontal">
                 <label for="titreOffre">Titre :</label>
                 <input v-model.trim="offerData.title" id="titreOffre" type="text"/>
-                <p v-if="erreurs.titre" class="validForm">Veuillez fournir le titre du stage.</p>
+                <p v-if="erreurs.titre" class="validForm error-message">Veuillez remplir ce champs.</p>
               </div>
             </div>  
             <!-- Section Entreprise -->
@@ -32,7 +32,7 @@
                         {{ entreprise.name }} 
                     </option>
                 </select>
-                <p v-if="erreurs.entreprise" class="validForm">Veuillez fournir l'entreprise du stage.</p>
+                <p v-if="erreurs.entreprise" class="validForm error-message">Veuillez effectuer un choix.</p>
               </div>
             </div>
             
@@ -43,7 +43,7 @@
                 <div>
                   <label for="descriptionOffre"></label>
                   <textarea v-model.trim="offerData.description" id="descriptionOffre" rows="5"></textarea>
-                  <p v-if="erreurs.description" class="validForm">Veuillez fournir la description du stage.</p>
+                  <p v-if="erreurs.description" class="validForm error-message">Veuillez remplir ce champs.</p>
                 </div>
               </div>              
 
@@ -51,12 +51,12 @@
             <div class="form-fiche__label-input-vertical">
               <label for="">Programme de formation</label>
               <input type="text" id="ajout-programme" v-model="progForm">
-              <p v-if="erreurs.progForm" class="validForm">Veuillez fournir un programme de formation.</p>
+              <p v-if="erreurs.progForm" class="validForm error-message">Veuillez remplir ce champs.</p>
             </div>
             <div class="form-fiche__label-input-vertical">
               <h4>Exigences</h4>
               <textarea v-model.trim="offerData.requiredSkills" id="exigence" type="text" rows="5"></textarea>
-              <p v-if="erreurs.exigences" class="validForm">Veuillez fournir les exigences du stage.</p>
+              <p v-if="erreurs.exigences" class="validForm error-message">Veuillez remplir ce champs.</p>
             </div>  
             
             <!-- Section Information sur le stage -->
@@ -71,12 +71,12 @@
                         <option disable value="">Veuillez effectuer un choix</option>
                         <option v-for="internshipType in  internshipTypes" :key="internshipType._id" :value="internshipType._id">{{ internshipType.value }}</option>
                     </select>
-                    <p v-if="erreurs.typeDeStage" class="validForm">Veuillez fournir le type de stage.</p>
+                    <p v-if="erreurs.typeDeStage" class="validForm error-message">Veuillez effectuer un choix</p>
                   </div>
                   <div class="form-fiche__label-input-vertical">
                     <label for="">Nombre d'heure par semaine</label>
                     <input v-model.number="offerData.weeklyWorkHours" type="number"/>
-                    <p v-if="erreurs.heuresSemaine" class="validForm">Veuillez fournir le nombre d'heures par semaine pour le stage.</p>
+                    <p v-if="erreurs.heuresSemaine" class="validForm error-message">Veuillez remplir ce champs.</p>
                   </div> 
                   <div class="form-fiche__label-input-vertical">
                     <label for="ajout-offre-remuneration">Rémunération</label>
@@ -100,12 +100,12 @@
                   <div class="form-fiche__label-input-vertical">
                     <label for="ajout-demande-date-debut">Date de début</label>
                     <input v-model="offerData.startDate" id="ajout-demande-date-debut" type="date"/>
-                    <p v-if="erreurs.dateDebut" class="validForm">Veuillez fournir une date pour le début du stage.</p>
+                    <p v-if="erreurs.dateDebut" class="validForm error-message">Veuillez effectuer un choix</p>
                   </div>
                   <div class="form-fiche__label-input-vertical">
                     <label for="ajout-demande-date-fin">Date de fin</label>
                     <input v-model="offerData.endDate" id="ajout-demande-date-fin" type="date"/>
-                    <p v-if="erreurs.dateFin" class="validForm">Veuillez fournir une date pour la fin du stage.</p>
+                    <p v-if="erreurs.dateFin" class="validForm error-message">Veuillez effectuer un choix</p>
                   </div>
                 </div>    
                 <div class="form-fiche__label-input-vertical">
@@ -115,7 +115,7 @@
                     <option disabled value="">Sélectionnez une province</option>
                     <option v-for="province in provinces" :key="province._id" :value="province">{{ province.value }}</option>
                 </select>     
-                <p v-if="erreurs.province" class="validForm">Veuillez fournir une province pour le stage.</p>
+                <p v-if="erreurs.province" class="validForm error-message">Veuillez effectuer un choix</p>
                 </div>           
               </div>
 
@@ -125,7 +125,7 @@
                 <div>
                   <label for="edit-demande-infos-supp"></label>
                   <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5" v-model="infoSupp"></textarea>
-                  <p v-if="erreurs.infoSupp" class="validForm">Veuillez fournir des l'informations supplémentaires.</p>
+                  <p v-if="erreurs.infoSupp" class="validForm error-message">Veuillez remplir ce champs.</p>
                 </div>
               </div>
             </div> 
@@ -134,7 +134,7 @@
           <!-- Boutons annuler et mettre à jour -->
           <BtnAnnulerModifierSauvegarder 
             buttonText="Sauvegarder" 
-            buttonClass="bouton bouton--turquoise">
+            buttonClass="bouton bouton--rougeOffre">
           </BtnAnnulerModifierSauvegarder>
         </form>
 

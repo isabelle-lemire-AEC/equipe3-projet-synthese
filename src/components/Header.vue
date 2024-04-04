@@ -1,14 +1,17 @@
 <!-- NavBar.vue -->
 <template>
   <!-- Boutons d'ajout -->
-  <div class="header" v-if="nomPrenom && courriel"> 
+  <div class="header" v-if="nomPrenom && courriel">
+    <div class="header__logo">
+      <img src="../assets/eStage-logo.png" alt="Logo">
+    </div> 
     <div class="header__items">
       <div class="header__icone-boutons-ajout">
-          <div class="burger-menu"> <!--   @click="toggleSidebar" -->
+          <div class="burger-menu">
             <i class="fa-solid fa-bars " id="icone-menu"></i>
           </div>
           
-          <div class="boutons-ajout btn-ajout-mobile">
+          <div class="boutons-ajout">
             <button class="add-button add-offer" @click="ajouterOffre">
               <i class="fas fa-plus"></i> <span>Ajouter une offre de stage</span>
             </button>
