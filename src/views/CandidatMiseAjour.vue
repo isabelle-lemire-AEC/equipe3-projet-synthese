@@ -21,6 +21,9 @@
                     <div>
                         <label for="description"></label>
                         <textarea name="description" id="description" rows="6" v-model="candidat.description"></textarea>
+                        <p class="error-message" v-if="erreurs.description">
+                            Veuillez remplir ce champs.
+                        </p>
                     </div>
                 </div>
 
@@ -31,28 +34,40 @@
                             <div class="form-fiche__label-input-vertical">
                                 <label for="address">Adresse</label>
                                 <input type="text" id="address" v-model="candidat.address">
+                                <p class="error-message" v-if="erreurs.address">
+                                    Veuillez remplir ce champs.
+                                </p>
                             </div>
 
                             <div class="form-fiche__label-input-vertical">
                                 <label for="city">Ville</label>
                                 <input type="text" id="city" v-model="candidat.city">
+                                <p class="error-message" v-if="erreurs.city">
+                                    Veuillez remplir ce champs.
+                                </p>
                             </div>
 
                             <div class="form-fiche__label-input-vertical">
                                 <label for="province">Province</label>
                                 <select id="province" v-model="candidat.province">
-                                    <option value="">Province</option>
+                                    <option value="" disabled selected>Province</option>
                                     <option v-for="province in provinces"
                                             :key="province._id"
                                             :value="province">{{ province.value }}
                                     </option>
 
                                 </select>
+                                <p class="error-message" v-if="erreurs.province">
+                                    Veuillez effectuer un choix.
+                                </p>
                             </div>
 
                             <div class="form-fiche__label-input-vertical">
                                 <label for="postalCode">Code postal</label>
                                 <input type="text" id="postalCode" v-model="candidat.postalCode">
+                                <p class="error-message" v-if="erreurs.postalCode">
+                                    Veuillez remplir ce champs.
+                                </p>
                             </div>
                         </div>
 
@@ -60,11 +75,17 @@
                             <div class="form-fiche__label-input-vertical">
                                 <label for="phone">Téléphone</label>
                                 <input type="text" id="phone" v-model="candidat.phone">
+                                <p class="error-message" v-if="erreurs.phone">
+                                    Veuillez remplir ce champs.
+                                </p>
                             </div>
 
                             <div class="form-fiche__label-input-vertical">
                                 <label for="email">Courriel</label>
                                 <input type="email" id="email" v-model="candidat.email">
+                                <p class="error-message" v-if="erreurs.email">
+                                    Veuillez remplir ce champs.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -97,6 +118,10 @@
 
     const provinces = ref([]);
 
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regexPhone = /^\d{10}$/;
+    const regexPostalCode = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
+
     const candidat = ref({
         firstName: '',
         lastName: '',
@@ -114,6 +139,16 @@
         postalCode: ''
     });
 
+    const erreurs = ref({
+        description: false,
+        address: false,
+        phone: false,
+        city: false,
+        email: false,
+        province: false,
+        postalCode: false,
+    });
+
     const initProvinces = async () => {
         try {
             provinces.value = await fetchProvinces();
@@ -122,9 +157,43 @@
         }
     }
 
+
+    const validerChamp = (champ) => {
+        switch (champ) {
+            case "description":
+            erreurs.value.description = !candidat.value.description.trim();
+        break;
+            case "address":
+            erreurs.value.address = !candidat.value.address.trim();
+        break;
+            case "city":
+            erreurs.value.city = !candidat.value.city.trim();
+        break;
+            case "email":
+            erreurs.value.email = !regexEmail.test(candidat.value.email);
+        break;
+            case "phone":
+            erreurs.value.phone = !regexPhone.test(candidat.value.phone);
+        break;
+            case "province":
+            erreurs.value.province = !candidat.value.province.value.trim();
+        break;
+            case "postalCode":
+            erreurs.value.postalCode = !regexPostalCode.test(candidat.value.postalCode);
+        break;
+        }
+    };
+
+    const validerFormulaire = () => {
+        const champs = Object.keys(erreurs.value);
+        champs.forEach((champ) => validerChamp(champ));
+        return Object.values(erreurs.value).some((err) => err);
+    };
+
+
     const modifCandidat = async () => {
         try {
-            if (!validerFormulaire()) {
+            if (validerFormulaire()) {
                 throw new Error("Veuillez remplir tous les champs obligatoires.");
             }
             console.log("Tentative de modification du candidat :", candidat.value);
@@ -149,19 +218,19 @@
 
     initProvinces();
 
-    const validerFormulaire = () => {
-        if (!candidat.value.firstName ||
-            !candidat.value.lastName ||
-            !candidat.value.email ||
-            !candidat.value.address ||
-            !candidat.value.phone ||
-            !candidat.value.city ||
-            !candidat.value.province ||
-            !candidat.value.postalCode) {
-            return false;
-        }
-        return true;
-    }
+    // const validerFormulaire = () => {
+    //     if (!candidat.value.firstName ||
+    //         !candidat.value.lastName ||
+    //         !candidat.value.email ||
+    //         !candidat.value.address ||
+    //         !candidat.value.phone ||
+    //         !candidat.value.city ||
+    //         !candidat.value.province ||
+    //         !candidat.value.postalCode) {
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
     onMounted(async () => {
         try {

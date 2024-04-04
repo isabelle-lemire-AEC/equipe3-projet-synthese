@@ -8,10 +8,10 @@
       </div>
     </div>
 
-    <form @submit.prevent="submitForm">
+    <form id="edition-offrestages" @submit.prevent="submitForm">
       <BtnAnnulerModifierSauvegarder 
 				buttonText="Mettre à jour" 
-				buttonClass="bouton bouton--turquoise">
+				buttonClass="bouton bouton--rougeOffre">
 			</BtnAnnulerModifierSauvegarder>		
 
 			<div class="form-fiche__encadre">
@@ -26,12 +26,12 @@
           <div class="form-fiche__label-input-vertical">
             <label for="">Programme de formation</label>
             <input class="" v-model="offerData.title" type="text"/>
-            <p v-if="erreurs.progForm" class="validForm">Veuillez fournir un programme de formation.</p>
+            <p v-if="erreurs.progForm" class="validForm error-message">Veuillez remplir ce champs.</p>
           </div>
           <div class="form-fiche__label-input-vertical">
             <h4>Exigences</h4>
             <textarea name="" id="" rows="5" v-model="offerData.requiredSkills"></textarea>
-            <p v-if="erreurs.exigences" class="validForm">Veuillez fournir les exigences du stage.</p>
+            <p v-if="erreurs.exigences" class="validForm error-message">Veuillez remplir ce champs.</p>
           </div>  
           
           <div class="form-fiche__wrapper-titre-groupe-inputs">
@@ -44,12 +44,12 @@
                         <option disable value="">Veuillez effectuer un choix</option>
                         <option v-for="internshipType in  internshipTypes" :key="internshipType._id" :value="internshipType">{{ internshipType.value }}</option>
                     </select>   
-                    <p v-if="erreurs.typeDeStage" class="validForm">Veuillez fournir le type de stage.</p>               
+                    <p v-if="erreurs.typeDeStage" class="validForm error-message">Veuillez effectuer un choix.</p>               
                   </div>
                   <div class="form-fiche__label-input-vertical">
                     <label for="">Nombre d'heure par semaine</label>
                     <input id="edit-offre-heures" name="edit-offre-heures" type="number" v-model.trim="offerData.weeklyWorkHours"/>
-                    <p v-if="erreurs.heuresSemaine" class="validForm">Veuillez fournir le nombre d'heures par semaine pour le stage.</p>
+                    <p v-if="erreurs.heuresSemaine" class="validForm error-message">Veuillez remplir ce champs.</p>
                   </div> 
                   <div class="form-fiche__label-input-vertical">
                     <label for="edit-offre-remuneration">Rémunération</label>
@@ -71,12 +71,12 @@
                   <div class="form-fiche__label-input-vertical">
                     <label for="edit-demande-date-debut">Date de début</label>
                     <input class="" v-model.trim="dateDebut" type="date" placeholder="Date de début" />
-                    <p v-if="erreurs.dateDebut" class="validForm">Veuillez fournir une date pour le début du stage.</p>
+                    <p v-if="erreurs.dateDebut" class="validForm error-message">Veuillez effectuer un choix.</p>
                   </div>
                   <div class="form-fiche__label-input-vertical">
                     <label for="edit-demande-date-fin">Date de fin</label>
                     <input type="date" id="edit-demande-date-fin" name="edit-demande-date-fin" v-model.trim="dateFin" />
-                    <p v-if="erreurs.dateFin" class="validForm">Veuillez fournir une date pour la fin du stage.</p>
+                    <p v-if="erreurs.dateFin" class="validForm error-message">Veuillez effectuer un choix.</p>
                   </div>
                 </div>                          
             </div>
@@ -84,8 +84,8 @@
               <h3>Informations supplémentaires</h3>
               <div>
                 <label for="edit-demande-infos-supp"></label>
-                <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5" v-model="infoSupp"></textarea>
-                <p v-if="erreurs.infoSupp" class="validForm">Veuillez fournir des l'informations supplémentaires.</p>
+                <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5" v-model="infoSupp" value="Informations supplémentaires"></textarea>
+                <p v-if="erreurs.infoSupp" class="validForm error-message">Veuillez remplir ce champs.</p>
               </div>
             </div>
           </div>
@@ -93,7 +93,7 @@
       
       <BtnAnnulerModifierSauvegarder 
 				buttonText="Mettre à jour" 
-				buttonClass="bouton bouton--turquoise">
+				buttonClass="bouton bouton--rougeOffre">
 			</BtnAnnulerModifierSauvegarder>
     </form>
   </div>
@@ -117,7 +117,7 @@
   const exigences = ref(null);
   const router = useRouter();
 	const formulaireValide = ref(false);
-  const infoSupp = ref('');
+  const infoSupp = ref('Informations supplémentaires');
 
   const offerData = ref({
     _id: "",

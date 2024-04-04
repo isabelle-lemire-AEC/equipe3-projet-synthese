@@ -21,15 +21,15 @@
             <label for="nom">Entreprise :</label>
             <div class="form-fiche__wrapper-input-msg-erreur">
               <input type="text" id="nom" v-model.trim="entreprise.name" @input="validerChamp('name')" />
-              <p class="error-message" v-if="erreurs.name">Ce champ est obligatoire</p>
+              <p class="error-message" v-if="erreurs.name">Veuillez remplir ce champs.</p>
             </div>
           </div>
           <div class="form-fiche__label-input-horizontal">
-            <label for="logo">Logo (URL) :</label>
+            <label for="logo">Logo :</label>
             <div class="form-fiche__wrapper-input-msg-erreur form-fiche__input-parcourir">
               <input type="text" id="logo" v-model.trim="entreprise.image" @input="validerChamp('image')" />
               <button disabled>Parcourir</button>
-              <p class="error-message" v-if="erreurs.image">L'URL du logo est obligatoire</p>
+              <p class="error-message" v-if="erreurs.image">Veuillez remplir ce champs.</p>
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@
             <label for="presentation" class="form-fiche__label--cache" hidden>Présentation</label>
             <textarea id="presentation" rows="6" v-model.trim="entreprise.description"
                       @input="validerChamp('description')"></textarea>
-            <p class="error-message" v-if="erreurs.description">Ce champ est obligatoire</p>
+            <p class="error-message" v-if="erreurs.description">Veuillez remplir ce champs.</p>
           </div>
 
           <div
@@ -58,7 +58,7 @@
                      @input="validerChamp('contactPerson')"
 
                      class="largeur-100" />
-              <p class="error-message" v-if="erreurs.contactPerson">Ce champ est obligatoire</p>
+              <p class="error-message" v-if="erreurs.contactPerson">Veuillez remplir ce champs.</p>
             </div>
           </div>
         </div>
@@ -72,14 +72,14 @@
                 <label for="adresse">Adresse :</label>
                 <div>
                   <input type="text" id="adresse" v-model.trim="entreprise.address" @input="validerChamp('address')" />
-                  <p class="error-message" v-if="erreurs.address">Ce champ est obligatoire</p>
+                  <p class="error-message" v-if="erreurs.address">Veuillez remplir ce champs.</p>
                 </div>
               </div>
               <div class="form-fiche__label-input-vertical">
                 <label for="ville">Ville :</label>
                 <div>
                   <input type="text" id="ville" v-model.trim="entreprise.city" @input="validerChamp('city')" />
-                  <p class="error-message" v-if="erreurs.city">Ce champ est obligatoire</p>
+                  <p class="error-message" v-if="erreurs.city">Veuillez remplir ce champs.</p>
                 </div>
               </div>  
               <div class="form-fiche__label-input-vertical">
@@ -90,14 +90,14 @@
                       {{ province.value }}
                     </option>
                   </select>
-                  <p class="error-message" v-if="erreurs.province"> Ce champ est obligatoire </p>
+                  <p class="error-message" v-if="erreurs.province"> Veuillez effectuer un choix. </p>
                 </div>
               </div>
               <div class="form-fiche__label-input-vertical">
                 <label for="cp">Code postal :</label>
                 <div>
                   <input type="text" id="cp" v-model.trim="entreprise.postalCode" @input="validerChamp('postalCode')" />
-                  <p class="error-message" v-if="erreurs.postalCode"> Ce champ est obligatoire </p>
+                  <p class="error-message" v-if="erreurs.postalCode"> Veuillez remplir ce champs. </p>
                 </div>
               </div>
             </div>
@@ -108,7 +108,7 @@
                 <div>
                   <input type="text" id="telephone" v-model.trim="entreprise.phone" @input="validerChamp('phone')" />
                   <p class="error-message" v-if="erreurs.phone">
-                    Ce champ est obligatoire
+                    Veuillez remplir ce champs.
                   </p>
                 </div>
               </div>              
@@ -116,7 +116,7 @@
                 <label for="courriel">Courriel :</label>
                 <div> 
                   <input type="email" id="courriel" v-model.trim="entreprise.email" @input="validerChamp('email')" />
-                  <p class="error-message" v-if="erreurs.email"> Ce champ est obligatoire</p>
+                  <p class="error-message" v-if="erreurs.email"> Veuillez remplir ce champs.</p>
                 </div>
               </div>
             </div>
