@@ -7,8 +7,8 @@
       <h1>{{ candidat.firstName }} {{ candidat.lastName }}</h1>
       <p class="form-fiche__sous-titre">UX Designer</p>
     </div>
-      <!-- Boutons d'action -->
-      <div class="form-fiche__wrapper-boutons-encadre">
+    <!-- Boutons d'action -->
+    <div class="form-fiche__wrapper-boutons-encadre">
       <div class="boutons-action">
         <button class="boutons-action__crochet" @click="activate()">
           <i class="fas fa-check"></i>
@@ -22,6 +22,7 @@
         </button>
       </div>
     </div>
+    
     <div class="form-fiche__encadre">
       <!-- Section de description du candidat -->
       <div class="form-fiche__wrapper-titre-groupe-inputs">
