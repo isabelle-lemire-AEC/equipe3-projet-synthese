@@ -166,6 +166,7 @@
     }
     else {
       try {
+        console.log("entreprise.value: ", entreprise.value);
         const response = await axios.patch(
           `https://api-3.fly.dev/enterprises/${id}`,
           entreprise.value
