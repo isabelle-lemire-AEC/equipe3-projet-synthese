@@ -94,12 +94,12 @@
 
     <!-- Modal de confirmation de suppression -->
     <div class="modal" v-if="showConfirmationModal">
-        <div class="modal-content">
+        <div class="modal__contenu">
             <p v-if="props.isDemande">Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
             <p v-if="!props.isDemande">Êtes-vous sûr de vouloir supprimer cette offre de stage?</p>
-            <div class="modal-buttons">
-                <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
-                <button class="btn confirm" @click="deleteDemande()">Confirmer</button>
+            <div class="modal__boutons">
+                <button class="bouton bouton--rouge" @click="annulerSuppression()">Annuler</button>
+                <button class="bouton bouton--vert" @click="deleteDemande()">Confirmer</button>
             </div>
         </div>
     </div>
@@ -224,5 +224,4 @@
     });
 </script>
 
-<style scoped>
-</style>
+
