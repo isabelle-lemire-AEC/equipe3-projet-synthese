@@ -98,11 +98,16 @@
   import { useRouter, useRoute } from "vue-router";
   import logoEntreprise from "@/assets/mediavox-logo.jpg";
   import ModalSuppression from '@/components/ModalSuppression.vue';
+  import { defineProps } from 'vue';
 
   const entreprise = ref(null);
   const router = useRouter();
   const route = useRoute();
   const showConfirmationModal = ref(false);
+
+  const props = defineProps({
+  id: String, 
+});
 
   // Fonction pour charger les détails de l'entreprise
   const chargerEntreprise = async () => {
