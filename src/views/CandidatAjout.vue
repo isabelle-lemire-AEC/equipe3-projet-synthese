@@ -17,8 +17,13 @@
       <div class="form-fiche__input-hors-encadre">
         <div class="form-fiche__label-input-horizontal">
           <label for="fullName">Nom et prénom :</label>
-          <input type="text" id="fullName" v-model.trim="fullName" @input="splitFullName">
-          
+          <div class="form-fiche__wrapper-input-msg-erreur">
+            <input type="text" id="fullName" v-model.trim="fullName" @input="splitFullName">
+            <p class="error-message" v-if="erreurs.fullName">
+                Veuillez remplir ce champs.
+            </p>
+          </div>
+
           <!-- 
           <div class="form-fiche__wrapper-input-msg-erreur">
             <input
@@ -234,6 +239,7 @@ const candidat = ref({
 });
 
 const erreurs = ref({
+  fullName: false,
   firstName: false,
   lastName: false,
   poste: false,
@@ -271,6 +277,9 @@ const splitFullName = () => {
 
 const validerChamp = (champ) => {
   switch (champ) {
+    case "fullName":
+      erreurs.value.fullName = !candidat.value.firstName.trim() && !candidat.value.lastName.trim();
+      break;
     case "firstName":
       erreurs.value.firstName = !candidat.value.firstName.trim();
       break;

@@ -141,10 +141,15 @@ venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</
       switch(offerData.value.paid) {
         case 'DISCRETIONARY':
           renumeration.value = "À la discrétion de l'entreprise";
+          break;
         case 'PAID':
           renumeration.value = 'Rénuméré';
+          break;
         case 'UNPAID':
           renumeration.value = 'Non-rémunéré';
+          break;
+        default :
+          renumeration.value = "À la discrétion de l'entreprise";
       }
 
       // Peuplez les autres champs de formulaire avec les données récupérées
