@@ -33,8 +33,8 @@
 									{{ candidate.firstName }} {{ candidate.lastName }}
 								</option>
 							</select>
-							<p v-if="erreurs.candidat" class="validForm">
-								Veuillez choisir un candidat.
+							<p v-if="erreurs.candidat" class="validForm error-message">
+								Veuillez effectuer un choix
 							</p>
 						</div>
 
@@ -47,7 +47,7 @@
 									  v-model="demande.description"
 									  rows="6"></textarea>
 							<p v-if="erreurs.description" class="error-message">
-								Veuillez fournir une présentation.
+								Veuillez remplir ce champs.
 							</p>
 						</div>
 					</div>
@@ -63,7 +63,7 @@
 										   name="edit-demande-programme"
 										   v-model.trim="formationInput" />
 									<p v-if="erreurs.formation" class="error-message">
-										Veuillez fournir un programme de formation.
+										Veuillez remplir ce champs.
 									</p>
 								</div>
 								<div class="form-fiche__label-input-vertical">
@@ -80,7 +80,7 @@
 										</option>
 									</select>
 									<p v-if="erreurs.activitySector" class="error-message">
-										Veuillez fournir un secteur d'activité de formation.
+										Veuillez effectuer un choix.
 									</p>
 								</div>
 								<div class="form-fiche__label-input-vertical">
@@ -92,8 +92,8 @@
 											{{ province.value }}
 										</option>
 									</select>
-									<p v-if="erreurs.province" class="validForm">
-										Veuillez choisir une région.
+									<p v-if="erreurs.province" class="validForm error-message">
+										Veuillez effectuer un choix.
 									</p>
 								</div>
 							</div>
@@ -107,7 +107,7 @@
 										   value="Cégep de Trois-Rivières"
 										   v-model="etablissementInput" />
 									<p v-if="erreurs.etablissement" class="error-message">
-										Veuillez fournir un établissement scolaire.
+										Veuillez remplir ce champs.
 									</p>
 								</div>
 								<div class="form-fiche__label-input-vertical">
@@ -118,7 +118,7 @@
 										   name="edit-demande-ville"
 										   v-model="demande.candidate.city" />
 									<p v-if="erreurs.city" class="error-message">
-										Veuillez fournir une ville.
+										Veuillez remplir ce champs.
 									</p>
 								</div>
 							</div>
@@ -131,7 +131,7 @@
 						<textarea id="edit-demande-competences" name="edit-demande-competences" rows="6"
 								  v-model="demande.skills"></textarea>
 						<p v-if="erreurs.skills" class="error-message">
-							Veuillez fournir des compétences.
+							Veuillez remplir ce champs.
 						</p>
 					</div>
 
@@ -151,8 +151,8 @@
 											{{ internshipType.value }}
 										</option>
 									</select>
-									<p v-if="erreurs.internshipType" class="validForm">
-										Veuillez choisir un type de stage.
+									<p v-if="erreurs.internshipType" class="validForm error-message">
+										Veuillez effectuer un choix.
 									</p>
 								</div>
 								<div class="form-fiche__label-input-vertical">
@@ -163,7 +163,7 @@
 										   type="number"
 										   v-model.trim="demande.weeklyWorkHours" />
 									<p v-if="erreurs.weeklyWorkHours" class="error-message">
-										Veuillez inscrire le nombre d'heures par semaine.
+										Veuillez remplir ce champs.
 									</p>
 								</div>
 								<div class="form-fiche__label-input-vertical">
@@ -196,16 +196,16 @@
 									<label for="edit-demande-date-debut">Date de début</label>
 									<input type="date" id="edit-demande-date-debut" name="edit-demande-date-debut"
 										   v-model.trim="dateDebut" />
-									<p v-if="erreurs.startDate" class="validForm">
-										Veuillez fournir une date de début.
+									<p v-if="erreurs.startDate" class="validForm error-message">
+										Veuillez effectuer un choix.
 									</p>
 								</div>
 								<div class="form-fiche__label-input-vertical">
 									<label for="edit-demande-date-fin">Date de fin</label>
 									<input type="date" id="edit-demande-date-fin" name="edit-demande-date-fin"
 										   v-model.trim="dateFin" />
-									<p v-if="erreurs.endDate" class="validForm">
-										Veuillez fournir une date de fin.
+									<p v-if="erreurs.endDate" class="validForm error-message">
+										Veuillez effectuer un choix.
 									</p>
 								</div>
 							</div>
@@ -219,7 +219,7 @@
 							<textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="6"
 									  v-model="demande.additionalInformation"></textarea>
 							<p v-if="erreurs.additionalInformation" class="error-message">
-								Veuillez fournir des informations supplémentaires.
+								Veuillez remplir ce champs.
 							</p>
 						</div>
 					</div>

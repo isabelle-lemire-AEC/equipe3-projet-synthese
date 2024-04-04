@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="form-fiche__label-input-horizontal">
-          <label for="logo">Logo (URL) :</label>
+          <label for="logo">Logo :</label>
           <div class="form-fiche__wrapper-input-msg-erreur">
             <input type="text" id="logo" v-model.trim="entreprise.image" @input="validerChamp('image')"/>
             <p class="error-message" v-if="erreurs.image">L'URL du logo est obligatoire</p>
