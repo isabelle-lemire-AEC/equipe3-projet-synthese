@@ -17,6 +17,7 @@
         <div class="form-fiche__label-input-horizontal">
           <label for="fullName">Nom et prénom :</label>
           <input type="text" id="fullName" v-model.trim="fullName" @input="splitFullName">
+          
           <!-- 
           <div class="form-fiche__wrapper-input-msg-erreur">
             <input
@@ -55,7 +56,7 @@
               @input="validerChamp('poste')"
             />
             <p class="error-message" v-if="erreurs.poste">
-              L'inscription du poste est requise
+              Veuillez remplir ce champs.
             </p>
           </div>
         </div>
@@ -75,7 +76,7 @@
               @input="validerChamp('description')">
             </textarea>
             <p class="error-message" v-if="erreurs.description">
-              La description est requise.
+              Veuillez remplir ce champs.
             </p>
           </div>
         </div>
@@ -95,7 +96,7 @@
                     @input="validerChamp('address')"
                   />
                   <p class="error-message" v-if="erreurs.address">
-                    L'adresse du candidat est requise
+                    Veuillez remplir ce champs.
                   </p>
                 </div>
               </div>
@@ -110,7 +111,7 @@
                     @input="validerChamp('city')"
                   />
                   <p class="error-message" v-if="erreurs.city">
-                    Le nom de la vielle requis
+                    Veuillez remplir ce champs.
                   </p>
                 </div>
               </div>
@@ -145,7 +146,7 @@
                     @input="validerChamp('postalCode')"
                   />
                   <p class="error-message" v-if="erreurs.postalCode">
-                    Le code postal est requis.
+                    Veuillez remplir ce champs.
                   </p>
                 </div>
               </div>
@@ -162,7 +163,7 @@
                     @input="validerChamp('phone')"
                   />
                   <p class="error-message" v-if="erreurs.phone">
-                    Le numero de telephone est requis.
+                    Veuillez remplir ce champs.
                   </p>
                 </div>
               </div>
@@ -177,7 +178,7 @@
                     @input="validerChamp('email')"
                   />
                   <p class="error-message" v-if="erreurs.email">
-                    L'email est requis.
+                    Veuillez remplir ce champs.
                   </p>
                 </div>
               </div>
