@@ -164,7 +164,7 @@
     postalCode: "",
     activitySector: {
       _id: "65f27444cbefd230d7c90949",
-      value: "securite pour entreprise",
+      value: "Sécurité",
     },
     website: "valeur par défaut",
   });
@@ -218,6 +218,7 @@
       console.error("Vous ne pouvez pas sauvegarder car des champs obligatoires ne sont pas remplis.");
     } else {
       try {
+        console.log("entreprise.value: ", entreprise.value);
         const response = await ajouterEntreprise(entreprise.value);
         if (response === undefined)
         {
