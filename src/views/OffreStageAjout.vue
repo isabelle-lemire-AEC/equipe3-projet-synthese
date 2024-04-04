@@ -6,16 +6,6 @@
         </div>
       </div>
 
-      <!-- Boutons annuler et mettre à jour -->
-      <!-- <div class="boutons">
-        <BtnAnnuler></BtnAnnuler>
-          <button class="bouton bouton--rougeOffre" @click="submitForm()">
-              <div class="icone-libelle">
-                  <i class="fas fa-save"></i>
-                  <span>Sauvegarder</span>
-              </div>
-          </button>
-      </div>   -->
       <form id="ajout-offrestages" @submit.prevent="submitForm">
             
         		<!-- Boutons annuler et mettre à jour -->
@@ -147,16 +137,6 @@
             buttonClass="bouton bouton--turquoise">
           </BtnAnnulerModifierSauvegarder>
         </form>
-        <!-- Boutons annuler et mettre à jour -->
-        <!-- <div class="boutons">
-            <button class="bouton bouton--transparent">Annuler</button>
-            <button class="bouton bouton--rougeOffre" @click="submitForm()">
-                <div class="icone-libelle">
-                    <i class="fas fa-save"></i>
-                    <span>Sauvegarder</span>
-                </div>
-            </button>
-        </div>             -->
 
 </template>
 
@@ -244,7 +224,7 @@
     erreurs.value.progForm = progForm.value === '',
     erreurs.value.exigences = (offerData.value.requiredSkills === '' || offerData.value.requiredSkills === undefined || offerData.value.requiredSkills[0] === ''),
     erreurs.value.typeDeStage = (offerData.value.internshipType._id === '' || offerData.value.internshipType._id === undefined),
-    erreurs.value.heuresSemaine = (offerData.value.weeklyWorkHours === 0 || offerData.value.weeklyWorkHours === undefined),
+    erreurs.value.heuresSemaine = (offerData.value.weeklyWorkHours === 0 || offerData.value.weeklyWorkHours === undefined || offerData.value.weeklyWorkHours === ''),
     erreurs.value.dateDebut = offerData.value.startDate === '',
     erreurs.value.dateFin = offerData.value.endDate === '',
     erreurs.value.province = offerData.value.province._id === '',
