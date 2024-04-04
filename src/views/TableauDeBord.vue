@@ -88,8 +88,8 @@
                     <h2>Dernières <span>offres</span> de stage</h2>
                     <p>En attente de validation</p>
                 </div>
-                <button class="bouton bouton--turquoise" @click="validerToutesLesOffres()">Valider toutes les
-                    offres</button>
+                <!--<button class="bouton bouton--turquoise" @click="validerToutesLesOffres()">Valider toutes les
+                    offres</button>-->
             </div>
 
             <table  v-if="offres && afficherOffres">
@@ -120,7 +120,7 @@
     </div>
 </template>
 <script setup>
-    import ElementListeStage from '../components/elementListeStage.vue'
+    import ElementListeStage from '../components/ElementListeStage.vue'
     import { ref, onMounted } from 'vue';
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';

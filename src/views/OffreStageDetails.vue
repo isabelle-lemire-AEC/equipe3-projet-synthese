@@ -95,7 +95,7 @@
 
 
     <!-- Message d'erreur -->
-    <div v-else>Aucune information disponible</div>
+    <!--<div v-else>Aucune information disponible</div>-->
   </div>
 </template>
 
