@@ -81,15 +81,15 @@
                   <div class="form-fiche__label-input-vertical">
                     <label for="ajout-offre-remuneration">Rémunération</label>
                     <div>
-                      <input type="radio" id="ajout-offre-discretion" name="ajout-offre-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
+                      <input type="radio" id="ajout-offre-discretion" name="ajout-offre-remuneration" value="DISCRETIONARY" v-model="offerData.paid" checked />
                       <label for="ajout-offre-discretion" class="form-fiche__label-radio-input">À la discrétion de l'entreprise</label>
                     </div>
                     <div>
-                      <input type="radio" id="ajout-offre-remunere" name="ajout-offre-remuneration" value="remunere" v-model="remunerationType" />
+                      <input type="radio" id="ajout-offre-remunere" name="ajout-offre-remuneration" value="PAID" v-model="offerData.paid" />
                       <label for="ajout-offre-remunere" class="form-fiche__label-radio-input">Rémunéré</label>
                     </div>
                     <div>
-                      <input type="radio" id="ajout-offre-non-renumere" name="ajout-offre-remuneration" value="non-remunere" v-model="remunerationType" />
+                      <input type="radio" id="ajout-offre-non-renumere" name="ajout-offre-remuneration" value="UNPAID" v-model="offerData.paid" />
                       <label for="ajout-offre-non-renumere" class="form-fiche__label-radio-input" >Non-rémunéré</label>
                     </div>
                   </div>                   
@@ -153,7 +153,7 @@
   const router = useRouter();
   const { ajouterOffre } = useInternshipOffers();
   const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError} = useEntreprise();
-  const remunerationType = ref(null);
+  // const remunerationType = ref('DISCRETIONARY');
   const entreprises = ref([]);
   const provinces = ref([]);
   const internshipTypes = ref([]);
@@ -234,7 +234,7 @@
   };
 
   const submitForm = async () => {
-
+    // console.log("remunerationType: ", remunerationType);
     listerExigences();
 
     try {

@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-fiche__label-input-vertical">
                   <h4>Rénumération</h4>
-                  <p>{{ offerData.paid }}</p>
+                  <p>{{ renumeration }}</p>
                 </div>
               </div>
               <!-- Colonne de droite -->
@@ -111,6 +111,7 @@ venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</
   const exigences = ref(null);
   const dateDebut = ref(null);
   const dateFin = ref(null);
+  const renumeration = ref('');
 
   onMounted(async () => {
 
@@ -136,6 +137,15 @@ venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</
       // Afin d'afficher les dates dans le bon format
       dateDebut.value = offerData.value.startDate.substring(0, offerData.value.startDate.indexOf('T'));
       dateFin.value = offerData.value.endDate.substring(0, offerData.value.startDate.indexOf('T'));
+
+      switch(offerData.value.paid) {
+        case 'DISCRETIONARY':
+          renumeration.value = "À la discrétion de l'entreprise";
+        case 'PAID':
+          renumeration.value = 'Rénuméré';
+        case 'UNPAID':
+          renumeration.value = 'Non-rémunéré';
+      }
 
       // Peuplez les autres champs de formulaire avec les données récupérées
     } else {
