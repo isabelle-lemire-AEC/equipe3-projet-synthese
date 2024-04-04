@@ -50,6 +50,7 @@ export function useEntreprise() {
             console.error('Détail de l\'erreur:', error.response.data);
         }
         loading.value = false;
+        return error;
     } finally {
         loading.value = false;
     }

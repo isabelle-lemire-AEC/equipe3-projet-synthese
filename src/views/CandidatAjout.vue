@@ -322,9 +322,11 @@ const soumettreFormulaire = async () => {
     // Si le formulaire est valide, essayez d'ajouter le candidat.
     try {
       splitFullName();
-      await addCandidat(candidat.value);
-      console.log("Nouveau candidat ajouté");
-      router.push({ name: "Candidats" });
+      const response = await addCandidat(candidat.value);
+      if(response === undefined) {
+        console.log("Nouveau candidat ajouté");
+        router.push({ name: "Candidats" });
+      }
       // Ici, vous pouvez déclencher une action pour mettre à jour la liste globale si vous utilisez Vuex ou Pinia
     } catch (error) {
       console.error("Erreur lors de l'ajout du candidat :", error);
