@@ -1,7 +1,6 @@
 <!-- OffreStageDetails.vue -->
 <template>
   <div>
-
     <div v-if="loading">Chargement...</div>
     <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>
 
@@ -26,14 +25,13 @@
             <i class="fas fa-square-xmark"></i>
           </button>
         </div>
-      </div>
 
-      <div class="form-fiche__encadre">
+        <div class="form-fiche__encadre">
           <!-- Section Description tâche -->
           <div class="form-fiche__wrapper-titre-groupe-inputs">
             <h2>Description de la tâche</h2>
             <p>{{ offerData.description }}</p>
-          </div>        
+          </div>
           <!-- Section Formation et exigences -->
           <div class="form-fiche__label-input-vertical">
             <h4>Formation demandées</h4>
@@ -78,21 +76,24 @@
 
           <div class="form-fiche__wrapper-titre-groupe-inputs">
             <h3>Informations suplémentaires</h3>
-            <p id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet quam justo. Aliquam interdum facilisis eros, ut
-dapibus quam hendrerit nec. Vestibulum vel blandit lorem. Praesent laoreet quis tortor quis pharetra. Nulla dictum erat id
-nisl pulvinar, ac aliquam lectus laoreet. Aliquam commodo pulvinar odio vitae interdum. Phasellus ut ante efficitur,
-venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</p>
-          </div>          
-
+            <p id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5">Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Vivamus sit amet quam justo. Aliquam interdum facilisis eros, ut
+              dapibus quam hendrerit nec. Vestibulum vel blandit lorem. Praesent laoreet quis tortor quis pharetra.
+              Nulla dictum erat id
+              nisl pulvinar, ac aliquam lectus laoreet. Aliquam commodo pulvinar odio vitae interdum. Phasellus ut ante
+              efficitur,
+              venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</p>
+          </div>
         </div>
-
       </div>
     </div>
+  </div>
 
-    <!-- Utilisation du composant ModalSuppression -->
-    <ModalSuppression :showConfirmationModal="showConfirmationModal"
-      :message="'Êtes-vous sûr de vouloir supprimer cette offre de stage?'" @annulerSuppression="annulerSuppression"
-      @confirmerSuppression="supprimer" />
+  <!-- Utilisation du composant ModalSuppression -->
+  <ModalSuppression :showConfirmationModal="showConfirmationModal"
+    :message="'Êtes-vous sûr de vouloir supprimer cette offre de stage?'"
+    @annulerSuppression="annulerSuppression"
+    @confirmerSuppression="supprimer" />
 
 </template>
 
