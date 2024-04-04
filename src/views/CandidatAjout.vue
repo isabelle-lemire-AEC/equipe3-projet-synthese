@@ -133,7 +133,7 @@
                     </option>
                   </select>
                   <p class="error-message" v-if="erreurs.province">
-                    Veuillez effectuer un choix
+                    Veuillez effectuer un choix.
                   </p>
                 </div>
               </div>
