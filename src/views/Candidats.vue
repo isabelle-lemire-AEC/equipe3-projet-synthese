@@ -39,8 +39,6 @@ const chargerCandidats = async () => {
   }
 };
 
-// Utiliser `watch` pour détecter les changements de route et recharger les candidats si nécessaire
-
 </script>
 
 <style scoped>

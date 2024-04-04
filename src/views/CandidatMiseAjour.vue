@@ -218,20 +218,6 @@
 
     initProvinces();
 
-    // const validerFormulaire = () => {
-    //     if (!candidat.value.firstName ||
-    //         !candidat.value.lastName ||
-    //         !candidat.value.email ||
-    //         !candidat.value.address ||
-    //         !candidat.value.phone ||
-    //         !candidat.value.city ||
-    //         !candidat.value.province ||
-    //         !candidat.value.postalCode) {
-    //         return false;
-    //     }
-    //     return true;
-    // }
-
     onMounted(async () => {
         try {
             const candidatId = route.params.id;

@@ -103,7 +103,6 @@
   import { ref, onMounted } from 'vue';
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
   import { useRoute } from 'vue-router';
-  import BtnAnnuler from '../components/BtnAnnuler.vue';
   import { fetchStageTypes } from '@/composables/api';
   import { useRouter } from 'vue-router';
 	import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'

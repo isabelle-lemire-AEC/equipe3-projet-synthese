@@ -23,34 +23,6 @@
                 Veuillez remplir ce champs.
             </p>
           </div>
-
-          <!-- 
-          <div class="form-fiche__wrapper-input-msg-erreur">
-            <input
-              type="text"
-              id="firstName"
-              v-model.trim="candidat.firstName"
-              @input="validerChamp('firstName')"
-            />
-            <p class="error-message" v-if="erreurs.firstName">
-              Le prénom est obligatoire
-            </p>
-          </div>
-          
-        </div>
-        <div class="form-fiche__label-input-horizontal">
-          <label for="lastName">Nom :</label>
-          <div class="form-fiche__wrapper-input-msg-erreur">
-            <input
-              type="text"
-              id="lastName"
-              v-model.trim="candidat.lastName"
-              @input="validerChamp('lastName')"
-            />
-            <p class="error-message" v-if="erreurs.lastName">
-              Le nom est obligatoire
-            </p>
-          </div>-->
         </div>
         <div class="form-fiche__label-input-horizontal">
           <label for="poste">Poste :</label>
@@ -195,15 +167,8 @@
 
       <BtnAnnulerModifierSauvegarder
         buttonText="Sauvegarder"
-        buttonClass="bouton bouton--mauve"
-      >
+        buttonClass="bouton bouton--mauve">
       </BtnAnnulerModifierSauvegarder>
-      <ModalChampRequis v-if="showModal" @close="showModal = false">
-        <p>
-          Un ou plusieurs champs ne sont pas correctement remplis. <br />
-          Veuillez vérifier et réessayer.
-        </p>
-      </ModalChampRequis>
     </form>
   </div>
 </template>
@@ -214,7 +179,6 @@ import { useRouter } from "vue-router";
 import { useCandidat } from "@/composables/candidats/candidat";
 import { fetchProvinces } from "@/composables/api";
 import BtnAnnulerModifierSauvegarder from "../components/BtnAnnulerModifierSauvegarder.vue";
-import ModalChampRequis from "../components/ModalChampRequis.vue";
 
 const router = useRouter();
 const { addCandidat } = useCandidat();
@@ -322,15 +286,12 @@ const validerFormulaire = () => {
 };
 
 const soumettreFormulaire = async () => {
-  // Vérifiez d'abord si le formulaire est valide.
   const isFormInvalid = validerFormulaire();
 
   if (isFormInvalid) {
-    // Si le formulaire n'est pas valide, affichez un modal d'erreur.
     showModal.value = true;
     console.error("Veuillez remplir tous les champs obligatoires.");
   } else {
-    // Si le formulaire est valide, essayez d'ajouter le candidat.
     try {
       splitFullName();
       const response = await addCandidat(candidat.value);
@@ -338,11 +299,8 @@ const soumettreFormulaire = async () => {
         console.log("Nouveau candidat ajouté");
         router.push({ name: "Candidats" });
       }
-      // Ici, vous pouvez déclencher une action pour mettre à jour la liste globale si vous utilisez Vuex ou Pinia
     } catch (error) {
       console.error("Erreur lors de l'ajout du candidat :", error);
-      // Vous pouvez aussi décider d'afficher le modal en cas d'erreur lors de l'ajout du candidat
-      // showModal.value = true;
     }
   }
 };

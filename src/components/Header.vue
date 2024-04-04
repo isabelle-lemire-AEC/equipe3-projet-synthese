@@ -49,10 +49,7 @@
 <script setup>
   import { ref } from 'vue';
   import { useRouter } from "vue-router";
-  //import {  defineProps } from 'vue'
   
-
-  // Récupérer les informations à partir du localStorage
   const nomPrenom = ref(localStorage.getItem('nomPrenom'));
   const courriel = ref(localStorage.getItem('courriel'));
 
@@ -81,15 +78,6 @@
       name: "CandidatAjout",
     });
   };
-
-  
-
-
-  /* Menu toggable */
-  //const props = defineProps(['toggleSidebar']);
-
-
-
 </script>
 
 

@@ -10,7 +10,7 @@
       </nav>
       <div class="wrapper-main-content">
         <header class="layout-header">
-          <Header></Header> <!--  :toggleSidebar="toggleSidebar" -->
+          <Header></Header>
         </header>
         <main>
           <section class="container">
@@ -42,7 +42,6 @@
   const toggleSidebar = () => {
     showSidebar.value = !showSidebar.value;
   };
- 
 
   // Fonction pour vérifier si la page actuelle est la page d'accueil
   const isHomePage = computed(() => route.name === 'accueil');

@@ -26,7 +26,8 @@
                         :id="demande._id"
                         :isDemande="true"
                         :isTableauDeBord="false"
-                        :isActive="demande.isActive"></ElementListeStage>
+                        :isActive="demande.isActive">
+                    </ElementListeStage>
                 </tbody>
             </table>
         </div>
