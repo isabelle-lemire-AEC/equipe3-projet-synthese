@@ -6,33 +6,34 @@
     <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>
 
     <div v-else-if="offerData && offerData.title" class="form-fiche fiche-offrestages-details">
-      <div class="boutons-action">
-        <button :class="{ 'boutons-action__crochet': offerData.isActive }" @click="activate()">
-          <i class="fas fa-check"></i>
-        </button>
-        <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(offerData._id)">
-          <i class="fas fa-pen-to-square"></i>
-        </button>
-        <!-- Bouton de suppression -->
-        <button class="boutons-action__supprimer" @click="afficherConfirmationModal">
-          <i class="fas fa-square-xmark"></i>
-        </button>
-      </div>
-
       <div class="form-fiche__wrapper-titre">
         <p class="form-fiche__nom-section">Offre de stage</p>
         <h1>{{ offerData.title }}</h1>
         <p class="form-fiche__sous-titre">{{ offerData.enterprise?.name }}</p>
       </div>
 
+      <!-- Boutons d'action -->
       <div class="form-fiche__wrapper-boutons-encadre">
-        <!-- Section Encadré blanc  -->
-        <div class="form-fiche__encadre">
+        <div class="boutons-action">
+          <button :class="{ 'boutons-action__crochet': offerData.isActive }" @click="activate()">
+            <i class="fas fa-check"></i>
+          </button>
+          <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(offerData._id)">
+            <i class="fas fa-pen-to-square"></i>
+          </button>
+          <!-- Bouton de suppression -->
+          <button class="boutons-action__supprimer" @click="afficherConfirmationModal">
+            <i class="fas fa-square-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-fiche__encadre">
           <!-- Section Description tâche -->
           <div class="form-fiche__wrapper-titre-groupe-inputs">
             <h2>Description de la tâche</h2>
             <p>{{ offerData.description }}</p>
-          </div>
+          </div>        
           <!-- Section Formation et exigences -->
           <div class="form-fiche__label-input-vertical">
             <h4>Formation demandées</h4>
@@ -81,8 +82,10 @@
 dapibus quam hendrerit nec. Vestibulum vel blandit lorem. Praesent laoreet quis tortor quis pharetra. Nulla dictum erat id
 nisl pulvinar, ac aliquam lectus laoreet. Aliquam commodo pulvinar odio vitae interdum. Phasellus ut ante efficitur,
 venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</p>
-          </div>
+          </div>          
+
         </div>
+
       </div>
     </div>
 
@@ -91,10 +94,6 @@ venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</
       :message="'Êtes-vous sûr de vouloir supprimer cette offre de stage?'" @annulerSuppression="annulerSuppression"
       @confirmerSuppression="supprimer" />
 
-
-    <!-- Message d'erreur
-    <div v-else>Aucune information disponible</div>   -->
-  </div>
 </template>
 
 <script setup>
@@ -206,57 +205,4 @@ venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</
 
 
 <style>
-/* Styles pour le modal 
-    .modal {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.4);
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 30%;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    }
-
-    .modal-buttons {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .btn.confirm {
-        background-color: #4CAF50;
-        color: white;
-    }
-
-    .btn.cancel {
-        background-color: #f44336;
-        color: white;
-    }
-
-    .btn:hover {
-        opacity: 0.8;
-    }
-
-*/
 </style>
