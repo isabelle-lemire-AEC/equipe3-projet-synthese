@@ -28,9 +28,25 @@
         @include mixins.grid(3, variables.$spacing-small);
         color: variables.$white;
 
+         @include mixins.media-max(900px) {
+             @include mixins.grid(2, null);
+         }
+
+        &-categorie {
+            font-size: variables.$font-style-h5;
+
+            @include mixins.media-max(1800px) {
+                font-size: variables.$font-style-h6;
+            }
+
+            @include mixins.media-max(1650px) {
+                display: none;
+            }
+        }
+
         .chiffre {
             @include mixins.font(null, variables.$font-style-h1, variables.$bold);
-            margin-top: variables.$spacing-xsmall;
+
         }
 
         &-demandes {
@@ -41,6 +57,10 @@
                 background-color: variables.$dark-gold;
                 @extend %pastilles-info-rapide-before;
             }
+
+            @include mixins.media-max(900px) {
+                grid-area: 1 / 1 / 2 / 2;
+            }
         }
 
         &-offres {
@@ -50,6 +70,10 @@
             &::before {
                 background-color: variables.$dark-red;
                 @extend %pastilles-info-rapide-before;
+            }
+
+            @include mixins.media-max(900px) {
+                grid-area: 1 / 2 / 2 / 3;
             }
         }
 
@@ -63,6 +87,10 @@
 
             .bulle-entreprise {
                 padding-left: variables.$spacing-small;
+            }
+
+            @include mixins.media-max(900px) {
+                grid-area: 2 / 1 / 2 / -1 ;
             }
         }
 
@@ -108,6 +136,8 @@
 
         h2 {
             margin-bottom: variables.$spacing-xsmall;
+            font-size: variables.$font-style-h5;
+            color: variables.$black;
         }
 
         p {
