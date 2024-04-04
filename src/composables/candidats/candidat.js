@@ -45,6 +45,7 @@ export function useCandidat() {
     catch (err) {
         error.value = err;
         console.log("Le candidat n'a pas pu être ajouter", err.response.data);
+        return err.response.data;
     }
     finally{
         loading.value = false;
@@ -61,6 +62,7 @@ export function useCandidat() {
     } catch (error) {
       error.value = error;
       console.log("Erreur : Le candidat n'a pu être modifié");
+      return error.response.data;
     } finally {
       loading.value = false;
     }

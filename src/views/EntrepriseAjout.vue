@@ -245,8 +245,11 @@ const soumettreFormulaireEntreprise = async () => {
     console.error("Vous ne pouvez pas sauvegarder car des champs obligatoires ne sont pas remplis.");
   } else {
     try {
-      await ajouterEntreprise(entreprise.value);
-      router.push({ name: "Entreprises" });
+      const response = await ajouterEntreprise(entreprise.value);
+      if (response === undefined)
+      {
+        router.push({ name: "Entreprises" });
+      }
     } catch (error) {
       console.error("Erreur lors de la soumission du formulaire :", error);
     }
