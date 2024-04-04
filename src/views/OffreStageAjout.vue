@@ -147,7 +147,6 @@
   import { fetchStageTypes } from '@/composables/api';
   import { useRouter } from 'vue-router';
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
-  import BtnAnnuler from '../components/BtnAnnuler.vue';
 	import BtnAnnulerModifierSauvegarder from '../components/BtnAnnulerModifierSauvegarder.vue'
 
   const router = useRouter();

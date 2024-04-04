@@ -65,16 +65,17 @@
 
                 <tbody class="liste__body">
                     <ElementListeStage v-for="demande in demandes"
-                    :key="demande._id"
-                    :posteTitre="demande.title"
-                    :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName"
-                    :info2="'Cégep de Trois-Rivières'"
-                    :region="demande.province.value"
-                    :date="demande.startDate"
-                    :id="demande._id"
-                    :isDemande="true"
-                    :isTableauDeBord="true"
-                    :isActive="demande.isActive"></ElementListeStage>
+                        :key="demande._id"
+                        :posteTitre="demande.title"
+                        :posteNom="demande.candidate.firstName+' '+demande.candidate.lastName"
+                        :info2="'Cégep de Trois-Rivières'"
+                        :region="demande.province.value"
+                        :date="demande.startDate"
+                        :id="demande._id"
+                        :isDemande="true"
+                        :isTableauDeBord="true"
+                        :isActive="demande.isActive">
+                    </ElementListeStage>
                 </tbody>
             </table>
         </div>
@@ -109,7 +110,8 @@
                         :id="offre._id"
                         :isDemande="false"
                         :isTableauDeBord="true"
-                        :isActive="offre.isActive"></ElementListeStage>
+                        :isActive="offre.isActive">
+                    </ElementListeStage>
                 </tbody>
             </table>     
         </div>
@@ -123,7 +125,6 @@
     import { useCandidat } from '../composables/candidats/candidat.js';
     import { useEntreprise } from '../composables/entreprises/entreprise.js';
     import { useActivitySectors } from '../composables/secteurs_activites/secteurs_activites.js'; 
-    //import { couldStartTrivia } from 'typescript';
 
     const {getAllNotActiveRequests,updateRequestStatus,getRequestsCount,activateRequest} = useInternshipRequests();
     const {getAllOffers,getInternshipOfferCount,activateOffer, getAllNotActiveOffers} = useInternshipOffers();
