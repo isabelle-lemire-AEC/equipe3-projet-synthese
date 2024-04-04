@@ -3,8 +3,8 @@
         <td class="liste__body__contenu-colonne liste__body__contenu-colonne--1">
             <div class="liste__wrapper-horizontal">
                 <div v-if="props.isDemande">
-                    <div :class="{ 'icone': true, 'icone--demande': true, 'icone-inactive': !props.isActive, 'demandestages-list': isDemandesStages }">
-                        <i class="fas fa-graduation-cap" :style="{ color: props.isActive ? 'inherit' : 'black' }"></i>
+                    <div class="icone icone--demande">
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
                 </div>
 

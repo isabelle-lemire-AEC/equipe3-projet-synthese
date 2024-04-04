@@ -80,7 +80,5 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-    .demandestages-list .icone-inactive i {
-        color: black;
-    }
+
 </style>
