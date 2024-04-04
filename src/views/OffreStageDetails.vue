@@ -1,21 +1,22 @@
 <!-- OffreStageDetails.vue -->
 <template>
   <div>
-    
+
     <div v-if="loading">Chargement...</div>
     <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>
 
     <div v-else-if="offerData && offerData.title" class="form-fiche fiche-offrestages-details">
       <div class="boutons-action">
-          <button :class="{ 'boutons-action__crochet': offerData.isActive }" @click="activate()">
-              <i class="fas fa-check"></i>
-          </button>
-          <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(offerData._id)">
-              <i class="fas fa-pen-to-square"></i>
-          </button>
-          <button class="boutons-action__supprimer" @click="afficherConfirmationModal()">
-              <i class="fas fa-square-xmark"></i>
-          </button>
+        <button :class="{ 'boutons-action__crochet': offerData.isActive }" @click="activate()">
+          <i class="fas fa-check"></i>
+        </button>
+        <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(offerData._id)">
+          <i class="fas fa-pen-to-square"></i>
+        </button>
+        <!-- Bouton de suppression -->
+        <button class="boutons-action__supprimer" @click="afficherConfirmationModal">
+          <i class="fas fa-square-xmark"></i>
+        </button>
       </div>
 
       <div class="form-fiche__wrapper-titre">
@@ -76,40 +77,36 @@
 
           <div class="form-fiche__wrapper-titre-groupe-inputs">
             <h3>Informations suplémentaires</h3>
-            <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5" v-model="offerData.additionalInformation"></textarea>
+            <textarea id="edit-demande-infos-supp" name="edit-demande-infos-supp" rows="5"
+              v-model="offerData.additionalInformation"></textarea>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal de confirmation de suppression -->
-    <div class="modal" v-if="showConfirmationModal">
-        <div class="modal-content">
-            <p>Êtes-vous sûr de vouloir supprimer cette offre de stage?</p>
-            <div class="modal-buttons">
-                <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
-                <button class="btn confirm" @click="supprimer()">Confirmer</button>
-            </div>
-        </div>
-    </div>
+    <!-- Utilisation du composant ModalSuppression -->
+    <ModalSuppression :showConfirmationModal="showConfirmationModal"
+      :message="'Êtes-vous sûr de vouloir supprimer cette offre de stage?'" @annulerSuppression="annulerSuppression"
+      @confirmerSuppression="supprimer" />
 
 
-    <!-- Message d'erreur -->
-    <div v-else>Aucune information disponible</div>
+    <!-- Message d'erreur
+    <div v-else>Aucune information disponible</div>   -->
   </div>
 </template>
 
 <script setup>
   import { ref, onMounted } from 'vue';
-  import { useRouter } from 'vue-router';
-  import { useRoute } from 'vue-router';
+  import { useRouter, useRoute } from 'vue-router';
   import { useInternshipOffers } from '../composables/offres_stage/offreDeStage';
+  import axios from 'axios';
+  import ModalSuppression from '@/components/ModalSuppression.vue'; 
 
   const { supprimerOffre } = useInternshipOffers();
   const route = useRoute();
   const router = useRouter(); 
   const { getInternshipOfferById, response, loading, error, edditerOffre } = useInternshipOffers();
-  const showConfirmationModal = ref(false);
+  const showConfirmationModal = ref(false); // Variable pour contrôler l'affichage du modal
   const exigences = ref(null);
 
   onMounted(async () => {
@@ -161,9 +158,21 @@
     await edditerOffre(route.params.id, offerData.value);
   };
 
+  // Fonction pour supprimer l'offre et fermer le modal
   const supprimer = async () => {
     await supprimerOffre(route.params.id);
+    showConfirmationModal.value = false; 
     router.push('/offres-de-stages');
+  };
+
+  // Fonction pour afficher la modal de confirmation
+  const afficherConfirmationModal = () => {
+    showConfirmationModal.value = true; 
+  };
+
+  // Fonction pour annuler la suppression et fermer le modal
+  const annulerSuppression = () => {
+    showConfirmationModal.value = false; 
   };
 
   const activate = async () => {
@@ -175,21 +184,11 @@
       router.push({ name: 'OffreStageMiseAjour', params: { id } });
   };
 
-  const afficherConfirmationModal = () => {
-        showConfirmationModal.value = true;
-  };
-
-  const annulerSuppression = () => {
-        showConfirmationModal.value = false;
-  };
-
-
 </script>
 
+
 <style>
-
-
-    /* Styles pour le modal */
+/* Styles pour le modal 
     .modal {
         display: flex;
         justify-content: center;
@@ -241,5 +240,5 @@
         opacity: 0.8;
     }
 
-
+*/
 </style>
