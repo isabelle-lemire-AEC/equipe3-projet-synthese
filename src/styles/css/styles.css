@@ -741,11 +741,12 @@ label {
   cursor: default;
 }
 
-/* .error-message {
-    color: rgb(230, 93, 93);
-    font-size: 0.75em;
-    margin-top: 0.25em;
-} */
+.error-message {
+  color: rgb(184, 56, 56);
+  font-size: 0.75em;
+  margin-top: 0.25em;
+}
+
 .modal {
   display: flex;
   justify-content: center;
