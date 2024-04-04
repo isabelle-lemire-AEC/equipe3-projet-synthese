@@ -21,7 +21,7 @@
 						<input type="text" id="ajout-demande-titre" name="ajout-demande-titre"
 							v-model.trim="demande.title" />
 						<!-- Validation -->
-						<p v-if="erreurs.title" class="validForm">Veuillez fournir le titre du stage.</p>
+						<p v-if="erreurs.title" class="validForm error-message">Veuillez remplir ce champs.</p>
 					</div>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 							</option>
 						</select>
 						<!-- Validation -->
-						<p v-if="erreurs.candidat" class="validForm">Veuillez fournir votre nom complet.</p>
+						<p v-if="erreurs.candidat" class="validForm error-message">Veuillez remplir ce champs.</p>
 					</div>
 					<!-- Section présentation -->
 					<div class="form-fiche__label-input-vertical form-fiche__label-input-vertical--sans-bordure">
@@ -48,7 +48,7 @@
 						<textarea id="ajout-demande-presentation" name="ajout-demande-presentation" rows="6"
 								  v-model.trim="demande.description"></textarea>
 						<!-- Validation -->
-						<p v-if="erreurs.description" class="validForm"> Veuillez fournir une présentation.</p>
+						<p v-if="erreurs.description" class="validForm error-message"> Veuillez remplir ce champs.</p>
 					</div>
 				</div>
 				<!-- Section infos -->
@@ -60,8 +60,7 @@
 								<input type="text" id="ajout-demande-programme" name="ajout-demande-programme"
 									   v-model.trim="formationInput" />
 								<!-- Validation -->
-								<p v-if="erreurs.formation" class="error-message">Veuillez fournir un programme de
-									formation.</p>
+								<p v-if="erreurs.formation" class="error-message">Veuillez remplir ce champs.</p>
 							</div>
 							<div class="form-fiche__label-input-vertical">
 								<label for="ajout-demande-secteur">Secteur d'activité</label>
@@ -74,8 +73,7 @@
 									</option>
 								</select>
 								<!-- Validation -->
-								<p v-if="erreurs.activitySector" class="error-message">Veuillez fournir un secteur
-									d'activité de formation.</p>
+								<p v-if="erreurs.activitySector" class="error-message">Veuillez effectuer un choix.</p>
 							</div>
 							<div class="form-fiche__label-input-vertical">
 								<label for="ajout-demande-region">Région</label>
@@ -87,7 +85,7 @@
 									</option>
 								</select>
 								<!-- Validation -->
-								<p v-if="erreurs.province" class="validForm">Veuillez choisir une région.</p>
+								<p v-if="erreurs.province" class="validForm error-message">Veuillez effectuer un choix.</p>
 							</div>
 						</div>
 						<div class="form-fiche__colonne-inputs">
@@ -96,15 +94,14 @@
 								<input type="text" id="ajout-demande-etablissement" name="ajout-demande-etablissement"
 									   v-model="etablissementInput" />
 								<!-- Validation -->
-								<p v-if="erreurs.etablissement" class="error-message">Veuillez fournir un établissement
-									scolaire.</p>
+								<p v-if="erreurs.etablissement" class="error-message">Veuillez remplir ce champs.</p>
 							</div>
 							<div class="form-fiche__label-input-vertical">
 								<label for="ajout-demande-ville">Ville</label>
 								<input type="text" id="ajout-demande-ville" name="ajout-demande-ville"
 									   v-model.trim="demande.candidate.city" />
 								<!-- Validation -->
-								<p v-if="erreurs.city" class="validForm"> Veuillez fournir une ville.</p>
+								<p v-if="erreurs.city" class="validForm error-message"> Veuillez remplir ce champs.</p>
 							</div>
 						</div>
 					</div>
@@ -114,7 +111,7 @@
 						<textarea id="ajout-demande-competences" name="ajout-demande-competences" rows="6"
 								  v-model="demande.skills"></textarea>
 						<!-- Validation -->
-						<p v-if="erreurs.skills" class="validForm">Veuillez fournir des compétences.</p>
+						<p v-if="erreurs.skills" class="validForm error-message">Veuillez remplir ce champs.</p>
 					</div>
 				</div>
 
@@ -136,8 +133,8 @@
 										{{ internshipType.value }}
 									</option>
 								</select>
-								<p v-if="erreurs.internshipType" class="validForm">
-									Veuillez choisir un type de stage.
+								<p v-if="erreurs.internshipType" class="validForm error-message">
+									Veuillez effectuer un choix.
 								</p>
 							</div>
 
@@ -148,8 +145,8 @@
 									id="ajout-demande-heures"
 									name="ajout-demande-heures"
 									v-model.trim="demande.weeklyWorkHours" />
-								<p v-if="erreurs.weeklyWorkHours" class="validForm">
-									Veuillez inscrire le nombre d'heures par semaine.
+								<p v-if="erreurs.weeklyWorkHours" class="validForm error-message">
+									Veuillez remplir ce champs.
 								</p>
 							</div>
 
@@ -183,14 +180,14 @@
 								<input type="date" id="ajout-demande-date-fin" name="ajout-demande-date-fin"
 									   v-model.trim="demande.startDate" />
 								<!-- Vaidation -->
-								<p v-if="erreurs.endDate" class="validForm">Veuillez fournir une date de fin.</p>
+								<p v-if="erreurs.endDate" class="validForm error-message">Veuillez effectuer un choix</p>
 							</div>
 							<div class="form-fiche__label-input-vertical">
 								<label for="ajout-demande-date-fin">Date de fin</label>
 								<input type="date" id="ajout-demande-date-fin" name="ajout-demande-date-fin"
 									   v-model.trim="demande.endDate" />
 								<!-- Validation -->
-								<p v-if="erreurs.endDate" class="validForm"> Veuillez fournir une date de fin.</p>
+								<p v-if="erreurs.endDate" class="validForm error-message">Veuillez effectuer un choix</p>
 							</div>
 						</div>
 					</div>
@@ -203,8 +200,7 @@
 						<textarea id="ajout-demande-infos-supp" name="ajout-demande-infos-supp" rows="6"
 								  v-model="demande.additionalInformation"></textarea>
 						<!-- Validation -->
-						<p v-if="erreurs.additionalInformation" class="error-message">Veuillez fournir des informations
-							supplémentaires.</p>
+						<p v-if="erreurs.additionalInformation" class="error-message">Veuillez remplir ce champs.</p>
 					</div>
 				</div>
 				<!-- Section Parcourir -->
