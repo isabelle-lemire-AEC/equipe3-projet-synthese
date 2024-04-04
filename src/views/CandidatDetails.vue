@@ -22,7 +22,7 @@
         </button>
       </div>
     </div>
-    
+
     <div class="form-fiche__encadre">
       <!-- Section de description du candidat -->
       <div class="form-fiche__wrapper-titre-groupe-inputs">
@@ -70,6 +70,7 @@
       :message="'Êtes-vous sûr de vouloir supprimer ce candidat?'" @annulerSuppression="annulerSuppression"
       @confirmerSuppression="confirmerSuppression" />
   </div>
+  
 </template>
 
 <script setup>
