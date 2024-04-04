@@ -203,56 +203,5 @@ const activate = async () => {
 
 
 <style scoped>
-/* Styles pour le modal 
-    .modal {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.4);
-    }
 
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 30%;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    }
-
-    .modal-buttons {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .btn.confirm {
-        background-color: #4CAF50;
-        color: white;
-    }
-
-    .btn.cancel {
-        background-color: #f44336;
-        color: white;
-    }
-
-    .btn:hover {
-        opacity: 0.8;
-    }
-*/
 </style>

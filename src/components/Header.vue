@@ -1,4 +1,4 @@
-<!-- NavBar.vue - Nacer / prog isa pour identification  -->
+<!-- NavBar.vue -->
 <template>
   <!-- Boutons d'ajout -->
   <div class="header" v-if="nomPrenom && courriel"> 
