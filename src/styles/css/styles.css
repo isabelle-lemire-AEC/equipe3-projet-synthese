@@ -12,7 +12,6 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -192,14 +191,49 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-  padding-block: 3rem;
+  padding-block: 2rem;
   padding-inline: 2rem;
   cursor: pointer;
-  /*  &__img {
-       min-width: 150px;
-       max-width: 70%;
-       margin-inline: auto;
-   } */
+}
+@media (max-width: 1680px) {
+  .carte-entreprise {
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    padding-block: 1rem;
+    padding-inline: 1rem;
+  }
+}
+@media (max-width: 900px) {
+  .carte-entreprise {
+    grid-template-columns: 1fr;
+    padding-block: 2rem;
+  }
+}
+@media (max-width: 600px) {
+  .carte-entreprise {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding-block: 2rem;
+    padding-inline: 2rem;
+  }
+}
+@media (max-width: 1680px) {
+  .carte-entreprise__img {
+    max-width: 80%;
+    margin-inline: auto;
+  }
+}
+@media (max-width: 900px) {
+  .carte-entreprise__img {
+    max-width: 60%;
+    margin-inline: unset;
+  }
+}
+@media (max-width: 600px) {
+  .carte-entreprise__img {
+    max-width: 100%;
+  }
 }
 .carte-entreprise__texte {
   display: flex;
@@ -208,13 +242,14 @@
   gap: 1rem;
 }
 .carte-entreprise__texte h2 {
-  font-size: clamp(1.2656rem, 1.1408rem + 0.3993vi, 1.62rem);
+  font-size: clamp(1.125rem, 1.0458rem + 0.2535vi, 1.35rem);
   color: #111111;
   margin-bottom: 0.5rem;
 }
 .carte-entreprise__texte p {
   font-family: "Roboto";
-  color: #707070;
+  font-size: 16px;
+  line-height: 1.1;
 }
 
 table {
@@ -269,8 +304,7 @@ table td {
 @media (max-width: 1000px) {
   .liste__rangee {
     grid-template-columns: 2fr 1fr 2fr;
-    -moz-column-gap: 2rem;
-         column-gap: 2rem;
+    column-gap: 2rem;
     row-gap: 1rem;
   }
   .liste__rangee:first-child {
@@ -547,7 +581,7 @@ select {
 }
 
 .form-fiche__label-input-vertical h4, .form-fiche__wrapper-titre-groupe-inputs h3 {
-  font-size: clamp(1rem, 0.956rem + 0.1408vi, 1.125rem);
+  font-size: clamp(1.125rem, 1.0458rem + 0.2535vi, 1.35rem);
 }
 
 input:not([type=radio]),
@@ -582,7 +616,6 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
-  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -670,7 +703,17 @@ label {
   }
 }
 .form-fiche__label-input-horizontal label {
-  flex-basis: 5%;
+  flex-basis: 10%;
+}
+@media (max-width: 1380px) {
+  .form-fiche__label-input-horizontal label {
+    flex-basis: 16%;
+  }
+}
+@media (max-width: 800px) {
+  .form-fiche__label-input-horizontal label {
+    flex-basis: unset;
+  }
 }
 .form-fiche__label-input-vertical {
   display: flex;
@@ -687,6 +730,11 @@ label {
 }
 .form-fiche__label-input-demi {
   width: calc(50% - 1rem);
+}
+@media (max-width: 800px) {
+  .form-fiche__label-input-demi {
+    width: 100%;
+  }
 }
 .form-fiche__label-radio-input {
   padding-left: 0.5rem;
@@ -1102,9 +1150,19 @@ label {
     margin-bottom: 3rem;
   }
 }
-@media (max-width: 1380px) {
+@media (max-width: 1760px) {
   .formulaire-ajout-candidat .form-fiche__label-input-horizontal label {
-    flex-basis: 10%;
+    flex-basis: 15%;
+  }
+}
+@media (max-width: 1200px) {
+  .formulaire-ajout-candidat .form-fiche__label-input-horizontal label {
+    flex-basis: 20%;
+  }
+}
+@media (max-width: 1000px) {
+  .formulaire-ajout-candidat .form-fiche__label-input-horizontal label {
+    flex-basis: 25%;
   }
 }
 @media (max-width: 800px) {
@@ -1137,18 +1195,21 @@ label {
 }
 
 /* Général à plusieurs views d'entreprises */
+#edition-entreprise,
 #ajout-entreprise {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 2rem;
-}
-
-#edition-entreprise {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
   gap: 9rem;
+}
+@media (max-width: 800px) {
+  #edition-entreprise,
+  #ajout-entreprise {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3rem;
+  }
 }
 
 .formulaire-ajout-entreprise .form-fiche__wrapper-titre,
@@ -1181,6 +1242,19 @@ label {
   grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
 }
+@media (max-width: 1680px) {
+  .entreprises__liste {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+@media (max-width: 600px) {
+  .entreprises__liste {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 .entreprises__liste a {
   text-decoration: none;
 }
@@ -1193,24 +1267,11 @@ label {
 }
 
 /* Spécifique pour la view EntrepriseAjout */
-.formulaire-ajout-entreprise {
-  /*   h2,
-  h3 {
-      color: variables.$blue;
-  } */
-}
-.formulaire-ajout-entreprise .form-fiche__wrapper-titre {
-  margin-bottom: 12rem;
+.formulaire-ajout-entreprise .form-fiche__input-parcourir {
+  flex-basis: 100%;
 }
 
 /* Spécifique pour la view EntrepriseDetail et EntrepriseMiseAJour */
-.fiche-entreprise-details,
-.formulaire-edition-entreprise {
-  /*   h2,
-  h3 {
-      color: variables.$blue;
-  } */
-}
 .fiche-entreprise-details .form-fiche__wrapper-titre-logo,
 .formulaire-edition-entreprise .form-fiche__wrapper-titre-logo {
   display: flex;
@@ -1218,6 +1279,24 @@ label {
   justify-content: flex-start;
   align-items: center;
   gap: 2rem;
+}
+@media (max-width: 800px) {
+  .fiche-entreprise-details .form-fiche__wrapper-titre-logo,
+  .formulaire-edition-entreprise .form-fiche__wrapper-titre-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  .fiche-entreprise-details .form-fiche__wrapper-titre-logo .entreprise-logo,
+  .formulaire-edition-entreprise .form-fiche__wrapper-titre-logo .entreprise-logo {
+    max-width: 100px;
+  }
+  .fiche-entreprise-details .form-fiche__wrapper-titre-logo h1,
+  .formulaire-edition-entreprise .form-fiche__wrapper-titre-logo h1 {
+    margin-bottom: 0;
+  }
 }
 .fiche-entreprise-details .form-fiche__wrapper-titre,
 .formulaire-edition-entreprise .form-fiche__wrapper-titre {
@@ -1234,6 +1313,9 @@ label {
 /* Spécifique pour la view EntrepriseMiseAJour */
 #edition-entreprise .form-fiche__label-input-horizontal label {
   flex-basis: 15%;
+}
+#edition-entreprise .form-fiche__input-parcourir {
+  flex-basis: 100%;
 }
 
 #ajout-demandestages,
@@ -1290,6 +1372,9 @@ label {
 } */
 #ajout-demandestages .form-fiche__input-parcourir {
   width: 50%;
+}
+#ajout-demandestages .form-fiche__label-input-horizontal label {
+  flex-basis: 5%;
 }
 @media (max-width: 1380px) {
   #ajout-demandestages .form-fiche__label-input-horizontal label {
@@ -1599,4 +1684,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}
+}/*# sourceMappingURL=styles.css.map */

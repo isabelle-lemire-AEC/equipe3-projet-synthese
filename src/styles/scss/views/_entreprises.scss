@@ -5,12 +5,13 @@
 
 /* Général à plusieurs views d'entreprises */
 
+#edition-entreprise,
 #ajout-entreprise {
-    @include mixins.flex(column, null, flex-end, variables.$spacing-medium);
-}
-
-#edition-entreprise {
     @include mixins.flex(column, null, flex-end, variables.$spacing-large*3);
+
+    @include mixins.media-max(800px) {
+        @include mixins.flex(column, null, flex-end, variables.$spacing-large);
+    }
 }
 
 .formulaire-ajout-entreprise,
@@ -51,6 +52,14 @@
     &__liste {
         @include mixins.grid(2, variables.$spacing-large);
 
+        @include mixins.media-max(1680px) {
+            @include mixins.grid(2, variables.$spacing-medium);
+        }
+
+        @include mixins.media-max(600px) {
+            @include mixins.grid(1, null);
+        }
+
         a {
             text-decoration: none; // Enlever lors de l'uniformisation avec la carte Candidat?????
         }
@@ -72,30 +81,36 @@
 
 .formulaire-ajout-entreprise {
 
-    .form-fiche__wrapper-titre {
-        margin-bottom: variables.$spacing-large * 4;
+    .form-fiche {
+        &__input-parcourir {
+            flex-basis: 100%;
+        }
     }
-
-    /*   h2,
-    h3 {
-        color: variables.$blue;
-    } */
 }
-
 
 /* Spécifique pour la view EntrepriseDetail et EntrepriseMiseAJour */
 
 .fiche-entreprise-details,
 .formulaire-edition-entreprise {
 
-    /*   h2,
-    h3 {
-        color: variables.$blue;
-    } */
-
     .form-fiche {
         &__wrapper-titre-logo {
             @include mixins.flex(row, flex-start, center, variables.$spacing-medium);
+
+            @include mixins.media-max(800px) {
+
+                @include mixins.flex(column, null, flex-start, variables.$spacing-medium);
+
+                .entreprise-logo {
+                    max-width: 100px;
+                }
+
+                h1 {
+                    margin-bottom: 0;
+                }
+
+                margin-bottom: variables.$spacing-large;
+            }
         }
 
         &__wrapper-titre {
@@ -121,6 +136,10 @@
             label {
                 flex-basis: 15%;
             }
+        }
+
+        &__input-parcourir {
+            flex-basis: 100%;
         }
     }
 }

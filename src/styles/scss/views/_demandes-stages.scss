@@ -72,6 +72,8 @@
 
         &__label-input-horizontal {
             label {
+                flex-basis: 5%;
+
                 @include mixins.media-max(1380px) {
                     flex-basis: 10%;
                 }

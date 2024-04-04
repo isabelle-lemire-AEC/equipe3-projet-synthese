@@ -1,7 +1,7 @@
 <!-- EntrepriseCard.vue -->
 <template>
     <div class="carte-entreprise" @click="redirectToDetails">
-      <img src="../assets/mediavox-logo.jpg" :alt=entreprise.name>
+      <img class="carte-entreprise__img" src="../assets/mediavox-logo.jpg" :alt=entreprise.name>
       <div class="carte-entreprise__texte">
         <div>
           <h2>{{ entreprise.name }}</h2>
