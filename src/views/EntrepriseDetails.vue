@@ -39,7 +39,7 @@
         <!-- Contact de l'entreprise -->
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h3>Personne contact</h3>
-          <p class="nom-contact">{{ entreprise.contactPerson }}</p>
+          <p class="nom-contact">Isabelle Lemire</p>
         </div>
 
         <!-- Informations de contact -->
