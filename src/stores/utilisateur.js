@@ -1,5 +1,4 @@
 // utilisateur.js
-
 import { defineStore } from 'pinia';
 
 export const utilisateurStore = defineStore({

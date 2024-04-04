@@ -1,4 +1,4 @@
-<!-- CandidatMiseAjour.vue - Isa  -->
+<!-- CandidatMiseAjour.vue -->
 <template>
     <div class="form-fiche formulaire-edition-candidat">
         <div class="form-fiche__wrapper-titre" v-if="candidat">
