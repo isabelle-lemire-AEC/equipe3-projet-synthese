@@ -20,7 +20,6 @@
             <div>
               <label for="description"></label>
               <textarea v-model="offerData.description" placeholder="Description" rows="5"></textarea>
-              <p v-if="erreurs.description" class="validForm">Veuillez fournir la description du stage.</p>
             </div>
           </div>
 
