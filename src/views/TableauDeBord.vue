@@ -116,7 +116,7 @@
     </div>
 </template>
 <script setup>
-    import ElementListeStage from '../components/elementListeStage.vue'
+    import ElementListeStage from '../components/ElementListeStage.vue'
     import { ref, onMounted } from 'vue';
     import { useInternshipRequests } from '../composables/demandes_stages/demandeDeStage.js';
     import { useInternshipOffers } from '../composables/offres_stage/offreDeStage.js';
