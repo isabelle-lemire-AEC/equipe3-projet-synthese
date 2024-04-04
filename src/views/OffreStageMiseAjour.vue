@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <form @submit.prevent="submitForm">
+    <form id="edition-offrestages" @submit.prevent="submitForm">
       <BtnAnnulerModifierSauvegarder 
 				buttonText="Mettre à jour" 
 				buttonClass="bouton bouton--turquoise">
