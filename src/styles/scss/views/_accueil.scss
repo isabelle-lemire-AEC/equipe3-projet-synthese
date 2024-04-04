@@ -4,8 +4,12 @@
 .accueil {
     &__logo {
         background-color: variables.$white;
-        width: 100%;
+        max-width: 100%;
         padding: 20px;
+
+        img {
+            max-width: 150px;
+        }
     }
 
     &__contenu {

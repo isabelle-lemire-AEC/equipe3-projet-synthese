@@ -78,7 +78,7 @@
                     flex-basis: 10%;
                 }
 
-                @include mixins.media-max(800px) {
+                @include mixins.media-max(900px) {
                     flex-basis: unset;
                 }
             }
@@ -89,7 +89,7 @@
                 width: 60%;
             }
 
-            @include mixins.media-max(800px) {
+            @include mixins.media-max(900px) {
                 width: 100%;
             }
         }

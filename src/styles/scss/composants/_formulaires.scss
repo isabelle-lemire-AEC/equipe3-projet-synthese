@@ -65,7 +65,7 @@ label {
     }
 
     &__boutons-haut {
-        @include mixins.media-max(800px) {
+        @include mixins.media-max(900px) {
             display: none;
         }
     }
@@ -77,7 +77,7 @@ label {
         @include mixins.border(0, null, 10px);
         @include mixins.padding(variables.$spacing-xlarge, variables.$spacing-large);
 
-        @include mixins.media-max(800px) {
+        @include mixins.media-max(900px) {
             @include mixins.padding(variables.$spacing-medium, variables.$spacing-small*1.5);
         }
     }
@@ -85,7 +85,7 @@ label {
     &__wrapper-titre-groupe-inputs {
         @include mixins.flex(column, null, null, variables.$spacing-large);
 
-        @include mixins.media-max(800px) {
+        @include mixins.media-max(900px) {
             @include mixins.grid(1, variables.$spacing-medium);
         }
 
@@ -98,7 +98,7 @@ label {
     &__colonnes-inputs {
         @include mixins.grid(2, variables.$spacing-medium);
 
-        @include mixins.media-max(800px) {
+        @include mixins.media-max(900px) {
             @include mixins.grid(1, variables.$spacing-medium);
         }
     }
@@ -110,18 +110,18 @@ label {
     &__label-input-horizontal {
         @include mixins.flex(row, null, center, variables.$spacing-small);
 
-        @include mixins.media-max(800px) {
+        @include mixins.media-max(900px) {
             @include mixins.flex(column, null, flex-start, null);
         }
 
         label {
-            flex-basis: 10%;
+            flex-basis: 15%;
 
             @include mixins.media-max(1380px) {
-                flex-basis: 16%;
+                flex-basis: 18%;
             }
 
-            @include mixins.media-max(800px) {
+            @include mixins.media-max(900px) {
                 flex-basis: unset;
             }
         }
@@ -147,7 +147,7 @@ label {
     &__label-input-demi {
         width: calc(50% - variables.$spacing-small);
 
-        @include mixins.media-max(800px) {
+        @include mixins.media-max(900px) {
             width: 100%;
         }
     }

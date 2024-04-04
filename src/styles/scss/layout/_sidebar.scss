@@ -7,26 +7,37 @@ $color-offres-stage: variables.$red;
 $color-candidats: variables.$purple;
 $color-entreprises: variables.$blue;
 
+.menu {
+    &__container {
+        background-color: variables.$white;
+        min-width: 280px;
+        height: 100%;
 
-.container-menu {
-    background-color: variables.$white;
-    min-width: 280px;
-    height: 100%;
+        @include mixins.media-max(1200px) {
+            min-width: 100px;
 
-    @include mixins.media-max(800px) {
-        min-width: 100px; 
-        img {
-            width: 100%;
+            img {
+                width: 100%;
+            }
+        }
+
+        @include mixins.media-max(600px) {
+            display: none;
         }
     }
-}
 
-.logo {
-    max-width: 200px;
-    padding: 1rem;
+    &__logo-sidebar {
+        img {
+            max-width: 200px;
+            padding-left: variables.$spacing-medium;
+            padding-top: variables.$spacing-small * 1.5;
+            margin-bottom: variables.$spacing-medium *1.5;
+        }
 
-    @include mixins.media-max(800px) {
-        padding: 10px 5px 0 5px;    }
+        @include mixins.media-max(1200px) {
+            display: none;
+        }
+    }
 }
 
 .navbar {
@@ -50,6 +61,10 @@ $color-entreprises: variables.$blue;
             width: 18px;
             height: auto;
             text-align: left;
+
+            @include mixins.media-max(1200px) {
+                font-size: 1.5rem;
+            }
         }
 
         &::after {
@@ -146,8 +161,6 @@ $color-entreprises: variables.$blue;
                 }
             }
 
-
-
         }
 
         &.candidats {
@@ -160,9 +173,6 @@ $color-entreprises: variables.$blue;
                     color: darken(variables.$purple, 5%);
                 }
             }
-
-
-
         }
 
         &.entreprises {
@@ -175,16 +185,14 @@ $color-entreprises: variables.$blue;
                     color: darken(variables.$blue, 5%);
                 }
             }
-
-
         }
     }
 
 }
 
-@include mixins.media-max(800px) {
-    span.nav-mobile  {
-        display:none;
+@include mixins.media-max(1200px) {
+    span.nav-mobile {
+        display: none;
     }
 
     .logo {
