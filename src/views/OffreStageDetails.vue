@@ -6,33 +6,34 @@
     <div v-else-if="error">Erreur lors du chargement des détails de l'offre de stage: {{ error }}</div>
 
     <div v-else-if="offerData && offerData.title" class="form-fiche fiche-offrestages-details">
-      <div class="boutons-action">
-        <button :class="{ 'boutons-action__crochet': offerData.isActive }" @click="activate()">
-          <i class="fas fa-check"></i>
-        </button>
-        <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(offerData._id)">
-          <i class="fas fa-pen-to-square"></i>
-        </button>
-        <!-- Bouton de suppression -->
-        <button class="boutons-action__supprimer" @click="afficherConfirmationModal">
-          <i class="fas fa-square-xmark"></i>
-        </button>
-      </div>
-
       <div class="form-fiche__wrapper-titre">
         <p class="form-fiche__nom-section">Offre de stage</p>
         <h1>{{ offerData.title }}</h1>
         <p class="form-fiche__sous-titre">{{ offerData.enterprise?.name }}</p>
       </div>
 
+      <!-- Boutons d'action -->
       <div class="form-fiche__wrapper-boutons-encadre">
-        <!-- Section Encadré blanc  -->
-        <div class="form-fiche__encadre">
+        <div class="boutons-action">
+          <button :class="{ 'boutons-action__crochet': offerData.isActive }" @click="activate()">
+            <i class="fas fa-check"></i>
+          </button>
+          <button class="boutons-action__modifier" @click="redirigerVersMiseAJour(offerData._id)">
+            <i class="fas fa-pen-to-square"></i>
+          </button>
+          <!-- Bouton de suppression -->
+          <button class="boutons-action__supprimer" @click="afficherConfirmationModal">
+            <i class="fas fa-square-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-fiche__encadre">
           <!-- Section Description tâche -->
           <div class="form-fiche__wrapper-titre-groupe-inputs">
             <h2>Description de la tâche</h2>
             <p>{{ offerData.description }}</p>
-          </div>
+          </div>        
           <!-- Section Formation et exigences -->
           <div class="form-fiche__label-input-vertical">
             <h4>Formation demandées</h4>
@@ -81,8 +82,10 @@
 dapibus quam hendrerit nec. Vestibulum vel blandit lorem. Praesent laoreet quis tortor quis pharetra. Nulla dictum erat id
 nisl pulvinar, ac aliquam lectus laoreet. Aliquam commodo pulvinar odio vitae interdum. Phasellus ut ante efficitur,
 venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</p>
-          </div>
+          </div>          
+
         </div>
+
       </div>
     </div>
 
@@ -91,10 +94,6 @@ venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</
       :message="'Êtes-vous sûr de vouloir supprimer cette offre de stage?'" @annulerSuppression="annulerSuppression"
       @confirmerSuppression="supprimer" />
 
-
-    <!-- Message d'erreur
-    <div v-else>Aucune information disponible</div>   -->
-  </div>
 </template>
 
 <script setup>
@@ -137,7 +136,6 @@ venenatis purus sit amet, condimentum leo. Pellentesque nulla sem, consectetur</
       // Afin d'afficher les dates dans le bon format
       dateDebut.value = offerData.value.startDate.substring(0, offerData.value.startDate.indexOf('T'));
       dateFin.value = offerData.value.endDate.substring(0, offerData.value.startDate.indexOf('T'));
-
 
       // Peuplez les autres champs de formulaire avec les données récupérées
     } else {
