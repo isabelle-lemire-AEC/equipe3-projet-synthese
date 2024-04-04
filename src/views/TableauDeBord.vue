@@ -7,7 +7,7 @@
                     <i class="fa-solid fa-file-lines"></i>
                 </div>
                 <div>
-                    <p>Demandes de stage</p>
+                    <p class="tableau-bord__info-rapide-categorie">Demandes de stage</p>
                     <p class="chiffre">{{ demandesCount }}</p>
                 </div>
 
@@ -17,7 +17,7 @@
                     <i class="fa-solid fa-paper-plane"></i>
                 </div>
                 <div>
-                    <p>Offres de stage</p>
+                    <p class="tableau-bord__info-rapide-categorie">Offres de stage</p>
                     <p class="chiffre">{{ offresCount }}</p>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                         <i class="fa-solid fa-user"></i>
                     </div>
                     <div>
-                        <p class="bulle-candidat">Candidats</p>
+                        <p class="bulle-candidat tableau-bord__info-rapide-categorie">Candidats</p>
                         <p class="chiffre">{{ candidatsCount }}</p>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                         <i class="fa-solid fa-computer-mouse bulle-entreprise"></i>
                     </div>
                     <div>
-                        <p>Entreprises</p>
+                        <p class="tableau-bord__info-rapide-categorie">Entreprises</p>
                         <p class="chiffre">{{ entreprisesCount }}</p>
                     </div>
                 </div>
