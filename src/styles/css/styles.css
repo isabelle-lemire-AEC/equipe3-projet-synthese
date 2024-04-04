@@ -12,6 +12,7 @@
   border-color: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .bouton--transparent {
@@ -304,7 +305,8 @@ table td {
 @media (max-width: 1000px) {
   .liste__rangee {
     grid-template-columns: 2fr 1fr 2fr;
-    column-gap: 2rem;
+    -moz-column-gap: 2rem;
+         column-gap: 2rem;
     row-gap: 1rem;
   }
   .liste__rangee:first-child {
@@ -574,6 +576,19 @@ table.liste-5-colonnes .liste__body__contenu-colonne--4 .bouton--activer {
   }
 }
 
+/* Spécifique à la condition isActive */
+.icone-noir {
+  color: black;
+}
+
+.fond-gris-pale {
+  background-color: rgb(177, 177, 177) !important;
+}
+
+.texte-rouge {
+  color: red;
+}
+
 .form-fiche__label-input-vertical h4, label, input:not([type=radio]),
 textarea,
 select {
@@ -616,6 +631,7 @@ label {
   font-weight: 700;
 }
 .form-fiche__sous-titre {
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem;
   background-color: #FFFFFF;
@@ -1714,4 +1730,4 @@ h3 {
 a,
 button {
   cursor: pointer;
-}/*# sourceMappingURL=styles.css.map */
+}

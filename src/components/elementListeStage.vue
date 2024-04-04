@@ -3,19 +3,19 @@
         <td class="liste__body__contenu-colonne liste__body__contenu-colonne--1">
             <div class="liste__wrapper-horizontal">
                 <div v-if="props.isDemande">
-                    <div class="icone icone--demande">
-                        <i class="fas fa-graduation-cap" :class="{ 'icone-noir': !props.isActive}"></i>
+                    <div class="icone icone--demande" :class="{ 'fond-gris-pale': props.isActive && !props.isTableauDeBord}">
+                        <i class="fas fa-graduation-cap" :class="{ 'icone-noir': props.isActive && !props.isTableauDeBord}"></i>
                     </div>
                 </div>
 
                 <div v-if="!props.isDemande">
-                    <div class="icone icone--offre">
-                        <i class="fas fa-suitcase"></i>
+                    <div class="icone icone--offre" :class="{ 'fond-gris-pale': props.isActive && !props.isTableauDeBord}">
+                        <i class="fas fa-suitcase" :class="{ 'icone-noir': props.isActive && !props.isTableauDeBord}"></i>
                     </div>
                 </div>
 
                 <div class="liste__wrapper-vertical">
-                    <span class="poste">{{ props.posteTitre }}</span>
+                    <span class="poste" :class="{ 'texte-rouge': props.isActive && !props.isTableauDeBord }">{{ props.posteTitre }}</span>
                     <span>{{ props.posteNom }}</span>
                 </div>
             </div>
@@ -226,7 +226,5 @@
 
 
 <style>
-    .icone-noir {
-        color: black;
-    }    
+
 </style>
