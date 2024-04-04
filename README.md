@@ -23,10 +23,10 @@ L’équipe a rencontré plusieurs défis lors de la réalisation du projet :
 **5.	Partage des tâches :** Certaines personnes ont évoqué le manque de temps et ont ainsi moins offert d’effort au niveau du travail. Cela a entraîné une répartition inégale des tâches et a ralenti la progression du projet.
 
 ## Équipe 3 :
-Cadieux, Caroline
-Lemire, Isabelle
-Massicotte, Anne
-Mouterfi, Nacer
-Pereira, Donaria
-Thivierge, Jonathan
-Villeneuve, Raphaël
+- Cadieux, Caroline
+- Lemire, Isabelle
+- Massicotte, Anne
+- Mouterfi, Nacer
+- Pereira, Donaria
+- Thivierge, Jonathan
+- Villeneuve, Raphaël
