@@ -14,7 +14,8 @@
       <div class="form-fiche__wrapper-boutons-inputs">
 
         <!-- Boutons annuler et mettre à jour -->
-        <BtnAnnulerModifierSauvegarder 
+        <BtnAnnulerModifierSauvegarder
+          class="form-fiche__boutons-haut" 
           buttonText="Mettre à jour" 
           buttonClass="bouton bouton--bleu">
         </BtnAnnulerModifierSauvegarder>
@@ -27,8 +28,10 @@
 
           <div class="form-fiche__label-input-horizontal form-fiche__input-parcourir">
             <label for="logo">Logo</label>
-            <input id="logo" type="text" v-model="entreprise.image" />
-            <button disabled>Parcourir</button>
+            <div class="form-fiche__input-parcourir">
+              <input id="logo" type="text" v-model="entreprise.image" />
+              <button disabled>Parcourir</button>
+            </div>
           </div>
         </div>
       </div>
@@ -183,15 +186,4 @@
 
 <style scoped>
 
-  .logo-container {
-    flex: 0 1 20%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-  .entreprise-logo {
-    max-width: 20%;
-    height: auto;
-  }
 </style>

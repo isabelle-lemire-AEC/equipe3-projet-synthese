@@ -66,9 +66,19 @@
         }
 
         &__label-input-horizontal {
+
             label {
-                @include mixins.media-max(1380px) {
-                    flex-basis: 10%;
+
+                @include mixins.media-max(1760px) {
+                    flex-basis: 15%;
+                }
+
+                @include mixins.media-max(1200px) {
+                    flex-basis: 20%;
+                }
+
+                @include mixins.media-max(1000px) {
+                    flex-basis: 25%;
                 }
 
                 @include mixins.media-max(800px) {

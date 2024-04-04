@@ -20,7 +20,7 @@
                     <h2>Courte présentation</h2>
                     <div>
                         <label for="description"></label>
-                        <textarea name="description" id="description" rows="10" v-model="candidat.description"></textarea>
+                        <textarea name="description" id="description" rows="6" v-model="candidat.description"></textarea>
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="form-fiche__label-input-vertical">
-                                <label for="province"></label>
+                                <label for="province">Province</label>
                                 <select id="province" v-model="candidat.province">
                                     <option value="">Province</option>
                                     <option v-for="province in provinces"

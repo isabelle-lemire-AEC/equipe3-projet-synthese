@@ -9,6 +9,7 @@
       
       <!-- Boutons annuler et sauvegarder -->
       <BtnAnnulerModifierSauvegarder
+        class="form-fiche__boutons-haut"
         buttonText="Sauvegarder"
         buttonClass="bouton bouton--mauve">
       </BtnAnnulerModifierSauvegarder>

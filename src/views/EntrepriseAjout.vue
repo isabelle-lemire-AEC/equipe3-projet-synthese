@@ -5,46 +5,64 @@
       <h1>Ajouter une entreprise</h1>
     </div>
     <form id="ajout-entreprise" @submit.prevent="soumettreFormulaireEntreprise">
-		
-        <!-- Boutons annuler et sauvegarder -->
-        <BtnAnnulerModifierSauvegarder 
-          buttonText="Sauvegarder" 
-          buttonClass="bouton bouton--bleu">
-        </BtnAnnulerModifierSauvegarder>
+
+    <div class="form-fiche__wrapper-boutons-inputs">
+
+      <!-- Boutons annuler et sauvegarder -->
+      <BtnAnnulerModifierSauvegarder
+        class="form-fiche__boutons-haut"
+        buttonText="Sauvegarder"
+        buttonClass="bouton bouton--bleu">
+      </BtnAnnulerModifierSauvegarder>
 
       <div class="form-fiche__input-hors-encadre">
-        <div class="form-fiche__label-input-horizontal">
-          <label for="nom">Entreprise :</label>
-          <div class="form-fiche__wrapper-input-msg-erreur">
-            <input type="text" id="nom" v-model.trim="entreprise.name" @input="validerChamp('name')"/>
-            <p class="error-message" v-if="erreurs.name">Ce champ est obligatoire</p>
+        <div class="form-fiche__colonne-inputs">
+          <div class="form-fiche__label-input-horizontal">
+            <label for="nom">Entreprise :</label>
+            <div class="form-fiche__wrapper-input-msg-erreur">
+              <input type="text" id="nom" v-model.trim="entreprise.name" @input="validerChamp('name')" />
+              <p class="error-message" v-if="erreurs.name">Ce champ est obligatoire</p>
+            </div>
           </div>
-        </div>
-        <div class="form-fiche__label-input-horizontal">
-          <label for="logo">Logo :</label>
-          <div class="form-fiche__wrapper-input-msg-erreur">
-            <input type="text" id="logo" v-model.trim="entreprise.image" @input="validerChamp('image')"/>
-            <p class="error-message" v-if="erreurs.image">L'URL du logo est obligatoire</p>
+          <div class="form-fiche__label-input-horizontal">
+            <label for="logo">Logo (URL) :</label>
+            <div class="form-fiche__wrapper-input-msg-erreur form-fiche__input-parcourir">
+              <input type="text" id="logo" v-model.trim="entreprise.image" @input="validerChamp('image')" />
+              <button disabled>Parcourir</button>
+              <p class="error-message" v-if="erreurs.image">L'URL du logo est obligatoire</p>
+            </div>
           </div>
         </div>
       </div>
+      </div>
+
+      <div class="form-fiche__wrapper-boutons-inputs">
       <div class="form-fiche__encadre">
-        <div class="form-fiche__wrapper-titre-groupe-inputs">
+        <div class="form-fiche__colonne-inputs">
           <h2>Courte présentation</h2>
           <div>
-            <label for="presentation" class="form-fiche__label--cache">Présentation</label>
-            <textarea id="presentation" cols="30" rows="10" v-model.trim="entreprise.description" @input="validerChamp('description')"></textarea>
+            <label for="presentation" class="form-fiche__label--cache" hidden>Présentation</label>
+            <textarea id="presentation" cols="30" rows="10" v-model.trim="entreprise.description"
+                      @input="validerChamp('description')"></textarea>
             <p class="error-message" v-if="erreurs.description">Ce champ est obligatoire</p>
           </div>
-        </div>
-        <div
-          class="form-fiche__label-input-vertical form-fiche__colonne-inputs">
-          <label for="contactPerson">Personne contact :</label>
-          <div>
-            <input type="text" id="contactPerson" v-model.trim="entreprise.contactPerson" @input="validerChamp('contactPerson')" class="largeur-100"/>
-            <p class="error-message" v-if="erreurs.contactPerson">Ce champ est obligatoire</p>
+
+          <div
+               class="form-fiche__label-input-vertical form-fiche__colonne-inputs form-fiche__label-input-demi">
+            <label for="contactPerson">Personne contact :</label>
+            <div>
+              <input
+                     type="text"
+                     id="contactPerson"
+                     v-model.trim="entreprise.contactPerson"
+                     @input="validerChamp('contactPerson')"
+
+                     class="largeur-100" />
+              <p class="error-message" v-if="erreurs.contactPerson">Ce champ est obligatoire</p>
+            </div>
           </div>
         </div>
+
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h3>Informations de contact</h3>
           <div class="form-fiche__colonnes-inputs">
@@ -106,11 +124,11 @@
         </div>
       </div>
 
-      <BtnAnnulerModifierSauvegarder 
-        buttonText="Sauvegarder" 
+      <BtnAnnulerModifierSauvegarder
+        buttonText="Sauvegarder"
         buttonClass="bouton bouton--bleu">
       </BtnAnnulerModifierSauvegarder>
-
+</div>
     </form>
   </div>
 </template>
