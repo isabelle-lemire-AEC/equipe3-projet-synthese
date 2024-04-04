@@ -13,6 +13,7 @@ export function useEntreprise() {
     loading.value = true;
     try {
       const response = await axios.get(`${apiBaseUrl}/enterprises`);
+      console.log('GET ALL - Entreprises - OK', response.data);
       entreprises.value = response.data;
     } catch (err) {
       error.value = err;
@@ -49,6 +50,7 @@ export function useEntreprise() {
             console.error('Détail de l\'erreur:', error.response.data);
         }
         loading.value = false;
+        return error;
     } finally {
         loading.value = false;
     }

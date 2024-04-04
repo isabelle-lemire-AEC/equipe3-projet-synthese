@@ -1,4 +1,4 @@
-<!-- CandidatMiseAjour.vue - Isa  -->
+<!-- CandidatMiseAjour.vue -->
 <template>
     <div class="form-fiche formulaire-edition-candidat">
         <div class="form-fiche__wrapper-titre" v-if="candidat">
@@ -129,9 +129,11 @@
             }
             console.log("Tentative de modification du candidat :", candidat.value);
             console.log("URL de la requête PATCH :", `https://api-3.fly.dev/candidates/${candidat.value._id}`);
-            await editCandidat(candidat.value._id, candidat.value); // Passez candidat.value._id en premier argument
+            const response = await editCandidat(candidat.value._id, candidat.value); // Passez candidat.value._id en premier argument
             console.log("Candidat modifié");
-            router.push(`/candidat/${candidat.value._id}`);
+            if(response === undefined) {
+                router.push(`/candidat/${candidat.value._id}`);
+            }
         } catch (error) {
             console.error("Erreur lors de la modification du candidat :", error);
         }

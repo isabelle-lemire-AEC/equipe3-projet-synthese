@@ -49,7 +49,7 @@
             <!-- Personne de contact -->
             <div class="form-fiche__label-input-vertical form-fiche__label-input-demi ">
               <label for="contactPerson">Personne de contact</label>
-              <input id="contactPerson" type="text" v-model="entreprise.contactPerson" />
+              <input id="contactPerson" type="text" v-model="entreprise.contactPerson" value="Isabelle Lemire" />
             </div>
           </div>
 

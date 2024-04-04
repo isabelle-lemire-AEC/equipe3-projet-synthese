@@ -49,5 +49,5 @@
 </script>
 
 <style scoped>
-/* Styles */
+
 </style>

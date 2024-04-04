@@ -1,5 +1,5 @@
 <template>
-    <tr class="liste__rangee">
+    <tr class="liste__rangee" v-if="showThisElement">
         <td class="liste__body__contenu-colonne liste__body__contenu-colonne--1">
             <div class="liste__wrapper-horizontal">
                 <div v-if="props.isDemande">
@@ -94,12 +94,12 @@
 
     <!-- Modal de confirmation de suppression -->
     <div class="modal" v-if="showConfirmationModal">
-        <div class="modal-content">
+        <div class="modal__contenu">
             <p v-if="props.isDemande">Êtes-vous sûr de vouloir supprimer cette demande de stage?</p>
             <p v-if="!props.isDemande">Êtes-vous sûr de vouloir supprimer cette offre de stage?</p>
-            <div class="modal-buttons">
-                <button class="btn cancel" @click="annulerSuppression()">Annuler</button>
-                <button class="btn confirm" @click="deleteDemande()">Confirmer</button>
+            <div class="modal__boutons">
+                <button class="bouton bouton--rouge" @click="annulerSuppression()">Annuler</button>
+                <button class="bouton bouton--vert" @click="deleteDemande()">Confirmer</button>
             </div>
         </div>
     </div>
@@ -191,11 +191,6 @@
 
         const totalTableBodyRow = document.querySelectorAll(".liste__body .liste__rangee");
 
-
-        console.log("contenuColonne2: ", contenuColonne2);
-        console.log("contenuColonne3: ", contenuColonne3);
-        console.log("totalTableBodyRow: ", totalTableBodyRow);
-
         for (let i = 0; i < totalTableBodyRow.length; i++) {
             contenuColonne2[i].setAttribute("data-title", titreColonne2.innerText);
 
@@ -229,5 +224,4 @@
     });
 </script>
 
-<style scoped>
-</style>
+

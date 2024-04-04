@@ -21,7 +21,7 @@
             <label for="nom">Entreprise :</label>
             <div class="form-fiche__wrapper-input-msg-erreur">
               <input type="text" id="nom" v-model.trim="entreprise.name" @input="validerChamp('name')" />
-              <p v-if="erreurs.name">Ce champ est obligatoire</p>
+              <p class="error-message" v-if="erreurs.name">Ce champ est obligatoire</p>
             </div>
           </div>
           <div class="form-fiche__label-input-horizontal">
@@ -29,7 +29,7 @@
             <div class="form-fiche__wrapper-input-msg-erreur form-fiche__input-parcourir">
               <input type="text" id="logo" v-model.trim="entreprise.image" @input="validerChamp('image')" />
               <button disabled>Parcourir</button>
-              <p v-if="erreurs.image">L'URL du logo est obligatoire</p>
+              <p class="error-message" v-if="erreurs.image">L'URL du logo est obligatoire</p>
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@
             <label for="presentation" class="form-fiche__label--cache" hidden>Présentation</label>
             <textarea id="presentation" cols="30" rows="10" v-model.trim="entreprise.description"
                       @input="validerChamp('description')"></textarea>
-            <p v-if="erreurs.description">Ce champ est obligatoire</p>
+            <p class="error-message" v-if="erreurs.description">Ce champ est obligatoire</p>
           </div>
 
           <div
@@ -58,9 +58,7 @@
                      @input="validerChamp('contactPerson')"
 
                      class="largeur-100" />
-              <p v-if="erreurs.contactPerson">
-                Ce champ est obligatoire
-              </p>
+              <p class="error-message" v-if="erreurs.contactPerson">Ce champ est obligatoire</p>
             </div>
           </div>
         </div>
@@ -68,87 +66,57 @@
         <div class="form-fiche__wrapper-titre-groupe-inputs">
           <h3>Informations de contact</h3>
           <div class="form-fiche__colonnes-inputs">
+            <!-- Colonne Gauche -->
             <div class="form-fiche__colonne-inputs">
               <div class="form-fiche__label-input-vertical">
                 <label for="adresse">Adresse :</label>
                 <div>
-                  <input
-                         type="text"
-                         id="adresse"
-                         v-model.trim="entreprise.address"
-                         @input="validerChamp('address')" />
-                  <p v-if="erreurs.address">
-                    Ce champ est obligatoire
-                  </p>
-                </div>
-              </div>
-              <div class="form-fiche__label-input-vertical">
-                <label for="telephone">Téléphone :</label>
-                <div>
-                  <input
-                         type="text"
-                         id="telephone"
-                         v-model.trim="entreprise.phone"
-                         @input="validerChamp('phone')" />
-                  <p v-if="erreurs.phone">
-                    Ce champ est obligatoire
-                  </p>
+                  <input type="text" id="adresse" v-model.trim="entreprise.address" @input="validerChamp('address')" />
+                  <p class="error-message" v-if="erreurs.address">Ce champ est obligatoire</p>
                 </div>
               </div>
               <div class="form-fiche__label-input-vertical">
                 <label for="ville">Ville :</label>
                 <div>
-                  <input
-                         type="text"
-                         id="ville"
-                         v-model.trim="entreprise.city"
-                         @input="validerChamp('city')" />
-                  <p v-if="erreurs.city">
-                  </p>
+                  <input type="text" id="ville" v-model.trim="entreprise.city" @input="validerChamp('city')" />
+                  <p class="error-message" v-if="erreurs.city">Ce champ est obligatoire</p>
                 </div>
-              </div>
-            </div>
-            <div class="form-fiche__colonne-inputs">
-              <div class="form-fiche__label-input-vertical">
-                <label for="courriel">Courriel :</label>
-                <div>
-                  <input
-                    type="email"
-                    id="courriel"
-                    v-model.trim="entreprise.email"
-                    @input="validerChamp('email')" />
-                  <p v-if="erreurs.email">
-                    Ce champ est obligatoire
-                  </p>
-                </div>
-              </div>
+              </div>  
               <div class="form-fiche__label-input-vertical">
                 <label for="province">Province :</label>
                 <div>
                   <select id="province" v-model="entreprise.province._id">
-                    <option
-                            v-for="province in provinces"
-                            :key="province._id"
-                            :value="province._id">
+                    <option v-for="province in provinces" :key="province._id" :value="province._id" >
                       {{ province.value }}
                     </option>
                   </select>
-                  <p v-if="erreurs.province">
-                    Ce champ est obligatoire
-                  </p>
+                  <p class="error-message" v-if="erreurs.province"> Ce champ est obligatoire </p>
                 </div>
               </div>
               <div class="form-fiche__label-input-vertical">
                 <label for="cp">Code postal :</label>
                 <div>
-                  <input
-                    type="text"
-                    id="cp"
-                    v-model.trim="entreprise.postalCode"
-                    @input="validerChamp('postalCode')" />
-                  <p v-if="erreurs.postalCode">
+                  <input type="text" id="cp" v-model.trim="entreprise.postalCode" @input="validerChamp('postalCode')" />
+                  <p class="error-message" v-if="erreurs.postalCode"> Ce champ est obligatoire </p>
+                </div>
+              </div>
+            </div>
+            <!-- Colonne droite -->
+            <div class="form-fiche__colonne-inputs">
+              <div class="form-fiche__label-input-vertical">
+                <label for="telephone">Téléphone :</label>
+                <div>
+                  <input type="text" id="telephone" v-model.trim="entreprise.phone" @input="validerChamp('phone')" />
+                  <p class="error-message" v-if="erreurs.phone">
                     Ce champ est obligatoire
                   </p>
+                </div>
+              </div>              
+              <div class="form-fiche__label-input-vertical">
+                <label for="courriel">Courriel :</label>
+                <div> 
+                  <input type="email" id="courriel" v-model.trim="entreprise.email" @input="validerChamp('email')" />
+                  <p class="error-message" v-if="erreurs.email"> Ce champ est obligatoire</p>
                 </div>
               </div>
             </div>
@@ -176,22 +144,20 @@
   const router = useRouter();
   const { ajouterEntreprise } = useEntreprise();
   const modalShow = ref(false);
-
+  const modalMessage = ref("");
 
   const provinces = ref([]);
   const entreprise = ref({
     name: "",
-    image: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8HwQACgAB/1TD9R8AAAAASUVORK5CYII=",
+    image:
+      "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8HwQACgAB/1TD9R8AAAAASUVORK5CYII=",
     contactPerson: "",
     description: "",
     address: "",
     phone: "",
     city: "",
     email: "",
-    province: {
-      _id: "",
-      value: ""
-    },
+    province: { _id: "", value: "" },
     postalCode: "",
     activitySector: {
       _id: "65f27444cbefd230d7c90949",
@@ -231,8 +197,7 @@
 
     erreurs.value.name = entreprise.value.name.trim() === "" ? true : false;
     erreurs.value.email = !regexEmail.test(entreprise.value.email.trim());
-    erreurs.value.phone = regexPhone.test(entreprise.value.phone.trim()) ? "" :
-      "Le numéro de téléphone doit être un numéro canadien valide.";
+    erreurs.value.phone = regexPhone.test(entreprise.value.phone.trim()) ? "" : "Le numéro de téléphone doit être un numéro canadien valide.";
     erreurs.value.postalCode = !regexPostalCode.test(
       entreprise.value.postalCode.trim()
     );
@@ -247,10 +212,11 @@
       console.error("Vous ne pouvez pas sauvegarder car des champs obligatoires ne sont pas remplis.");
     } else {
       try {
-        await ajouterEntreprise(entreprise.value);
-        router.push({
-          name: "Entreprises"
-        });
+        const response = await ajouterEntreprise(entreprise.value);
+        if (response === undefined)
+        {
+          router.push({ name: "Entreprises" });
+        }
       } catch (error) {
         console.error("Erreur lors de la soumission du formulaire :", error);
       }
@@ -297,26 +263,21 @@
     }
   };
 
-
+  const fermerModal = () => {
+    modalShow.value = false;
+  };
 
   const confirmerEnregistrement = async () => {
     modalShow.value = false;
-    router.push({
-      name: "Entreprises"
-    });
+    router.push({ name: "Entreprises" });
   };
 
   const annulerEnregistrement = () => {
     modalShow.value = false;
-    router.push({
-      name: "Entreprises"
-    });
+    router.push({ name: "Entreprises" });
   };
 </script>
 
 <style scoped>
-
-
-
 
 </style>

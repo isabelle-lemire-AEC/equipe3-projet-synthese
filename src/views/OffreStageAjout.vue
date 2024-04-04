@@ -6,16 +6,6 @@
         </div>
       </div>
 
-      <!-- Boutons annuler et mettre à jour -->
-      <!-- <div class="boutons">
-        <BtnAnnuler></BtnAnnuler>
-          <button class="bouton bouton--rougeOffre" @click="submitForm()">
-              <div class="icone-libelle">
-                  <i class="fas fa-save"></i>
-                  <span>Sauvegarder</span>
-              </div>
-          </button>
-      </div>   -->
       <form id="ajout-offrestages" @submit.prevent="submitForm">
             
         		<!-- Boutons annuler et mettre à jour -->
@@ -91,15 +81,15 @@
                   <div class="form-fiche__label-input-vertical">
                     <label for="ajout-offre-remuneration">Rémunération</label>
                     <div>
-                      <input type="radio" id="ajout-offre-discretion" name="ajout-offre-remuneration" value="discretion" v-model="remunerationType" checked="checked" />
+                      <input type="radio" id="ajout-offre-discretion" name="ajout-offre-remuneration" value="DISCRETIONARY" v-model="offerData.paid" checked />
                       <label for="ajout-offre-discretion" class="form-fiche__label-radio-input">À la discrétion de l'entreprise</label>
                     </div>
                     <div>
-                      <input type="radio" id="ajout-offre-remunere" name="ajout-offre-remuneration" value="remunere" v-model="remunerationType" />
+                      <input type="radio" id="ajout-offre-remunere" name="ajout-offre-remuneration" value="PAID" v-model="offerData.paid" />
                       <label for="ajout-offre-remunere" class="form-fiche__label-radio-input">Rémunéré</label>
                     </div>
                     <div>
-                      <input type="radio" id="ajout-offre-non-renumere" name="ajout-offre-remuneration" value="non-remunere" v-model="remunerationType" />
+                      <input type="radio" id="ajout-offre-non-renumere" name="ajout-offre-remuneration" value="UNPAID" v-model="offerData.paid" />
                       <label for="ajout-offre-non-renumere" class="form-fiche__label-radio-input" >Non-rémunéré</label>
                     </div>
                   </div>                   
@@ -147,16 +137,6 @@
             buttonClass="bouton bouton--turquoise">
           </BtnAnnulerModifierSauvegarder>
         </form>
-        <!-- Boutons annuler et mettre à jour -->
-        <!-- <div class="boutons">
-            <button class="bouton bouton--transparent">Annuler</button>
-            <button class="bouton bouton--rougeOffre" @click="submitForm()">
-                <div class="icone-libelle">
-                    <i class="fas fa-save"></i>
-                    <span>Sauvegarder</span>
-                </div>
-            </button>
-        </div>             -->
 
 </template>
 
@@ -173,7 +153,7 @@
   const router = useRouter();
   const { ajouterOffre } = useInternshipOffers();
   const { getAllEntreprises, response: entreprisesResponse, error: entreprisesError} = useEntreprise();
-  const remunerationType = ref(null);
+  // const remunerationType = ref('DISCRETIONARY');
   const entreprises = ref([]);
   const provinces = ref([]);
   const internshipTypes = ref([]);
@@ -244,7 +224,7 @@
     erreurs.value.progForm = progForm.value === '',
     erreurs.value.exigences = (offerData.value.requiredSkills === '' || offerData.value.requiredSkills === undefined || offerData.value.requiredSkills[0] === ''),
     erreurs.value.typeDeStage = (offerData.value.internshipType._id === '' || offerData.value.internshipType._id === undefined),
-    erreurs.value.heuresSemaine = (offerData.value.weeklyWorkHours === 0 || offerData.value.weeklyWorkHours === undefined),
+    erreurs.value.heuresSemaine = (offerData.value.weeklyWorkHours === 0 || offerData.value.weeklyWorkHours === undefined || offerData.value.weeklyWorkHours === ''),
     erreurs.value.dateDebut = offerData.value.startDate === '',
     erreurs.value.dateFin = offerData.value.endDate === '',
     erreurs.value.province = offerData.value.province._id === '',
@@ -254,7 +234,7 @@
   };
 
   const submitForm = async () => {
-
+    // console.log("remunerationType: ", remunerationType);
     listerExigences();
 
     try {
