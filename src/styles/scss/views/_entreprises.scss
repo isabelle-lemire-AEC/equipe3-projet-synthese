@@ -9,7 +9,7 @@
 #ajout-entreprise {
     @include mixins.flex(column, null, flex-end, variables.$spacing-large*3);
 
-    @include mixins.media-max(800px) {
+    @include mixins.media-max(900px) {
         @include mixins.flex(column, null, flex-end, variables.$spacing-large);
     }
 }
@@ -25,7 +25,6 @@
 
 .entreprise-logo {
     max-width: 150px;
-    /* À valider si on garde ou pas quand on sera rendu au responsive */
     width: 70%;
 }
 
@@ -56,7 +55,7 @@
             @include mixins.grid(2, variables.$spacing-medium);
         }
 
-        @include mixins.media-max(600px) {
+        @include mixins.media-max(768px) {
             @include mixins.grid(1, null);
         }
 
@@ -97,7 +96,7 @@
         &__wrapper-titre-logo {
             @include mixins.flex(row, flex-start, center, variables.$spacing-medium);
 
-            @include mixins.media-max(800px) {
+            @include mixins.media-max(900px) {
 
                 @include mixins.flex(column, null, flex-start, variables.$spacing-medium);
 

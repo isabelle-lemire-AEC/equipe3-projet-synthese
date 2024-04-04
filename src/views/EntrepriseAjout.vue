@@ -42,7 +42,7 @@
           <h2>Courte présentation</h2>
           <div>
             <label for="presentation" class="form-fiche__label--cache" hidden>Présentation</label>
-            <textarea id="presentation" cols="30" rows="10" v-model.trim="entreprise.description"
+            <textarea id="presentation" rows="6" v-model.trim="entreprise.description"
                       @input="validerChamp('description')"></textarea>
             <p class="error-message" v-if="erreurs.description">Veuillez remplir ce champs.</p>
           </div>

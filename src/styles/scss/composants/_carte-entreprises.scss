@@ -16,12 +16,12 @@
         @include mixins.padding(variables.$spacing-small, variables.$spacing-small);
     }
 
-    @include mixins.media-max(900px) {
+    @include mixins.media-max(1000px) {
         grid-template-columns: 1fr;
         padding-block: variables.$spacing-medium;
     }
 
-    @include mixins.media-max(600px) {
+    @include mixins.media-max(768px) {
         @include mixins.grid(2, variables.$spacing-small);
         @include mixins.padding(variables.$spacing-medium, variables.$spacing-medium);
     }
@@ -33,12 +33,12 @@
             margin-inline: auto;
         }
 
-        @include mixins.media-max(900px) {
-            max-width: 60%;
+        @include mixins.media-max(1000px) {
+            max-width: 50%;
             margin-inline:unset;
         }
 
-        @include mixins.media-max(600px) {
+        @include mixins.media-max(768px) {
             max-width: 100%;
         }
     }
