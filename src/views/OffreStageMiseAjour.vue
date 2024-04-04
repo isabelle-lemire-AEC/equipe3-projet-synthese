@@ -124,7 +124,23 @@
     _id: "",
     title: "",
     description: "",
-    enterprise: { _id: "" },
+    enterprise: {
+      _id: "",
+      name: "",
+      image: "",
+      description: "",
+      address: "",
+      phone: "",
+      city: "",
+      email: "",
+      province: { _id: "", value: "" },
+      postalCode: "",
+      activitySector: {
+        _id: "",
+        value: "",
+      },
+      website: ""
+    },
     startDate: "",
     endDate: "",
     weeklyWorkHours: 0,
@@ -163,7 +179,26 @@
 
   onMounted(async () => {
     await getInternshipOfferById(route.params.id);
-    console.log("response: ", response);
+
+    if (response.value.enterprise === null || response.value.enterprise === undefined) {
+      response.value.enterprise = {
+        _id: "",
+        name: "",
+        image: "",
+        description: "",
+        address: "",
+        phone: "",
+        city: "",
+        email: "",
+        province: { _id: "", value: "" },
+        postalCode: "",
+        activitySector: {
+          _id: "",
+          value: "",
+        },
+        website: ""
+      }
+    }
     internshipTypes.value = await fetchStageTypes();
 
     if (response.value) {
