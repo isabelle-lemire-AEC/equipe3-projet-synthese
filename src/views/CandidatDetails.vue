@@ -1,8 +1,14 @@
 <!-- CandidatDetails.vue -->
 <template>
   <div class="form-fiche fiche-candidat-details" v-if="candidat">
-    <!-- Boutons d'action -->
-    <div class="form-fiche__wrapper-boutons-encadre">
+    <!-- Informations sur le candidat -->
+    <div class="form-fiche__wrapper-titre">
+      <p class="form-fiche__nom-section">Candidat</p>
+      <h1>{{ candidat.firstName }} {{ candidat.lastName }}</h1>
+      <p class="form-fiche__sous-titre">UX Designer</p>
+    </div>
+      <!-- Boutons d'action -->
+      <div class="form-fiche__wrapper-boutons-encadre">
       <div class="boutons-action">
         <button class="boutons-action__crochet" @click="activate()">
           <i class="fas fa-check"></i>
@@ -15,12 +21,6 @@
           <i class="fas fa-square-xmark"></i>
         </button>
       </div>
-    </div>
-    <!-- Informations sur le candidat -->
-    <div class="form-fiche__wrapper-titre">
-      <p class="form-fiche__nom-section">Candidat</p>
-      <h1>{{ candidat.firstName }} {{ candidat.lastName }}</h1>
-      <p class="form-fiche__sous-titre">UX Designer</p>
     </div>
     <div class="form-fiche__encadre">
       <!-- Section de description du candidat -->
